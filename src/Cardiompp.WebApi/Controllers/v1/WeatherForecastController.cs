@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Cardiompp.WebApi.Controllers
+namespace Cardiompp.WebApi.Controllers.v1
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [Authorize]
     public class WeatherForecastController : ControllerBase
     {
