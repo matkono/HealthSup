@@ -19,14 +19,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardiompp.Application", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardiompp.Domain", "src\Cardiompp.Domain\Cardiompp.Domain.csproj", "{747E391A-79CB-4A33-B0F2-E7DF52CD556B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardiompp.Infrastructure", "src\Cardiompp.Infrastructure\Cardiompp.Infrastructure.csproj", "{60811280-5E37-4C92-BA49-6F0499B43AEB}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C2559684-D062-4EC5-92BE-D65CAF8C7D01}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cardiompp.Application.Test", "test\Cardiompp.Application.Test\Cardiompp.Application.Test.csproj", "{4E77B666-B15C-4B55-8DF9-4F676DD4B32D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardiompp.Application.Test", "test\Cardiompp.Application.Test\Cardiompp.Application.Test.csproj", "{4E77B666-B15C-4B55-8DF9-4F676DD4B32D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cardiompp.Infrastructure.Data", "src\Cardiompp.Infrastructure\Cardiompp.Infrastructure.Data\Cardiompp.Infrastructure.Data.csproj", "{2C8547E8-8BAF-44DB-88B5-A08EA68ED6EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cardiompp.Infrastructure.CrossCutting", "src\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting\Cardiompp.Infrastructure.CrossCutting.csproj", "{19A0EC35-CDC2-4CEB-BEB4-6E211363A7D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,14 +48,18 @@ Global
 		{747E391A-79CB-4A33-B0F2-E7DF52CD556B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{747E391A-79CB-4A33-B0F2-E7DF52CD556B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{747E391A-79CB-4A33-B0F2-E7DF52CD556B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60811280-5E37-4C92-BA49-6F0499B43AEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60811280-5E37-4C92-BA49-6F0499B43AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60811280-5E37-4C92-BA49-6F0499B43AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60811280-5E37-4C92-BA49-6F0499B43AEB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4E77B666-B15C-4B55-8DF9-4F676DD4B32D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4E77B666-B15C-4B55-8DF9-4F676DD4B32D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E77B666-B15C-4B55-8DF9-4F676DD4B32D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E77B666-B15C-4B55-8DF9-4F676DD4B32D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C8547E8-8BAF-44DB-88B5-A08EA68ED6EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C8547E8-8BAF-44DB-88B5-A08EA68ED6EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C8547E8-8BAF-44DB-88B5-A08EA68ED6EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C8547E8-8BAF-44DB-88B5-A08EA68ED6EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19A0EC35-CDC2-4CEB-BEB4-6E211363A7D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19A0EC35-CDC2-4CEB-BEB4-6E211363A7D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19A0EC35-CDC2-4CEB-BEB4-6E211363A7D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19A0EC35-CDC2-4CEB-BEB4-6E211363A7D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,8 +68,9 @@ Global
 		{5F298F0A-E474-400E-926B-F81A4B600525} = {C7DC38F0-6B8E-4DB2-8FF2-9E1AAA73FC8B}
 		{951C8BDA-00A0-4860-B028-41EEF2723D0B} = {DE51B780-2693-4CBF-A922-AAD7B06CFD08}
 		{747E391A-79CB-4A33-B0F2-E7DF52CD556B} = {3E2618F8-B5C9-49E3-99D6-89CDCD5142B9}
-		{60811280-5E37-4C92-BA49-6F0499B43AEB} = {CC416411-5197-4696-93D3-80572EDCDE1C}
 		{4E77B666-B15C-4B55-8DF9-4F676DD4B32D} = {C459C277-8310-4F43-9E18-7149C32ABAC5}
+		{2C8547E8-8BAF-44DB-88B5-A08EA68ED6EB} = {CC416411-5197-4696-93D3-80572EDCDE1C}
+		{19A0EC35-CDC2-4CEB-BEB4-6E211363A7D0} = {CC416411-5197-4696-93D3-80572EDCDE1C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F2C2DF05-D9E4-4AC6-A852-390F80300367}
