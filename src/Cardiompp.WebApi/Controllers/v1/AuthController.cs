@@ -6,9 +6,10 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
-namespace Cardiompp.WebApi.Controllers
+namespace Cardiompp.WebApi.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [ApiController]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class AuthController: ControllerBase
     {
         private readonly IConfiguration _config;
