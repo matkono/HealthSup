@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cardiompp.Infrastructure
+namespace Cardiompp.Infrastructure.CrossCutting
 {
     public class Class1
     {
