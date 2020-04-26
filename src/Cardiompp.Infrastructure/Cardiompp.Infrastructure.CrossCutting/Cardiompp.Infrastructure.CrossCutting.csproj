@@ -6,6 +6,13 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cardiompp.Application\Cardiompp.Application.csproj" />
+    <ProjectReference Include="..\..\Cardiompp.Domain\Cardiompp.Domain.csproj" />
+    <ProjectReference Include="..\Cardiompp.Infrastructure.Data\Cardiompp.Infrastructure.Data.csproj" />
   </ItemGroup>
 
 </Project>

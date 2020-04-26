@@ -5,7 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\Doctor\GetByCrm.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\Doctor\GetByCrm.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.35" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cardiompp.Domain\Cardiompp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

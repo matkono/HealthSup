@@ -1,4 +1,5 @@
-using Affiliation.WebApi.Configurations.Swagger;
+using Cardiompp.WebApi.Configurations;
+using Cardiompp.WebApi.Configurations.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,7 @@ namespace Cardiompp.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .ConfigureDI(Configuration)
                 .AddSwaggerGen()
                 .AddApiVersioning(p =>
                 {
