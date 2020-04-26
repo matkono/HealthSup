@@ -14,5 +14,7 @@ namespace Cardiompp.Domain.Repositories
         IDbConnection Connection { get; }
 
         IDbTransaction Transaction { get; }
+
+        IDoctorRepository DoctorRepository { get; }
     }
 }

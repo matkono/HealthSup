@@ -15,6 +15,10 @@ namespace Cardiompp.Infrastructure.Data.Repositories
             Connection.Open();
         }
 
+        private IDoctorRepository _doctorRepository;
+
+        public IDoctorRepository DoctorRepository => _doctorRepository ??= new DoctorRepository(this);
+
         public void Begin(IsolationLevel isolationLevel = IsolationLevel.ReadUncommitted)
         {
             Transaction?.Dispose();
