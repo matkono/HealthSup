@@ -21,6 +21,7 @@ namespace Cardiompp.Infrastructure.CrossCutting.Ioc
         private static void ConfigureServices(this IServiceCollection services)
         {
             services.AddScoped<IDoctorService, DoctorService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
         }
 
         private static void ConfigureUnitOfWork(this IServiceCollection services, IConfiguration configuration)

@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Cardiompp.Application.DataContracts.v1.Requests.Login;
+using Cardiompp.Application.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Cardiompp.WebApi.Controllers.v1
 {
@@ -14,26 +17,29 @@ namespace Cardiompp.WebApi.Controllers.v1
     {
         private readonly IConfiguration _config;
 
-        public AuthController(IConfiguration config)
+        IAuthenticationService AuthenticationService { get; set; }
+
+        public AuthController(IConfiguration config, IAuthenticationService authenticationService)
         {
             _config = config;
+            AuthenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult CreateToken([FromBody]LoginModel login)
+        public async Task<IActionResult> CreateTokenAsync([FromBody]AuthenticateRequest login)
         {
-            if (login == null) return Unauthorized();
-            string tokenString = string.Empty;
-            bool validUser = Authenticate(login);
-            if (validUser)
-            {
-                tokenString = BuildToken();
-            }
-            else
-            {
+            if (login == null) 
                 return Unauthorized();
-            }
+
+            var tokenString = string.Empty;
+            var validUser = await AuthenticationService.AuthenticateAsync(login.AgentName, login.Password);
+
+            if (validUser)
+                tokenString = BuildToken();
+            else
+                return Unauthorized();
+
             return Ok(new { Token = tokenString });
         }
 
@@ -48,27 +54,6 @@ namespace Cardiompp.WebApi.Controllers.v1
               signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-        private bool Authenticate(LoginModel login)
-        {
-            bool validUser = false;
-
-            var user = _config.GetValue<string>("User:Name");
-            var password = _config.GetValue<string>("User:Password");
-
-            if (login.Username == user && login.Password == password)
-            {
-                validUser = true;
-            }
-
-            return validUser;
-        }
-
-        public class LoginModel
-        {
-            public string Username { get; set; }
-            public string Password { get; set; }
         }
     }
 }

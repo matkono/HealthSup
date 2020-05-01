@@ -5,10 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\CardiomppAgent\GetByNameAndPassword.sql" />
     <None Remove="Scripts\Doctor\GetByCrm.sql" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\CardiomppAgent\GetByNameAndPassword.sql" />
     <EmbeddedResource Include="Scripts\Doctor\GetByCrm.sql" />
   </ItemGroup>
 
