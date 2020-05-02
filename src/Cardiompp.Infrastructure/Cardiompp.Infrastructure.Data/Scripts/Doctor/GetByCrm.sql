@@ -3,6 +3,8 @@
 	d.name,
 	d.crm,
 	d.phone,
+	d.email,
+	d.isActive,
 	a.id,
 	a.region,
 	a.cep
