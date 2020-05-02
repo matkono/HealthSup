@@ -2,7 +2,8 @@
 {
     public class CardiomppAgent
     {
-        public CardiomppAgent(
+        public CardiomppAgent
+        (
             int id,
             string name,
             string password

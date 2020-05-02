@@ -5,6 +5,6 @@ namespace Cardiompp.Domain.Repositories
 {
     public interface ICardiomppAgentRepository
     {
-        Task<CardiomppAgent> GetByNameAndPassword(string name, string password);
+        Task<CardiomppAgent> GetByNameAndPasswordAsync(string name, string password);
     }
 }

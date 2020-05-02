@@ -16,7 +16,7 @@ namespace Cardiompp.Infrastructure.Data.Repositories
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<CardiomppAgent> GetByNameAndPassword(string name, string password)
+        public async Task<CardiomppAgent> GetByNameAndPasswordAsync(string name, string password)
         {
             var query = ScriptManager.GetByName(ScriptManager.FileNames.CardiomppAgent.GetByNameAndPassword);
 
