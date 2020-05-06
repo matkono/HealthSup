@@ -1,3 +1,4 @@
+using Cardiompp.Application.Configuration.JwtToken;
 using Cardiompp.WebApi.Configurations;
 using Cardiompp.WebApi.Configurations.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -29,8 +30,11 @@ namespace Cardiompp.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var tokenConfiguration = Configuration.Get<JwtTokenConfiguration>();
+
             services
                 .ConfigureDI(Configuration)
+                .Configure<JwtTokenConfiguration>(Configuration)
                 .AddSwaggerGen()
                 .AddApiVersioning(p =>
                 {
@@ -60,9 +64,9 @@ namespace Cardiompp.WebApi
                     ValidateAudience = true,
                     ValidateLifetime = false,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["JwtToken:Issuer"],
-                    ValidAudience = Configuration["JwtToken:Issuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtToken:SecretKey"]))
+                    ValidIssuer = tokenConfiguration.Issuer,
+                    ValidAudience = tokenConfiguration.Issuer,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenConfiguration.SecretKey))
                 };
             });
 

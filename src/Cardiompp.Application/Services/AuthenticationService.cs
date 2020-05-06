@@ -1,7 +1,9 @@
-﻿using Cardiompp.Application.DataContracts.v1.Responses.Authentication;
+﻿using Cardiompp.Application.Configuration.JwtToken;
+using Cardiompp.Application.DataContracts.v1.Responses.Authentication;
 using Cardiompp.Application.Services.Contracts;
 using Cardiompp.Domain.Repositories;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,18 +14,23 @@ namespace Cardiompp.Application.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        private readonly IConfiguration _config;
-
-        IMd5HashService Md5HashService { get; set; }
-
-        public AuthenticationService(IUnitOfWork unitOfWork, IConfiguration config, IMd5HashService md5HashService)
+        public AuthenticationService
+        (
+            IUnitOfWork unitOfWork,
+            IOptionsMonitor<JwtTokenConfiguration> config, 
+            IMd5HashService md5HashService
+        )
         {
             _config = config;
             _unitOfWork = unitOfWork;
             Md5HashService = md5HashService ?? throw new ArgumentNullException(nameof(md5HashService));
         }
+
+        private readonly IUnitOfWork _unitOfWork;
+
+        private readonly IOptionsMonitor<JwtTokenConfiguration> _config;
+
+        IMd5HashService Md5HashService { get; set; }
 
         public async Task<GetAuthenticationResponse> AuthenticateAsync(string name, string password)
         {
@@ -39,11 +46,11 @@ namespace Cardiompp.Application.Services
 
         private string BuildToken()
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JwtToken:SecretKey"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.CurrentValue.SecretKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(_config["JwtToken:Issuer"],
-              _config["JwtToken:Issuer"],
+            var token = new JwtSecurityToken(_config.CurrentValue.Issuer,
+              _config.CurrentValue.Issuer,
               expires: DateTime.UtcNow.AddMinutes(30),
               signingCredentials: creds);
 
