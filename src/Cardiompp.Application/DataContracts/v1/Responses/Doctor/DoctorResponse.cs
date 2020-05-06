@@ -10,6 +10,10 @@ namespace Cardiompp.Application.DataContracts.v1.Responses.Doctor
 
         public string Phone { get; set; }
 
+        public string Email { get; set; }
+
+        public bool IsActive { get; set; } 
+
         public AddressResponse Address { get; set; }
     }
 }

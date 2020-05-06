@@ -11,6 +11,8 @@ namespace Cardiompp.Application.Mappers
                 Name = doctor.Name,
                 Crm = doctor.Crm,
                 Phone = doctor.Phone,
+                Email = doctor.Email,
+                IsActive = doctor.IsActive,
                 Address = doctor.Address?.ToDataContract()
             };
     }
