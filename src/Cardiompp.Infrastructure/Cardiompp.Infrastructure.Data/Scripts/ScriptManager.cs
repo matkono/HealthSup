@@ -15,6 +15,13 @@ namespace Cardiompp.Infrastructure.Data.Scripts
 
                 public static readonly string GetByCrm = $"{EntityName}.GetByCrm";
             }
+
+            public static class CardiomppAgent
+            { 
+                static readonly string EntityName = $"{nameof(CardiomppAgent)}";
+
+                public static readonly string GetByNameAndPassword = $"{EntityName}.GetByNameAndPassword";
+            }
         }
 
         private static Assembly _thisAssemnbly = Assembly.GetExecutingAssembly();
