@@ -5,6 +5,6 @@ namespace Cardiompp.Application.Services.Contracts
 {
     public interface IDoctorService
     {
-        Task<GetDoctorResponse> GetByCrm(string crm);
+        Task<GetDoctorResponse<GetDoctorByCrmResponse>> GetByCrm(string crm);
     }
 }

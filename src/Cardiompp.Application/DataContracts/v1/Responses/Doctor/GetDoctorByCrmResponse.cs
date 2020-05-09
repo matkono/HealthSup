@@ -2,7 +2,7 @@
 
 namespace Cardiompp.Application.DataContracts.v1.Responses.Doctor
 {
-    public class DoctorResponse
+    public class GetDoctorByCrmResponse
     {
         public string Name { get; set; }
 

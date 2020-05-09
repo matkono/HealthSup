@@ -5,8 +5,8 @@ namespace Cardiompp.Application.Mappers
 {
     public static class DoctorMapper
     {
-        public static DoctorResponse ToDataContract(this Doctor doctor)
-            => new DoctorResponse()
+        public static GetDoctorByCrmResponse ToDataContract(this Doctor doctor)
+            => new GetDoctorByCrmResponse()
             {
                 Name = doctor.Name,
                 Crm = doctor.Crm,

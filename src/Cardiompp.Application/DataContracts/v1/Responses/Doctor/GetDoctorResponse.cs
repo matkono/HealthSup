@@ -2,9 +2,9 @@
 
 namespace Cardiompp.Application.DataContracts.v1.Responses.Doctor
 {
-    public class GetDoctorResponse: BaseResponse<DoctorResponse>
+    public class GetDoctorResponse<T>: BaseResponse<T>
     {
-        public GetDoctorResponse(DoctorResponse response) : base(response)
+        public GetDoctorResponse(T response) : base(response)
         {
         }
     }

@@ -15,11 +15,11 @@ namespace Cardiompp.Application.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<GetDoctorResponse> GetByCrm(string crm)
+        public async Task<GetDoctorResponse<GetDoctorByCrmResponse>> GetByCrm(string crm)
         {
             var doctor = await _unitOfWork.DoctorRepository.GetByCrm(crm);
 
-            return new GetDoctorResponse(doctor?.ToDataContract());
+            return new GetDoctorResponse<GetDoctorByCrmResponse>(doctor?.ToDataContract());
         }
     }
 }
