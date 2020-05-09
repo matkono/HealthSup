@@ -14,6 +14,7 @@ namespace Cardiompp.Infrastructure.Data.Scripts
                 static readonly string EntityName = $"{nameof(Doctor)}";
 
                 public static readonly string GetByCrm = $"{EntityName}.GetByCrm";
+                public static readonly string GetByEmailAndPassword = $"{EntityName}.GetByEmailAndPassword";
             }
 
             public static class CardiomppAgent
