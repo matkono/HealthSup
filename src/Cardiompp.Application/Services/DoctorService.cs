@@ -13,7 +13,7 @@ namespace Cardiompp.Application.Services
         public DoctorService
         (
             IUnitOfWork unitOfWork,
-            IMd5HashService md5HashService
+            IHashService md5HashService
         )
         {
             _unitOfWork = unitOfWork;
@@ -22,7 +22,7 @@ namespace Cardiompp.Application.Services
 
         private readonly IUnitOfWork _unitOfWork;
 
-        IMd5HashService Md5HashService { get; set; }
+        IHashService Md5HashService { get; set; }
 
         public async Task<GetDoctorResponse<GetDoctorByCrmResponse>> GetByCrm(string crm)
         {
@@ -36,7 +36,7 @@ namespace Cardiompp.Application.Services
             GetDoctorByEmailAndPasswordRequest loginRequest
         ) 
         {
-            var passwordMd5 = Md5HashService.GetMd5Hash(loginRequest.Password);
+            var passwordMd5 = Md5HashService.GetHash(loginRequest.Password);
             var doctor = await _unitOfWork.DoctorRepository.GetByEmailAndPassword(loginRequest.Email, passwordMd5);
 
             return new GetDoctorResponse<GetDoctorByEmailAndPasswordResponse>(doctor?.ToGetByEmailAndPasswordDataContact());
