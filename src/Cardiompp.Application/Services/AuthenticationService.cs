@@ -18,7 +18,7 @@ namespace Cardiompp.Application.Services
         (
             IUnitOfWork unitOfWork,
             IOptionsMonitor<JwtTokenConfiguration> config, 
-            IMd5HashService md5HashService
+            IHashService md5HashService
         )
         {
             _config = config;
@@ -30,11 +30,11 @@ namespace Cardiompp.Application.Services
 
         private readonly IOptionsMonitor<JwtTokenConfiguration> _config;
 
-        IMd5HashService Md5HashService { get; set; }
+        IHashService Md5HashService { get; set; }
 
         public async Task<GetAuthenticationResponse> AuthenticateAsync(string name, string password)
         {
-            var passwordMd5 = Md5HashService.GetMd5Hash(password);
+            var passwordMd5 = Md5HashService.GetHash(password);
             var cardiomppAgent = await _unitOfWork.CardiomppAgentRepository.GetByNameAndPasswordAsync(name, passwordMd5);
             AuthenticationResponse authenticationResponse = null;
 

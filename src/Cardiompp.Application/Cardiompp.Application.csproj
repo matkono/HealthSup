@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataContracts\v1\Requests\Doctor\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Cardiompp.Domain\Cardiompp.Domain.csproj" />
   </ItemGroup>
 

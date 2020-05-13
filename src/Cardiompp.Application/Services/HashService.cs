@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Cardiompp.Application.Services
 {
-    public class Md5HashService : IMd5HashService
+    public class HashService : IHashService
     {
-        public string GetMd5Hash(string value)
+        public string GetHash(string value)
         {
             using (MD5 md5Hash = MD5.Create()) 
             {

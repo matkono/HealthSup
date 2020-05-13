@@ -22,7 +22,7 @@ namespace Cardiompp.Infrastructure.CrossCutting.Ioc
         {
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
-            services.AddScoped<IMd5HashService, Md5HashService>();
+            services.AddScoped<IHashService, HashService>();
         }
 
         private static void ConfigureUnitOfWork(this IServiceCollection services, IConfiguration configuration)

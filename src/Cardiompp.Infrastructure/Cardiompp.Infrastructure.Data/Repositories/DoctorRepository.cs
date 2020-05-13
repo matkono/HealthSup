@@ -36,5 +36,16 @@ namespace Cardiompp.Infrastructure.Data.Repositories
             return result.FirstOrDefault();
         }
 
+        public async Task<Doctor> GetByEmailAndPassword(string email, string password)
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.Doctor.GetByEmailAndPassword);
+
+            var result = await UnitOfWork.Connection.QueryAsync<Doctor>(
+                                                                query,
+                                                                new { email, password },
+                                                                UnitOfWork.Transaction);
+
+            return result.FirstOrDefault();
+        }
     }
 }
