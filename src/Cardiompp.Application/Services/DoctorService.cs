@@ -17,29 +17,44 @@ namespace Cardiompp.Application.Services
         )
         {
             _unitOfWork = unitOfWork;
-            Md5HashService = md5HashService ?? throw new ArgumentNullException(nameof(md5HashService));
+            HashService = md5HashService ?? throw new ArgumentNullException(nameof(md5HashService));
         }
 
         private readonly IUnitOfWork _unitOfWork;
 
-        IHashService Md5HashService { get; set; }
+        IHashService HashService { get; set; }
 
-        public async Task<GetDoctorResponse<GetDoctorByCrmResponse>> GetByCrm(string crm)
+        public async Task<DoctorResponse<GetDoctorByCrmResponse>> GetByCrm(string crm)
         {
             var doctor = await _unitOfWork.DoctorRepository.GetByCrm(crm);
 
-            return new GetDoctorResponse<GetDoctorByCrmResponse>(doctor?.ToGetByCrmDataContract());
+            return new DoctorResponse<GetDoctorByCrmResponse>(doctor?.ToGetByCrmDataContract());
         }
 
-        public async Task<GetDoctorResponse<GetDoctorByEmailAndPasswordResponse>> GetByEmailAndPassword
+        public async Task<DoctorResponse<GetDoctorByEmailAndPasswordResponse>> GetByEmailAndPassword
         (
             GetDoctorByEmailAndPasswordRequest loginRequest
         ) 
         {
-            var passwordMd5 = Md5HashService.GetHash(loginRequest.Password);
+            var passwordMd5 = HashService.GetHash(loginRequest.Password);
             var doctor = await _unitOfWork.DoctorRepository.GetByEmailAndPassword(loginRequest.Email, passwordMd5);
 
-            return new GetDoctorResponse<GetDoctorByEmailAndPasswordResponse>(doctor?.ToGetByEmailAndPasswordDataContact());
+            return new DoctorResponse<GetDoctorByEmailAndPasswordResponse>(doctor?.ToGetByEmailAndPasswordDataContact());
+        }
+
+        public async Task<bool> UpdatePassword
+        (
+            UpdatePasswordRequest updatePasswordRequest
+        ) 
+        {
+            var passwordMd5 = HashService.GetHash(updatePasswordRequest.Password);
+            var newPasswordMd5 = HashService.GetHash(updatePasswordRequest.NewPassword);
+            var doctor = await _unitOfWork.DoctorRepository.GetByEmailAndPassword(updatePasswordRequest.Email, passwordMd5);
+
+            if(doctor == null)
+                return false;
+
+            return await _unitOfWork.DoctorRepository.UpdatePassword(doctor.Id, newPasswordMd5) > 0;
         }
     }
 }

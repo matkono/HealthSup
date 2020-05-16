@@ -1,4 +1,5 @@
 ﻿SELECT 
+	d.id,
 	d.crm,
 	d.email,
 	d.isActive

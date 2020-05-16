@@ -1,6 +1,7 @@
 ﻿using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
 using Cardiompp.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace Cardiompp.WebApi.Controllers.v1
         /// <returns></returns>
         [HttpGet]
         [Route("{crm}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetByCrm(string crm)
         {
             var response = await DoctorService.GetByCrm(crm);
@@ -43,6 +45,7 @@ namespace Cardiompp.WebApi.Controllers.v1
         /// <returns></returns>
         [HttpPost]
         [Route("login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Login([FromBody] GetDoctorByEmailAndPasswordRequest loginRequest)
         {
             var response = await DoctorService.GetByEmailAndPassword(loginRequest);
@@ -51,6 +54,24 @@ namespace Cardiompp.WebApi.Controllers.v1
                 return NotFound(response);
 
             return Ok(response);
+        }
+
+        /// <summary>
+        /// Update password
+        /// </summary>
+        /// <param name="UpdatePasswordRequest">Update password request.</param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("updatePassword")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordRequest updatePasswordRequest)
+        {
+            var response = await DoctorService.UpdatePassword(updatePasswordRequest);
+
+            if (!response)
+                return NotFound();
+
+            return NoContent();
         }
     }
 }

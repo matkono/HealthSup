@@ -8,12 +8,14 @@
     <None Remove="Scripts\CardiomppAgent\GetByNameAndPassword.sql" />
     <None Remove="Scripts\Doctor\GetByCrm.sql" />
     <None Remove="Scripts\Doctor\GetByEmailAndPassword.sql" />
+    <None Remove="Scripts\Doctor\UpdatePassword.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\CardiomppAgent\GetByNameAndPassword.sql" />
     <EmbeddedResource Include="Scripts\Doctor\GetByCrm.sql" />
     <EmbeddedResource Include="Scripts\Doctor\GetByEmailAndPassword.sql" />
+    <EmbeddedResource Include="Scripts\Doctor\UpdatePassword.sql" />
   </ItemGroup>
 
   <ItemGroup>
