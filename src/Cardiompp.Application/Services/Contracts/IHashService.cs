@@ -4,6 +4,6 @@ namespace Cardiompp.Application.Services.Contracts
 {
     public interface IHashService
     {
-        string GetHash(string value);
+        string GetMd5Hash(string value);
     }
 }

@@ -13,11 +13,11 @@ namespace Cardiompp.Application.Services
         public DoctorService
         (
             IUnitOfWork unitOfWork,
-            IHashService md5HashService
+            IHashService hashService
         )
         {
             _unitOfWork = unitOfWork;
-            HashService = md5HashService ?? throw new ArgumentNullException(nameof(md5HashService));
+            HashService = hashService ?? throw new ArgumentNullException(nameof(hashService));
         }
 
         private readonly IUnitOfWork _unitOfWork;
@@ -36,7 +36,7 @@ namespace Cardiompp.Application.Services
             GetDoctorByEmailAndPasswordRequest loginRequest
         ) 
         {
-            var passwordMd5 = HashService.GetHash(loginRequest.Password);
+            var passwordMd5 = HashService.GetMd5Hash(loginRequest.Password);
             var doctor = await _unitOfWork.DoctorRepository.GetByEmailAndPassword(loginRequest.Email, passwordMd5);
 
             return new DoctorResponse<GetDoctorByEmailAndPasswordResponse>(doctor?.ToGetByEmailAndPasswordDataContact());
@@ -47,8 +47,8 @@ namespace Cardiompp.Application.Services
             UpdatePasswordRequest updatePasswordRequest
         ) 
         {
-            var passwordMd5 = HashService.GetHash(updatePasswordRequest.Password);
-            var newPasswordMd5 = HashService.GetHash(updatePasswordRequest.NewPassword);
+            var passwordMd5 = HashService.GetMd5Hash(updatePasswordRequest.Password);
+            var newPasswordMd5 = HashService.GetMd5Hash(updatePasswordRequest.NewPassword);
             var doctor = await _unitOfWork.DoctorRepository.GetByEmailAndPassword(updatePasswordRequest.Email, passwordMd5);
 
             if(doctor == null)

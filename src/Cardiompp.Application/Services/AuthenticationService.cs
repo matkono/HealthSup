@@ -34,7 +34,7 @@ namespace Cardiompp.Application.Services
 
         public async Task<GetAuthenticationResponse> AuthenticateAsync(string name, string password)
         {
-            var passwordMd5 = Md5HashService.GetHash(password);
+            var passwordMd5 = Md5HashService.GetMd5Hash(password);
             var cardiomppAgent = await _unitOfWork.CardiomppAgentRepository.GetByNameAndPasswordAsync(name, passwordMd5);
             AuthenticationResponse authenticationResponse = null;
 

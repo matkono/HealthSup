@@ -12,7 +12,7 @@ namespace Cardiompp.Application.DataContracts.v1.Requests.Doctor
         public string Password { get; set; }
 
         [Required(ErrorMessage = "New password is required to reset password.")]
-        [NotEqual("Password")]
+        [NotEqual(nameof(Password))]
         public string NewPassword { get; set; }
 
         [Required(ErrorMessage = "Confirm new password is required to reset password.")]
