@@ -1,10 +1,13 @@
-﻿using Cardiompp.Application.DataContracts.v1.Responses.Doctor;
+﻿using Cardiompp.Application.DataContracts.Responses;
+using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
+using Cardiompp.Application.DataContracts.v1.Responses.Doctor;
+using Cardiompp.Application.Mappers;
 using Cardiompp.Application.Services.Contracts;
 using Cardiompp.Domain.Repositories;
-using Cardiompp.Application.Mappers;
-using System.Threading.Tasks;
-using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Cardiompp.Application.Services
 {
@@ -42,7 +45,7 @@ namespace Cardiompp.Application.Services
             return new DoctorResponse<GetDoctorByEmailAndPasswordResponse>(doctor?.ToGetByEmailAndPasswordDataContact());
         }
 
-        public async Task<bool> UpdatePassword
+        public async Task<BaseResponse> UpdatePassword
         (
             UpdatePasswordRequest updatePasswordRequest
         ) 
@@ -50,11 +53,31 @@ namespace Cardiompp.Application.Services
             var passwordMd5 = HashService.GetMd5Hash(updatePasswordRequest.Password);
             var newPasswordMd5 = HashService.GetMd5Hash(updatePasswordRequest.NewPassword);
             var doctor = await _unitOfWork.DoctorRepository.GetByEmailAndPassword(updatePasswordRequest.Email, passwordMd5);
+            var baseResponse = new BaseResponse();
 
-            if(doctor == null)
-                return false;
+            if (doctor == null)
+            {
+                var passwordError = new ErrorResponse()
+                {
+                    Code = 400,
+                    Message = "Email or password incorrect.",
+                    Field = "Email or Password"
+                };
 
-            return await _unitOfWork.DoctorRepository.UpdatePassword(doctor.Id, newPasswordMd5) > 0;
+                baseResponse.Success = false;
+                baseResponse.AddError(passwordError);
+
+                return baseResponse;
+            }
+
+            var repositoryResponse = await _unitOfWork.DoctorRepository.UpdatePassword(doctor.Id, newPasswordMd5) > 0;
+
+            if (repositoryResponse)
+            {
+                baseResponse.Success = true;
+            }
+
+            return baseResponse;
         }
     }
 }

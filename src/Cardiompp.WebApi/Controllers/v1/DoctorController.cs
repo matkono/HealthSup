@@ -1,12 +1,9 @@
-﻿using Cardiompp.Application.DataContracts.Responses;
-using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
+﻿using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
 using Cardiompp.Application.Services.Contracts;
-using Dapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Cardiompp.WebApi.Controllers.v1
@@ -71,25 +68,8 @@ namespace Cardiompp.WebApi.Controllers.v1
         {
             var response = await DoctorService.UpdatePassword(updatePasswordRequest);
 
-            if (!response) 
-            {
-                var passwordError = new ErrorResponse()
-                {
-                    Code = 400,
-                    Message = "Email or password incorrect.",
-                    Field = "Email or Password"
-                };
-
-                var passwordErrorResponse = new BaseResponse()
-                {
-                    Success = false,
-                    Errors = new List<ErrorResponse>()
-                };
-
-                passwordErrorResponse.Errors.AsList().Add(passwordError);
-
-                return BadRequest(passwordErrorResponse);
-            }
+            if (!response.Success) 
+                return BadRequest(response);
 
             return NoContent();
         }

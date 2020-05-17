@@ -1,4 +1,5 @@
-﻿using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
+﻿using Cardiompp.Application.DataContracts.Responses;
+using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
 using Cardiompp.Application.DataContracts.v1.Responses.Doctor;
 using System.Threading.Tasks;
 
@@ -10,6 +11,6 @@ namespace Cardiompp.Application.Services.Contracts
 
         Task<DoctorResponse<GetDoctorByEmailAndPasswordResponse>> GetByEmailAndPassword(GetDoctorByEmailAndPasswordRequest loginRequest);
 
-        Task<bool> UpdatePassword(UpdatePasswordRequest updatePasswordRequest);
+        Task<BaseResponse> UpdatePassword(UpdatePasswordRequest updatePasswordRequest);
     }
 }
