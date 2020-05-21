@@ -1,4 +1,5 @@
 using Cardiompp.Application.Configuration.JwtToken;
+using Cardiompp.Infrastructure.CrossCutting.JwtToken;
 using Cardiompp.WebApi.Configurations;
 using Cardiompp.WebApi.Configurations.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -66,7 +67,8 @@ namespace Cardiompp.WebApi
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = tokenConfiguration.Issuer,
                     ValidAudience = tokenConfiguration.Issuer,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenConfiguration.SecretKey))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenConfiguration.SecretKey)),
+                    LifetimeValidator = TokenLifetimeValidator.Validate
                 };
             });
 
