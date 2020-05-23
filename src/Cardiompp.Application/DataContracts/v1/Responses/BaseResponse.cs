@@ -4,8 +4,6 @@ namespace Cardiompp.Application.DataContracts.Responses
 {
     public class BaseResponse
     {
-        public bool Success { get; set; } = false;
-
         public IList<ErrorResponse> Errors { get; set; }
 
         public void AddError
@@ -34,7 +32,6 @@ namespace Cardiompp.Application.DataContracts.Responses
         public BaseResponse(T data)
         {
             Data = data;
-            Success = data != null;
         }
 
         public T Data { get; set; }
