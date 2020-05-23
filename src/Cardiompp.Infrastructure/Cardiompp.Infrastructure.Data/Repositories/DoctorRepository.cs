@@ -47,5 +47,17 @@ namespace Cardiompp.Infrastructure.Data.Repositories
 
             return result.FirstOrDefault();
         }
+
+        public async Task<int> UpdatePassword(int doctorId, string newPassword)
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.Doctor.UpdatePassword);
+
+            var affectedRows = await UnitOfWork.Connection.ExecuteAsync(
+                                                                query,
+                                                                new { doctorId, newPassword },
+                                                                UnitOfWork.Transaction);
+
+            return affectedRows;
+        }
     }
 }

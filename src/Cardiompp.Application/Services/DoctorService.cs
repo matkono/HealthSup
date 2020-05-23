@@ -1,10 +1,14 @@
-﻿using Cardiompp.Application.DataContracts.v1.Responses.Doctor;
+﻿using Cardiompp.Application.DataContracts.Responses;
+using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
+using Cardiompp.Application.DataContracts.v1.Responses.Doctor;
+using Cardiompp.Application.Mappers;
 using Cardiompp.Application.Services.Contracts;
 using Cardiompp.Domain.Repositories;
-using Cardiompp.Application.Mappers;
-using System.Threading.Tasks;
-using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
+using Cardiompp.Domain.Enums;
 
 namespace Cardiompp.Application.Services
 {
@@ -13,33 +17,66 @@ namespace Cardiompp.Application.Services
         public DoctorService
         (
             IUnitOfWork unitOfWork,
-            IHashService md5HashService
+            IHashService hashService
         )
         {
             _unitOfWork = unitOfWork;
-            Md5HashService = md5HashService ?? throw new ArgumentNullException(nameof(md5HashService));
+            HashService = hashService ?? throw new ArgumentNullException(nameof(hashService));
         }
 
         private readonly IUnitOfWork _unitOfWork;
 
-        IHashService Md5HashService { get; set; }
+        IHashService HashService { get; set; }
 
-        public async Task<GetDoctorResponse<GetDoctorByCrmResponse>> GetByCrm(string crm)
+        public async Task<DoctorResponse<GetDoctorByCrmResponse>> GetByCrm(string crm)
         {
             var doctor = await _unitOfWork.DoctorRepository.GetByCrm(crm);
 
-            return new GetDoctorResponse<GetDoctorByCrmResponse>(doctor?.ToGetByCrmDataContract());
+            return new DoctorResponse<GetDoctorByCrmResponse>(doctor?.ToGetByCrmDataContract());
         }
 
-        public async Task<GetDoctorResponse<GetDoctorByEmailAndPasswordResponse>> GetByEmailAndPassword
+        public async Task<DoctorResponse<GetDoctorByEmailAndPasswordResponse>> GetByEmailAndPassword
         (
             GetDoctorByEmailAndPasswordRequest loginRequest
         ) 
         {
-            var passwordMd5 = Md5HashService.GetHash(loginRequest.Password);
+            var passwordMd5 = HashService.GetMd5Hash(loginRequest.Password);
             var doctor = await _unitOfWork.DoctorRepository.GetByEmailAndPassword(loginRequest.Email, passwordMd5);
 
-            return new GetDoctorResponse<GetDoctorByEmailAndPasswordResponse>(doctor?.ToGetByEmailAndPasswordDataContact());
+            return new DoctorResponse<GetDoctorByEmailAndPasswordResponse>(doctor?.ToGetByEmailAndPasswordDataContact());
+        }
+
+        public async Task<BaseResponse> UpdatePassword
+        (
+            UpdatePasswordRequest updatePasswordRequest
+        ) 
+        {
+            var passwordMd5 = HashService.GetMd5Hash(updatePasswordRequest.Password);
+            var newPasswordMd5 = HashService.GetMd5Hash(updatePasswordRequest.NewPassword);
+            var doctor = await _unitOfWork.DoctorRepository.GetByEmailAndPassword(updatePasswordRequest.Email, passwordMd5);
+            var baseResponse = new BaseResponse();
+
+            if (doctor == null)
+            {
+                baseResponse.Success = false;
+                baseResponse.AddError
+                (
+                    (int) ValidationErrorCodeEnum.EmailOrPasswordInvalid,
+                    "Email or password incorrect.",
+                    null
+                );
+
+                return baseResponse;
+            }
+
+            var repositoryResponse = await _unitOfWork.DoctorRepository.UpdatePassword(doctor.Id, newPasswordMd5) > 0;
+
+            if (repositoryResponse)
+            {
+                baseResponse.Success = true;
+            }
+
+            return baseResponse;
         }
     }
 }

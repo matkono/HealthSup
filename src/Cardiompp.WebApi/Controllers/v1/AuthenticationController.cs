@@ -1,6 +1,7 @@
 ﻿using Cardiompp.Application.DataContracts.v1.Requests.Login;
 using Cardiompp.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace Cardiompp.WebApi.Controllers.v1
 
         [AllowAnonymous]
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> CreateTokenAsync([FromBody]AuthenticateRequest login)
         {
             var response = await AuthenticationService.AuthenticateAsync(login.AgentName, login.Password);

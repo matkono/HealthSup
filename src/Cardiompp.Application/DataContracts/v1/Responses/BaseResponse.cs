@@ -6,7 +6,27 @@ namespace Cardiompp.Application.DataContracts.Responses
     {
         public bool Success { get; set; } = false;
 
-        public IEnumerable<ErrorResponse> Errors { get; set; }
+        public IList<ErrorResponse> Errors { get; set; }
+
+        public void AddError
+        (
+            int code,
+            string message,
+            string field
+        )
+        {
+            if (Errors == null)
+                Errors = new List<ErrorResponse>();
+
+            var error = new ErrorResponse()
+            { 
+                Code = code,
+                Message = message,
+                Field = field
+            };
+
+            Errors.Add(error);
+        }
     }
 
     public class BaseResponse<T> : BaseResponse

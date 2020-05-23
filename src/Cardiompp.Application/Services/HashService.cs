@@ -6,7 +6,7 @@ namespace Cardiompp.Application.Services
 {
     public class HashService : IHashService
     {
-        public string GetHash(string value)
+        public string GetMd5Hash(string value)
         {
             using (MD5 md5Hash = MD5.Create()) 
             {
