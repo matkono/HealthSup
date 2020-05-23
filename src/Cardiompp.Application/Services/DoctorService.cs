@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using Cardiompp.Domain.Enums;
 
 namespace Cardiompp.Application.Services
 {
@@ -57,15 +58,13 @@ namespace Cardiompp.Application.Services
 
             if (doctor == null)
             {
-                var passwordError = new ErrorResponse()
-                {
-                    Code = 400,
-                    Message = "Email or password incorrect.",
-                    Field = "Email or Password"
-                };
-
                 baseResponse.Success = false;
-                baseResponse.AddError(passwordError);
+                baseResponse.AddError
+                (
+                    (int) ValidationErrorCodeEnum.EmailOrPasswordInvalid,
+                    "Email or password incorrect.",
+                    null
+                );
 
                 return baseResponse;
             }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Cardiompp.Application.DataContracts.Responses
 {
@@ -7,16 +6,26 @@ namespace Cardiompp.Application.DataContracts.Responses
     {
         public bool Success { get; set; } = false;
 
-        public IEnumerable<ErrorResponse> Errors { get; set; }
+        public IList<ErrorResponse> Errors { get; set; }
 
-        public void AddError(ErrorResponse error) 
+        public void AddError
+        (
+            int code,
+            string message,
+            string field
+        )
         {
             if (Errors == null)
                 Errors = new List<ErrorResponse>();
 
-            var errorList = Errors.ToList();
-            errorList.Add(error);
-            Errors = errorList;
+            var error = new ErrorResponse()
+            { 
+                Code = code,
+                Message = message,
+                Field = field
+            };
+
+            Errors.Add(error);
         }
     }
 
