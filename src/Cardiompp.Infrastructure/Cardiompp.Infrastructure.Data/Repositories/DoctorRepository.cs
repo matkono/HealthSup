@@ -2,6 +2,7 @@
 using Cardiompp.Domain.Repositories;
 using Cardiompp.Infrastructure.Data.Scripts;
 using Dapper;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -48,16 +49,16 @@ namespace Cardiompp.Infrastructure.Data.Repositories
             return result.FirstOrDefault();
         }
 
-        public async Task<int> UpdatePassword(int doctorId, string newPassword)
+        public async Task UpdatePassword(int doctorId, string newPassword)
         {
             var query = ScriptManager.GetByName(ScriptManager.FileNames.Doctor.UpdatePassword);
 
-            var affectedRows = await UnitOfWork.Connection.ExecuteAsync(
-                                                                query,
-                                                                new { doctorId, newPassword },
-                                                                UnitOfWork.Transaction);
-
-            return affectedRows;
+            await UnitOfWork.Connection.ExecuteAsync
+            (
+                query,
+                new { doctorId, newPassword },
+                UnitOfWork.Transaction
+            );
         }
     }
 }

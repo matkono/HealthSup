@@ -3,12 +3,10 @@ using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
 using Cardiompp.Application.DataContracts.v1.Responses.Doctor;
 using Cardiompp.Application.Mappers;
 using Cardiompp.Application.Services.Contracts;
+using Cardiompp.Domain.Enums;
 using Cardiompp.Domain.Repositories;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
-using Cardiompp.Domain.Enums;
 
 namespace Cardiompp.Application.Services
 {
@@ -58,7 +56,6 @@ namespace Cardiompp.Application.Services
 
             if (doctor == null)
             {
-                baseResponse.Success = false;
                 baseResponse.AddError
                 (
                     (int) ValidationErrorCodeEnum.EmailOrPasswordInvalid,
@@ -69,12 +66,7 @@ namespace Cardiompp.Application.Services
                 return baseResponse;
             }
 
-            var repositoryResponse = await _unitOfWork.DoctorRepository.UpdatePassword(doctor.Id, newPasswordMd5) > 0;
-
-            if (repositoryResponse)
-            {
-                baseResponse.Success = true;
-            }
+            await _unitOfWork.DoctorRepository.UpdatePassword(doctor.Id, newPasswordMd5);
 
             return baseResponse;
         }

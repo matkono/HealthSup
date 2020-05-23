@@ -9,6 +9,6 @@ namespace Cardiompp.Domain.Repositories
 
         Task<Doctor> GetByEmailAndPassword(string email, string password);
 
-        Task<int> UpdatePassword(int doctorId, string newPassword);
+        Task UpdatePassword(int doctorId, string newPassword);
     }
 }

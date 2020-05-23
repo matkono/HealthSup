@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cardiompp.WebApi.Controllers.v1
@@ -68,7 +69,7 @@ namespace Cardiompp.WebApi.Controllers.v1
         {
             var response = await DoctorService.UpdatePassword(updatePasswordRequest);
 
-            if (!response.Success) 
+            if (response.Errors != null && response.Errors.Any()) 
                 return BadRequest(response);
 
             return NoContent();
