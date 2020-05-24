@@ -6,6 +6,6 @@
 
         public string Issuer { get; set; } = "https://localhost:44378";
 
-        public int LifeTime { get; set; } = 2;
+        public int LifeTime { get; set; } = 30;
     }
 }
