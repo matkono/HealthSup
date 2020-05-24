@@ -2,7 +2,6 @@
 using Cardiompp.Application.DataContracts.v1.Responses.Authentication;
 using Cardiompp.Application.Services.Contracts;
 using Cardiompp.Domain.Repositories;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
