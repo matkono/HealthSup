@@ -1,7 +1,7 @@
-﻿using Cardiompp.Application.Configuration.JwtToken;
-using Cardiompp.Application.DataContracts.v1.Responses.Authentication;
+﻿using Cardiompp.Application.DataContracts.v1.Responses.Authentication;
 using Cardiompp.Application.Services.Contracts;
 using Cardiompp.Domain.Repositories;
+using Cardiompp.Infrastructure.CrossCutting.JwtToken;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -50,7 +50,7 @@ namespace Cardiompp.Application.Services
 
             var token = new JwtSecurityToken(_config.CurrentValue.Issuer,
               _config.CurrentValue.Issuer,
-              expires: DateTime.UtcNow.AddMinutes(30),
+              expires: DateTime.UtcNow.AddMinutes(_config.CurrentValue.LifeTime),
               signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

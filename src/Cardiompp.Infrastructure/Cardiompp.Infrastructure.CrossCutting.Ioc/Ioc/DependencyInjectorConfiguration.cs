@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Cardiompp.Infrastructure.CrossCutting.Ioc
+namespace Cardiompp.Infrastructure.CrossCutting.Ioc.Ioc
 {
     public static class DependencyInjectorConfiguration
     {
