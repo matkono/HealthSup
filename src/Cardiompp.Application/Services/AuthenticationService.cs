@@ -1,12 +1,9 @@
-﻿using Cardiompp.Application.DataContracts.v1.Responses.Authentication;
+﻿using Cardiompp.Application.DataContracts.v1.Requests.Authenticate;
+using Cardiompp.Application.DataContracts.v1.Responses.Authentication;
 using Cardiompp.Application.Services.Contracts;
-using Cardiompp.Domain.Repositories;
-using Cardiompp.Infrastructure.CrossCutting.JwtToken;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
+using Cardiompp.Domain.Services.Contracts;
 using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cardiompp.Application.Services
@@ -15,45 +12,40 @@ namespace Cardiompp.Application.Services
     {
         public AuthenticationService
         (
-            IUnitOfWork unitOfWork,
-            IOptionsMonitor<JwtTokenConfiguration> config, 
-            IHashService md5HashService
+            IAuthenticationServiceDomain authenticationServiceDomain
         )
         {
-            _config = config;
-            _unitOfWork = unitOfWork;
-            Md5HashService = md5HashService ?? throw new ArgumentNullException(nameof(md5HashService));
+            AuthenticationServiceDomain = authenticationServiceDomain ?? throw new ArgumentNullException(nameof(authenticationServiceDomain));
         }
 
-        private readonly IUnitOfWork _unitOfWork;
+        private IAuthenticationServiceDomain AuthenticationServiceDomain;
 
-        private readonly IOptionsMonitor<JwtTokenConfiguration> _config;
-
-        IHashService Md5HashService { get; set; }
-
-        public async Task<GetAuthenticationResponse> AuthenticateAsync(string name, string password)
+        public async Task<GetAuthenticationResponse> AuthenticateAsync(AuthenticateRequest authenticateRequest)
         {
-            var passwordMd5 = Md5HashService.GetMd5Hash(password);
-            var cardiomppAgent = await _unitOfWork.CardiomppAgentRepository.GetByNameAndPasswordAsync(name, passwordMd5);
-            AuthenticationResponse authenticationResponse = null;
+            var cardiomppAgent = await AuthenticationServiceDomain.AuthenticateAsync
+            (
+                authenticateRequest.AgentName,
+                authenticateRequest.Password
+            );
 
-            if (cardiomppAgent != null)
-                authenticationResponse = new AuthenticationResponse(BuildToken());
+
+            if (cardiomppAgent.Errors != null && cardiomppAgent.Errors.Any())
+            {
+                var response = new GetAuthenticationResponse(null);
+
+                foreach (var error in cardiomppAgent.Errors)
+                    response.AddError(error.Code, error.Message, error.Field);
+
+                return response;
+
+            }
+                
+            var authenticationResponse = new AuthenticationResponse
+            (
+                AuthenticationServiceDomain.BuildToken()
+            );
             
             return new GetAuthenticationResponse(authenticationResponse);
-        }
-
-        private string BuildToken()
-        {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.CurrentValue.SecretKey));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(_config.CurrentValue.Issuer,
-              _config.CurrentValue.Issuer,
-              expires: DateTime.UtcNow.AddMinutes(_config.CurrentValue.LifeTime),
-              signingCredentials: creds);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

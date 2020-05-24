@@ -6,6 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting\Cardiompp.Infrastructure.CrossCutting.csproj" />
   </ItemGroup>
 
 </Project>

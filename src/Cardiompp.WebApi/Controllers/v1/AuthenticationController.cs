@@ -1,4 +1,4 @@
-﻿using Cardiompp.Application.DataContracts.v1.Requests.Login;
+﻿using Cardiompp.Application.DataContracts.v1.Requests.Authenticate;
 using Cardiompp.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -22,9 +22,9 @@ namespace Cardiompp.WebApi.Controllers.v1
         [AllowAnonymous]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> CreateTokenAsync([FromBody]AuthenticateRequest login)
+        public async Task<IActionResult> CreateTokenAsync([FromBody]AuthenticateRequest authenticateRequest)
         {
-            var response = await AuthenticationService.AuthenticateAsync(login.AgentName, login.Password);
+            var response = await AuthenticationService.AuthenticateAsync(authenticateRequest);
 
             if (response.Data == null)
                 return NotFound(response);

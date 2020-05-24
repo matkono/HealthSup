@@ -25,7 +25,7 @@ namespace Cardiompp.Infrastructure.CrossCutting.Ioc.Ioc
             services.AddScoped<IDoctorService, DoctorServiceApplication>();
             services.AddScoped<IDoctorServiceDomain, DoctorServiceDomain>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
-            services.AddScoped<IHashService, HashService>();
+            services.AddScoped<IAuthenticationServiceDomain, AuthenticationServiceDomain>();
             services.AddScoped<IHashServiceDomain, HashServiceDomain>();
         }
 
