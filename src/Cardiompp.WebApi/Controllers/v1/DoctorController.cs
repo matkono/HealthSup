@@ -51,8 +51,8 @@ namespace Cardiompp.WebApi.Controllers.v1
         {
             var response = await DoctorService.GetByEmailAndPassword(loginRequest);
 
-            if (response.Data == null)
-                return NotFound(response);
+            if (response.Errors != null && response.Errors.Any())
+                return BadRequest(response);
 
             return Ok(response);
         }
@@ -69,7 +69,7 @@ namespace Cardiompp.WebApi.Controllers.v1
         {
             var response = await DoctorService.UpdatePassword(updatePasswordRequest);
 
-            if (response.Errors != null && response.Errors.Any()) 
+            if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);
 
             return NoContent();
