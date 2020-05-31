@@ -14,9 +14,9 @@ namespace Cardiompp.WebApi.Controllers.v1
     [Authorize]
     public class DoctorController : ControllerBase
     {
-        IDoctorService DoctorService { get; set; }
+        IDoctorApplicationService DoctorService { get; set; }
 
-        public DoctorController(IDoctorService doctorService)
+        public DoctorController(IDoctorApplicationService doctorService)
         {
             DoctorService = doctorService ?? throw new ArgumentNullException(nameof(doctorService));
         }
@@ -51,8 +51,8 @@ namespace Cardiompp.WebApi.Controllers.v1
         {
             var response = await DoctorService.GetByEmailAndPassword(loginRequest);
 
-            if (response.Data == null)
-                return NotFound(response);
+            if (response.Errors != null && response.Errors.Any())
+                return BadRequest(response);
 
             return Ok(response);
         }
@@ -69,7 +69,7 @@ namespace Cardiompp.WebApi.Controllers.v1
         {
             var response = await DoctorService.UpdatePassword(updatePasswordRequest);
 
-            if (response.Errors != null && response.Errors.Any()) 
+            if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);
 
             return NoContent();

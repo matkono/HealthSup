@@ -1,13 +1,15 @@
 ﻿using Cardiompp.Application.Services;
 using Cardiompp.Application.Services.Contracts;
 using Cardiompp.Domain.Repositories;
+using Cardiompp.Domain.Services;
+using Cardiompp.Domain.Services.Contracts;
 using Cardiompp.Infrastructure.Data.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Cardiompp.Infrastructure.CrossCutting.Ioc
+namespace Cardiompp.Infrastructure.CrossCutting.Ioc.Ioc
 {
     public static class DependencyInjectorConfiguration
     {
@@ -20,9 +22,11 @@ namespace Cardiompp.Infrastructure.CrossCutting.Ioc
 
         private static void ConfigureServices(this IServiceCollection services)
         {
-            services.AddScoped<IDoctorService, DoctorService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
-            services.AddScoped<IHashService, HashService>();
+            services.AddScoped<IDoctorApplicationService, DoctorApplicationService>();
+            services.AddScoped<IDoctorDomainService, DoctorDomainService>();
+            services.AddScoped<IAuthenticationApplicationService, AuthenticationApplicationService>();
+            services.AddScoped<IAuthenticationDomainService, AuthenticationDomainService>();
+            services.AddScoped<IHashDomainService, HashDomainService>();
         }
 
         private static void ConfigureUnitOfWork(this IServiceCollection services, IConfiguration configuration)

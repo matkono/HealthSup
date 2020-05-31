@@ -5,13 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.5.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.3" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Cardiompp.Domain\Cardiompp.Domain.csproj" />
+    <ProjectReference Include="..\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting\Cardiompp.Infrastructure.CrossCutting.csproj" />
   </ItemGroup>
 
 </Project>

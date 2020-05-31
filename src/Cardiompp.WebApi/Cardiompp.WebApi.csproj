@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting.Ioc\Cardiompp.Infrastructure.CrossCutting.Ioc.csproj" />
     <ProjectReference Include="..\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting\Cardiompp.Infrastructure.CrossCutting.csproj" />
   </ItemGroup>
 

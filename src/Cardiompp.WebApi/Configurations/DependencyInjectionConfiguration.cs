@@ -1,4 +1,4 @@
-﻿using Cardiompp.Infrastructure.CrossCutting.Ioc;
+﻿using Cardiompp.Infrastructure.CrossCutting.Ioc.Ioc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

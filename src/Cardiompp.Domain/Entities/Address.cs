@@ -1,6 +1,6 @@
 ﻿namespace Cardiompp.Domain.Entities
 {
-    public class Address
+    public class Address: DomainResponse
     {
         public Address(
             int id, 

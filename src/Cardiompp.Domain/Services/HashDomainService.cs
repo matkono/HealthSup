@@ -1,20 +1,20 @@
-﻿using Cardiompp.Application.Services.Contracts;
+﻿using Cardiompp.Domain.Services.Contracts;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Cardiompp.Application.Services
+namespace Cardiompp.Domain.Services
 {
-    public class HashService : IHashService
+    public class HashDomainService: IHashDomainService
     {
         public string GetMd5Hash(string value)
         {
-            using (MD5 md5Hash = MD5.Create()) 
+            using (MD5 md5Hash = MD5.Create())
             {
                 return GenerateMd5hash(md5Hash, value);
             }
         }
 
-        private static string GenerateMd5hash(MD5 md5Hash, string value) 
+        private static string GenerateMd5hash(MD5 md5Hash, string value)
         {
             var data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(value));
             var sBuilder = new StringBuilder();

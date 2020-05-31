@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Cardiompp.Application.Services.Contracts
 {
-    public interface IDoctorService
+    public interface IDoctorApplicationService
     {
         Task<DoctorResponse<GetDoctorByCrmResponse>> GetByCrm(string crm);
 

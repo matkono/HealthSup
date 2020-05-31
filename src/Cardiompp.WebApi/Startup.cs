@@ -1,4 +1,3 @@
-using Cardiompp.Application.Configuration.JwtToken;
 using Cardiompp.Infrastructure.CrossCutting.JwtToken;
 using Cardiompp.WebApi.Configurations;
 using Cardiompp.WebApi.Configurations.Swagger;

@@ -1,6 +1,6 @@
 ﻿namespace Cardiompp.Domain.Entities
 {
-    public class CardiomppAgent
+    public class CardiomppAgent: DomainResponse
     {
         public CardiomppAgent
         (
