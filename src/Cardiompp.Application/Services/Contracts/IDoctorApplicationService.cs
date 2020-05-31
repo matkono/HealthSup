@@ -7,8 +7,6 @@ namespace Cardiompp.Application.Services.Contracts
 {
     public interface IDoctorApplicationService
     {
-        Task<DoctorResponse<GetDoctorByCrmResponse>> GetByCrm(string crm);
-
         Task<DoctorResponse<GetDoctorByEmailAndPasswordResponse>> GetByEmailAndPassword(GetDoctorByEmailAndPasswordRequest loginRequest);
 
         Task<BaseResponse> UpdatePassword(UpdatePasswordRequest updatePasswordRequest);

@@ -22,24 +22,6 @@ namespace Cardiompp.WebApi.Controllers.v1
         }
 
         /// <summary>
-        /// Get merchant by crm
-        /// </summary>
-        /// <param name="crm">Doctor identifier</param>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("{crm}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetByCrm(string crm)
-        {
-            var response = await DoctorService.GetByCrm(crm);
-
-            if (response.Data == null)
-                return NotFound(response);
-
-            return Ok(response);
-        }
-
-        /// <summary>
         /// Get merchant by email and password.
         /// </summary>
         /// <param name="loginRequest">Login request.</param>
