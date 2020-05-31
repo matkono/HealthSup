@@ -13,9 +13,9 @@ namespace Cardiompp.WebApi.Controllers.v1
     [Route("api/v{version:apiVersion}/[controller]")]
     public class AuthenticationController: ControllerBase
     {
-        IAuthenticationService AuthenticationService { get; set; }
+        IAuthenticationApplicationService AuthenticationService { get; set; }
 
-        public AuthenticationController(IAuthenticationService authenticationService)
+        public AuthenticationController(IAuthenticationApplicationService authenticationService)
         {
             AuthenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
         }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Cardiompp.Application.Services.Contracts
 {
-    public interface IAuthenticationService
+    public interface IAuthenticationApplicationService
     {
         public Task<GetAuthenticationResponse> AuthenticateAsync(AuthenticateRequest authenticateRequest);
     }

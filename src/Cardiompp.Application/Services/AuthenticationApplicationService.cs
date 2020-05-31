@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace Cardiompp.Application.Services
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationApplicationService : IAuthenticationApplicationService
     {
-        public AuthenticationService
+        public AuthenticationApplicationService
         (
-            IAuthenticationServiceDomain authenticationServiceDomain
+            IAuthenticationDomainService authenticationServiceDomain
         )
         {
             AuthenticationServiceDomain = authenticationServiceDomain ?? throw new ArgumentNullException(nameof(authenticationServiceDomain));
         }
 
-        private IAuthenticationServiceDomain AuthenticationServiceDomain;
+        private IAuthenticationDomainService AuthenticationServiceDomain;
 
         public async Task<GetAuthenticationResponse> AuthenticateAsync(AuthenticateRequest authenticateRequest)
         {

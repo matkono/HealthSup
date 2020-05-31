@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Cardiompp.Domain.Services
 {
-    public class DoctorServiceDomain : IDoctorServiceDomain
+    public class DoctorDomainService : IDoctorDomainService
     {
-        public DoctorServiceDomain
+        public DoctorDomainService
         (
             IUnitOfWork unitOfWork,
-            IHashServiceDomain hashService
+            IHashDomainService hashService
         )
         {
             _unitOfWork = unitOfWork;
@@ -21,7 +21,7 @@ namespace Cardiompp.Domain.Services
 
         private readonly IUnitOfWork _unitOfWork;
 
-        IHashServiceDomain HashService { get; set; }
+        IHashDomainService HashService { get; set; }
 
         public async Task<Doctor> GetByCrm(string crm)
         {

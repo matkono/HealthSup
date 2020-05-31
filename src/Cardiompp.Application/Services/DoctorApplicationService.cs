@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace Cardiompp.Application.Services
 {
-    public class DoctorServiceApplication : IDoctorService
+    public class DoctorApplicationService : IDoctorApplicationService
     {
-        public DoctorServiceApplication
+        public DoctorApplicationService
         (
-            IDoctorServiceDomain doctorServiceDomain
+            IDoctorDomainService doctorServiceDomain
         )
         {
             DoctorServiceDomain = doctorServiceDomain ?? throw new ArgumentNullException(nameof(doctorServiceDomain));
         }
 
-        IDoctorServiceDomain DoctorServiceDomain;
+        IDoctorDomainService DoctorServiceDomain;
 
         public async Task<DoctorResponse<GetDoctorByCrmResponse>> GetByCrm(string crm)
         {

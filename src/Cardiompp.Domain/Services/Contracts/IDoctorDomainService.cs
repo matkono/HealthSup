@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Cardiompp.Domain.Services.Contracts
 {
-    public interface IDoctorServiceDomain
+    public interface IDoctorDomainService
     {
         Task<Doctor> GetByCrm(string crm);
 

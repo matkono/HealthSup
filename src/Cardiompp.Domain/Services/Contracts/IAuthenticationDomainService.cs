@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Cardiompp.Domain.Services.Contracts
 {
-    public interface IAuthenticationServiceDomain
+    public interface IAuthenticationDomainService
     {
         public Task<CardiomppAgent> AuthenticateAsync(string name, string password);
 

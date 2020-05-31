@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Cardiompp.Domain.Services
 {
-    public class HashServiceDomain: IHashServiceDomain
+    public class HashDomainService: IHashDomainService
     {
         public string GetMd5Hash(string value)
         {

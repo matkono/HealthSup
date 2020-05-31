@@ -14,9 +14,9 @@ namespace Cardiompp.WebApi.Controllers.v1
     [Authorize]
     public class DoctorController : ControllerBase
     {
-        IDoctorService DoctorService { get; set; }
+        IDoctorApplicationService DoctorService { get; set; }
 
-        public DoctorController(IDoctorService doctorService)
+        public DoctorController(IDoctorApplicationService doctorService)
         {
             DoctorService = doctorService ?? throw new ArgumentNullException(nameof(doctorService));
         }

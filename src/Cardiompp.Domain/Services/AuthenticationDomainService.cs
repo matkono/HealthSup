@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace Cardiompp.Domain.Services
 {
-    public class AuthenticationServiceDomain : IAuthenticationServiceDomain
+    public class AuthenticationServiceDomain : IAuthenticationDomainService
     {
         public AuthenticationServiceDomain
         (
             IUnitOfWork unitOfWork,
             IOptionsMonitor<JwtTokenConfiguration> config,
-            IHashServiceDomain md5HashServiceDomain
+            IHashDomainService md5HashServiceDomain
         )
         {
             _config = config;
@@ -30,7 +30,7 @@ namespace Cardiompp.Domain.Services
 
         private readonly IOptionsMonitor<JwtTokenConfiguration> _config;
 
-        IHashServiceDomain Md5HashServiceDomain { get; set; }
+        IHashDomainService Md5HashServiceDomain { get; set; }
 
         public async Task<CardiomppAgent> AuthenticateAsync(string name, string password)
         {

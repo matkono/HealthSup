@@ -22,11 +22,11 @@ namespace Cardiompp.Infrastructure.CrossCutting.Ioc.Ioc
 
         private static void ConfigureServices(this IServiceCollection services)
         {
-            services.AddScoped<IDoctorService, DoctorServiceApplication>();
-            services.AddScoped<IDoctorServiceDomain, DoctorServiceDomain>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
-            services.AddScoped<IAuthenticationServiceDomain, AuthenticationServiceDomain>();
-            services.AddScoped<IHashServiceDomain, HashServiceDomain>();
+            services.AddScoped<IDoctorApplicationService, DoctorApplicationService>();
+            services.AddScoped<IDoctorDomainService, DoctorDomainService>();
+            services.AddScoped<IAuthenticationApplicationService, AuthenticationApplicationService>();
+            services.AddScoped<IAuthenticationDomainService, AuthenticationDomainService>();
+            services.AddScoped<IHashDomainService, HashDomainService>();
         }
 
         private static void ConfigureUnitOfWork(this IServiceCollection services, IConfiguration configuration)
