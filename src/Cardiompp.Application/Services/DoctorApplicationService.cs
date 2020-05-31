@@ -22,13 +22,6 @@ namespace Cardiompp.Application.Services
 
         IDoctorDomainService DoctorServiceDomain;
 
-        public async Task<DoctorResponse<GetDoctorByCrmResponse>> GetByCrm(string crm)
-        {
-            var doctor = await DoctorServiceDomain.GetByCrm(crm);
-
-            return new DoctorResponse<GetDoctorByCrmResponse>(doctor?.ToGetByCrmDataContract());
-        }
-
         public async Task<DoctorResponse<GetDoctorByEmailAndPasswordResponse>> GetByEmailAndPassword
         (
             GetDoctorByEmailAndPasswordRequest loginRequest

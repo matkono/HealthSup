@@ -23,13 +23,6 @@ namespace Cardiompp.Domain.Services
 
         IHashDomainService HashService { get; set; }
 
-        public async Task<Doctor> GetByCrm(string crm)
-        {
-            var doctor = await _unitOfWork.DoctorRepository.GetByCrm(crm);
-
-            return doctor;
-        }
-
         public async Task<Doctor> GetByEmailAndPassword(string email, string password)
         {
             var passwordMd5 = HashService.GetMd5Hash(password);

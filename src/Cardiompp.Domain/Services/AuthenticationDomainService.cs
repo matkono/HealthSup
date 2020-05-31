@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace Cardiompp.Domain.Services
 {
-    public class AuthenticationServiceDomain : IAuthenticationDomainService
+    public class AuthenticationDomainService : IAuthenticationDomainService
     {
-        public AuthenticationServiceDomain
+        public AuthenticationDomainService
         (
             IUnitOfWork unitOfWork,
             IOptionsMonitor<JwtTokenConfiguration> config,

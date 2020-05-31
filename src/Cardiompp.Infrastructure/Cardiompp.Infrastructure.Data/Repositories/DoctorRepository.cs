@@ -17,26 +17,6 @@ namespace Cardiompp.Infrastructure.Data.Repositories
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<Doctor> GetByCrm(string crm)
-        {
-            Doctor MapFromQuery(Doctor doctor, Address address)
-            {
-                doctor.SetAddress(address);
-                return doctor;
-            };
-
-            var query = ScriptManager.GetByName(ScriptManager.FileNames.Doctor.GetByCrm);
-
-            var result = await UnitOfWork.Connection.QueryAsync<Doctor, Address, Doctor>(
-                                                                query,
-                                                                MapFromQuery,
-                                                                new { crm },
-                                                                UnitOfWork.Transaction,
-                                                                splitOn: "Id");
-
-            return result.FirstOrDefault();
-        }
-
         public async Task<Doctor> GetByEmailAndPassword(string email, string password)
         {
             var query = ScriptManager.GetByName(ScriptManager.FileNames.Doctor.GetByEmailAndPassword);
