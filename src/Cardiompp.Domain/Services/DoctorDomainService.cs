@@ -18,9 +18,9 @@ namespace Cardiompp.Domain.Services
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public async Task UpdatePassword(int doctorId, string newPassword)
+        public async Task UpdatePassword(int userId, string newPassword)
         {
-            await _unitOfWork.DoctorRepository.UpdatePassword(doctorId, newPassword);
+            await _unitOfWork.UserRepository.UpdatePassword(userId, newPassword);
         }
     }
 }

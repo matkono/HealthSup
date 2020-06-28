@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\CardiomppAgent\GetByNameAndPassword.sql" />
-    <EmbeddedResource Include="Scripts\Doctor\UpdatePassword.sql" />
+    <EmbeddedResource Include="Scripts\UserDTO\UpdatePassword.sql" />
     <EmbeddedResource Include="Scripts\UserDTO\GetByEmailAndPassword.sql" />
   </ItemGroup>
 
@@ -23,6 +23,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Cardiompp.Domain\Cardiompp.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Scripts\Doctor\" />
   </ItemGroup>
 
 </Project>

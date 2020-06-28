@@ -6,5 +6,7 @@ namespace Cardiompp.Domain.Repositories
     public interface IUserRepository
     {
         Task<UserDTO> GetByEmailAndPassword(string email, string password);
+
+        Task UpdatePassword(int doctorId, string newPassword);
     }
 }

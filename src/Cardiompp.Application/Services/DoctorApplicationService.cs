@@ -56,7 +56,9 @@ namespace Cardiompp.Application.Services
                 return baseResponse;
             }
 
-            await DoctorServiceDomain.UpdatePassword(user.Id, updatePasswordRequest.NewPassword);
+            var newPasswordMd5 = HashCrossCuttingService.GetMd5Hash(updatePasswordRequest.NewPassword);
+
+            await DoctorServiceDomain.UpdatePassword(user.Id, newPasswordMd5);
 
             return baseResponse;
         }

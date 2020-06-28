@@ -27,5 +27,17 @@ namespace Cardiompp.Infrastructure.Data.Repositories
 
             return result.FirstOrDefault();
         }
+
+        public async Task UpdatePassword(int userId, string newPassword)
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.UserDTO.UpdatePassword);
+
+            await UnitOfWork.Connection.ExecuteAsync
+            (
+                query,
+                new { userId, newPassword },
+                UnitOfWork.Transaction
+            );
+        }
     }
 }
