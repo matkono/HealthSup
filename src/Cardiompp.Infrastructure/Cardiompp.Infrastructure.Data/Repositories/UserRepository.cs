@@ -18,7 +18,7 @@ namespace Cardiompp.Infrastructure.Data.Repositories
 
         public async Task<UserDTO> GetByEmailAndPassword(string email, string password)
         {
-            var query = ScriptManager.GetByName(ScriptManager.FileNames.User.GetByEmailAndPassword);
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.UserDTO.GetByEmailAndPassword);
 
             var result = await UnitOfWork.Connection.QueryAsync<UserDTO>(
                                                                 query,

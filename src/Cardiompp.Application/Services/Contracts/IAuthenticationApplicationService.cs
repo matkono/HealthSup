@@ -6,6 +6,8 @@ namespace Cardiompp.Application.Services.Contracts
 {
     public interface IAuthenticationApplicationService
     {
-        public Task<GetAuthenticationAgentResponse> AuthenticateAsync(AuthenticateAgentRequest authenticateRequest);
+        public Task<GetAuthenticationAgentResponse> AuthenticateAgentAsync(AuthenticationAgentRequest authenticateAgentRequest);
+
+        public Task<GetAuthenticationUserResponse> AuthenticateUserAsync(AuthenticationUserRequest authenticateUserRequest);
     }
 }

@@ -24,7 +24,7 @@ namespace Cardiompp.Infrastructure.Data.Scripts
                 public static readonly string GetByNameAndPassword = $"{EntityName}.GetByNameAndPassword";
             }
 
-            public static class User
+            public static class UserDTO
             {
                 static readonly string EntityName = $"{nameof(UserDTO)}";
 
