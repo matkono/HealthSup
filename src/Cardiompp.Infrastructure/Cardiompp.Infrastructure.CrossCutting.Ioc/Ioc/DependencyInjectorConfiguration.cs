@@ -3,6 +3,10 @@ using Cardiompp.Application.Services.Contracts;
 using Cardiompp.Domain.Repositories;
 using Cardiompp.Domain.Services;
 using Cardiompp.Domain.Services.Contracts;
+using Cardiompp.Infrastructure.CrossCutting.Authentication.Services.Contracts;
+using Cardiompp.Infrastructure.CrossCutting.Hash.Services.Contracts;
+using Cardiompp.Infrastructure.CrossCutting.Services.Authentication;
+using Cardiompp.Infrastructure.CrossCutting.Services.Hash;
 using Cardiompp.Infrastructure.Data.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,15 +29,15 @@ namespace Cardiompp.Infrastructure.CrossCutting.Ioc.Ioc
             services.AddScoped<IDoctorApplicationService, DoctorApplicationService>();
             services.AddScoped<IDoctorDomainService, DoctorDomainService>();
             services.AddScoped<IAuthenticationApplicationService, AuthenticationApplicationService>();
-            services.AddScoped<IAuthenticationDomainService, AuthenticationDomainService>();
-            services.AddScoped<IHashDomainService, HashDomainService>();
+            services.AddScoped<IAuthenticationCrossCuttingService, AuthenticationCrossCuttingService>();
+            services.AddScoped<IHashCrossCuttingService, HashCrossCuttingService>();
         }
 
         private static void ConfigureUnitOfWork(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IDbConnection>(serviceProvider => new SqlConnection
             {
-                ConnectionString = configuration.GetConnectionString("Cardiompp")
+                ConnectionString = configuration.GetConnectionString("HealthSup")
             });
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -22,24 +22,6 @@ namespace Cardiompp.WebApi.Controllers.v1
         }
 
         /// <summary>
-        /// Get merchant by email and password.
-        /// </summary>
-        /// <param name="loginRequest">Login request.</param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("login")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Login([FromBody] GetDoctorByEmailAndPasswordRequest loginRequest)
-        {
-            var response = await DoctorService.GetByEmailAndPassword(loginRequest);
-
-            if (response.Errors != null && response.Errors.Any())
-                return BadRequest(response);
-
-            return Ok(response);
-        }
-
-        /// <summary>
         /// Update password
         /// </summary>
         /// <param name="UpdatePasswordRequest">Update password request.</param>

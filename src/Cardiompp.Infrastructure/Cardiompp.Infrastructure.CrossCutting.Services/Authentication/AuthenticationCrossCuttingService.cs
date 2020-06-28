@@ -23,21 +23,24 @@ namespace Cardiompp.Infrastructure.CrossCutting.Services.Authentication
         {
             _config = config;
             _unitOfWork = unitOfWork;
-            Md5HashServiceDomain = md5HashCrossCuttingService ?? throw new ArgumentNullException(nameof(md5HashCrossCuttingService));
         }
 
         private readonly IUnitOfWork _unitOfWork;
 
         private readonly IOptionsMonitor<JwtTokenConfiguration> _config;
 
-        IHashCrossCuttingService Md5HashServiceDomain { get; set; }
-
-        public async Task<AgentDTO> AuthenticateAsync(string name, string password)
+        public async Task<AgentDTO> AuthenticateAgentAsync(string key, string password)
         {
-            var passwordMd5 = Md5HashServiceDomain.GetMd5Hash(password);
-            var cardiomppAgent = await _unitOfWork.CardiomppAgentRepository.GetByNameAndPasswordAsync(name, passwordMd5);
+            var agent = await _unitOfWork.CardiomppAgentRepository.GetByKeyAndPassword(key, password);
 
-            return cardiomppAgent;
+            return agent;
+        }
+
+        public async Task<UserDTO> AuthenticateUserAsync(string email, string password)
+        { 
+            var user = await _unitOfWork.UserRepository.GetByEmailAndPassword(email, password);
+
+            return user;
         }
 
         public string BuildToken()

@@ -22,8 +22,9 @@ namespace Cardiompp.WebApi.Controllers.v1
 
         [AllowAnonymous]
         [HttpPost]
+        [Route("authenticateAgent")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> CreateTokenAsync([FromBody]AuthenticateRequest authenticateRequest)
+        public async Task<IActionResult> AuthenticateAgent([FromBody]AuthenticateAgentRequest authenticateRequest)
         {
             var response = await AuthenticationService.AuthenticateAsync(authenticateRequest);
 

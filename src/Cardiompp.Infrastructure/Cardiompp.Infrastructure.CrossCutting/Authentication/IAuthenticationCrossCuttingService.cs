@@ -5,7 +5,9 @@ namespace Cardiompp.Infrastructure.CrossCutting.Authentication.Services.Contract
 {
     public interface IAuthenticationCrossCuttingService
     {
-        public Task<AgentDTO> AuthenticateAsync(string name, string password);
+        public Task<AgentDTO> AuthenticateAgentAsync(string name, string password);
+
+        public Task<UserDTO> AuthenticateUserAsync(string email, string password);
 
         public string BuildToken();
     }

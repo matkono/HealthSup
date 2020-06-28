@@ -1,7 +1,7 @@
 ﻿SELECT 
-	ca.name
+	hsa.name
 FROM
-	CardiomppAgent ca
+	HealthSupAgent hsa
 WHERE
-	ca.name = @name AND
-	ca.password = @password
+	hsa.keyAgent = @name AND
+	hsa.password = @password

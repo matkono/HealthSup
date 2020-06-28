@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using Cardiompp.Infrastructure.CrossCutting.Authentication.DTO;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -13,8 +14,6 @@ namespace Cardiompp.Infrastructure.Data.Scripts
             {
                 static readonly string EntityName = $"{nameof(Doctor)}";
 
-                public static readonly string GetByCrm = $"{EntityName}.GetByCrm";
-                public static readonly string GetByEmailAndPassword = $"{EntityName}.GetByEmailAndPassword";
                 public static readonly string UpdatePassword = $"{EntityName}.UpdatePassword";
             }
 
@@ -23,6 +22,13 @@ namespace Cardiompp.Infrastructure.Data.Scripts
                 static readonly string EntityName = $"{nameof(CardiomppAgent)}";
 
                 public static readonly string GetByNameAndPassword = $"{EntityName}.GetByNameAndPassword";
+            }
+
+            public static class User
+            {
+                static readonly string EntityName = $"{nameof(UserDTO)}";
+
+                public static readonly string GetByEmailAndPassword = $"{EntityName}.GetByEmailAndPassword";
             }
         }
 

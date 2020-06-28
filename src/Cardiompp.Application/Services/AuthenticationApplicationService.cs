@@ -1,9 +1,10 @@
 ﻿using Cardiompp.Application.DataContracts.v1.Requests.Authenticate;
 using Cardiompp.Application.DataContracts.v1.Responses.Authentication;
 using Cardiompp.Application.Services.Contracts;
-using Cardiompp.Domain.Services.Contracts;
+using Cardiompp.Domain.Enums;
+using Cardiompp.Infrastructure.CrossCutting.Authentication.Services.Contracts;
+using Cardiompp.Infrastructure.CrossCutting.Hash.Services.Contracts;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cardiompp.Application.Services
@@ -12,40 +13,47 @@ namespace Cardiompp.Application.Services
     {
         public AuthenticationApplicationService
         (
-            IAuthenticationDomainService authenticationServiceDomain
+            IHashCrossCuttingService hashCrossCuttingService,
+            IAuthenticationCrossCuttingService authenticationCrossCuttingService
         )
         {
-            AuthenticationServiceDomain = authenticationServiceDomain ?? throw new ArgumentNullException(nameof(authenticationServiceDomain));
+            HashCrossCuttingService = hashCrossCuttingService ?? throw new ArgumentNullException(nameof(hashCrossCuttingService));
+            AuthenticationCrossCuttingService = authenticationCrossCuttingService ?? throw new ArgumentNullException(nameof(authenticationCrossCuttingService));
         }
 
-        private IAuthenticationDomainService AuthenticationServiceDomain;
+        private IHashCrossCuttingService HashCrossCuttingService { get; set; }
 
-        public async Task<GetAuthenticationResponse> AuthenticateAsync(AuthenticateRequest authenticateRequest)
+        private IAuthenticationCrossCuttingService AuthenticationCrossCuttingService;
+
+        public async Task<GetAuthenticationAgentResponse> AuthenticateAsync(AuthenticateAgentRequest authenticateRequest)
         {
-            var cardiomppAgent = await AuthenticationServiceDomain.AuthenticateAsync
+            var passwordMd5 = HashCrossCuttingService.GetMd5Hash(authenticateRequest.Password);
+            var agent = await AuthenticationCrossCuttingService.AuthenticateAgentAsync
             (
-                authenticateRequest.AgentName,
-                authenticateRequest.Password
-            );
-
-
-            if (cardiomppAgent.Errors != null && cardiomppAgent.Errors.Any())
-            {
-                var response = new GetAuthenticationResponse(null);
-
-                foreach (var error in cardiomppAgent.Errors)
-                    response.AddError(error.Code, error.Message, error.Field);
-
-                return response;
-
-            }
-                
-            var authenticationResponse = new AuthenticationResponse
-            (
-                AuthenticationServiceDomain.BuildToken()
+                authenticateRequest.AgentKey,
+                passwordMd5
             );
             
-            return new GetAuthenticationResponse(authenticationResponse);
+            if (agent == null)
+            {
+                var response = new GetAuthenticationAgentResponse(null);
+
+                response.AddError
+                (
+                    (int)ValidationErrorCodeEnum.AgentNameOrPasswordInvalid,
+                    "AgentKey or password is incorrect.",
+                    null
+                );
+
+                return response;
+            }
+                
+            var authenticationResponse = new AuthenticationAgentResponse
+            (
+                AuthenticationCrossCuttingService.BuildToken()
+            );
+            
+            return new GetAuthenticationAgentResponse(authenticationResponse);
         }
     }
 }

@@ -17,9 +17,13 @@ namespace Cardiompp.Infrastructure.Data.Repositories
 
         private IDoctorRepository _doctorRepository;
         private ICardiomppAgentRepository _cardiomppAgentRepository;
+        private IUserRepository _userRepository;
 
         public IDoctorRepository DoctorRepository => _doctorRepository ??= new DoctorRepository(this);
+
         public ICardiomppAgentRepository CardiomppAgentRepository => _cardiomppAgentRepository ??= new CardiomppAgentRepository(this);
+
+        public IUserRepository UserRepository => _userRepository ??= new UserRepository(this);
 
         public void Begin(IsolationLevel isolationLevel = IsolationLevel.ReadUncommitted)
         {

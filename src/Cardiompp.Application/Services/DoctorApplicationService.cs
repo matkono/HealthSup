@@ -1,11 +1,11 @@
 ﻿using Cardiompp.Application.DataContracts.Responses;
 using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
-using Cardiompp.Application.DataContracts.v1.Responses.Doctor;
-using Cardiompp.Application.Mappers;
 using Cardiompp.Application.Services.Contracts;
+using Cardiompp.Domain.Enums;
 using Cardiompp.Domain.Services.Contracts;
+using Cardiompp.Infrastructure.CrossCutting.Authentication.Services.Contracts;
+using Cardiompp.Infrastructure.CrossCutting.Hash.Services.Contracts;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cardiompp.Application.Services
@@ -14,38 +14,21 @@ namespace Cardiompp.Application.Services
     {
         public DoctorApplicationService
         (
-            IDoctorDomainService doctorServiceDomain
+            IDoctorDomainService doctorServiceDomain,
+            IHashCrossCuttingService hashCrossCuttingService,
+            IAuthenticationCrossCuttingService authenticationCrossCuttingService
         )
         {
             DoctorServiceDomain = doctorServiceDomain ?? throw new ArgumentNullException(nameof(doctorServiceDomain));
+            HashCrossCuttingService = hashCrossCuttingService ?? throw new ArgumentNullException(nameof(hashCrossCuttingService));
+            AuthenticationCrossCuttingService = authenticationCrossCuttingService ?? throw new ArgumentNullException(nameof(authenticationCrossCuttingService));
         }
 
-        IDoctorDomainService DoctorServiceDomain;
+        private IDoctorDomainService DoctorServiceDomain;
 
-        public async Task<DoctorResponse<GetDoctorByEmailAndPasswordResponse>> GetByEmailAndPassword
-        (
-            GetDoctorByEmailAndPasswordRequest loginRequest
-        ) 
-        {
-            var doctor = await DoctorServiceDomain.GetByEmailAndPassword
-            (
-                loginRequest.Email,
-                loginRequest.Password
-            );
+        private IHashCrossCuttingService HashCrossCuttingService;
 
-            if(doctor.Errors != null && doctor.Errors.Any()) 
-            {
-                var response = new DoctorResponse<GetDoctorByEmailAndPasswordResponse>(null);
-
-                foreach (var error in doctor.Errors)
-                    response.AddError(error.Code, error.Message, error.Field);
-
-                return response;
-
-            }
-
-            return new DoctorResponse<GetDoctorByEmailAndPasswordResponse>(doctor?.ToGetByEmailAndPasswordDataContact());
-        }
+        private IAuthenticationCrossCuttingService AuthenticationCrossCuttingService;
 
         public async Task<BaseResponse> UpdatePassword
         (
@@ -54,21 +37,26 @@ namespace Cardiompp.Application.Services
         {
             var baseResponse = new BaseResponse();
 
-            var doctor = await DoctorServiceDomain.GetByEmailAndPassword
+            var passwordMd5 = HashCrossCuttingService.GetMd5Hash(updatePasswordRequest.Password);
+            var user = await AuthenticationCrossCuttingService.AuthenticateUserAsync
             (
-                updatePasswordRequest.Email, 
-                updatePasswordRequest.Password
+                updatePasswordRequest.Email,
+                passwordMd5
             );
 
-            if (doctor.Errors != null && doctor.Errors.Any())
+            if (user == null)
             {
-                foreach (var error in doctor.Errors)
-                    baseResponse.AddError(error.Code, error.Message, error.Field);
+                baseResponse.AddError
+                (
+                    (int)ValidationErrorCodeEnum.EmailOrPasswordInvalid,
+                    "Email or password is incorrect.",
+                    null
+                );
 
                 return baseResponse;
             }
 
-            await DoctorServiceDomain.UpdatePassword(doctor.Id, updatePasswordRequest.NewPassword);
+            await DoctorServiceDomain.UpdatePassword(user.Id, updatePasswordRequest.NewPassword);
 
             return baseResponse;
         }

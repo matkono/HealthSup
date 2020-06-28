@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace Cardiompp.Infrastructure.Data.Repositories
 {
-    public class CardiomppAgentRepository : ICardiomppAgentRepository
+    public class UserRepository : IUserRepository
     {
         private IUnitOfWork UnitOfWork { get; }
 
-        public CardiomppAgentRepository(IUnitOfWork unitOfWork)
+        public UserRepository(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<AgentDTO> GetByKeyAndPassword(string name, string password)
+        public async Task<UserDTO> GetByEmailAndPassword(string email, string password)
         {
-            var query = ScriptManager.GetByName(ScriptManager.FileNames.CardiomppAgent.GetByNameAndPassword);
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.User.GetByEmailAndPassword);
 
-            var result = await UnitOfWork.Connection.QueryAsync<AgentDTO>(
+            var result = await UnitOfWork.Connection.QueryAsync<UserDTO>(
                                                                 query,
-                                                                new { name, password },
+                                                                new { email, password },
                                                                 UnitOfWork.Transaction);
 
             return result.FirstOrDefault();

@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace Cardiompp.Domain.Repositories
 {
-    public interface ICardiomppAgentRepository
+    public interface IUserRepository
     {
-        Task<AgentDTO> GetByKeyAndPassword(string key, string password);
+        Task<UserDTO> GetByEmailAndPassword(string email, string password);
     }
 }
