@@ -29,8 +29,8 @@ namespace Cardiompp.Infrastructure.CrossCutting.Ioc.Ioc
             services.AddScoped<IDoctorApplicationService, DoctorApplicationService>();
             services.AddScoped<IDoctorDomainService, DoctorDomainService>();
             services.AddScoped<IAuthenticationApplicationService, AuthenticationApplicationService>();
-            services.AddScoped<IAuthenticationCrossCuttingService, AuthenticationCrossCuttingService>();
-            services.AddScoped<IHashCrossCuttingService, HashCrossCuttingService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IHashService, HashService>();
         }
 
         private static void ConfigureUnitOfWork(this IServiceCollection services, IConfiguration configuration)

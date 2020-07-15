@@ -1,4 +1,5 @@
 ﻿using Cardiompp.Application.DataContracts.v1.Requests.Authenticate;
+using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
 using Cardiompp.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -23,7 +24,7 @@ namespace Cardiompp.WebApi.Controllers.v1
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("authenticationAgent")]
+        [Route("agentAuthentication/token")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> AuthenticationAgent([FromBody]AuthenticationAgentRequest authenticateRequest)
         {
@@ -36,7 +37,7 @@ namespace Cardiompp.WebApi.Controllers.v1
         }
 
         [HttpPost]
-        [Route("authenticationUser")]
+        [Route("userAuthentication")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> AuthenticationUser([FromBody]AuthenticationUserRequest authenticateRequest)
         {
@@ -46,6 +47,19 @@ namespace Cardiompp.WebApi.Controllers.v1
                 return BadRequest(response);
 
             return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("updateUserPassword")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> UpdateUserPassword([FromBody] UpdateUserPasswordRequest updateUserPasswordRequest)
+        {
+            var response = await AuthenticationService.UpdatePassword(updateUserPasswordRequest);
+
+            if (response.Errors != null && response.Errors.Any())
+                return BadRequest(response);
+
+            return NoContent();
         }
     }
 }

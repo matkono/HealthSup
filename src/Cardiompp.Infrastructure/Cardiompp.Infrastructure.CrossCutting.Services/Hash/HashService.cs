@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Cardiompp.Infrastructure.CrossCutting.Services.Hash
 {
-    public class HashCrossCuttingService : IHashCrossCuttingService
+    public class HashService : IHashService
     {
         public string GetMd5Hash(string value)
         {

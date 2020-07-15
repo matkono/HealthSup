@@ -6,6 +6,5 @@ namespace Cardiompp.Application.Services.Contracts
 {
     public interface IDoctorApplicationService
     {
-        Task<BaseResponse> UpdatePassword(UpdatePasswordRequest updatePasswordRequest);
     }
 }

@@ -20,23 +20,5 @@ namespace Cardiompp.WebApi.Controllers.v1
         {
             DoctorService = doctorService ?? throw new ArgumentNullException(nameof(doctorService));
         }
-
-        /// <summary>
-        /// Update password
-        /// </summary>
-        /// <param name="UpdatePasswordRequest">Update password request.</param>
-        /// <returns></returns>
-        [HttpPut]
-        [Route("updatePassword")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordRequest updatePasswordRequest)
-        {
-            var response = await DoctorService.UpdatePassword(updatePasswordRequest);
-
-            if (response.Errors != null && response.Errors.Any())
-                return BadRequest(response);
-
-            return NoContent();
-        }
     }
 }

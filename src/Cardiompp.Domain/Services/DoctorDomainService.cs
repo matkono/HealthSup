@@ -1,7 +1,6 @@
 ﻿using Cardiompp.Domain.Repositories;
 using Cardiompp.Domain.Services.Contracts;
 using Cardiompp.Infrastructure.CrossCutting.Hash.Services.Contracts;
-using System.Threading.Tasks;
 
 namespace Cardiompp.Domain.Services
 {
@@ -10,17 +9,12 @@ namespace Cardiompp.Domain.Services
         public DoctorDomainService
         (
             IUnitOfWork unitOfWork,
-            IHashCrossCuttingService hashCrossCuttingService
+            IHashService hashService
         )
         {
             _unitOfWork = unitOfWork;
         }
 
         private readonly IUnitOfWork _unitOfWork;
-
-        public async Task UpdatePassword(int userId, string newPassword)
-        {
-            await _unitOfWork.UserRepository.UpdatePassword(userId, newPassword);
-        }
     }
 }

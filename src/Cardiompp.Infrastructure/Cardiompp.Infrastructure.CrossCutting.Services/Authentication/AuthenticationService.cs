@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace Cardiompp.Infrastructure.CrossCutting.Services.Authentication
 {
-    public class AuthenticationCrossCuttingService: IAuthenticationCrossCuttingService
+    public class AuthenticationService: IAuthenticationService
     {
-        public AuthenticationCrossCuttingService
+        public AuthenticationService
         (
             IUnitOfWork unitOfWork,
             IOptionsMonitor<JwtTokenConfiguration> config,
-            IHashCrossCuttingService md5HashCrossCuttingService
+            IHashService md5HashCrossCuttingService
         )
         {
             _config = config;
@@ -41,6 +41,11 @@ namespace Cardiompp.Infrastructure.CrossCutting.Services.Authentication
             var user = await _unitOfWork.UserRepository.GetByEmailAndPassword(email, password);
 
             return user;
+        }
+
+        public async Task UpdatePassword(int userId, string newPassword)
+        {
+            await _unitOfWork.UserRepository.UpdatePassword(userId, newPassword);
         }
 
         public string BuildToken()
