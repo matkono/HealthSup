@@ -20,41 +20,5 @@ namespace Cardiompp.WebApi.Controllers.v1
         {
             DoctorService = doctorService ?? throw new ArgumentNullException(nameof(doctorService));
         }
-
-        /// <summary>
-        /// Get merchant by email and password.
-        /// </summary>
-        /// <param name="loginRequest">Login request.</param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("login")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Login([FromBody] GetDoctorByEmailAndPasswordRequest loginRequest)
-        {
-            var response = await DoctorService.GetByEmailAndPassword(loginRequest);
-
-            if (response.Errors != null && response.Errors.Any())
-                return BadRequest(response);
-
-            return Ok(response);
-        }
-
-        /// <summary>
-        /// Update password
-        /// </summary>
-        /// <param name="UpdatePasswordRequest">Update password request.</param>
-        /// <returns></returns>
-        [HttpPut]
-        [Route("updatePassword")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordRequest updatePasswordRequest)
-        {
-            var response = await DoctorService.UpdatePassword(updatePasswordRequest);
-
-            if (response.Errors != null && response.Errors.Any())
-                return BadRequest(response);
-
-            return NoContent();
-        }
     }
 }

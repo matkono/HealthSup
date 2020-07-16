@@ -1,10 +1,10 @@
-﻿using Cardiompp.Domain.Services.Contracts;
+﻿using Cardiompp.Infrastructure.CrossCutting.Hash.Services.Contracts;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Cardiompp.Domain.Services
+namespace Cardiompp.Infrastructure.CrossCutting.Services.Hash
 {
-    public class HashDomainService: IHashDomainService
+    public class HashService : IHashService
     {
         public string GetMd5Hash(string value)
         {

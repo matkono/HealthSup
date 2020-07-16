@@ -1,8 +1,8 @@
 ﻿namespace Cardiompp.Application.DataContracts.v1.Responses.Authentication
 {
-    public class AuthenticationResponse
+    public class AuthenticationAgentResponse
     {
-        public AuthenticationResponse
+        public AuthenticationAgentResponse
         (
             string token
         ) 

@@ -13,4 +13,8 @@
     <ProjectReference Include="..\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting\Cardiompp.Infrastructure.CrossCutting.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataContracts\v1\Requests\Doctor\" />
+  </ItemGroup>
+
 </Project>

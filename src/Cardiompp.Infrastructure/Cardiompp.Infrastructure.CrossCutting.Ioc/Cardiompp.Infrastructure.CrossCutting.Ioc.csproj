@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Cardiompp.Application\Cardiompp.Application.csproj" />
+    <ProjectReference Include="..\Cardiompp.Infrastructure.CrossCutting.Services\Cardiompp.Infrastructure.CrossCutting.Services.csproj" />
     <ProjectReference Include="..\Cardiompp.Infrastructure.Data\Cardiompp.Infrastructure.Data.csproj" />
   </ItemGroup>
 

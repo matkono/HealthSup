@@ -30,7 +30,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardiompp.Infrastructure.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardiompp.Infrastructure.CrossCutting", "src\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting\Cardiompp.Infrastructure.CrossCutting.csproj", "{19A0EC35-CDC2-4CEB-BEB4-6E211363A7D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cardiompp.Infrastructure.CrossCutting.Ioc", "src\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting.Ioc\Cardiompp.Infrastructure.CrossCutting.Ioc.csproj", "{7723F8CE-97D6-4E7D-93D4-D250B0992240}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cardiompp.Infrastructure.CrossCutting.Ioc", "src\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting.Ioc\Cardiompp.Infrastructure.CrossCutting.Ioc.csproj", "{7723F8CE-97D6-4E7D-93D4-D250B0992240}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cardiompp.Infrastructure.CrossCutting.Services", "src\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting.Services\Cardiompp.Infrastructure.CrossCutting.Services.csproj", "{F6FE20A2-12CF-46C6-9B5A-AD4EF7505BCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +68,10 @@ Global
 		{7723F8CE-97D6-4E7D-93D4-D250B0992240}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7723F8CE-97D6-4E7D-93D4-D250B0992240}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7723F8CE-97D6-4E7D-93D4-D250B0992240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6FE20A2-12CF-46C6-9B5A-AD4EF7505BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6FE20A2-12CF-46C6-9B5A-AD4EF7505BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6FE20A2-12CF-46C6-9B5A-AD4EF7505BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6FE20A2-12CF-46C6-9B5A-AD4EF7505BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{2C8547E8-8BAF-44DB-88B5-A08EA68ED6EB} = {CC416411-5197-4696-93D3-80572EDCDE1C}
 		{19A0EC35-CDC2-4CEB-BEB4-6E211363A7D0} = {CC416411-5197-4696-93D3-80572EDCDE1C}
 		{7723F8CE-97D6-4E7D-93D4-D250B0992240} = {CC416411-5197-4696-93D3-80572EDCDE1C}
+		{F6FE20A2-12CF-46C6-9B5A-AD4EF7505BCF} = {CC416411-5197-4696-93D3-80572EDCDE1C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F2C2DF05-D9E4-4AC6-A852-390F80300367}

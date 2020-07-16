@@ -18,5 +18,7 @@ namespace Cardiompp.Domain.Repositories
         IDoctorRepository DoctorRepository { get; }
 
         ICardiomppAgentRepository CardiomppAgentRepository { get; }
+
+        IUserRepository UserRepository { get; }
     }
 }

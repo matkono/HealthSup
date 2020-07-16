@@ -12,10 +12,6 @@ namespace Cardiompp.Infrastructure.Data.Scripts
             public static class Doctor
             {
                 static readonly string EntityName = $"{nameof(Doctor)}";
-
-                public static readonly string GetByCrm = $"{EntityName}.GetByCrm";
-                public static readonly string GetByEmailAndPassword = $"{EntityName}.GetByEmailAndPassword";
-                public static readonly string UpdatePassword = $"{EntityName}.UpdatePassword";
             }
 
             public static class CardiomppAgent
@@ -23,6 +19,14 @@ namespace Cardiompp.Infrastructure.Data.Scripts
                 static readonly string EntityName = $"{nameof(CardiomppAgent)}";
 
                 public static readonly string GetByNameAndPassword = $"{EntityName}.GetByNameAndPassword";
+            }
+
+            public static class UserDTO
+            {
+                static readonly string EntityName = $"{nameof(UserDTO)}";
+
+                public static readonly string GetByEmailAndPassword = $"{EntityName}.GetByEmailAndPassword";
+                public static readonly string UpdatePassword = $"{EntityName}.UpdatePassword";
             }
         }
 

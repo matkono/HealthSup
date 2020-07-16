@@ -2,10 +2,10 @@
 
 namespace Cardiompp.Application.DataContracts.v1.Requests.Authenticate
 {
-    public class AuthenticateRequest
+    public class AuthenticationAgentRequest
     {
-        [Required(ErrorMessage = "Agent name is required to auhenticate.")]
-        public string AgentName { get; set; }
+        [Required(ErrorMessage = "Agent key is required to auhenticate.")]
+        public string AgentKey { get; set; }
 
         [Required(ErrorMessage = "Password is required to auhenticate.")]
         public string Password { get; set; }

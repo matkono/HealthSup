@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Cardiompp.Application.DataContracts.v1.Requests.Doctor
 {
-    public class UpdatePasswordRequest
+    public class UpdateUserPasswordRequest
     {
         [Required(ErrorMessage = "Email is required to reset password.")]
         public string Email { get; set; }

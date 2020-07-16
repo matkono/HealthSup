@@ -6,14 +6,14 @@
 
   <ItemGroup>
     <None Remove="Scripts\CardiomppAgent\GetByNameAndPassword.sql" />
-    <None Remove="Scripts\Doctor\GetByEmailAndPassword.sql" />
     <None Remove="Scripts\Doctor\UpdatePassword.sql" />
+    <None Remove="Scripts\UserDTO\GetByEmailAndPassword.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\CardiomppAgent\GetByNameAndPassword.sql" />
-    <EmbeddedResource Include="Scripts\Doctor\GetByEmailAndPassword.sql" />
-    <EmbeddedResource Include="Scripts\Doctor\UpdatePassword.sql" />
+    <EmbeddedResource Include="Scripts\UserDTO\UpdatePassword.sql" />
+    <EmbeddedResource Include="Scripts\UserDTO\GetByEmailAndPassword.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +23,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Cardiompp.Domain\Cardiompp.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Scripts\Doctor\" />
   </ItemGroup>
 
 </Project>

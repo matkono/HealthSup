@@ -1,5 +1,5 @@
-﻿using Cardiompp.Domain.Entities;
-using Cardiompp.Domain.Repositories;
+﻿using Cardiompp.Domain.Repositories;
+using Cardiompp.Infrastructure.CrossCutting.Authentication.DTO;
 using Cardiompp.Infrastructure.Data.Scripts;
 using Dapper;
 using System.Linq;
@@ -16,11 +16,11 @@ namespace Cardiompp.Infrastructure.Data.Repositories
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<CardiomppAgent> GetByNameAndPasswordAsync(string name, string password)
+        public async Task<AgentDTO> GetByKeyAndPassword(string name, string password)
         {
             var query = ScriptManager.GetByName(ScriptManager.FileNames.CardiomppAgent.GetByNameAndPassword);
 
-            var result = await UnitOfWork.Connection.QueryAsync<CardiomppAgent>(
+            var result = await UnitOfWork.Connection.QueryAsync<AgentDTO>(
                                                                 query,
                                                                 new { name, password },
                                                                 UnitOfWork.Transaction);

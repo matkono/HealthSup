@@ -1,9 +1,13 @@
-﻿using Cardiompp.Application.DataContracts.v1.Requests.Authenticate;
+﻿using Cardiompp.Application.DataContracts.Responses;
+using Cardiompp.Application.DataContracts.v1.Requests.Authenticate;
+using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
 using Cardiompp.Application.DataContracts.v1.Responses.Authentication;
+using Cardiompp.Application.Mappers;
 using Cardiompp.Application.Services.Contracts;
-using Cardiompp.Domain.Services.Contracts;
+using Cardiompp.Domain.Enums;
+using Cardiompp.Infrastructure.CrossCutting.Authentication.Services.Contracts;
+using Cardiompp.Infrastructure.CrossCutting.Hash.Services.Contracts;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cardiompp.Application.Services
@@ -12,40 +16,106 @@ namespace Cardiompp.Application.Services
     {
         public AuthenticationApplicationService
         (
-            IAuthenticationDomainService authenticationServiceDomain
+            IHashService hashService,
+            IAuthenticationService authenticationService
         )
         {
-            AuthenticationServiceDomain = authenticationServiceDomain ?? throw new ArgumentNullException(nameof(authenticationServiceDomain));
+            HashService = hashService ?? throw new ArgumentNullException(nameof(hashService));
+            AuthenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
         }
 
-        private IAuthenticationDomainService AuthenticationServiceDomain;
+        private readonly IHashService HashService;
 
-        public async Task<GetAuthenticationResponse> AuthenticateAsync(AuthenticateRequest authenticateRequest)
+        private readonly IAuthenticationService AuthenticationService;
+
+        public async Task<GetAuthenticationAgentResponse> AuthenticateAgentAsync(AuthenticationAgentRequest authenticateRequest)
         {
-            var cardiomppAgent = await AuthenticationServiceDomain.AuthenticateAsync
+            var passwordMd5 = HashService.GetMd5Hash(authenticateRequest.Password);
+            var agent = await AuthenticationService.AuthenticateAgentAsync
             (
-                authenticateRequest.AgentName,
-                authenticateRequest.Password
-            );
-
-
-            if (cardiomppAgent.Errors != null && cardiomppAgent.Errors.Any())
-            {
-                var response = new GetAuthenticationResponse(null);
-
-                foreach (var error in cardiomppAgent.Errors)
-                    response.AddError(error.Code, error.Message, error.Field);
-
-                return response;
-
-            }
-                
-            var authenticationResponse = new AuthenticationResponse
-            (
-                AuthenticationServiceDomain.BuildToken()
+                authenticateRequest.AgentKey,
+                passwordMd5
             );
             
-            return new GetAuthenticationResponse(authenticationResponse);
+            if (agent == null)
+            {
+                var response = new GetAuthenticationAgentResponse(null);
+
+                response.AddError
+                (
+                    (int)ValidationErrorCodeEnum.AgentNameOrPasswordInvalid,
+                    "AgentKey or password is incorrect.",
+                    null
+                );
+
+                return response;
+            }
+                
+            var authenticationResponse = new AuthenticationAgentResponse
+            (
+                AuthenticationService.BuildToken()
+            );
+            
+            return new GetAuthenticationAgentResponse(authenticationResponse);
+        }
+
+        public async Task<GetAuthenticationUserResponse> AuthenticateUserAsync(AuthenticationUserRequest authenticateUserRequest)
+        {
+            var passwordMd5 = HashService.GetMd5Hash(authenticateUserRequest.Password);
+            var user = await AuthenticationService.AuthenticateUserAsync
+            (
+                authenticateUserRequest.Email,
+                passwordMd5
+            );
+
+            if (user == null)
+            {
+                var response = new GetAuthenticationUserResponse(null);
+
+                response.AddError
+                (
+                    (int)ValidationErrorCodeEnum.EmailOrPasswordInvalid,
+                    "Email or password is incorrect.",
+                    null
+                );
+
+                return response;
+            }
+
+            return new GetAuthenticationUserResponse(user.ToDataContract());
+        }
+
+        public async Task<BaseResponse> UpdatePassword
+        (
+            UpdateUserPasswordRequest updatePasswordRequest
+        )
+        {
+            var baseResponse = new BaseResponse();
+
+            var passwordMd5 = HashService.GetMd5Hash(updatePasswordRequest.Password);
+            var user = await AuthenticationService.AuthenticateUserAsync
+            (
+                updatePasswordRequest.Email,
+                passwordMd5
+            );
+
+            if (user == null)
+            {
+                baseResponse.AddError
+                (
+                    (int)ValidationErrorCodeEnum.EmailOrPasswordInvalid,
+                    "Email or password is incorrect.",
+                    null
+                );
+
+                return baseResponse;
+            }
+
+            var newPasswordMd5 = HashService.GetMd5Hash(updatePasswordRequest.NewPassword);
+
+            await AuthenticationService.UpdatePassword(user.Id, newPasswordMd5);
+
+            return baseResponse;
         }
     }
 }
