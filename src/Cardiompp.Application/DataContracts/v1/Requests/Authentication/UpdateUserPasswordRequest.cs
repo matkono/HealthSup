@@ -1,7 +1,7 @@
-﻿using Cardiompp.Application.DataContracts.v1.DataAnnotations;
+﻿using HealthSup.Application.DataContracts.v1.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 
-namespace Cardiompp.Application.DataContracts.v1.Requests.Doctor
+namespace HealthSup.Application.DataContracts.v1.Requests.Doctor
 {
     public class UpdateUserPasswordRequest
     {

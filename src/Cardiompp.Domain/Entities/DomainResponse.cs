@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Cardiompp.Domain.Entities
+namespace HealthSup.Domain.Entities
 {
     public class DomainResponse
     {

@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
+    <None Remove="Scripts\Doctor\UpdatePassword.sql" />
+    <None Remove="Scripts\UserDTO\GetByEmailAndPassword.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
+    <EmbeddedResource Include="Scripts\UserDTO\UpdatePassword.sql" />
+    <EmbeddedResource Include="Scripts\UserDTO\GetByEmailAndPassword.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cardiompp.Domain\HealthSup.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Scripts\Doctor\" />
+  </ItemGroup>
+
+</Project>

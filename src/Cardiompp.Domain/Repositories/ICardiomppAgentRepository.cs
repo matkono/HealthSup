@@ -1,9 +1,9 @@
-﻿using Cardiompp.Infrastructure.CrossCutting.Authentication.DTO;
+﻿using HealthSup.Infrastructure.CrossCutting.Authentication.DTO;
 using System.Threading.Tasks;
 
-namespace Cardiompp.Domain.Repositories
+namespace HealthSup.Domain.Repositories
 {
-    public interface ICardiomppAgentRepository
+    public interface IHealthSupAgentRepository
     {
         Task<AgentDTO> GetByKeyAndPassword(string key, string password);
     }

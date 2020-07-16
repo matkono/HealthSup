@@ -1,7 +1,7 @@
-﻿using Cardiompp.Infrastructure.CrossCutting.Authentication.DTO;
+﻿using HealthSup.Infrastructure.CrossCutting.Authentication.DTO;
 using System.Threading.Tasks;
 
-namespace Cardiompp.Infrastructure.CrossCutting.Authentication.Services.Contracts
+namespace HealthSup.Infrastructure.CrossCutting.Authentication.Services.Contracts
 {
     public interface IAuthenticationService
     {

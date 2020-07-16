@@ -1,7 +1,7 @@
-﻿using Cardiompp.Infrastructure.CrossCutting.Authentication.DTO;
+﻿using HealthSup.Infrastructure.CrossCutting.Authentication.DTO;
 using System.Threading.Tasks;
 
-namespace Cardiompp.Domain.Repositories
+namespace HealthSup.Domain.Repositories
 {
     public interface IUserRepository
     {

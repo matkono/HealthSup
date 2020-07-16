@@ -1,6 +1,6 @@
-using Cardiompp.Infrastructure.CrossCutting.JwtToken;
-using Cardiompp.WebApi.Configurations;
-using Cardiompp.WebApi.Configurations.Swagger;
+using HealthSup.Infrastructure.CrossCutting.JwtToken;
+using HealthSup.WebApi.Configurations;
+using HealthSup.WebApi.Configurations.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,7 +16,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Text;
 
-namespace Cardiompp.WebApi
+namespace HealthSup.WebApi
 {
     public class Startup
     {

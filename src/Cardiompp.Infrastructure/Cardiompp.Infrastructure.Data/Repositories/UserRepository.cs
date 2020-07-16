@@ -1,11 +1,11 @@
-﻿using Cardiompp.Domain.Repositories;
-using Cardiompp.Infrastructure.CrossCutting.Authentication.DTO;
-using Cardiompp.Infrastructure.Data.Scripts;
+﻿using HealthSup.Domain.Repositories;
+using HealthSup.Infrastructure.CrossCutting.Authentication.DTO;
+using HealthSup.Infrastructure.Data.Scripts;
 using Dapper;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Cardiompp.Infrastructure.Data.Repositories
+namespace HealthSup.Infrastructure.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {

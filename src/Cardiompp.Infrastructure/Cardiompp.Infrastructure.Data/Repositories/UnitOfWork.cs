@@ -1,7 +1,7 @@
-﻿using Cardiompp.Domain.Repositories;
+﻿using HealthSup.Domain.Repositories;
 using System.Data;
 
-namespace Cardiompp.Infrastructure.Data.Repositories
+namespace HealthSup.Infrastructure.Data.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -16,12 +16,12 @@ namespace Cardiompp.Infrastructure.Data.Repositories
         }
 
         private IDoctorRepository _doctorRepository;
-        private ICardiomppAgentRepository _cardiomppAgentRepository;
+        private IHealthSupAgentRepository _HealthSupAgentRepository;
         private IUserRepository _userRepository;
 
         public IDoctorRepository DoctorRepository => _doctorRepository ??= new DoctorRepository(this);
 
-        public ICardiomppAgentRepository CardiomppAgentRepository => _cardiomppAgentRepository ??= new CardiomppAgentRepository(this);
+        public IHealthSupAgentRepository HealthSupAgentRepository => _HealthSupAgentRepository ??= new HealthSupAgentRepository(this);
 
         public IUserRepository UserRepository => _userRepository ??= new UserRepository(this);
 

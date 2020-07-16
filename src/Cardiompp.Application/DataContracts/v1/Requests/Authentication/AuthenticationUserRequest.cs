@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Cardiompp.Application.DataContracts.v1.Requests.Authenticate
+namespace HealthSup.Application.DataContracts.v1.Requests.Authenticate
 {
     public class AuthenticationUserRequest
     {

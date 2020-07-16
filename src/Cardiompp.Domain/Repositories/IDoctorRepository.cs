@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Cardiompp.Domain.Repositories
+namespace HealthSup.Domain.Repositories
 {
     public interface IDoctorRepository
     { 

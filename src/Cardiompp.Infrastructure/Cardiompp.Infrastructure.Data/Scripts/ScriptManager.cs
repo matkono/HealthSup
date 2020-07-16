@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace Cardiompp.Infrastructure.Data.Scripts
+namespace HealthSup.Infrastructure.Data.Scripts
 {
     public static class ScriptManager
     {
@@ -14,9 +14,9 @@ namespace Cardiompp.Infrastructure.Data.Scripts
                 static readonly string EntityName = $"{nameof(Doctor)}";
             }
 
-            public static class CardiomppAgent
+            public static class HealthSupAgent
             { 
-                static readonly string EntityName = $"{nameof(CardiomppAgent)}";
+                static readonly string EntityName = $"{nameof(HealthSupAgent)}";
 
                 public static readonly string GetByNameAndPassword = $"{EntityName}.GetByNameAndPassword";
             }

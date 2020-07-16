@@ -1,8 +1,8 @@
-﻿using Cardiompp.Domain.Repositories;
-using Cardiompp.Domain.Services.Contracts;
-using Cardiompp.Infrastructure.CrossCutting.Hash.Services.Contracts;
+﻿using HealthSup.Domain.Repositories;
+using HealthSup.Domain.Services.Contracts;
+using HealthSup.Infrastructure.CrossCutting.Hash.Services.Contracts;
 
-namespace Cardiompp.Domain.Services
+namespace HealthSup.Domain.Services
 {
     public class DoctorDomainService : IDoctorDomainService
     {

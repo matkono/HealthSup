@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Cardiompp.Application.Test
+namespace HealthSup.Application.Test
 {
     public class Tests
     {

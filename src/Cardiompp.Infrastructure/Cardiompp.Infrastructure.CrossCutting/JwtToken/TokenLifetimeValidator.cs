@@ -1,7 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System;
 
-namespace Cardiompp.Infrastructure.CrossCutting.JwtToken
+namespace HealthSup.Infrastructure.CrossCutting.JwtToken
 {
     public static class TokenLifetimeValidator
     {

@@ -1,6 +1,6 @@
-﻿using Cardiompp.Application.DataContracts.Responses;
+﻿using HealthSup.Application.DataContracts.Responses;
 
-namespace Cardiompp.Application.DataContracts.v1.Responses.Authentication
+namespace HealthSup.Application.DataContracts.v1.Responses.Authentication
 {
     public class GetAuthenticationUserResponse : BaseResponse<AuthenticationUserResponse>
     {

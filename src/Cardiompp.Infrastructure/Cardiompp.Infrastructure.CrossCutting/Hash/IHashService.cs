@@ -1,4 +1,4 @@
-﻿namespace Cardiompp.Infrastructure.CrossCutting.Hash.Services.Contracts
+﻿namespace HealthSup.Infrastructure.CrossCutting.Hash.Services.Contracts
 {
     public interface IHashService
     {

@@ -1,4 +1,4 @@
-﻿namespace Cardiompp.Infrastructure.CrossCutting.Authentication.DTO
+﻿namespace HealthSup.Infrastructure.CrossCutting.Authentication.DTO
 {
     public class UserDTO
     {

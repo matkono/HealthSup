@@ -1,8 +1,8 @@
-﻿using Cardiompp.Domain.Repositories;
-using Cardiompp.Infrastructure.CrossCutting.Authentication.DTO;
-using Cardiompp.Infrastructure.CrossCutting.Authentication.Services.Contracts;
-using Cardiompp.Infrastructure.CrossCutting.Hash.Services.Contracts;
-using Cardiompp.Infrastructure.CrossCutting.JwtToken;
+﻿using HealthSup.Domain.Repositories;
+using HealthSup.Infrastructure.CrossCutting.Authentication.DTO;
+using HealthSup.Infrastructure.CrossCutting.Authentication.Services.Contracts;
+using HealthSup.Infrastructure.CrossCutting.Hash.Services.Contracts;
+using HealthSup.Infrastructure.CrossCutting.JwtToken;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -10,7 +10,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cardiompp.Infrastructure.CrossCutting.Services.Authentication
+namespace HealthSup.Infrastructure.CrossCutting.Services.Authentication
 {
     public class AuthenticationService: IAuthenticationService
     {
@@ -31,7 +31,7 @@ namespace Cardiompp.Infrastructure.CrossCutting.Services.Authentication
 
         public async Task<AgentDTO> AuthenticateAgentAsync(string key, string password)
         {
-            var agent = await _unitOfWork.CardiomppAgentRepository.GetByKeyAndPassword(key, password);
+            var agent = await _unitOfWork.HealthSupAgentRepository.GetByKeyAndPassword(key, password);
 
             return agent;
         }
