@@ -13,26 +13,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infrastructure", "4 - I
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Tests", "5 - Tests", "{C459C277-8310-4F43-9E18-7149C32ABAC5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.WebApi", "src\Cardiompp.WebApi\HealthSup.WebApi.csproj", "{5F298F0A-E474-400E-926B-F81A4B600525}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.WebApi", "src\HealthSup.WebApi\HealthSup.WebApi.csproj", "{5F298F0A-E474-400E-926B-F81A4B600525}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Application", "src\Cardiompp.Application\HealthSup.Application.csproj", "{951C8BDA-00A0-4860-B028-41EEF2723D0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Application", "src\HealthSup.Application\HealthSup.Application.csproj", "{951C8BDA-00A0-4860-B028-41EEF2723D0B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Domain", "src\Cardiompp.Domain\HealthSup.Domain.csproj", "{747E391A-79CB-4A33-B0F2-E7DF52CD556B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Domain", "src\HealthSup.Domain\HealthSup.Domain.csproj", "{747E391A-79CB-4A33-B0F2-E7DF52CD556B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C2559684-D062-4EC5-92BE-D65CAF8C7D01}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Application.Test", "test\Cardiompp.Application.Test\HealthSup.Application.Test.csproj", "{4E77B666-B15C-4B55-8DF9-4F676DD4B32D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Application.Test", "test\HealthSup.Application.Test\HealthSup.Application.Test.csproj", "{4E77B666-B15C-4B55-8DF9-4F676DD4B32D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Infrastructure.Data", "src\Cardiompp.Infrastructure\Cardiompp.Infrastructure.Data\HealthSup.Infrastructure.Data.csproj", "{2C8547E8-8BAF-44DB-88B5-A08EA68ED6EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Infrastructure.Data", "src\HealthSup.Infrastructure\HealthSup.Infrastructure.Data\HealthSup.Infrastructure.Data.csproj", "{2C8547E8-8BAF-44DB-88B5-A08EA68ED6EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Infrastructure.CrossCutting", "src\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting\HealthSup.Infrastructure.CrossCutting.csproj", "{19A0EC35-CDC2-4CEB-BEB4-6E211363A7D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Infrastructure.CrossCutting", "src\HealthSup.Infrastructure\HealthSup.Infrastructure.CrossCutting\HealthSup.Infrastructure.CrossCutting.csproj", "{19A0EC35-CDC2-4CEB-BEB4-6E211363A7D0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Infrastructure.CrossCutting.Ioc", "src\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting.Ioc\HealthSup.Infrastructure.CrossCutting.Ioc.csproj", "{7723F8CE-97D6-4E7D-93D4-D250B0992240}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Infrastructure.CrossCutting.Ioc", "src\HealthSup.Infrastructure\HealthSup.Infrastructure.CrossCutting.Ioc\HealthSup.Infrastructure.CrossCutting.Ioc.csproj", "{7723F8CE-97D6-4E7D-93D4-D250B0992240}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Infrastructure.CrossCutting.Services", "src\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting.Services\HealthSup.Infrastructure.CrossCutting.Services.csproj", "{F6FE20A2-12CF-46C6-9B5A-AD4EF7505BCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthSup.Infrastructure.CrossCutting.Services", "src\HealthSup.Infrastructure\HealthSup.Infrastructure.CrossCutting.Services\HealthSup.Infrastructure.CrossCutting.Services.csproj", "{F6FE20A2-12CF-46C6-9B5A-AD4EF7505BCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

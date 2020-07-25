@@ -1,4 +1,4 @@
-# CardiomppApi
+# HealthSup API
 
 ## Problem diagnosis
 
