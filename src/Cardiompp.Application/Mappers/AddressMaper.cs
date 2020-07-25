@@ -1,7 +1,7 @@
-﻿using Cardiompp.Application.DataContracts.v1.Responses.Address;
-using Cardiompp.Domain.Entities;
+﻿using HealthSup.Application.DataContracts.v1.Responses.Address;
+using HealthSup.Domain.Entities;
 
-namespace Cardiompp.Application.Mappers
+namespace HealthSup.Application.Mappers
 {
     public static class AddressMaper
     {

@@ -1,8 +1,8 @@
-﻿using Cardiompp.Infrastructure.CrossCutting.Hash.Services.Contracts;
+﻿using HealthSup.Infrastructure.CrossCutting.Hash.Services.Contracts;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Cardiompp.Infrastructure.CrossCutting.Services.Hash
+namespace HealthSup.Infrastructure.CrossCutting.Services.Hash
 {
     public class HashService : IHashService
     {

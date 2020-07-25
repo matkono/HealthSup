@@ -1,6 +1,6 @@
-﻿using Cardiompp.Domain.Repositories;
+﻿using HealthSup.Domain.Repositories;
 
-namespace Cardiompp.Infrastructure.Data.Repositories
+namespace HealthSup.Infrastructure.Data.Repositories
 {
     public class DoctorRepository : IDoctorRepository
     {

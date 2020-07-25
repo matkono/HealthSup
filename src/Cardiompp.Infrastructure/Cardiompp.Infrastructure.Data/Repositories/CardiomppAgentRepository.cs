@@ -1,24 +1,24 @@
-﻿using Cardiompp.Domain.Repositories;
-using Cardiompp.Infrastructure.CrossCutting.Authentication.DTO;
-using Cardiompp.Infrastructure.Data.Scripts;
+﻿using HealthSup.Domain.Repositories;
+using HealthSup.Infrastructure.CrossCutting.Authentication.DTO;
+using HealthSup.Infrastructure.Data.Scripts;
 using Dapper;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Cardiompp.Infrastructure.Data.Repositories
+namespace HealthSup.Infrastructure.Data.Repositories
 {
-    public class CardiomppAgentRepository : ICardiomppAgentRepository
+    public class HealthSupAgentRepository : IHealthSupAgentRepository
     {
         private IUnitOfWork UnitOfWork { get; }
 
-        public CardiomppAgentRepository(IUnitOfWork unitOfWork)
+        public HealthSupAgentRepository(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
         }
 
         public async Task<AgentDTO> GetByKeyAndPassword(string name, string password)
         {
-            var query = ScriptManager.GetByName(ScriptManager.FileNames.CardiomppAgent.GetByNameAndPassword);
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.HealthSupAgent.GetByNameAndPassword);
 
             var result = await UnitOfWork.Connection.QueryAsync<AgentDTO>(
                                                                 query,

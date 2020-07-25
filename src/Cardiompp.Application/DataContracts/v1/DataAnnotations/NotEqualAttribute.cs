@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Cardiompp.Application.DataContracts.v1.DataAnnotations
+namespace HealthSup.Application.DataContracts.v1.DataAnnotations
 {
     public class NotEqualAttribute : ValidationAttribute
     {

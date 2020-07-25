@@ -1,8 +1,8 @@
-﻿using Cardiompp.Infrastructure.CrossCutting.Ioc.Ioc;
+﻿using HealthSup.Infrastructure.CrossCutting.Ioc.Ioc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Cardiompp.WebApi.Configurations
+namespace HealthSup.WebApi.Configurations
 {
     internal static class DependencyInjectionConfiguration
     {

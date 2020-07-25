@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 
-namespace Cardiompp.Domain.Repositories
+namespace HealthSup.Domain.Repositories
 {
     public interface IUnitOfWork : IDisposable
     {
@@ -17,7 +17,7 @@ namespace Cardiompp.Domain.Repositories
 
         IDoctorRepository DoctorRepository { get; }
 
-        ICardiomppAgentRepository CardiomppAgentRepository { get; }
+        IHealthSupAgentRepository HealthSupAgentRepository { get; }
 
         IUserRepository UserRepository { get; }
     }

@@ -1,4 +1,4 @@
-﻿namespace Cardiompp.Domain.Services.Contracts
+﻿namespace HealthSup.Domain.Services.Contracts
 {
     public interface IDoctorDomainService
     {

@@ -1,19 +1,19 @@
-﻿using Cardiompp.Application.Services;
-using Cardiompp.Application.Services.Contracts;
-using Cardiompp.Domain.Repositories;
-using Cardiompp.Domain.Services;
-using Cardiompp.Domain.Services.Contracts;
-using Cardiompp.Infrastructure.CrossCutting.Authentication.Services.Contracts;
-using Cardiompp.Infrastructure.CrossCutting.Hash.Services.Contracts;
-using Cardiompp.Infrastructure.CrossCutting.Services.Authentication;
-using Cardiompp.Infrastructure.CrossCutting.Services.Hash;
-using Cardiompp.Infrastructure.Data.Repositories;
+﻿using HealthSup.Application.Services;
+using HealthSup.Application.Services.Contracts;
+using HealthSup.Domain.Repositories;
+using HealthSup.Domain.Services;
+using HealthSup.Domain.Services.Contracts;
+using HealthSup.Infrastructure.CrossCutting.Authentication.Services.Contracts;
+using HealthSup.Infrastructure.CrossCutting.Hash.Services.Contracts;
+using HealthSup.Infrastructure.CrossCutting.Services.Authentication;
+using HealthSup.Infrastructure.CrossCutting.Services.Hash;
+using HealthSup.Infrastructure.Data.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Cardiompp.Infrastructure.CrossCutting.Ioc.Ioc
+namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
 {
     public static class DependencyInjectorConfiguration
     {

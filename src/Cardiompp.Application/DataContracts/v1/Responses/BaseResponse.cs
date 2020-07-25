@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Cardiompp.Application.DataContracts.Responses
+namespace HealthSup.Application.DataContracts.Responses
 {
     public class BaseResponse
     {

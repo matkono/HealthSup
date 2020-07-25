@@ -1,4 +1,4 @@
-﻿namespace Cardiompp.Application.DataContracts.v1.Responses.Address
+﻿namespace HealthSup.Application.DataContracts.v1.Responses.Address
 {
     public class AddressResponse
     {

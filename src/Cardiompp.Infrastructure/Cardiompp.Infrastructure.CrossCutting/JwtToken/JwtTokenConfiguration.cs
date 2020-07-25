@@ -1,4 +1,4 @@
-﻿namespace Cardiompp.Infrastructure.CrossCutting.JwtToken
+﻿namespace HealthSup.Infrastructure.CrossCutting.JwtToken
 {
     public class JwtTokenConfiguration
     {

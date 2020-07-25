@@ -1,16 +1,16 @@
-﻿using Cardiompp.Application.DataContracts.Responses;
-using Cardiompp.Application.DataContracts.v1.Requests.Authenticate;
-using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
-using Cardiompp.Application.DataContracts.v1.Responses.Authentication;
-using Cardiompp.Application.Mappers;
-using Cardiompp.Application.Services.Contracts;
-using Cardiompp.Domain.Enums;
-using Cardiompp.Infrastructure.CrossCutting.Authentication.Services.Contracts;
-using Cardiompp.Infrastructure.CrossCutting.Hash.Services.Contracts;
+﻿using HealthSup.Application.DataContracts.Responses;
+using HealthSup.Application.DataContracts.v1.Requests.Authenticate;
+using HealthSup.Application.DataContracts.v1.Requests.Doctor;
+using HealthSup.Application.DataContracts.v1.Responses.Authentication;
+using HealthSup.Application.Mappers;
+using HealthSup.Application.Services.Contracts;
+using HealthSup.Domain.Enums;
+using HealthSup.Infrastructure.CrossCutting.Authentication.Services.Contracts;
+using HealthSup.Infrastructure.CrossCutting.Hash.Services.Contracts;
 using System;
 using System.Threading.Tasks;
 
-namespace Cardiompp.Application.Services
+namespace HealthSup.Application.Services
 {
     public class AuthenticationApplicationService : IAuthenticationApplicationService
     {

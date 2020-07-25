@@ -1,8 +1,8 @@
-﻿using Cardiompp.Application.DataContracts.Responses;
-using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
+﻿using HealthSup.Application.DataContracts.Responses;
+using HealthSup.Application.DataContracts.v1.Requests.Doctor;
 using System.Threading.Tasks;
 
-namespace Cardiompp.Application.Services.Contracts
+namespace HealthSup.Application.Services.Contracts
 {
     public interface IDoctorApplicationService
     {

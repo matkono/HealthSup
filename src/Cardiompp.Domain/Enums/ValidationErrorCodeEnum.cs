@@ -1,4 +1,4 @@
-﻿namespace Cardiompp.Domain.Enums
+﻿namespace HealthSup.Domain.Enums
 {
     public enum ValidationErrorCodeEnum
     {

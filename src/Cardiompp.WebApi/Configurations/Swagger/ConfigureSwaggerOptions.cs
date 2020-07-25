@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Cardiompp.WebApi.Configurations.Swagger
+namespace HealthSup.WebApi.Configurations.Swagger
 {
     public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
@@ -57,13 +57,13 @@ namespace Cardiompp.WebApi.Configurations.Swagger
         {
             var info = new OpenApiInfo()
             {
-                Title = "Cardiompp API",
+                Title = "HealthSup API",
                 Version = description.ApiVersion.ToString(),
-                Description = "Cardiompp API.",
+                Description = "HealthSup API.",
                 Contact = new OpenApiContact()
                 {
-                    Name = "Cardiompp team",
-                    Email = "cardiompp@gmail.com.br"
+                    Name = "HealthSup team",
+                    Email = "healthsup@gmail.com.br"
                 }
             };
 

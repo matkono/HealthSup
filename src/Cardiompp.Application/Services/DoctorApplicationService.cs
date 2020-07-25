@@ -1,14 +1,14 @@
-﻿using Cardiompp.Application.DataContracts.Responses;
-using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
-using Cardiompp.Application.Services.Contracts;
-using Cardiompp.Domain.Enums;
-using Cardiompp.Domain.Services.Contracts;
-using Cardiompp.Infrastructure.CrossCutting.Authentication.Services.Contracts;
-using Cardiompp.Infrastructure.CrossCutting.Hash.Services.Contracts;
+﻿using HealthSup.Application.DataContracts.Responses;
+using HealthSup.Application.DataContracts.v1.Requests.Doctor;
+using HealthSup.Application.Services.Contracts;
+using HealthSup.Domain.Enums;
+using HealthSup.Domain.Services.Contracts;
+using HealthSup.Infrastructure.CrossCutting.Authentication.Services.Contracts;
+using HealthSup.Infrastructure.CrossCutting.Hash.Services.Contracts;
 using System;
 using System.Threading.Tasks;
 
-namespace Cardiompp.Application.Services
+namespace HealthSup.Application.Services
 {
     public class DoctorApplicationService : IDoctorApplicationService
     {

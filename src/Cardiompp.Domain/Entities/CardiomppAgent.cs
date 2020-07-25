@@ -1,8 +1,8 @@
-﻿namespace Cardiompp.Domain.Entities
+﻿namespace HealthSup.Domain.Entities
 {
-    public class CardiomppAgent: DomainResponse
+    public class HealthSupAgent: DomainResponse
     {
-        public CardiomppAgent
+        public HealthSupAgent
         (
             int id,
             string name,
@@ -14,7 +14,7 @@
             Password = password;
         }
 
-        public CardiomppAgent() { }
+        public HealthSupAgent() { }
 
         public int Id { get; private set; }
 

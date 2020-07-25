@@ -1,4 +1,4 @@
-﻿namespace Cardiompp.Application.DataContracts.Responses
+﻿namespace HealthSup.Application.DataContracts.Responses
 {
     public class ErrorResponse
     {

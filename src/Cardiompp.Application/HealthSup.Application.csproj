@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cardiompp.Domain\Cardiompp.Domain.csproj" />
-    <ProjectReference Include="..\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting\Cardiompp.Infrastructure.CrossCutting.csproj" />
+    <ProjectReference Include="..\Cardiompp.Domain\HealthSup.Domain.csproj" />
+    <ProjectReference Include="..\Cardiompp.Infrastructure\Cardiompp.Infrastructure.CrossCutting\HealthSup.Infrastructure.CrossCutting.csproj" />
   </ItemGroup>
 
   <ItemGroup>

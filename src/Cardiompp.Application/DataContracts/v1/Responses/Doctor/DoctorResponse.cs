@@ -1,6 +1,6 @@
-﻿using Cardiompp.Application.DataContracts.Responses;
+﻿using HealthSup.Application.DataContracts.Responses;
 
-namespace Cardiompp.Application.DataContracts.v1.Responses.Doctor
+namespace HealthSup.Application.DataContracts.v1.Responses.Doctor
 {
     public class DoctorResponse<T>: BaseResponse<T>
     {

@@ -1,4 +1,4 @@
-﻿namespace Cardiompp.Domain.Entities
+﻿namespace HealthSup.Domain.Entities
 {
     public class Address: DomainResponse
     {

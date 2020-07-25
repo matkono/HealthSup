@@ -1,7 +1,7 @@
-﻿using Cardiompp.Application.DataContracts.v1.Responses.Authentication;
-using Cardiompp.Infrastructure.CrossCutting.Authentication.DTO;
+﻿using HealthSup.Application.DataContracts.v1.Responses.Authentication;
+using HealthSup.Infrastructure.CrossCutting.Authentication.DTO;
 
-namespace Cardiompp.Application.Mappers
+namespace HealthSup.Application.Mappers
 {
     public static class AuthenticationUserMapper
     {

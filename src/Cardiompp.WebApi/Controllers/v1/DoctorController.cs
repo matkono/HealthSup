@@ -1,5 +1,5 @@
-﻿using Cardiompp.Application.DataContracts.v1.Requests.Doctor;
-using Cardiompp.Application.Services.Contracts;
+﻿using HealthSup.Application.DataContracts.v1.Requests.Doctor;
+using HealthSup.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +7,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Cardiompp.WebApi.Controllers.v1
+namespace HealthSup.WebApi.Controllers.v1
 {
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
