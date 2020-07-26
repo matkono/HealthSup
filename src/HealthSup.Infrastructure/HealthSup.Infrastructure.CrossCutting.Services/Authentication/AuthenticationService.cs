@@ -29,21 +29,33 @@ namespace HealthSup.Infrastructure.CrossCutting.Services.Authentication
 
         private readonly IOptionsMonitor<JwtTokenConfiguration> _config;
 
-        public async Task<AgentDTO> AuthenticateAgentAsync(string key, string password)
+        public async Task<AgentDTO> AuthenticateAgentAsync
+        (
+            string key, 
+            string password
+        )
         {
             var agent = await _unitOfWork.HealthSupAgentRepository.GetByKeyAndPassword(key, password);
 
             return agent;
         }
 
-        public async Task<UserDTO> AuthenticateUserAsync(string email, string password)
+        public async Task<UserDTO> AuthenticateUserAsync
+        (
+            string email, 
+            string password
+        )
         { 
             var user = await _unitOfWork.UserRepository.GetByEmailAndPassword(email, password);
 
             return user;
         }
 
-        public async Task UpdatePassword(int userId, string newPassword)
+        public async Task UpdatePassword
+        (
+            int userId, 
+            string newPassword
+        )
         {
             await _unitOfWork.UserRepository.UpdatePassword(userId, newPassword);
         }

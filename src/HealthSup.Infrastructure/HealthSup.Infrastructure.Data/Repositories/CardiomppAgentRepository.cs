@@ -11,12 +11,19 @@ namespace HealthSup.Infrastructure.Data.Repositories
     {
         private IUnitOfWork UnitOfWork { get; }
 
-        public HealthSupAgentRepository(IUnitOfWork unitOfWork)
+        public HealthSupAgentRepository
+        (
+            IUnitOfWork unitOfWork
+        )
         {
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<AgentDTO> GetByKeyAndPassword(string name, string password)
+        public async Task<AgentDTO> GetByKeyAndPassword
+        (
+            string name, 
+            string password
+        )
         {
             var query = ScriptManager.GetByName(ScriptManager.FileNames.HealthSupAgent.GetByNameAndPassword);
 

@@ -5,6 +5,10 @@ namespace HealthSup.Domain.Repositories
 {
     public interface IHealthSupAgentRepository
     {
-        Task<AgentDTO> GetByKeyAndPassword(string key, string password);
+        Task<AgentDTO> GetByKeyAndPassword
+        (
+            string key, 
+            string password
+        );
     }
 }

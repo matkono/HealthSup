@@ -28,7 +28,10 @@ namespace HealthSup.Application.Services
 
         private readonly IAuthenticationService AuthenticationService;
 
-        public async Task<GetAuthenticationAgentResponse> AuthenticateAgentAsync(AuthenticationAgentRequest authenticateRequest)
+        public async Task<GetAuthenticationAgentResponse> AuthenticateAgentAsync
+        (
+            AuthenticationAgentRequest authenticateRequest
+        )
         {
             var passwordMd5 = HashService.GetMd5Hash(authenticateRequest.Password);
             var agent = await AuthenticationService.AuthenticateAgentAsync
@@ -59,7 +62,10 @@ namespace HealthSup.Application.Services
             return new GetAuthenticationAgentResponse(authenticationResponse);
         }
 
-        public async Task<GetAuthenticationUserResponse> AuthenticateUserAsync(AuthenticationUserRequest authenticateUserRequest)
+        public async Task<GetAuthenticationUserResponse> AuthenticateUserAsync
+        (
+            AuthenticationUserRequest authenticateUserRequest
+        )
         {
             var passwordMd5 = HashService.GetMd5Hash(authenticateUserRequest.Password);
             var user = await AuthenticationService.AuthenticateUserAsync

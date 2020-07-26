@@ -5,7 +5,8 @@ namespace HealthSup.Infrastructure.CrossCutting.JwtToken
 {
     public static class TokenLifetimeValidator
     {
-        public static bool Validate(
+        public static bool Validate
+        (
             DateTime? notBefore,
             DateTime? expires,
             SecurityToken tokenToValidate,

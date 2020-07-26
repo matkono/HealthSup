@@ -11,12 +11,19 @@ namespace HealthSup.Infrastructure.Data.Repositories
     {
         private IUnitOfWork UnitOfWork { get; }
 
-        public UserRepository(IUnitOfWork unitOfWork)
+        public UserRepository
+        (
+            IUnitOfWork unitOfWork
+        )
         {
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<UserDTO> GetByEmailAndPassword(string email, string password)
+        public async Task<UserDTO> GetByEmailAndPassword
+        (
+            string email, 
+            string password
+        )
         {
             var query = ScriptManager.GetByName(ScriptManager.FileNames.UserDTO.GetByEmailAndPassword);
 
@@ -28,7 +35,11 @@ namespace HealthSup.Infrastructure.Data.Repositories
             return result.FirstOrDefault();
         }
 
-        public async Task UpdatePassword(int userId, string newPassword)
+        public async Task UpdatePassword
+        (
+            int userId, 
+            string newPassword
+        )
         {
             var query = ScriptManager.GetByName(ScriptManager.FileNames.UserDTO.UpdatePassword);
 

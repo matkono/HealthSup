@@ -9,7 +9,10 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
         public IDbTransaction Transaction { get; private set; }
 
-        public UnitOfWork(IDbConnection dbConnection)
+        public UnitOfWork
+        (
+            IDbConnection dbConnection
+        )
         {
             Connection = dbConnection;
             Connection.Open();
@@ -25,7 +28,10 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
         public IUserRepository UserRepository => _userRepository ??= new UserRepository(this);
 
-        public void Begin(IsolationLevel isolationLevel = IsolationLevel.ReadUncommitted)
+        public void Begin
+        (
+            IsolationLevel isolationLevel = IsolationLevel.ReadUncommitted
+        )
         {
             Transaction?.Dispose();
 

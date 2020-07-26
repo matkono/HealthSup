@@ -10,12 +10,18 @@ namespace HealthSup.WebApi.Configurations.Swagger
     {
         private readonly IApiVersionDescriptionProvider _provider;
 
-        public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider)
+        public ConfigureSwaggerOptions
+        (
+            IApiVersionDescriptionProvider provider
+        )
         {
             _provider = provider;
         }
 
-        public void Configure(SwaggerGenOptions options)
+        public void Configure
+        (
+            SwaggerGenOptions options
+        )
         {
             SetSecurity(options);
 
@@ -25,7 +31,10 @@ namespace HealthSup.WebApi.Configurations.Swagger
             }
         }
 
-        private static void SetSecurity(SwaggerGenOptions options)
+        private static void SetSecurity
+        (
+            SwaggerGenOptions options
+        )
         {
             options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
@@ -53,7 +62,10 @@ namespace HealthSup.WebApi.Configurations.Swagger
             });
         }
 
-        private static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
+        private static OpenApiInfo CreateInfoForApiVersion
+        (
+            ApiVersionDescription description
+        )
         {
             var info = new OpenApiInfo()
             {

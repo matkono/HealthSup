@@ -6,7 +6,11 @@ namespace HealthSup.WebApi.Configurations
 {
     internal static class DependencyInjectionConfiguration
     {
-        public static IServiceCollection ConfigureDI(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigureDI
+        (
+            this IServiceCollection services, 
+            IConfiguration configuration
+        )
         {
             services.ConfigureDependencyInjection(configuration);
 

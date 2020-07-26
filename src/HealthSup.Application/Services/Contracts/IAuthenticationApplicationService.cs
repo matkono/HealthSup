@@ -8,10 +8,19 @@ namespace HealthSup.Application.Services.Contracts
 {
     public interface IAuthenticationApplicationService
     {
-        public Task<GetAuthenticationAgentResponse> AuthenticateAgentAsync(AuthenticationAgentRequest authenticateAgentRequest);
+        public Task<GetAuthenticationAgentResponse> AuthenticateAgentAsync
+        (
+            AuthenticationAgentRequest authenticateAgentRequest
+        );
 
-        public Task<GetAuthenticationUserResponse> AuthenticateUserAsync(AuthenticationUserRequest authenticateUserRequest);
+        public Task<GetAuthenticationUserResponse> AuthenticateUserAsync
+        (
+            AuthenticationUserRequest authenticateUserRequest
+        );
 
-        public Task<BaseResponse> UpdatePassword(UpdateUserPasswordRequest updatePasswordRequest);
+        public Task<BaseResponse> UpdatePassword
+        (
+            UpdateUserPasswordRequest updatePasswordRequest
+        );
     }
 }

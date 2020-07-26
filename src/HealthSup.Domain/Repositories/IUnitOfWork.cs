@@ -5,7 +5,10 @@ namespace HealthSup.Domain.Repositories
 {
     public interface IUnitOfWork : IDisposable
     {
-        void Begin(IsolationLevel isolationLevel = IsolationLevel.ReadUncommitted);
+        void Begin
+        (
+            IsolationLevel isolationLevel = IsolationLevel.ReadUncommitted
+        );
 
         void Commit();
 

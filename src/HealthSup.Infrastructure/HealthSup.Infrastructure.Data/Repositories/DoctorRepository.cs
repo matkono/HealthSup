@@ -6,7 +6,10 @@ namespace HealthSup.Infrastructure.Data.Repositories
     {
         private IUnitOfWork UnitOfWork { get; }
 
-        public DoctorRepository(IUnitOfWork unitOfWork)
+        public DoctorRepository
+        (
+            IUnitOfWork unitOfWork
+        )
         {
             UnitOfWork = unitOfWork;
         }

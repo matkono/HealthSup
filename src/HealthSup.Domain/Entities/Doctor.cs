@@ -2,7 +2,8 @@
 {
     public class Doctor: DomainResponse
     {
-        public Doctor(
+        public Doctor
+        (
             int id,
             string name,
             string crm,
@@ -41,7 +42,10 @@
 
         public Address Address { get; private set; }
 
-        public void SetAddress(Address address) 
+        public void SetAddress
+        (
+            Address address
+        ) 
         {
             Address = address;
         }
