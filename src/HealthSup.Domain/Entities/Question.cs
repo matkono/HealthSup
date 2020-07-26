@@ -1,4 +1,6 @@
-﻿namespace HealthSup.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace HealthSup.Domain.Entities
 {
     public class Question
     {
@@ -7,7 +9,8 @@
             int code,
             string title,
             QuestionType questionType,
-            bool isInitial
+            bool isInitial,
+            List<PossibleAnswer> possibleAnswers
         )
         {
             Id = id;
@@ -15,6 +18,7 @@
             Title = title;
             QuestionType = questionType;
             IsInitial = isInitial;
+            PossibleAnswers = possibleAnswers;
         }
 
         public Question() { }
@@ -28,6 +32,8 @@
         public QuestionType QuestionType { get; private set; }
 
         public bool IsInitial { get; private set; }
+
+        public List<PossibleAnswer> PossibleAnswers { get; private set; } = new List<PossibleAnswer>();
 
         public void SetQuestionType
         (

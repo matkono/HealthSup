@@ -25,7 +25,5 @@ namespace HealthSup.Domain.Repositories
         IUserRepository UserRepository { get; }
 
         IQuestionRepository QuestionRepository { get; }
-
-        IPossibleAnswerRepository PossibleAnswerRepository { get; }
     }
 }

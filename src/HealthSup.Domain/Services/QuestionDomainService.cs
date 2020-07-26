@@ -22,7 +22,7 @@ namespace HealthSup.Domain.Services
             int diseaseId
         )
         {
-            return  _unitOfWork.QuestionRepository.GetInitialByDisease(diseaseId);
+            return _unitOfWork.QuestionRepository.GetInitialByDisease(diseaseId);
         }
     }
 }

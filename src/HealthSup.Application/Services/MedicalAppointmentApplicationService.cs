@@ -4,7 +4,6 @@ using HealthSup.Application.Services.Contracts;
 using HealthSup.Domain.Enums;
 using HealthSup.Domain.Services.Contracts;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HealthSup.Application.Services
@@ -13,17 +12,13 @@ namespace HealthSup.Application.Services
     {
         public MedicalAppointmentApplicationService
         (
-            IQuestionDomainService questionDomainService,
-            IPossibleAnswerDomainService possibleAnswerDomainService
+            IQuestionDomainService questionDomainService
         )
         {
             QuestionDomainService = questionDomainService ?? throw new ArgumentNullException(nameof(questionDomainService));
-            PossibleAnswerDomainService = possibleAnswerDomainService ?? throw new ArgumentNullException(nameof(possibleAnswerDomainService));
         }
 
         private readonly IQuestionDomainService QuestionDomainService;
-
-        private readonly IPossibleAnswerDomainService PossibleAnswerDomainService;
 
         public async Task<GetInitialQuestionResponse> GetInitialByDiseaseId
         (
@@ -49,12 +44,7 @@ namespace HealthSup.Application.Services
                 return response;
             }
 
-            var possibleAnswers = await PossibleAnswerDomainService.ListByQuestionId
-            (
-                question.Id
-            );
-
-            var initialQuestionResponse = new InitialQuestionResponse(question, possibleAnswers);
+            var initialQuestionResponse = new InitialQuestionResponse(question);
 
             return new GetInitialQuestionResponse(initialQuestionResponse);
         }

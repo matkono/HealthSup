@@ -7,14 +7,12 @@
   <ItemGroup>
     <None Remove="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
     <None Remove="Scripts\Doctor\UpdatePassword.sql" />
-    <None Remove="Scripts\PossibleAnswer\ListByQuestionId.sql" />
     <None Remove="Scripts\Question\GetInitialByDiseaseId.sql" />
     <None Remove="Scripts\UserDTO\GetByEmailAndPassword.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
-    <EmbeddedResource Include="Scripts\PossibleAnswer\ListByQuestionId.sql" />
     <EmbeddedResource Include="Scripts\Question\GetInitialByDiseaseId.sql" />
     <EmbeddedResource Include="Scripts\UserDTO\UpdatePassword.sql" />
     <EmbeddedResource Include="Scripts\UserDTO\GetByEmailAndPassword.sql" />

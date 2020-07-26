@@ -7,16 +7,12 @@ namespace HealthSup.Application.DataContracts.v1.Responses.MedicalAppointment
     {
         public InitialQuestionResponse
         (
-            Question question,
-            List<PossibleAnswer> possibleAnswers
+            Question question
         )
         {
             Question = question;
-            PossibleAnswers = possibleAnswers;
         }
 
         public Question Question { get; set; }
-
-        public List<PossibleAnswer> PossibleAnswers { get; set; }
     }
 }
