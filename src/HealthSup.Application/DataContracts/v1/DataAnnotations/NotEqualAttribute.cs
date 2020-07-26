@@ -6,12 +6,19 @@ namespace HealthSup.Application.DataContracts.v1.DataAnnotations
     {
         private string OtherProperty { get; set; }
 
-        public NotEqualAttribute(string otherProperty)
+        public NotEqualAttribute
+        (
+            string otherProperty
+        )
         {
             OtherProperty = otherProperty;
         }
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult IsValid
+        (
+            object value, 
+            ValidationContext validationContext
+        )
         {
             var otherPropertyInfo = validationContext.ObjectType.GetProperty(OtherProperty);
             var otherValue = otherPropertyInfo.GetValue(validationContext.ObjectInstance);

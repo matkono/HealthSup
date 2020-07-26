@@ -29,7 +29,10 @@ namespace HealthSup.Domain.Entities
 
     public class DomainResponse<T> : DomainResponse
     {
-        public DomainResponse(T data)
+        public DomainResponse
+        (
+            T data
+        )
         {
             Data = data;
         }

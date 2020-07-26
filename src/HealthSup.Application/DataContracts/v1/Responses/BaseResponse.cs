@@ -29,7 +29,10 @@ namespace HealthSup.Application.DataContracts.Responses
 
     public class BaseResponse<T> : BaseResponse
     {
-        public BaseResponse(T data)
+        public BaseResponse
+        (
+            T data
+        )
         {
             Data = data;
         }

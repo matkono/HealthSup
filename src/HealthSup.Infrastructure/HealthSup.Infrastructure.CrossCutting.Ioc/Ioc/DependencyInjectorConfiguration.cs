@@ -17,14 +17,21 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
 {
     public static class DependencyInjectorConfiguration
     {
-        public static void ConfigureDependencyInjection(this IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureDependencyInjection
+        (
+            this IServiceCollection services, 
+            IConfiguration configuration
+        )
         {
             services.ConfigureUnitOfWork(configuration);
             services.ConfigureServices();
             services.ConfigureExternalServices();
         }
 
-        private static void ConfigureServices(this IServiceCollection services)
+        private static void ConfigureServices
+        (
+            this IServiceCollection services
+        )
         {
             services.AddScoped<IDoctorApplicationService, DoctorApplicationService>();
             services.AddScoped<IDoctorDomainService, DoctorDomainService>();
@@ -33,7 +40,11 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
             services.AddScoped<IHashService, HashService>();
         }
 
-        private static void ConfigureUnitOfWork(this IServiceCollection services, IConfiguration configuration)
+        private static void ConfigureUnitOfWork
+        (
+            this IServiceCollection services, 
+            IConfiguration configuration
+        )
         {
             services.AddScoped<IDbConnection>(serviceProvider => new SqlConnection
             {
@@ -43,7 +54,10 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
-        private static void ConfigureExternalServices(this IServiceCollection services)
+        private static void ConfigureExternalServices
+        (
+            this IServiceCollection services
+        )
         {
 
         }

@@ -1,11 +1,7 @@
-﻿using HealthSup.Application.DataContracts.v1.Requests.Doctor;
-using HealthSup.Application.Services.Contracts;
+﻿using HealthSup.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HealthSup.WebApi.Controllers.v1
 {
@@ -16,7 +12,10 @@ namespace HealthSup.WebApi.Controllers.v1
     {
         IDoctorApplicationService DoctorService { get; set; }
 
-        public DoctorController(IDoctorApplicationService doctorService)
+        public DoctorController
+        (
+            IDoctorApplicationService doctorService
+        )
         {
             DoctorService = doctorService ?? throw new ArgumentNullException(nameof(doctorService));
         }

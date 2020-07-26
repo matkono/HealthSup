@@ -4,7 +4,10 @@ namespace HealthSup.Application.DataContracts.v1.Responses.Doctor
 {
     public class DoctorResponse<T>: BaseResponse<T>
     {
-        public DoctorResponse(T response) : base(response)
+        public DoctorResponse
+        (
+            T response
+        ) : base(response)
         {
         }
     }

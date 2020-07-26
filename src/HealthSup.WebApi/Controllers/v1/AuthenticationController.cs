@@ -17,7 +17,10 @@ namespace HealthSup.WebApi.Controllers.v1
     {
         IAuthenticationApplicationService AuthenticationService { get; set; }
 
-        public AuthenticationController(IAuthenticationApplicationService authenticationService)
+        public AuthenticationController
+        (
+            IAuthenticationApplicationService authenticationService
+        )
         {
             AuthenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
         }
@@ -26,7 +29,10 @@ namespace HealthSup.WebApi.Controllers.v1
         [HttpPost]
         [Route("agentAuthentication/token")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> AuthenticationAgent([FromBody]AuthenticationAgentRequest authenticateRequest)
+        public async Task<IActionResult> AuthenticationAgent
+        (
+            [FromBody]AuthenticationAgentRequest authenticateRequest
+        )
         {
             var response = await AuthenticationService.AuthenticateAgentAsync(authenticateRequest);
 
@@ -39,7 +45,10 @@ namespace HealthSup.WebApi.Controllers.v1
         [HttpPost]
         [Route("userAuthentication")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> AuthenticationUser([FromBody]AuthenticationUserRequest authenticateRequest)
+        public async Task<IActionResult> AuthenticationUser
+        (
+            [FromBody]AuthenticationUserRequest authenticateRequest
+        )
         {
             var response = await AuthenticationService.AuthenticateUserAsync(authenticateRequest);
 
@@ -52,7 +61,10 @@ namespace HealthSup.WebApi.Controllers.v1
         [HttpPost]
         [Route("updateUserPassword")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> UpdateUserPassword([FromBody] UpdateUserPasswordRequest updateUserPasswordRequest)
+        public async Task<IActionResult> UpdateUserPassword
+        (
+            [FromBody] UpdateUserPasswordRequest updateUserPasswordRequest
+        )
         {
             var response = await AuthenticationService.UpdatePassword(updateUserPasswordRequest);
 

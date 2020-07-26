@@ -4,7 +4,10 @@ namespace HealthSup.Application.DataContracts.v1.Responses.Authentication
 {
     public class GetAuthenticationUserResponse : BaseResponse<AuthenticationUserResponse>
     {
-        public GetAuthenticationUserResponse(AuthenticationUserResponse response) : base(response)
+        public GetAuthenticationUserResponse
+        (
+            AuthenticationUserResponse response
+        ) : base(response)
         {
         }
     }
