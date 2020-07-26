@@ -34,8 +34,11 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
         )
         {
             services.AddScoped<IDoctorApplicationService, DoctorApplicationService>();
-            services.AddScoped<IDoctorDomainService, DoctorDomainService>();
+            services.AddScoped<IMedicalAppointmentApplicationService, MedicalAppointmentApplicationService>();
             services.AddScoped<IAuthenticationApplicationService, AuthenticationApplicationService>();
+            services.AddScoped<IDoctorDomainService, DoctorDomainService>();
+            services.AddScoped<IQuestionDomainService, QuestionDomainService>();
+            services.AddScoped<IPossibleAnswerDomainService, PossibleAnswerDomainService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IHashService, HashService>();
         }
@@ -59,7 +62,6 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
             this IServiceCollection services
         )
         {
-
         }
     }
 }
