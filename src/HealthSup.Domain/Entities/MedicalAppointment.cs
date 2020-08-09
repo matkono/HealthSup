@@ -2,7 +2,7 @@
 
 namespace HealthSup.Domain.Entities
 {
-    public class MedicalAppointment
+    public class MedicalAppointment : DomainResponse
     {
         public MedicalAppointment
         (

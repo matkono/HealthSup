@@ -2,7 +2,7 @@
 
 namespace HealthSup.Domain.Entities
 {
-    public class Node
+    public class Node : DomainResponse
     {
         public Node
         (
