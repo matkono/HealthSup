@@ -1,6 +1,6 @@
 ﻿namespace HealthSup.Domain.Entities
 {
-    public class Patient : DomainResponse
+    public class Patient : DomainEntity
     {
         public Patient
         (

@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace HealthSup.Domain.Entities
+﻿namespace HealthSup.Domain.Entities
 {
-    public class MedicalAppointment : DomainResponse
+    public class MedicalAppointment : DomainEntity
     {
         public MedicalAppointment
         (
