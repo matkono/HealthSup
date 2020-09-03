@@ -1,14 +1,65 @@
-﻿using HealthSup.Domain.Entities;
+﻿using Dapper;
+using HealthSup.Domain.Entities;
 using HealthSup.Domain.Repositories;
+using HealthSup.Infrastructure.Data.Scripts;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HealthSup.Infrastructure.Data.Repositories
 {
     public class MedicalAppointmentRepository : IMedicalAppointmentRepository
     {
-        public Task<MedicalAppointment> GetById(int id)
+        private IUnitOfWork UnitOfWork { get; }
+
+        public MedicalAppointmentRepository
+        (
+            IUnitOfWork unitOfWork
+        )
         {
-            throw new System.NotImplementedException();
+            UnitOfWork = unitOfWork;
+        }
+
+        public async Task<MedicalAppointment> GetById
+        (
+            int id
+        )
+        {
+            MedicalAppointment MapFromQuery
+            (
+                MedicalAppointment medicalAppointment,
+                Patient patient,
+                DecisionTree decisionTree,
+                Node node
+            )
+            {
+                medicalAppointment.setPatient
+                (
+                    patient
+                );
+
+                medicalAppointment.setDecisionTree
+                (
+                    decisionTree
+                );
+
+                medicalAppointment.setLastNode
+                (
+                    node
+                );
+
+                return medicalAppointment;
+            };
+
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.GetById);
+
+            var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointment, Patient, DecisionTree, Node, MedicalAppointment>(
+                                                                query,
+                                                                MapFromQuery,
+                                                                new { id},
+                                                                UnitOfWork.Transaction,
+                                                                splitOn: "patientId, decisionTreeId, diseaseId, lastNodeId");
+
+            return result.FirstOrDefault();
         }
     }
 }

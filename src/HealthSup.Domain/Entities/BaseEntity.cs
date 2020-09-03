@@ -2,7 +2,7 @@
 
 namespace HealthSup.Domain.Entities
 {
-    public class DomainEntity
+    public class BaseEntity
     {
         public IList<ErrorResponse> Errors { get; set; }
 
@@ -27,9 +27,9 @@ namespace HealthSup.Domain.Entities
         }
     }
 
-    public class DomainResponse<T> : DomainEntity
+    public class BaseEntity<T> : BaseEntity
     {
-        public DomainResponse
+        public BaseEntity
         (
             T data
         )

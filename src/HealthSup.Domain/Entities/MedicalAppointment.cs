@@ -1,22 +1,18 @@
 ﻿namespace HealthSup.Domain.Entities
 {
-    public class MedicalAppointment : DomainEntity
+    public class MedicalAppointment : BaseEntity
     {
         public MedicalAppointment
         (
             int id,
             bool isDiagnostic,
             Patient patient, 
-            Doctor doctor,
-            Disease disease,
             Node lastNode
         )
         {
             Id = id;
             IsDiagnostic = isDiagnostic;
             Patient = patient;
-            Doctor = doctor;
-            Disease = disease;
             LastNode = lastNode;
         }
 
@@ -28,10 +24,32 @@
 
         public Patient Patient { get; private set; }
 
-        public Doctor Doctor { get; private set; }
-
-        public Disease Disease { get; private set; }
+        public DecisionTree DecisionTree { get; private set; }
 
         public Node? LastNode { get; private set; }
+
+        public void setPatient
+        (
+            Patient patient
+        )
+        {
+            Patient = patient;
+        }
+
+        public void setDecisionTree
+        (
+            DecisionTree decisionTree
+        )
+        {
+            DecisionTree = decisionTree;
+        }
+
+        public void setLastNode
+        (
+            Node node
+        )
+        {
+            LastNode = node;
+        }
     }
 }

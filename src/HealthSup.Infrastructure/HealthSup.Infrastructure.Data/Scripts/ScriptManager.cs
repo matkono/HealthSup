@@ -28,6 +28,13 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 public static readonly string GetByEmailAndPassword = $"{EntityName}.GetByEmailAndPassword";
                 public static readonly string UpdatePassword = $"{EntityName}.UpdatePassword";
             }
+
+            public static class MedicalAppointment
+            {
+                static readonly string EntityName = $"{nameof(MedicalAppointment)}";
+
+                public static readonly string GetById = $"{EntityName}.GetById";
+            }
         }
 
         private static Assembly _thisAssemnbly = Assembly.GetExecutingAssembly();

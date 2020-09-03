@@ -23,5 +23,7 @@ namespace HealthSup.Domain.Repositories
         IHealthSupAgentRepository HealthSupAgentRepository { get; }
 
         IUserRepository UserRepository { get; }
+
+        IMedicalAppointmentRepository MedicalAppointmentRepository { get; }
     }
 }

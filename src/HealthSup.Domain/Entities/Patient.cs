@@ -1,6 +1,8 @@
-﻿namespace HealthSup.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace HealthSup.Domain.Entities
 {
-    public class Patient : DomainEntity
+    public class Patient : BaseEntity
     {
         public Patient
         (
@@ -25,5 +27,7 @@
         public string Registration { get; private set; }
 
         public Address Address { get; private set; }
+
+        public List<MedicalAppointment> MedicalAppointments { get; private set; }
     }
 }
