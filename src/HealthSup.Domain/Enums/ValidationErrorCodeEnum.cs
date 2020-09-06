@@ -3,6 +3,7 @@
     public enum ValidationErrorCodeEnum
     {
         EmailOrPasswordInvalid = 1,
-        AgentNameOrPasswordInvalid = 2
+        AgentNameOrPasswordInvalid = 2,
+        MedicalAppointNotFOund = 3
     }
 }

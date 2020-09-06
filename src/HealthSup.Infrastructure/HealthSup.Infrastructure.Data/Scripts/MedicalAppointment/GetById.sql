@@ -1,10 +1,10 @@
 ﻿SELECT
 	ma.id,
 	ma.isDiagnostic,
-	p.id as patientId,
-	dt.id as decisionTreeId,
-	di.id as diseaseId, 
-	ma.lastNodeId as nodeId
+	p.id,
+	dt.id,
+	di.id, 
+	ma.lastNodeId as id
 FROM
 	MedicalAppointment ma
 INNER JOIN Patient p ON

@@ -21,7 +21,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
         public async Task<MedicalAppointment> GetById
         (
-            int id
+            int medicalAppointmentId
         )
         {
             MedicalAppointment MapFromQuery
@@ -55,9 +55,9 @@ namespace HealthSup.Infrastructure.Data.Repositories
             var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointment, Patient, DecisionTree, Node, MedicalAppointment>(
                                                                 query,
                                                                 MapFromQuery,
-                                                                new { id},
+                                                                new { medicalAppointmentId },
                                                                 UnitOfWork.Transaction,
-                                                                splitOn: "patientId, decisionTreeId, diseaseId, lastNodeId");
+                                                                splitOn: "id, id, id, id, id");
 
             return result.FirstOrDefault();
         }
