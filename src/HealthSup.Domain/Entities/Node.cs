@@ -8,7 +8,7 @@ namespace HealthSup.Domain.Entities
         (
             int id,
             bool isInitial,
-            NodeTypeEnum nodeType,
+            NodeType nodeType,
             DecisionTree decisionTree
         )
         {
@@ -24,7 +24,7 @@ namespace HealthSup.Domain.Entities
 
         public bool IsInitial { get; private set; }
 
-        public NodeTypeEnum NodeType { get; private set; }
+        public NodeType NodeType { get; private set; }
 
         public DecisionTree DecisionTree { get; private set; }
     }
