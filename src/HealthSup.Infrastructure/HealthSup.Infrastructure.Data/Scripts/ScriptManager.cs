@@ -35,6 +35,13 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string GetById = $"{EntityName}.GetById";
             }
+
+            public static class Node
+            {
+                static readonly string EntityName = $"{nameof(Node)}";
+
+                public static readonly string GetInitialByDecisionTreeid = $"{EntityName}.GetInitialByDecisionTreeId";
+            }
         }
 
         private static Assembly _thisAssemnbly = Assembly.GetExecutingAssembly();
@@ -72,10 +79,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
         private static string CleanQuery(string query)
         {
-            // Removing ALL comments
             query = Regex.Replace(query, @"--(.*)", "", RegexOptions.Multiline);
-
-            // Removing ALL whitespaces (except those inside quotes that must be preserved)
             query = Regex.Replace(query, @"(?<=^([^']| '[^']*')*)\s+", " ");
 
             return query;

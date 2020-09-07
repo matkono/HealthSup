@@ -22,6 +22,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
         private IHealthSupAgentRepository _healthSupAgentRepository;
         private IUserRepository _userRepository;
         private IMedicalAppointmentRepository _medicalAppointmentRepository;
+        private INodeRepository _nodeRepository;
 
         public IDoctorRepository DoctorRepository => _doctorRepository ??= new DoctorRepository(this);
 
@@ -30,6 +31,8 @@ namespace HealthSup.Infrastructure.Data.Repositories
         public IUserRepository UserRepository => _userRepository ??= new UserRepository(this);
 
         public IMedicalAppointmentRepository MedicalAppointmentRepository => _medicalAppointmentRepository ??= new MedicalAppointmentRepository(this);
+
+        public INodeRepository NodeRepository => _nodeRepository ??= new NodeRepository(this);
 
         public void Begin
         (

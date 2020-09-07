@@ -8,12 +8,14 @@
     <None Remove="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
     <None Remove="Scripts\Doctor\UpdatePassword.sql" />
     <None Remove="Scripts\MedicalAppointment\GetById.sql" />
+    <None Remove="Scripts\Node\GetInitialByDecisionTreeId.sql" />
     <None Remove="Scripts\UserDTO\GetByEmailAndPassword.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\GetById.sql" />
+    <EmbeddedResource Include="Scripts\Node\GetInitialByDecisionTreeId.sql" />
     <EmbeddedResource Include="Scripts\UserDTO\UpdatePassword.sql" />
     <EmbeddedResource Include="Scripts\UserDTO\GetByEmailAndPassword.sql" />
   </ItemGroup>

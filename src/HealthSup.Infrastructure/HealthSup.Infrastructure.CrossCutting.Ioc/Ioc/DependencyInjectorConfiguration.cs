@@ -39,6 +39,7 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
             services.AddScoped<IDoctorDomainService, DoctorDomainService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IMedicalAppointmentDomainService, MedicalAppointmentDomainService>();
+            services.AddScoped<INodeDomainService, NodeDomainService>();
             services.AddScoped<IHashService, HashService>();
         }
 
