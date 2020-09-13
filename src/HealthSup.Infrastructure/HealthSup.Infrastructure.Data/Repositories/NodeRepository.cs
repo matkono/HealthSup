@@ -24,12 +24,28 @@ namespace HealthSup.Infrastructure.Data.Repositories
             int decisionTreeId
         )
         {
+            Node MapFromQuery
+            (
+                Node node,
+                NodeType nodeType,
+                DecisionTree decisionTree
+            )
+            {
+                node.SetNodeType(nodeType);
+
+                node.SetDecisionTree(decisionTree);
+
+                return node;
+            };
+
             var query = ScriptManager.GetByName(ScriptManager.FileNames.Node.GetInitialByDecisionTreeid);
 
-            var result = await UnitOfWork.Connection.QueryAsync<Node>(
+            var result = await UnitOfWork.Connection.QueryAsync<Node, NodeType, DecisionTree, Node>(
                                                                 query,
-                                                                new { decisionTreeId},
-                                                                UnitOfWork.Transaction);
+                                                                MapFromQuery,
+                                                                new { decisionTreeId },
+                                                                UnitOfWork.Transaction,
+                                                                splitOn: "id, id, id");
 
             return result.FirstOrDefault();
         }

@@ -24,7 +24,6 @@ namespace HealthSup.WebApi.Controllers.v1
 
         IMedicalAppointmentApplicationService MedicalAppointmentService { get; set; }
 
-        [AllowAnonymous]
         [HttpGet]
         [Route("medicalAppointment/{medicalAppointmentId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

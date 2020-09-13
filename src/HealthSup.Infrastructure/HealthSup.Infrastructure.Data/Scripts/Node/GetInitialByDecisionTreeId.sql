@@ -1,8 +1,8 @@
 ﻿SELECT
 	n.id, 
 	n.isInitial,
-	n.nodeTypeId,
-	n.decisionTreeId
+	n.nodeTypeId as id,
+	n.decisionTreeId as id
 FROM
 	Node n
 WHERE
