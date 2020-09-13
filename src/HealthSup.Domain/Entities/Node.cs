@@ -27,5 +27,21 @@ namespace HealthSup.Domain.Entities
         public NodeType NodeType { get; private set; }
 
         public DecisionTree DecisionTree { get; private set; }
+
+        public void SetNodeType
+        (
+            NodeType nodeType
+        )
+        {
+            NodeType = nodeType;
+        }
+
+        public void SetDecisionTree
+        (
+            DecisionTree decisionTree
+        )
+        {
+            DecisionTree = decisionTree;
+        }
     }
 }
