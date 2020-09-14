@@ -42,6 +42,13 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string GetInitialByDecisionTreeid = $"{EntityName}.GetInitialByDecisionTreeId";
             }
+
+            public static class Question
+            {
+                static readonly string EntityName = $"{nameof(Question)}";
+
+                public static readonly string GetByNodeId = $"{EntityName}.GetByNodeId";
+            }
         }
 
         private static Assembly _thisAssemnbly = Assembly.GetExecutingAssembly();

@@ -33,12 +33,14 @@ namespace HealthSup.Application.Services
 
             if (medicalAppointment != null)
             {
-                var node = new Node();
+                Node node;
 
                 if (medicalAppointment.LastNode == null)
                 {
                     node = await NodeService.GetInitialByDecisionTreeId(medicalAppointment.DecisionTree.Id);
                 }
+
+                return new GetMedicalAppointmentLastNodeReturn(null);
             }
             else 
             {
@@ -53,8 +55,6 @@ namespace HealthSup.Application.Services
 
                 return response;
             }
-
-            return new GetMedicalAppointmentLastNodeReturn(null);
         }
     }
 }

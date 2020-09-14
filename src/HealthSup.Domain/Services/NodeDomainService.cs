@@ -1,4 +1,5 @@
 ﻿using HealthSup.Domain.Entities;
+using HealthSup.Domain.Enums;
 using HealthSup.Domain.Repositories;
 using HealthSup.Domain.Services.Contracts;
 using System.Threading.Tasks;
@@ -27,7 +28,15 @@ namespace HealthSup.Domain.Services
                 decisionTreeId
             );
 
-            return initialNode;
+            switch (initialNode.NodeType.Id)
+            {
+                case (int)NodeTypeEnum.Question:
+                    var question = await _unitOfWork.QuestionRepository.GetByNodeId(initialNode.Id);
+                    return question;
+
+                default:
+                    return initialNode;
+            }
         }
     }
 }

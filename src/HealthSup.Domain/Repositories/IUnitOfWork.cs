@@ -27,5 +27,7 @@ namespace HealthSup.Domain.Repositories
         IMedicalAppointmentRepository MedicalAppointmentRepository { get; }
 
         INodeRepository NodeRepository { get; }
+
+        IQuestionRepository QuestionRepository { get; }
     }
 }
