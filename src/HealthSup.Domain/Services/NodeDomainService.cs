@@ -30,12 +30,13 @@ namespace HealthSup.Domain.Services
 
             switch (initialNode.NodeType.Id)
             {
-                case (int)NodeTypeEnum.Question:
-                    var question = await _unitOfWork.QuestionRepository.GetByNodeId(initialNode.Id);
-                    return question;
+                case (int)NodeTypeEnum.Action:
+                    var action = await _unitOfWork.ActionRepository.GetByNodeId(initialNode.Id);
+                    return action;
 
                 default:
-                    return initialNode;
+                    var question = await _unitOfWork.QuestionRepository.GetByNodeId(initialNode.Id);
+                    return question;
             }
         }
     }

@@ -49,6 +49,13 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string GetByNodeId = $"{EntityName}.GetByNodeId";
             }
+
+            public static class Action
+            {
+                static readonly string EntityName = $"{nameof(Action)}";
+
+                public static readonly string GetByNodeId = $"{EntityName}.GetByNodeId";
+            }
         }
 
         private static Assembly _thisAssemnbly = Assembly.GetExecutingAssembly();

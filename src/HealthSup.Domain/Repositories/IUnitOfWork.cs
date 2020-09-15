@@ -29,5 +29,7 @@ namespace HealthSup.Domain.Repositories
         INodeRepository NodeRepository { get; }
 
         IQuestionRepository QuestionRepository { get; }
+
+        IActionRepository ActionRepository { get; }
     }
 }
