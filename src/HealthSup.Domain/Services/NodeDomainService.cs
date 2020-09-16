@@ -36,6 +36,7 @@ namespace HealthSup.Domain.Services
 
                 default:
                     var question = await _unitOfWork.QuestionRepository.GetByNodeId(initialNode.Id);
+                    question.SetPossibleAnswers(await _unitOfWork.PossibleAnswerRepository.ListByQuestionId(question.Id));
                     return question;
             }
         }

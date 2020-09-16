@@ -25,6 +25,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
         private INodeRepository _nodeRepository;
         private IQuestionRepository _questionRepository;
         private IActionRepository _actionRepository;
+        private IPossibleAnswerRepository _possibleAnswerRepository;
 
         public IDoctorRepository DoctorRepository => _doctorRepository ??= new DoctorRepository(this);
 
@@ -39,6 +40,8 @@ namespace HealthSup.Infrastructure.Data.Repositories
         public IQuestionRepository QuestionRepository => _questionRepository ??= new QuestionRepository(this);
 
         public IActionRepository ActionRepository => _actionRepository ??= new ActionRepository(this);
+
+        public IPossibleAnswerRepository PossibleAnswerRepository => _possibleAnswerRepository ??= new PossibleAnswerRepository(this);
 
         public void Begin
         (

@@ -1,4 +1,6 @@
-﻿namespace HealthSup.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace HealthSup.Domain.Entities
 {
     public class Question: Node
     {
@@ -30,12 +32,22 @@
 
         public QuestionType QuestionType { get; private set; }
 
+        public List<PossibleAnswer> PossibleAnswers { get; private set; }
+
         public void SetQuestionType
         (
             QuestionType questionType
         )
         {
             QuestionType = questionType;
+        }
+
+        public void SetPossibleAnswers
+        (
+            List<PossibleAnswer> possibleAnswers
+        )
+        {
+            PossibleAnswers = possibleAnswers;
         }
     }
 }

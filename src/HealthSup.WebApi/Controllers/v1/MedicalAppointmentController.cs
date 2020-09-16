@@ -1,5 +1,4 @@
-﻿using HealthSup.Application.DataContracts.v1.Requests.MedicalAppointment;
-using HealthSup.Application.Services.Contracts;
+﻿using HealthSup.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
