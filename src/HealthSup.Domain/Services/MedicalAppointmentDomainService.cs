@@ -29,5 +29,14 @@ namespace HealthSup.Domain.Services
 
             return medicalAppointment;
         }
+
+        public async Task UpdatelastNode
+        (
+            int id,
+            int lastNodeId
+        )
+        {
+            await _unitOfWork.MedicalAppointmentRepository.UpdateLastNode(id, lastNodeId);
+        }
     }
 }

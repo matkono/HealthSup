@@ -9,5 +9,11 @@ namespace HealthSup.Domain.Repositories
         (
             int id
         );
+
+        public Task UpdateLastNode
+        (
+            int id,
+            int lastNodeId
+        );
     }
 }

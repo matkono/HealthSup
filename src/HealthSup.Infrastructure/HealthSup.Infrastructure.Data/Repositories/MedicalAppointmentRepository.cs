@@ -52,5 +52,21 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
             return result.FirstOrDefault();
         }
+
+        public async Task UpdateLastNode
+        (
+            int id,
+            int lastNodeId
+        )
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.UpdateLastNode);
+
+            await UnitOfWork.Connection.ExecuteAsync
+            (
+                query,
+                new { id, lastNodeId },
+                UnitOfWork.Transaction
+            );
+        }
     }
 }

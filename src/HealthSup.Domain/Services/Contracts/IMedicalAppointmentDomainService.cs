@@ -9,5 +9,11 @@ namespace HealthSup.Domain.Services.Contracts
         (
             int id
         );
+
+        Task UpdatelastNode
+        (
+            int id,
+            int lastNodeId
+        );
     }
 }

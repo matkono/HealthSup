@@ -34,6 +34,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 static readonly string EntityName = $"{nameof(MedicalAppointment)}";
 
                 public static readonly string GetById = $"{EntityName}.GetById";
+                public static readonly string UpdateLastNode = $"{EntityName}.UpdateLastNode";
             }
 
             public static class Node

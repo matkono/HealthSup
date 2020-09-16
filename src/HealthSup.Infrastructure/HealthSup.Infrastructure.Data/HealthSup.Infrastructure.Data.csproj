@@ -9,6 +9,7 @@
     <None Remove="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
     <None Remove="Scripts\Doctor\UpdatePassword.sql" />
     <None Remove="Scripts\MedicalAppointment\GetById.sql" />
+    <None Remove="Scripts\MedicalAppointment\UpdateLastNode.sql" />
     <None Remove="Scripts\Node\GetInitialByDecisionTreeId.sql" />
     <None Remove="Scripts\PossibleAnswer\ListByQuestionId.sql" />
     <None Remove="Scripts\Question\GetByNodeId.sql" />
@@ -19,6 +20,7 @@
     <EmbeddedResource Include="Scripts\Action\GetByNodeId.sql" />
     <EmbeddedResource Include="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\GetById.sql" />
+    <EmbeddedResource Include="Scripts\MedicalAppointment\UpdateLastNode.sql" />
     <EmbeddedResource Include="Scripts\Node\GetInitialByDecisionTreeId.sql" />
     <EmbeddedResource Include="Scripts\PossibleAnswer\ListByQuestionId.sql" />
     <EmbeddedResource Include="Scripts\Question\GetByNodeId.sql" />
