@@ -40,6 +40,10 @@ namespace HealthSup.Application.Services
                     node = await NodeService.GetInitialByDecisionTreeId(medicalAppointment.DecisionTree.Id);
                     await MedicalAppointmentService.UpdatelastNode(medicalAppointment.Id, node.Id);
                 }
+                else
+                {
+                    node = await NodeService.GetById(medicalAppointment.LastNode.Id);
+                }
 
                 return new GetMedicalAppointmentLastNodeReturn(null);
             }

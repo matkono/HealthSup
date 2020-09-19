@@ -28,17 +28,17 @@ namespace HealthSup.Infrastructure.Data.Repositories
             PossibleAnswer MapFromQuery
             (
                 PossibleAnswer possibleAnswer,
-                SetPossibleAnswer setPossibleAnswer
+                PossibleAnswerGroup setPossibleAnswer
             )
             {
-                possibleAnswer.SetSetPossibleAnswer(setPossibleAnswer);
+                possibleAnswer.SetPossibleAnswerGropu(setPossibleAnswer);
 
                 return possibleAnswer;
             };
 
             var query = ScriptManager.GetByName(ScriptManager.FileNames.PossibleAnswer.ListByQuestionId);
 
-            var result = await UnitOfWork.Connection.QueryAsync<PossibleAnswer, SetPossibleAnswer, PossibleAnswer>(
+            var result = await UnitOfWork.Connection.QueryAsync<PossibleAnswer, PossibleAnswerGroup, PossibleAnswer>(
                                                                 query,
                                                                 MapFromQuery,
                                                                 new { questionId },

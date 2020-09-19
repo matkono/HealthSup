@@ -7,13 +7,13 @@
             int id,
             int code,
             string title,
-            SetPossibleAnswer setPossibleAnswer
+            PossibleAnswerGroup possibleAnswerGroup
         )
         {
             Id = id;
             Code = code;
             Title = title;
-            SetPossibleAnswer = setPossibleAnswer;
+            PossibleAnswerGroup = possibleAnswerGroup;
         }
 
         public PossibleAnswer() { }
@@ -24,14 +24,14 @@
 
         public string Title { get; private set; }
 
-        public SetPossibleAnswer SetPossibleAnswer { get; private set; }
+        public PossibleAnswerGroup PossibleAnswerGroup { get; private set; }
 
-        public void SetSetPossibleAnswer
+        public void SetPossibleAnswerGropu
         (
-            SetPossibleAnswer setPossibleAnswer
+            PossibleAnswerGroup possibleAnswerGroup
         )
         {
-            SetPossibleAnswer = setPossibleAnswer;
+            PossibleAnswerGroup = possibleAnswerGroup;
         }
     }
 }

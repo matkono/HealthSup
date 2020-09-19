@@ -2,9 +2,9 @@
 
 namespace HealthSup.Domain.Entities
 {
-    public class SetPossibleAnswer: BaseEntity
+    public class PossibleAnswerGroup: BaseEntity
     {
-        public SetPossibleAnswer
+        public PossibleAnswerGroup
         (
             int id,
             string description
@@ -14,7 +14,7 @@ namespace HealthSup.Domain.Entities
             Description = description;
         }
 
-        public SetPossibleAnswer() { }
+        public PossibleAnswerGroup() { }
 
         public int Id { get; private set; }
 

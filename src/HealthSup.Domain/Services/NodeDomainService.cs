@@ -40,5 +40,13 @@ namespace HealthSup.Domain.Services
                     return question;
             }
         }
+
+        public async Task<Node> GetById
+        (
+            int id
+        )
+        {
+            return  await _unitOfWork.NodeRepository.GetById(id);
+        }
     }
 }

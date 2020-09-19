@@ -2,7 +2,7 @@
 	pa.id,
 	pa.code,
 	pa.title,
-	pa.setPossibleAnswerId as id
+	pa.possibleAnswerGropuId as id
 FROM 
 	PossibleAnswer pa
 INNER JOIN QuestionPossibleAnswer qpa ON

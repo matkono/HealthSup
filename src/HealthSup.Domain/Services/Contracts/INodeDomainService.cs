@@ -9,5 +9,10 @@ namespace HealthSup.Domain.Services.Contracts
         (
             int decisionTreeId
         );
+
+        Task<Node> GetById
+        (
+            int id
+        );
     }
 }

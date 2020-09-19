@@ -9,5 +9,10 @@ namespace HealthSup.Domain.Repositories
         (
             int decisionTreeId
         );
+
+        Task<Node> GetById
+        (
+            int id
+        );
     }
 }
