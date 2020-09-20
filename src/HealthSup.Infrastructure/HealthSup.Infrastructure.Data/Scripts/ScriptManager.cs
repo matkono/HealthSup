@@ -65,6 +65,13 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string ListByQuestionId = $"{EntityName}.ListByQuestionId";
             }
+
+            public static class DecisionTreeRule
+            {
+                static readonly string EntityName = $"{nameof(DecisionTreeRule)}";
+
+                public static readonly string GetActionConfirmationQuestionByNodeId = $"{EntityName}.GetActionConfirmationQuestionByNodeId";
+            }
         }
 
         private static Assembly _thisAssemnbly = Assembly.GetExecutingAssembly();

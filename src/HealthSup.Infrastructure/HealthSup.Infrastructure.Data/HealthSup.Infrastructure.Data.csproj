@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <None Remove="Scripts\Action\GetByNodeId.sql" />
+    <None Remove="Scripts\DecisionTreeRule\GetActionConfirmationQuestionByNodeId.sql" />
     <None Remove="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
     <None Remove="Scripts\Doctor\UpdatePassword.sql" />
     <None Remove="Scripts\MedicalAppointment\GetById.sql" />
@@ -19,6 +20,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\Action\GetByNodeId.sql" />
+    <EmbeddedResource Include="Scripts\DecisionTreeRule\GetActionConfirmationQuestionByNodeId.sql" />
     <EmbeddedResource Include="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\GetById.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\UpdateLastNode.sql" />

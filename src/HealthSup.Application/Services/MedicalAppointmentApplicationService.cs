@@ -42,7 +42,7 @@ namespace HealthSup.Application.Services
                 }
                 else
                 {
-                    node = await NodeService.GetById(medicalAppointment.LastNode.Id);
+                    node = await NodeService.ResolveById(medicalAppointment.LastNode.Id);
                 }
 
                 return new GetMedicalAppointmentLastNodeReturn(null);
