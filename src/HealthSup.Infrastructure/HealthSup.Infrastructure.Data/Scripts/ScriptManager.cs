@@ -72,6 +72,13 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string GetActionConfirmationQuestionByNodeId = $"{EntityName}.GetActionConfirmationQuestionByNodeId";
             }
+
+            public static class MedicalAppointmentFlow
+            {
+                static readonly string EntityName = $"{nameof(MedicalAppointmentFlow)}";
+
+                public static readonly string Insert = $"{EntityName}.Insert";
+            }
         }
 
         private static Assembly _thisAssemnbly = Assembly.GetExecutingAssembly();

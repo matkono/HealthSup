@@ -32,17 +32,19 @@ namespace HealthSup.Domain.Services
             return await LoadInitialNodeDetailsAsync(initialNode.Id, initialNode.NodeType.Id);
         }
 
-        public async Task<Node> ResolveById
+        public async Task<Node> ResolveByMedicalAppointment
         (
-            int id
+            MedicalAppointment medicalAppointment
         )
         {
-            var node = await _unitOfWork.NodeRepository.GetById(id);
+            var node = await _unitOfWork.NodeRepository.GetById(medicalAppointment.Id);
 
             if (node.NodeType.Id == (int)NodeTypeEnum.Action)
             {
                 var decisionTreeRule = await _unitOfWork.DecisionTreeRuleRepository.GetActionConfirmationQuestionByNodeId(node.Id);
                 node = await _unitOfWork.NodeRepository.GetById(decisionTreeRule.ToNode.Id);
+                var medicalAppointmentMoviment = new MedicalAppointmentFlow(decisionTreeRule.FromNode, decisionTreeRule.ToNode, medicalAppointment);
+                await _unitOfWork.MedicalAppointmentFlowRepository.InsetMovement(medicalAppointmentMoviment);
             }
 
             return await LoadNodeDetails(node.Id, node.NodeType.Id);

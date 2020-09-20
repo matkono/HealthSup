@@ -10,9 +10,9 @@ namespace HealthSup.Domain.Services.Contracts
             int decisionTreeId
         );
 
-        Task<Node> ResolveById
+        Task<Node> ResolveByMedicalAppointment
         (
-            int id
+            MedicalAppointment medicalAppointment
         );
     }
 }

@@ -35,5 +35,7 @@ namespace HealthSup.Domain.Repositories
         IPossibleAnswerRepository PossibleAnswerRepository { get; }
         
         IDecisionTreeRuleRepository DecisionTreeRuleRepository { get; }
+
+        IMedicalAppointmentFlowRepository MedicalAppointmentFlowRepository { get; }
     }
 }
