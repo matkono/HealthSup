@@ -1,9 +1,9 @@
 ﻿SELECT 
 	dtr.id,
-	dtr.nodeId,
-	dtr.nextNodeId,
-	dtr.possibleAnswerGroupId
+	dtr.fromNodeId as id,
+	dtr.toNodeId as id,
+	dtr.possibleAnswerGroupId as id
 FROM 
 	DecisionTreeRules dtr
 WHERE
-	dtr.nodeId = @NodeId
+	dtr.fromNodeId = @fromNodeId

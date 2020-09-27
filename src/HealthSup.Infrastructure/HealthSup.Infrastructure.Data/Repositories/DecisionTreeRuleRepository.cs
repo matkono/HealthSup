@@ -21,7 +21,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
         public async Task<DecisionTreeRule> GetActionConfirmationQuestionByNodeId
         (
-            int nodeId
+            int fromNodeId
         )
         {
             DecisionTreeRule MapFromQuery
@@ -44,7 +44,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
             var result = await UnitOfWork.Connection.QueryAsync<DecisionTreeRule, Node, Node, PossibleAnswerGroup, DecisionTreeRule>(
                                                                 query,
                                                                 MapFromQuery,
-                                                                new { nodeId },
+                                                                new { fromNodeId },
                                                                 UnitOfWork.Transaction,
                                                                 splitOn: "id, id, id, id");
 

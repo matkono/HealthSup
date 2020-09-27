@@ -6,4 +6,4 @@
 FROM 
 	Node n
 WHERE 
-	n.id = @nodeId
+	n.id = @id

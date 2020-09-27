@@ -37,7 +37,7 @@ namespace HealthSup.Domain.Services
             MedicalAppointment medicalAppointment
         )
         {
-            var node = await _unitOfWork.NodeRepository.GetById(medicalAppointment.Id);
+            var node = await _unitOfWork.NodeRepository.GetById(medicalAppointment.LastNode.Id);
 
             if (node.NodeType.Id == (int)NodeTypeEnum.Action)
             {
