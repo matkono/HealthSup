@@ -7,15 +7,15 @@ namespace HealthSup.Application.DataContracts.v1.Responses.DecisionTree
     public class DecisionTreeResponse
     {
         [DataMember]
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         [DataMember]
-        public string Version { get; private set; }
+        public string Version { get; set; }
 
         [DataMember]
-        public string Description { get; private set; }
+        public string Description { get; set; }
 
         [DataMember]
-        public DiseaseResponse Disease { get; private set; }
+        public DiseaseResponse Disease { get; set; }
     }
 }

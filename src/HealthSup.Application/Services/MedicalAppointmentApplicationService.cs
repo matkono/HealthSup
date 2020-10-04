@@ -1,10 +1,12 @@
 ﻿using HealthSup.Application.DataContracts.v1.Responses.MedicalAppointment;
+using HealthSup.Application.Mappers;
 using HealthSup.Application.Services.Contracts;
 using HealthSup.Domain.Entities;
 using HealthSup.Domain.Enums;
 using HealthSup.Domain.Services.Contracts;
 using System;
 using System.Threading.Tasks;
+using Action = HealthSup.Domain.Entities.Action;
 
 namespace HealthSup.Application.Services
 {
@@ -31,23 +33,7 @@ namespace HealthSup.Application.Services
         {
             var medicalAppointment = await MedicalAppointmentService.GetById(medicalAppointmentId);
 
-            if (medicalAppointment != null)
-            {
-                Node node;
-
-                if (medicalAppointment.LastNode == null)
-                {
-                    node = await NodeService.GetInitialByDecisionTreeId(medicalAppointment.DecisionTree.Id);
-                    await MedicalAppointmentService.UpdatelastNode(medicalAppointment.Id, node.Id);
-                }
-                else
-                {
-                    node = await NodeService.ResolveByMedicalAppointment(medicalAppointment);
-                }
-
-                return new GetMedicalAppointmentLastNodeReturn(null);
-            }
-            else 
+            if (medicalAppointment == null)
             {
                 var response = new GetMedicalAppointmentLastNodeReturn(null);
 
@@ -60,6 +46,29 @@ namespace HealthSup.Application.Services
 
                 return response;
             }
+
+            Node node;
+
+            if (medicalAppointment.LastNode == null)
+            {
+                node = await NodeService.GetInitialByDecisionTreeId(medicalAppointment.DecisionTree.Id);
+                await MedicalAppointmentService.UpdatelastNode(medicalAppointment.Id, node.Id);
+            }
+            else
+            {
+                node = await NodeService.ResolveByMedicalAppointment(medicalAppointment);
+            }
+
+            if (node is Action action)
+            {
+                return new GetMedicalAppointmentLastNodeReturn(action.ToDataContract());
+            }
+            else if (node is Question question)
+            {
+                return new GetMedicalAppointmentLastNodeReturn(question.ToDataContract());
+            }
+
+            return new GetMedicalAppointmentLastNodeReturn(node.ToDataContract());
         }
     }
 }

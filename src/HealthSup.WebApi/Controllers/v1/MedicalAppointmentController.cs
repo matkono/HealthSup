@@ -1,7 +1,11 @@
-﻿using HealthSup.Application.Services.Contracts;
+﻿using HealthSup.Application.DataContracts.v1.Responses.Action;
+using HealthSup.Application.DataContracts.v1.Responses.MedicalAppointment;
+using HealthSup.Application.DataContracts.v1.Responses.Question;
+using HealthSup.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,7 +40,10 @@ namespace HealthSup.WebApi.Controllers.v1
             if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);
 
-            return Ok(response);
+
+            var teste = new GetMedicalAppointmentLastNodeReturn(teste2);
+
+            return Ok(teste);
         }
     }
 }

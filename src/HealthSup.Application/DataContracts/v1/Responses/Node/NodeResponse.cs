@@ -1,21 +1,15 @@
 ﻿using HealthSup.Application.DataContracts.v1.Responses.DecisionTree;
-using System.Runtime.Serialization;
 
 namespace HealthSup.Application.DataContracts.v1.Responses.Node
 {
-    [DataContract]
     public class NodeResponse
     {
-        [DataMember]
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        [DataMember]
-        public bool IsInitial { get; private set; }
+        public bool IsInitial { get; set; }
 
-        [DataMember]
-        public NodeTypeResponse NodeType { get; private set; }
+        public NodeTypeResponse NodeType { get; set; }
 
-        [DataMember]
-        public DecisionTreeResponse DecisionTree { get; private set; }
+        public DecisionTreeResponse DecisionTree { get; set; }
     }
 }

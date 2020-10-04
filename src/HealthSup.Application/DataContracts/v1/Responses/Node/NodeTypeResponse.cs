@@ -6,12 +6,12 @@ namespace HealthSup.Application.DataContracts.v1.Responses.Node
     public class NodeTypeResponse
     {
         [DataMember]
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         [DataMember]
-        public int Code { get; private set; }
+        public int Code { get; set; }
 
         [DataMember]
-        public string Name { get; private set; }
+        public string Name { get; set; }
     }
 }
