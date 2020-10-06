@@ -40,10 +40,7 @@ namespace HealthSup.WebApi.Controllers.v1
             if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);
 
-
-            var teste = new GetMedicalAppointmentLastNodeReturn(teste2);
-
-            return Ok(teste);
+            return Ok(response);
         }
     }
 }

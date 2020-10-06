@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Text;
@@ -49,7 +50,8 @@ namespace HealthSup.WebApi
                     p.SubstituteApiVersionInUrl = true;
                 })
                 .AddCors()
-                .AddControllers();
+                .AddControllers()
+                .AddNewtonsoftJson(option => option.SerializerSettings.NullValueHandling = NullValueHandling.Ignore);
 
             services.AddAuthentication(option =>
             {
