@@ -25,6 +25,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
         private INodeRepository _nodeRepository;
         private IQuestionRepository _questionRepository;
         private IActionRepository _actionRepository;
+        private IDecisionRepository _decisionRepository;
         private IPossibleAnswerRepository _possibleAnswerRepository;
         private IDecisionTreeRuleRepository _decisionTreeRuleRepository;
         private IMedicalAppointmentFlowRepository _medicalAppointmentFlowRepository;
@@ -42,6 +43,8 @@ namespace HealthSup.Infrastructure.Data.Repositories
         public IQuestionRepository QuestionRepository => _questionRepository ??= new QuestionRepository(this);
 
         public IActionRepository ActionRepository => _actionRepository ??= new ActionRepository(this);
+
+        public IDecisionRepository DecisionRepository => _decisionRepository ??= new DecisionRepository(this);
 
         public IPossibleAnswerRepository PossibleAnswerRepository => _possibleAnswerRepository ??= new PossibleAnswerRepository(this);
 

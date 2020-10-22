@@ -47,17 +47,7 @@ namespace HealthSup.Application.Services
                 return response;
             }
 
-            Node node;
-
-            if (medicalAppointment.LastNode == null)
-            {
-                node = await NodeService.GetInitialByDecisionTreeId(medicalAppointment.DecisionTree.Id);
-                await MedicalAppointmentService.UpdatelastNode(medicalAppointment.Id, node.Id);
-            }
-            else
-            {
-                node = await NodeService.ResolveByMedicalAppointment(medicalAppointment);
-            }
+            var node = await NodeService.ResolveByMedicalAppointment(medicalAppointment);
 
             if (node is Action action)
             {
@@ -67,8 +57,11 @@ namespace HealthSup.Application.Services
             {
                 return new GetMedicalAppointmentLastNodeReturn(question.ToDataContract());
             }
-
-            return new GetMedicalAppointmentLastNodeReturn(node.ToDataContract());
+            else
+            {
+                var decision = node as Decision;
+                return new GetMedicalAppointmentLastNodeReturn(decision.ToDataContract());
+            }
         }
     }
 }

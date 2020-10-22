@@ -90,6 +90,10 @@ namespace HealthSup.Domain.Services
                     question.SetPossibleAnswers(await _unitOfWork.PossibleAnswerRepository.ListByQuestionId(question.Id));
                     return question;
 
+                case (int)NodeTypeEnum.Decision:
+                    var decision = await _unitOfWork.DecisionRepository.GetByNodeId(nodeId);
+                    return decision;
+
                 default:
                     throw new InvalidNodeTypeException("NodeType is invalid.");
             }
