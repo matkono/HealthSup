@@ -26,7 +26,7 @@
 
         public PossibleAnswerGroup PossibleAnswerGroup { get; private set; }
 
-        public void SetPossibleAnswerGropu
+        public void SetPossibleAnswerGroup
         (
             PossibleAnswerGroup possibleAnswerGroup
         )
