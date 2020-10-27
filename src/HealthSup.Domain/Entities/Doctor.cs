@@ -11,7 +11,7 @@
             string email,
             string password,
             bool isActive,
-            Address address
+            User user
         ) 
         {
             Id = id;
@@ -21,7 +21,7 @@
             Email = email;
             Password = password;
             IsActive = isActive;
-            Address = address;
+            User = user;
         }
 
         public Doctor() { }
@@ -40,14 +40,14 @@
 
         public bool IsActive { get; private set; }
 
-        public Address Address { get; private set; }
+        public User User { get; private set; }
 
-        public void SetAddress
+        public void SetUser
         (
-            Address address
-        ) 
+            User user
+        )
         {
-            Address = address;
+            User = user;
         }
     }
 }

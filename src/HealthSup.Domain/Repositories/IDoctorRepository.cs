@@ -1,8 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using HealthSup.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace HealthSup.Domain.Repositories
 {
     public interface IDoctorRepository
-    { 
+    {
+        Task<Doctor> GetById
+        (
+            int id
+        );
     }
 }

@@ -8,6 +8,7 @@
     <None Remove="Scripts\Action\GetByNodeId.sql" />
     <None Remove="Scripts\DecisionTreeRule\GetActionConfirmationQuestionByNodeId.sql" />
     <None Remove="Scripts\Decision\GetByNodeId.sql" />
+    <None Remove="Scripts\Doctor\GetById.sql" />
     <None Remove="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
     <None Remove="Scripts\Doctor\UpdatePassword.sql" />
     <None Remove="Scripts\MedicalAppointmentFlow\Insert.sql" />
@@ -24,6 +25,7 @@
     <EmbeddedResource Include="Scripts\Action\GetByNodeId.sql" />
     <EmbeddedResource Include="Scripts\DecisionTreeRule\GetActionConfirmationQuestionByNodeId.sql" />
     <EmbeddedResource Include="Scripts\Decision\GetByNodeId.sql" />
+    <EmbeddedResource Include="Scripts\Doctor\GetById.sql" />
     <EmbeddedResource Include="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointmentFlow\Insert.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\GetById.sql" />
@@ -43,10 +45,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\HealthSup.Domain\HealthSup.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Scripts\Doctor\" />
   </ItemGroup>
 
 </Project>
