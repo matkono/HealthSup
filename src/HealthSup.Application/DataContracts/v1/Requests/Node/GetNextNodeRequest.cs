@@ -15,8 +15,8 @@ namespace HealthSup.Application.DataContracts.v1.Requests.Node
         [Required(ErrorMessage = "QuestionId is required to get next node.")]
         public int QuestionId { get; set; }
 
-        [Required(ErrorMessage = "SetPossibleAnswerId is required to get next node.")]
-        public int SetPossibleAnswerId { get; set; }
+        [Required(ErrorMessage = "PossibleAnswerGroupId is required to get next node.")]
+        public int PossibleAnswerGroupId { get; set; }
 
         [Required(ErrorMessage = "Date is required to get next node.")]
         public DateTime Date { get; set; }
