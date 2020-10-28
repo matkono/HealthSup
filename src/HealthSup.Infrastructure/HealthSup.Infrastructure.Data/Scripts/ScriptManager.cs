@@ -82,10 +82,11 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 public static readonly string GetActionConfirmationQuestionByNodeId = $"{EntityName}.GetActionConfirmationQuestionByNodeId";
             }
 
-            public static class MedicalAppointmentFlow
+            public static class MedicalAppointmentMovement
             {
-                static readonly string EntityName = $"{nameof(MedicalAppointmentFlow)}";
+                static readonly string EntityName = $"{nameof(MedicalAppointmentMovement)}";
 
+                public static readonly string GetById = $"{EntityName}.GetById";
                 public static readonly string Insert = $"{EntityName}.Insert";
             }
         }

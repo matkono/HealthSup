@@ -39,7 +39,7 @@ namespace HealthSup.Application.Services
 
                 response.AddError
                 (
-                    (int)ValidationErrorCodeEnum.MedicalAppointNotFOund,
+                    (int)ValidationErrorCodeEnum.MedicalAppointNotFound,
                     "Medical appointment not found.",
                     null
                 );
