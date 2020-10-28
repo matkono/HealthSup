@@ -20,7 +20,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
         public async Task<int> InsetMovement
         (
-            MedicalAppointmentFlow medicalAppointmentFlow
+            MedicalAppointmentMovement medicalAppointmentFlow
         )
         {
             var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointmentFlow.Insert);

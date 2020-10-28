@@ -1,8 +1,8 @@
 ﻿namespace HealthSup.Domain.Entities
 {
-    public class MedicalAppointmentFlow: BaseEntity
+    public class MedicalAppointmentMovement: BaseEntity
     {
-        public MedicalAppointmentFlow
+        public MedicalAppointmentMovement
         (
             Node fromNode,
             Node toNode,
@@ -14,7 +14,7 @@
             MedicalAppointment = medicalAppointment;
         }
 
-        public MedicalAppointmentFlow() { }
+        public MedicalAppointmentMovement() { }
 
         public int Id { get; private set; }
 

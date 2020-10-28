@@ -7,7 +7,7 @@ namespace HealthSup.Domain.Repositories
     {
         public Task<int> InsetMovement
         (
-            MedicalAppointmentFlow medicalAppointmentFlow
+            MedicalAppointmentMovement medicalAppointmentFlow
         );
     }
 }

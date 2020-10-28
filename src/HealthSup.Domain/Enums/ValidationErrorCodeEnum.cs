@@ -4,6 +4,6 @@
     {
         EmailOrPasswordInvalid = 1,
         AgentNameOrPasswordInvalid = 2,
-        MedicalAppointNotFOund = 3
+        MedicalAppointNotFound = 3
     }
 }
