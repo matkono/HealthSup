@@ -17,6 +17,7 @@
     <None Remove="Scripts\MedicalAppointment\UpdateLastNode.sql" />
     <None Remove="Scripts\Node\GetById.sql" />
     <None Remove="Scripts\Node\GetInitialByDecisionTreeId.sql" />
+    <None Remove="Scripts\PossibleAnswerGroup\GetById.sql" />
     <None Remove="Scripts\PossibleAnswer\ListByQuestionId.sql" />
     <None Remove="Scripts\Question\GetById.sql" />
     <None Remove="Scripts\Question\GetByNodeId.sql" />
@@ -35,6 +36,7 @@
     <EmbeddedResource Include="Scripts\MedicalAppointment\UpdateLastNode.sql" />
     <EmbeddedResource Include="Scripts\Node\GetById.sql" />
     <EmbeddedResource Include="Scripts\Node\GetInitialByDecisionTreeId.sql" />
+    <EmbeddedResource Include="Scripts\PossibleAnswerGroup\GetById.sql" />
     <EmbeddedResource Include="Scripts\PossibleAnswer\ListByQuestionId.sql" />
     <EmbeddedResource Include="Scripts\Question\GetById.sql" />
     <EmbeddedResource Include="Scripts\Question\GetByNodeId.sql" />

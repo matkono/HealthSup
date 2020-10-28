@@ -29,6 +29,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
         private IPossibleAnswerRepository _possibleAnswerRepository;
         private IDecisionTreeRuleRepository _decisionTreeRuleRepository;
         private IMedicalAppointmentMovementRepository _medicalAppointmentMovementRepository;
+        private IPossibleAnswerGroupRepository _possibleAnswerGroupRepository;
 
         public IDoctorRepository DoctorRepository => _doctorRepository ??= new DoctorRepository(this);
 
@@ -51,6 +52,8 @@ namespace HealthSup.Infrastructure.Data.Repositories
         public IDecisionTreeRuleRepository DecisionTreeRuleRepository => _decisionTreeRuleRepository ??= new DecisionTreeRuleRepository(this);
 
         public IMedicalAppointmentMovementRepository MedicalAppointmentMovementRepository => _medicalAppointmentMovementRepository ??= new MedicalAppointmentMovementRepository(this);
+
+        public IPossibleAnswerGroupRepository PossibleAnswerGroupRepository => _possibleAnswerGroupRepository ??= new PossibleAnswerGroupRepository(this);
 
         public void Begin
         (
