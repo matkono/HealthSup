@@ -28,10 +28,10 @@ namespace HealthSup.Infrastructure.Data.Repositories
             PossibleAnswer MapFromQuery
             (
                 PossibleAnswer possibleAnswer,
-                PossibleAnswerGroup setPossibleAnswer
+                PossibleAnswerGroup possibleAnswerGroup
             )
             {
-                possibleAnswer.SetPossibleAnswerGroup(setPossibleAnswer);
+                possibleAnswer.SetPossibleAnswerGroup(possibleAnswerGroup);
 
                 return possibleAnswer;
             };
