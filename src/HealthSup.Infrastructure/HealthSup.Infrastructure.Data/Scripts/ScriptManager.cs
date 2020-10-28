@@ -72,6 +72,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
             {
                 static readonly string EntityName = $"{nameof(PossibleAnswer)}";
 
+                public static readonly string GetById = $"{EntityName}.GetById";
                 public static readonly string ListByQuestionId = $"{EntityName}.ListByQuestionId";
             }
 

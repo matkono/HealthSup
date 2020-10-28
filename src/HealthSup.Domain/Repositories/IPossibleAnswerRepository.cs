@@ -6,6 +6,11 @@ namespace HealthSup.Domain.Repositories
 {
     public interface IPossibleAnswerRepository
     {
+        Task<PossibleAnswer> GetById
+        (
+            int id
+        );
+
         Task<List<PossibleAnswer>> ListByQuestionId
         (
             int questionId
