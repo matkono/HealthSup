@@ -41,6 +41,7 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
             services.AddScoped<IMedicalAppointmentDomainService, MedicalAppointmentDomainService>();
             services.AddScoped<INodeDomainService, NodeDomainService>();
             services.AddScoped<IHashService, HashService>();
+            services.AddScoped<IDecisionEngineApplicationService, DecisionEngineApplicationService>();
         }
 
         private static void ConfigureUnitOfWork
