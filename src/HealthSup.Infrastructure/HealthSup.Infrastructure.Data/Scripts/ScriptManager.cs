@@ -87,7 +87,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
             {
                 static readonly string EntityName = $"{nameof(MedicalAppointmentMovement)}";
 
-                public static readonly string GetById = $"{EntityName}.GetById";
+                public static readonly string GetByFromNodeId = $"{EntityName}.GetByFromNodeId";
                 public static readonly string Insert = $"{EntityName}.Insert";
             }
 

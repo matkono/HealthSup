@@ -47,8 +47,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
                                                                 query,
                                                                 MapFromQuery,
                                                                 new { medicalAppointmentId },
-                                                                UnitOfWork.Transaction,
-                                                                splitOn: "id, id, id, id");
+                                                                UnitOfWork.Transaction);
 
             return result.FirstOrDefault();
         }

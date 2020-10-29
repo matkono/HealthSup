@@ -60,7 +60,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
                 return medicalAppointmentMovement;
             };
 
-            var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointmentMovement.GetById);
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointmentMovement.GetByFromNodeId);
 
             var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointmentMovement, Node, Node, MedicalAppointment, MedicalAppointmentMovement>(
                                                                 query,
