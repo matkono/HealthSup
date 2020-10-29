@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="DataContracts\v1\Requests\Doctor\" />
-    <Folder Include="Validators\" />
   </ItemGroup>
 
 </Project>
