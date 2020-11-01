@@ -1,10 +1,13 @@
 ﻿using FluentValidation;
 using HealthSup.Application.DataContracts.v1.Requests.Node;
+using HealthSup.Application.Validators.Contracts;
 using HealthSup.Domain.Repositories;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace HealthSup.Application.Validators
 {
-    public class GetNextNodeValidator: AbstractValidator<GetNextNodeRequest>
+    public class GetNextNodeValidator: AbstractValidator<GetNextNodeRequest>, IGetNextNodeValidator
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -16,36 +19,37 @@ namespace HealthSup.Application.Validators
             _unitOfWork = unitOfWork;
 
             RuleFor(x => x.MedicalAppointmentId)
-                .Must(BeValidMedicalAppointmentId)
+                .MustAsync(BeValidMedicalAppointmentIdAsync)
                 .WithMessage("Medical appointment not found.");
 
             RuleFor(x => x.DoctorId)
-                .Must(BeValidDoctorId)
+                .MustAsync(BeValidDoctorIdAsync)
                 .WithMessage("Doctor not found.");
 
             RuleFor(x => x.QuestionId)
-                .Must(BeValidQuestionId)
+                .MustAsync(BeValidQuestionIdAsync)
                 .WithMessage("Question not found.");
 
             RuleFor(x => x.QuestionId)
-                .Must(BeUnansweredQuestion)
+                .MustAsync(BeUnansweredQuestionAsync)
                 .WithMessage("Question is already answered.");
 
             RuleFor(x => x.PossibleAnswerGroupId)
-                .Must(BeValidPossibleAnswerGroupId)
+                .MustAsync(BeValidPossibleAnswerGroupIdAsync)
                 .WithMessage("Possible answer group not found.");
 
             RuleForEach(x => x.PossibleAnswersId)
-                .Must((x, possibleAnswerId) => BeValidPossibleAnswerId(possibleAnswerId, x.PossibleAnswerGroupId))
+                .MustAsync(async (x, possibleAnswerId, cancellationToken) => await BeValidPossibleAnswerIdAsync(possibleAnswerId, x.PossibleAnswerGroupId))
                 .WithMessage("PossibleAnswersId does not belongs to Possible Answer Group.");
         }
 
-        private bool BeValidMedicalAppointmentId
+        private async Task<bool> BeValidMedicalAppointmentIdAsync
         (
-            int medicalAppointmentId
+            int medicalAppointmentId,
+            CancellationToken cancellationToken
         )
         {
-            var medicalAppointment = _unitOfWork.MedicalAppointmentRepository.GetById(medicalAppointmentId).Result;
+            var medicalAppointment = await _unitOfWork.MedicalAppointmentRepository.GetById(medicalAppointmentId);
 
             if (medicalAppointment != null)
                 return true;
@@ -53,12 +57,13 @@ namespace HealthSup.Application.Validators
             return false;
         }
 
-        private bool BeValidDoctorId
+        private async Task<bool> BeValidDoctorIdAsync
         (
-            int doctorId
+            int doctorId,
+            CancellationToken cancellationToken
         )
         {
-            var doctor = _unitOfWork.DoctorRepository.GetById(doctorId).Result;
+            var doctor = await _unitOfWork.DoctorRepository.GetById(doctorId);
 
             if (doctor != null)
                 return true;
@@ -66,12 +71,13 @@ namespace HealthSup.Application.Validators
             return false;
         }
 
-        private bool BeValidQuestionId
+        private async Task<bool> BeValidQuestionIdAsync
         (
-            int questionId
+            int questionId,
+            CancellationToken cancellationToken
         )
         {
-            var question = _unitOfWork.QuestionRepository.GetById(questionId).Result;
+            var question = await _unitOfWork.QuestionRepository.GetById(questionId);
 
             if (question != null)
                 return true;
@@ -79,14 +85,15 @@ namespace HealthSup.Application.Validators
             return false;
         }
 
-        private bool BeUnansweredQuestion
+        private async Task<bool> BeUnansweredQuestionAsync
         (
-            int questionId
+            int questionId,
+            CancellationToken cancellationToken
         ) 
         {
-            var question = _unitOfWork.QuestionRepository.GetById(questionId).Result;
+            var question = await _unitOfWork.QuestionRepository.GetById(questionId);
 
-            var medicalAppointmentMovement = _unitOfWork.MedicalAppointmentMovementRepository.GetByFromNodeId(question.Id).Result;
+            var medicalAppointmentMovement = await _unitOfWork.MedicalAppointmentMovementRepository.GetByFromNodeId(question.Id);
 
             if (medicalAppointmentMovement == null)
                 return true;
@@ -94,12 +101,13 @@ namespace HealthSup.Application.Validators
             return false;
         }
 
-        private bool BeValidPossibleAnswerGroupId
+        private async Task<bool> BeValidPossibleAnswerGroupIdAsync
         (
-            int possibleAnswerGroupId
+            int possibleAnswerGroupId,
+            CancellationToken cancellationToken
         )
         {
-            var possibleAnswerGroup = _unitOfWork.PossibleAnswerGroupRepository.GetById(possibleAnswerGroupId);
+            var possibleAnswerGroup = await _unitOfWork.PossibleAnswerGroupRepository.GetById(possibleAnswerGroupId);
 
             if (possibleAnswerGroup != null)
                 return true;
@@ -107,13 +115,13 @@ namespace HealthSup.Application.Validators
             return false;
         }
 
-        private bool BeValidPossibleAnswerId
+        private async Task<bool> BeValidPossibleAnswerIdAsync
         (
             int possibleAnswerId,
             int possibleAnswerGroupId
         )
         {
-            var possibleAnswer = _unitOfWork.PossibleAnswerRepository.GetById(possibleAnswerId).Result;
+            var possibleAnswer = await _unitOfWork.PossibleAnswerRepository.GetById(possibleAnswerId);
 
             if (possibleAnswer.PossibleAnswerGroup.Id.Equals(possibleAnswerGroupId))
                 return true;

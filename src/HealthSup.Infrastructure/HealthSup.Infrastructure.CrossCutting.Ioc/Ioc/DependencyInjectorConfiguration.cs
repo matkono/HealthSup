@@ -1,5 +1,7 @@
 ﻿using HealthSup.Application.Services;
 using HealthSup.Application.Services.Contracts;
+using HealthSup.Application.Validators;
+using HealthSup.Application.Validators.Contracts;
 using HealthSup.Domain.Repositories;
 using HealthSup.Domain.Services;
 using HealthSup.Domain.Services.Contracts;
@@ -42,6 +44,7 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
             services.AddScoped<INodeDomainService, NodeDomainService>();
             services.AddScoped<IHashService, HashService>();
             services.AddScoped<IDecisionEngineApplicationService, DecisionEngineApplicationService>();
+            services.AddScoped<IGetNextNodeValidator, GetNextNodeValidator>();
         }
 
         private static void ConfigureUnitOfWork
