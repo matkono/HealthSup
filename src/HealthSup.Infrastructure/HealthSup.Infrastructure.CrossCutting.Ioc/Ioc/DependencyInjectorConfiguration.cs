@@ -35,16 +35,36 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
             this IServiceCollection services
         )
         {
+            #region Validator
+
+            services.AddScoped<IGetNextNodeValidator, GetNextNodeValidator>();
+
+            #endregion
+
+            #region CrossCutting
+
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IHashService, HashService>();
+
+            #endregion
+
+            #region ApplicationService
+
             services.AddScoped<IDoctorApplicationService, DoctorApplicationService>();
             services.AddScoped<IMedicalAppointmentApplicationService, MedicalAppointmentApplicationService>();
             services.AddScoped<IAuthenticationApplicationService, AuthenticationApplicationService>();
-            services.AddScoped<IDoctorDomainService, DoctorDomainService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
-            services.AddScoped<IMedicalAppointmentDomainService, MedicalAppointmentDomainService>();
-            services.AddScoped<INodeDomainService, NodeDomainService>();
-            services.AddScoped<IHashService, HashService>();
             services.AddScoped<IDecisionEngineApplicationService, DecisionEngineApplicationService>();
-            services.AddScoped<IGetNextNodeValidator, GetNextNodeValidator>();
+
+            #endregion
+
+            #region DomainService
+
+            services.AddScoped<IDoctorDomainService, DoctorDomainService>();
+            services.AddScoped<IMedicalAppointmentDomainService, MedicalAppointmentDomainService>();
+            services.AddScoped<IDecisionEngineDomainService, DecisionEngineDomainService>();
+            services.AddScoped<INodeDomainService, NodeDomainService>();
+
+            #endregion            
         }
 
         private static void ConfigureUnitOfWork

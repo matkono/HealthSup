@@ -3,6 +3,7 @@ using HealthSup.Application.DataContracts.v1.Requests.Node;
 using HealthSup.Application.Validators.Contracts;
 using HealthSup.Domain.Enums;
 using HealthSup.Domain.Repositories;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -71,9 +72,9 @@ namespace HealthSup.Application.Validators
             When(x => !x.QuestionId.Equals(0) && BeValidQuestionIdAsync(x.QuestionId, new CancellationToken()).GetAwaiter().GetResult(), () =>
             {
                 RuleFor(x => x.QuestionId)
-                .MustAsync(BeUnansweredQuestionAsync)
-                .WithErrorCode(((int)ValidationErrorCodeEnum.QuestionAlreadyAnswered).ToString())
-                .WithMessage("Question is already answered.");
+                .MustAsync(async (x, questionId, cancellationToken) => await BeCurrentNode(x.MedicalAppointmentId, questionId))
+                .WithErrorCode(((int)ValidationErrorCodeEnum.QuestionIsNotCurrentNode).ToString())
+                .WithMessage("Question is not the current node of Medical Appoint, so cannot be answered.");
             });
 
             #endregion
@@ -160,17 +161,17 @@ namespace HealthSup.Application.Validators
             return false;
         }
 
-        private async Task<bool> BeUnansweredQuestionAsync
+        private async Task<bool> BeCurrentNode
         (
-            int questionId,
-            CancellationToken cancellationToken
+            int medicalAppointmentId,
+            int questionId    
         ) 
         {
+            var medicalAppointment = await _unitOfWork.MedicalAppointmentRepository.GetById(medicalAppointmentId);
+
             var question = await _unitOfWork.QuestionRepository.GetById(questionId);
 
-            var medicalAppointmentMovement = await _unitOfWork.MedicalAppointmentMovementRepository.GetByFromNodeId(question.Id);
-
-            if (medicalAppointmentMovement == null)
+            if (question.Id.Equals(medicalAppointment.LastNode.Id))
                 return true;
 
             return false;

@@ -27,7 +27,7 @@
 
         QuestionIdIsNull = 400,
         QuestionNotFound = 401,
-        QuestionAlreadyAnswered = 402,
+        QuestionIsNotCurrentNode = 402,
 
         #endregion
 

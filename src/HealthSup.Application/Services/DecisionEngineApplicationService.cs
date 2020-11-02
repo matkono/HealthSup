@@ -3,6 +3,7 @@ using HealthSup.Application.DataContracts.v1.Responses.Node;
 using HealthSup.Application.Services.Contracts;
 using HealthSup.Application.Validators.Contracts;
 using HealthSup.Domain.Repositories;
+using HealthSup.Domain.Services.Contracts;
 using System;
 using System.Threading.Tasks;
 
@@ -13,15 +14,18 @@ namespace HealthSup.Application.Services
         public DecisionEngineApplicationService
         (
             IUnitOfWork unitOfWork,
-            IGetNextNodeValidator getNextNodeValidator
+            IGetNextNodeValidator getNextNodeValidator,
+            IDecisionEngineDomainService decisionEngineDomainService
         )
         {
             _unitOfWork = unitOfWork;
             _getNextNodeValidator = getNextNodeValidator;
+            DecisionEngineService = decisionEngineDomainService ?? throw new ArgumentNullException(nameof(decisionEngineDomainService));
         }
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IGetNextNodeValidator _getNextNodeValidator;
+        private readonly IDecisionEngineDomainService DecisionEngineService;
 
         public async Task<GetNextNodeReturn> GetNextNode
         (
@@ -46,6 +50,16 @@ namespace HealthSup.Application.Services
 
                 return response;
             }
+
+            var teste = DecisionEngineService.ResolveNextNode
+            (
+                argument.MedicalAppointmentId,
+                argument.DoctorId,
+                argument.QuestionId,
+                argument.PossibleAnswerGroupId,
+                argument.Date,
+                argument.PossibleAnswersId
+            );
 
             return new GetNextNodeReturn(null);
         }
