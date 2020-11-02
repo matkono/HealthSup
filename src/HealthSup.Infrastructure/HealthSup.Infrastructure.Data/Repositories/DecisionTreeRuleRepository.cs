@@ -50,5 +50,37 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
             return result.FirstOrDefault();
         }
+
+        public async Task<DecisionTreeRule> GetByFromNodeIdAndPossibleAnswerIdAsync
+        (
+            int fromNodeId, 
+            int possibleAnswerGroupId
+        )
+        {
+            DecisionTreeRule MapFromQuery
+            (
+                DecisionTreeRule decisionTreeRule,
+                Node node,
+                Node nextNode,
+                PossibleAnswerGroup possibleAnswerGroup
+            )
+            {
+                decisionTreeRule.SetFromNode(node);
+                decisionTreeRule.SetToNode(nextNode);
+                decisionTreeRule.SetPossibleAnswerGroup(possibleAnswerGroup);
+
+                return decisionTreeRule;
+            };
+
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.DecisionTreeRule.GetByFromNodeIdAndPossibleAnswerGroupdId);
+
+            var result = await UnitOfWork.Connection.QueryAsync<DecisionTreeRule, Node, Node, PossibleAnswerGroup, DecisionTreeRule>(
+                                                                query,
+                                                                MapFromQuery,
+                                                                new { fromNodeId, possibleAnswerGroupId },
+                                                                UnitOfWork.Transaction);
+
+            return result.FirstOrDefault();
+        }
     }
 }

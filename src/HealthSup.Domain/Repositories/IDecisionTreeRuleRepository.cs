@@ -9,5 +9,11 @@ namespace HealthSup.Domain.Repositories
         (
             int nodeId
         );
+
+        Task<DecisionTreeRule> GetByFromNodeIdAndPossibleAnswerIdAsync
+        (
+            int fromNodeId,
+            int possibleAnswerGroupId
+        );
     }
 }

@@ -1,11 +1,14 @@
 ﻿using HealthSup.Application.DataContracts.v1.Requests.Node;
 using HealthSup.Application.DataContracts.v1.Responses.Node;
+using HealthSup.Application.Mappers;
 using HealthSup.Application.Services.Contracts;
 using HealthSup.Application.Validators.Contracts;
+using HealthSup.Domain.Entities;
 using HealthSup.Domain.Repositories;
 using HealthSup.Domain.Services.Contracts;
 using System;
 using System.Threading.Tasks;
+using Action = HealthSup.Domain.Entities.Action;
 
 namespace HealthSup.Application.Services
 {
@@ -51,7 +54,7 @@ namespace HealthSup.Application.Services
                 return response;
             }
 
-            var teste = DecisionEngineService.ResolveNextNode
+            var node = await DecisionEngineService.ResolveNextNode
             (
                 argument.MedicalAppointmentId,
                 argument.DoctorId,
@@ -61,7 +64,19 @@ namespace HealthSup.Application.Services
                 argument.PossibleAnswersId
             );
 
-            return new GetNextNodeReturn(null);
+            if (node is Action action)
+            {
+                return new GetNextNodeReturn(action.ToDataContract());
+            }
+            else if (node is Question question)
+            {
+                return new GetNextNodeReturn(question.ToDataContract());
+            }
+            else
+            {
+                var decision = node as Decision;
+                return new GetNextNodeReturn(decision.ToDataContract());
+            }
         }
     }
 }

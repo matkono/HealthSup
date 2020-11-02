@@ -4,17 +4,21 @@
     {
         public DecisionTreeRule
         (
+            int id,
             Node fromNode,
             Node toNode,
             PossibleAnswerGroup possibleAnswerGroup
         )
         {
+            Id = id;
             FromNode = fromNode;
             ToNode = toNode;
             PossibleAnswerGroup = possibleAnswerGroup;
         }
 
         public DecisionTreeRule() { }
+
+        public int Id { get; private set;}
 
         public Node FromNode { get; private set; }
 
