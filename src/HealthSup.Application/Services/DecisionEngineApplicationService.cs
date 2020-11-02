@@ -1,9 +1,9 @@
 ﻿using HealthSup.Application.DataContracts.v1.Requests.Node;
 using HealthSup.Application.DataContracts.v1.Responses.Node;
 using HealthSup.Application.Services.Contracts;
-using HealthSup.Application.Validators;
 using HealthSup.Application.Validators.Contracts;
 using HealthSup.Domain.Repositories;
+using System;
 using System.Threading.Tasks;
 
 namespace HealthSup.Application.Services
@@ -30,7 +30,24 @@ namespace HealthSup.Application.Services
         {
             var result = await  _getNextNodeValidator.ValidateAsync(argument);
 
-            throw new System.NotImplementedException();
+            if (!result.IsValid)
+            {
+                var response = new GetNextNodeReturn(null);
+
+                foreach (var error in result.Errors)
+                {
+                    response.AddError
+                    (
+                        Int32.Parse(error.ErrorCode),
+                        error.ErrorMessage,
+                        error.PropertyName
+                    );
+                }
+
+                return response;
+            }
+
+            return new GetNextNodeReturn(null);
         }
     }
 }
