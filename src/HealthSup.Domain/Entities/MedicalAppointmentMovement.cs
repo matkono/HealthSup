@@ -4,11 +4,13 @@
     {
         public MedicalAppointmentMovement
         (
+            int id,
             Node fromNode,
             Node toNode,
             MedicalAppointment medicalAppointment
         )
         {
+            Id = id;
             FromNode = fromNode;
             ToNode = toNode;
             MedicalAppointment = medicalAppointment;
@@ -16,36 +18,12 @@
 
         public MedicalAppointmentMovement() { }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        public Node FromNode { get; private set; }
+        public Node FromNode { get; set; }
 
-        public Node ToNode { get; private set; }
+        public Node ToNode { get; set; }
 
-        public MedicalAppointment MedicalAppointment { get; private set; }
-
-        public void SetFromNode
-        (
-            Node fromNode
-        )
-        {
-            FromNode = fromNode;
-        }
-
-        public void SetToNode
-        (
-            Node toNode
-        )
-        {
-            ToNode = toNode;
-        }
-
-        public void SetMedicalAppointment
-        (
-            MedicalAppointment medicalAppointment
-        )
-        {
-            MedicalAppointment = medicalAppointment;
-        }
+        public MedicalAppointment MedicalAppointment { get; set; }
     }
 }

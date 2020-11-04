@@ -31,7 +31,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
                 PossibleAnswerGroup possibleAnswerGroup
             )
             {
-                possibleAnswer.SetPossibleAnswerGroup(possibleAnswerGroup);
+                possibleAnswer.PossibleAnswerGroup = possibleAnswerGroup;
 
                 return possibleAnswer;
             };
@@ -58,7 +58,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
                 PossibleAnswerGroup possibleAnswerGroup
             )
             {
-                possibleAnswer.SetPossibleAnswerGroup(possibleAnswerGroup);
+                possibleAnswer.PossibleAnswerGroup = possibleAnswerGroup;
 
                 return possibleAnswer;
             };

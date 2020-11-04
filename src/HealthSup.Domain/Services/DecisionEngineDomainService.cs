@@ -32,8 +32,32 @@ namespace HealthSup.Domain.Services
         )
         {
             var question = await _unitOfWork.QuestionRepository.GetById(questionId);
-
             var decisionTreeRule = await _unitOfWork.DecisionTreeRuleRepository.GetByFromNodeIdAndPossibleAnswerIdAsync(question.Id, possibleAnswerGroupId);
+            var medicalAppointment = new MedicalAppointment() { Id = medicalAppointmentId };
+
+            var answers = new List<Answer>();
+
+            foreach (var possibleAnswerId in PossibleAnswersId) 
+            {
+                answers.Add(new Answer() 
+                {
+                    Date = date,
+                    Question = question,
+                    PossibleAnswer = new PossibleAnswer() { Id = possibleAnswerId },
+                    Doctor = new Doctor() { Id = doctorId },
+                    MedicalAppointment = new MedicalAppointment() { Id = medicalAppointmentId }
+                });
+            }
+
+            var medicalAppointmentMoviment = new MedicalAppointmentMovement() 
+            {
+                FromNode = decisionTreeRule.FromNode,
+                ToNode = decisionTreeRule.ToNode,
+                MedicalAppointment = medicalAppointment
+            };
+
+            /*await _unitOfWork.MedicalAppointmentMovementRepository.InsetMovement(medicalAppointmentMoviment);
+            await _unitOfWork.MedicalAppointmentRepository.UpdateLastNode(medicalAppointment.Id, decisionTreeRule.ToNode.Id);*/
 
             var node = await _unitOfWork.NodeRepository.GetById(decisionTreeRule.ToNode.Id);
 

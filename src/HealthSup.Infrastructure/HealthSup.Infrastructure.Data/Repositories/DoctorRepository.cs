@@ -30,7 +30,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
                 User user
             )
             {
-                doctor.SetUser(user);
+                doctor.User = user;
 
                 return doctor;
             };

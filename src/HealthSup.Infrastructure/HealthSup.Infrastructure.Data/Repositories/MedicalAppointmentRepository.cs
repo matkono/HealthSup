@@ -32,11 +32,11 @@ namespace HealthSup.Infrastructure.Data.Repositories
                 Node node
             )
             {
-                medicalAppointment.setPatient(patient);
+                medicalAppointment.Patient = patient;
 
-                medicalAppointment.setDecisionTree( decisionTree);
+                medicalAppointment.DecisionTree = decisionTree;
 
-                medicalAppointment.setLastNode(node);
+                medicalAppointment.LastNode = node;
 
                 return medicalAppointment;
             };

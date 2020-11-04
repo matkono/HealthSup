@@ -51,11 +51,11 @@ namespace HealthSup.Infrastructure.Data.Repositories
                 MedicalAppointment medicalAppointment
             )
             {
-                medicalAppointmentMovement.SetFromNode(fromNode);
+                medicalAppointmentMovement.FromNode = fromNode;
 
-                medicalAppointmentMovement.SetToNode(toNode);
+                medicalAppointmentMovement.ToNode = toNode;
 
-                medicalAppointmentMovement.SetMedicalAppointment(medicalAppointment);
+                medicalAppointmentMovement.MedicalAppointment  = medicalAppointment;
 
                 return medicalAppointmentMovement;
             };

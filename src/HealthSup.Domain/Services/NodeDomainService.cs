@@ -31,7 +31,12 @@ namespace HealthSup.Domain.Services
                 var decisionTreeRule = await _unitOfWork.DecisionTreeRuleRepository.GetActionConfirmationQuestionByNodeId(node.Id);
                 node = await _unitOfWork.NodeRepository.GetById(decisionTreeRule.ToNode.Id);
                 await _unitOfWork.MedicalAppointmentRepository.UpdateLastNode(medicalAppointment.Id, node.Id);
-                var medicalAppointmentMoviment = new MedicalAppointmentMovement(decisionTreeRule.FromNode, decisionTreeRule.ToNode, medicalAppointment);
+                var medicalAppointmentMoviment = new MedicalAppointmentMovement() 
+                {
+                    FromNode = decisionTreeRule.FromNode,
+                    ToNode = decisionTreeRule.ToNode,
+                    MedicalAppointment = medicalAppointment
+                };
                 await _unitOfWork.MedicalAppointmentMovementRepository.InsetMovement(medicalAppointmentMoviment);
             }
 

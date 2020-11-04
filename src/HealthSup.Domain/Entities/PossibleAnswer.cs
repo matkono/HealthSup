@@ -18,20 +18,12 @@
 
         public PossibleAnswer() { }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        public int Code { get; private set; }
+        public int Code { get; set; }
 
-        public string Title { get; private set; }
+        public string Title { get; set; }
 
-        public PossibleAnswerGroup PossibleAnswerGroup { get; private set; }
-
-        public void SetPossibleAnswerGroup
-        (
-            PossibleAnswerGroup possibleAnswerGroup
-        )
-        {
-            PossibleAnswerGroup = possibleAnswerGroup;
-        }
+        public PossibleAnswerGroup PossibleAnswerGroup { get; set; }
     }
 }

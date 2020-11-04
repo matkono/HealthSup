@@ -16,8 +16,8 @@ namespace HealthSup.Domain.Entities
 
         public PossibleAnswerGroup() { }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        public string Description { get; private set;}
+        public string Description { get; set;}
     }
 }
