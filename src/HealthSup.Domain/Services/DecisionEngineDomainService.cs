@@ -56,8 +56,9 @@ namespace HealthSup.Domain.Services
                 MedicalAppointment = medicalAppointment
             };
 
-            /*await _unitOfWork.MedicalAppointmentMovementRepository.InsetMovement(medicalAppointmentMoviment);
-            await _unitOfWork.MedicalAppointmentRepository.UpdateLastNode(medicalAppointment.Id, decisionTreeRule.ToNode.Id);*/
+            await _unitOfWork.AnswerRepository.InsertManyAsync(answers);
+            await _unitOfWork.MedicalAppointmentMovementRepository.InsetMovement(medicalAppointmentMoviment);
+            await _unitOfWork.MedicalAppointmentRepository.UpdateLastNode(medicalAppointment.Id, decisionTreeRule.ToNode.Id);
 
             var node = await _unitOfWork.NodeRepository.GetById(decisionTreeRule.ToNode.Id);
 

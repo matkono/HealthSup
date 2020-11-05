@@ -41,5 +41,7 @@ namespace HealthSup.Domain.Repositories
         IMedicalAppointmentMovementRepository MedicalAppointmentMovementRepository { get; }
 
         IPossibleAnswerGroupRepository PossibleAnswerGroupRepository { get; }
+
+        IAnswerRepository AnswerRepository { get; }
     }
 }

@@ -98,6 +98,13 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string GetById = $"{EntityName}.GetById";
             }
+
+            public static class Answer 
+            {
+                static readonly string EntityName = $"{nameof(Answer)}";
+
+                public static readonly string Insert = $"{EntityName}.Insert";
+            }
         }
 
         private static Assembly _thisAssemnbly = Assembly.GetExecutingAssembly();
