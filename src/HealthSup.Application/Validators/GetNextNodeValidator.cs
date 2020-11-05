@@ -3,6 +3,7 @@ using HealthSup.Application.DataContracts.v1.Requests.Node;
 using HealthSup.Application.Validators.Contracts;
 using HealthSup.Domain.Enums;
 using HealthSup.Domain.Repositories;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -31,15 +32,17 @@ namespace HealthSup.Application.Validators
                 RuleFor(x => x.MedicalAppointmentId)
                 .MustAsync(BeValidMedicalAppointmentIdAsync)
                 .WithErrorCode(((int)ValidationErrorCodeEnum.MedicalAppointNotFound).ToString())
-                .WithMessage("Medical appointment not found.");
+                .WithMessage("Medical appointment with id {PropertyValue} is not found.");
             });
 
-            When(x => !x.MedicalAppointmentId.Equals(0) && BeValidMedicalAppointmentIdAsync(x.MedicalAppointmentId, new CancellationToken()).GetAwaiter().GetResult(), () =>
+            When(x => !x.MedicalAppointmentId.Equals(0) &&
+            BeValidMedicalAppointmentIdAsync(x.MedicalAppointmentId, new CancellationToken()).GetAwaiter().GetResult() &&
+            BeValidMedicalAppointmentIdAsync(x.MedicalAppointmentId, new CancellationToken()).GetAwaiter().GetResult(), () =>
             {
                 RuleFor(x => x.MedicalAppointmentId)
                 .MustAsync(BeMedicalAppointmentUnfinalizedAsync)
                 .WithErrorCode(((int)ValidationErrorCodeEnum.MedicalAppointmentIsFinalized).ToString())
-                .WithMessage("Medical appointment is finalized.");
+                .WithMessage("Medical appointment with id {PropertyValue} is finalized.");
             });
 
 
@@ -57,7 +60,7 @@ namespace HealthSup.Application.Validators
                 RuleFor(x => x.DoctorId)
                 .MustAsync(BeValidDoctorIdAsync)
                 .WithErrorCode(((int)ValidationErrorCodeEnum.DoctorNotFound).ToString())
-                .WithMessage("Doctor not found.");
+                .WithMessage("Doctor with id {PropertyValue} is not found.");
             });
 
             #endregion
@@ -74,17 +77,18 @@ namespace HealthSup.Application.Validators
                 RuleFor(x => x.QuestionId)
                 .MustAsync(BeValidQuestionIdAsync)
                 .WithErrorCode(((int)ValidationErrorCodeEnum.QuestionNotFound).ToString())
-                .WithMessage("Question not found.");
+                .WithMessage("Question with id {PropertyValue} is not found.");
             });
 
             When(x => !x.QuestionId.Equals(0) && 
             BeValidQuestionIdAsync(x.QuestionId, new CancellationToken()).GetAwaiter().GetResult() &&
+            BeValidMedicalAppointmentIdAsync(x.MedicalAppointmentId, new CancellationToken()).GetAwaiter().GetResult()&&
             BeMedicalAppointmentUnfinalizedAsync(x.MedicalAppointmentId, new CancellationToken()).GetAwaiter().GetResult(), () =>
             {
                 RuleFor(x => x.QuestionId)
                 .MustAsync(async (x, questionId, cancellationToken) => await BeCurrentNode(x.MedicalAppointmentId, questionId))
                 .WithErrorCode(((int)ValidationErrorCodeEnum.QuestionIsNotCurrentNode).ToString())
-                .WithMessage("Question is not the current node of Medical Appoint, so cannot be answered.");
+                .WithMessage("Question with id {PropertyValue} is not the current node of Medical Appoint, so cannot be answered.");
             });
 
             #endregion
@@ -101,7 +105,7 @@ namespace HealthSup.Application.Validators
                 RuleFor(x => x.PossibleAnswerGroupId)
                 .MustAsync(BeValidPossibleAnswerGroupIdAsync)
                 .WithErrorCode(((int)ValidationErrorCodeEnum.PossibleAnswerGroupNotFound).ToString())
-                .WithMessage("Possible answer group not found.");
+                .WithMessage("Possible answer group with id {PropertyValue} is not found.");
             });
 
             #endregion
@@ -124,7 +128,7 @@ namespace HealthSup.Application.Validators
             RuleForEach(x => x.PossibleAnswersId)
                 .MustAsync(async (x, possibleAnswerId, cancellationToken) => await BeValidPossibleAnswerIdAsync(possibleAnswerId, x.PossibleAnswerGroupId))
                 .WithErrorCode(((int)ValidationErrorCodeEnum.PossibleAnswerInvalidForQuestion).ToString())
-                .WithMessage("PossibleAnswersId does not belongs to Possible Answer Group.");
+                .WithMessage("PossibleAnswersId with id {PropertyValue} does not belongs to Possible Answer Group.");
 
             #endregion
         }
@@ -223,7 +227,7 @@ namespace HealthSup.Application.Validators
         {
             var possibleAnswer = await _unitOfWork.PossibleAnswerRepository.GetById(possibleAnswerId);
 
-            if (possibleAnswer.PossibleAnswerGroup.Id.Equals(possibleAnswerGroupId))
+            if (possibleAnswer != null && possibleAnswer.PossibleAnswerGroup.Id.Equals(possibleAnswerGroupId))
                 return true;
 
             return false;
