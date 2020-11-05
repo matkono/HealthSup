@@ -3,7 +3,6 @@ using HealthSup.Application.DataContracts.v1.Requests.Node;
 using HealthSup.Application.Validators.Contracts;
 using HealthSup.Domain.Enums;
 using HealthSup.Domain.Repositories;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,6 +33,15 @@ namespace HealthSup.Application.Validators
                 .WithErrorCode(((int)ValidationErrorCodeEnum.MedicalAppointNotFound).ToString())
                 .WithMessage("Medical appointment not found.");
             });
+
+            When(x => !x.MedicalAppointmentId.Equals(0) && BeValidMedicalAppointmentIdAsync(x.MedicalAppointmentId, new CancellationToken()).GetAwaiter().GetResult(), () =>
+            {
+                RuleFor(x => x.MedicalAppointmentId)
+                .MustAsync(BeMedicalAppointmentUnfinalizedAsync)
+                .WithErrorCode(((int)ValidationErrorCodeEnum.MedicalAppointmentIsFinalized).ToString())
+                .WithMessage("Medical appointment is finalized.");
+            });
+
 
             #endregion
 
@@ -128,6 +136,20 @@ namespace HealthSup.Application.Validators
             var medicalAppointment = await _unitOfWork.MedicalAppointmentRepository.GetById(medicalAppointmentId);
 
             if (medicalAppointment != null)
+                return true;
+
+            return false;
+        }
+
+        private async Task<bool> BeMedicalAppointmentUnfinalizedAsync
+        (
+            int medicalAppointmentId,
+            CancellationToken cancellationToken
+        )
+        {
+            var medicalAppointment = await _unitOfWork.MedicalAppointmentRepository.GetById(medicalAppointmentId);
+
+            if (medicalAppointment.Status.Id.Equals(MedicalAppointmentStatusEnum.InProgress))
                 return true;
 
             return false;

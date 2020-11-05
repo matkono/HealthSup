@@ -29,21 +29,21 @@ namespace HealthSup.Infrastructure.Data.Repositories
                 MedicalAppointment medicalAppointment,
                 Patient patient,
                 DecisionTree decisionTree,
-                Node node
+                Node node,
+                MedicalAppointmentStatus status
             )
             {
                 medicalAppointment.Patient = patient;
-
                 medicalAppointment.DecisionTree = decisionTree;
-
                 medicalAppointment.LastNode = node;
+                medicalAppointment.Status = status;
 
                 return medicalAppointment;
             };
 
             var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.GetById);
 
-            var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointment, Patient, DecisionTree, Node, MedicalAppointment>(
+            var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointment, Patient, DecisionTree, Node, MedicalAppointmentStatus, MedicalAppointment>(
                                                                 query,
                                                                 MapFromQuery,
                                                                 new { medicalAppointmentId },

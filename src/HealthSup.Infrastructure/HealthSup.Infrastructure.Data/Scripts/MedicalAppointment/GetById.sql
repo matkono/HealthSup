@@ -3,7 +3,8 @@
 	ma.isDiagnostic,
 	p.id,
 	dt.id,
-	ma.lastNodeId as id
+	ma.lastNodeId as id,
+	ma.medicalAppointmentStatusId as id
 FROM
 	MedicalAppointment ma
 INNER JOIN Patient p ON
