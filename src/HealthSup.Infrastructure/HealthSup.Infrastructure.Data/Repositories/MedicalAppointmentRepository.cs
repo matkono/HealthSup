@@ -52,7 +52,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
             return result.FirstOrDefault();
         }
 
-        public async Task UpdateLastNode
+        public async Task<int> UpdateLastNode
         (
             int id,
             int lastNodeId
@@ -60,10 +60,26 @@ namespace HealthSup.Infrastructure.Data.Repositories
         {
             var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.UpdateLastNode);
 
-            await UnitOfWork.Connection.ExecuteAsync
+            return await UnitOfWork.Connection.ExecuteAsync
             (
                 query,
                 new { id, lastNodeId },
+                UnitOfWork.Transaction
+            );
+        }
+
+        public async Task<int> UpdateStatus
+        (
+            int id,
+            int statusId
+        )
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.UpdateStatus);
+
+            return await UnitOfWork.Connection.ExecuteAsync
+            (
+                query,
+                new { id, statusId },
                 UnitOfWork.Transaction
             );
         }

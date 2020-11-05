@@ -62,6 +62,11 @@ namespace HealthSup.Domain.Services
 
             var node = await _unitOfWork.NodeRepository.GetById(decisionTreeRule.ToNode.Id);
 
+            if (node.NodeType.Id.Equals((int)NodeTypeEnum.Decision)) 
+            {
+                await _unitOfWork.MedicalAppointmentRepository.UpdateStatus(medicalAppointment.Id, (int)MedicalAppointmentStatusEnum.Finalized);
+            }
+
             return await LoadNodeDetails(node.Id, node.NodeType.Id);
         }
 

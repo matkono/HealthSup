@@ -37,6 +37,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string GetById = $"{EntityName}.GetById";
                 public static readonly string UpdateLastNode = $"{EntityName}.UpdateLastNode";
+                public static readonly string UpdateStatus = $"{EntityName}.UpdateStatus";
             }
 
             public static class Node

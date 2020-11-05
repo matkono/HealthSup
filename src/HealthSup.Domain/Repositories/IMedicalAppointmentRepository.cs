@@ -10,10 +10,16 @@ namespace HealthSup.Domain.Repositories
             int id
         );
 
-        public Task UpdateLastNode
+        public Task<int> UpdateLastNode
         (
             int id,
             int lastNodeId
+        );
+
+        public Task<int> UpdateStatus
+        (
+            int id,
+            int statusId
         );
     }
 }

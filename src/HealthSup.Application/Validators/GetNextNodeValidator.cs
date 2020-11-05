@@ -77,7 +77,9 @@ namespace HealthSup.Application.Validators
                 .WithMessage("Question not found.");
             });
 
-            When(x => !x.QuestionId.Equals(0) && BeValidQuestionIdAsync(x.QuestionId, new CancellationToken()).GetAwaiter().GetResult(), () =>
+            When(x => !x.QuestionId.Equals(0) && 
+            BeValidQuestionIdAsync(x.QuestionId, new CancellationToken()).GetAwaiter().GetResult() &&
+            BeMedicalAppointmentUnfinalizedAsync(x.MedicalAppointmentId, new CancellationToken()).GetAwaiter().GetResult(), () =>
             {
                 RuleFor(x => x.QuestionId)
                 .MustAsync(async (x, questionId, cancellationToken) => await BeCurrentNode(x.MedicalAppointmentId, questionId))
@@ -149,7 +151,7 @@ namespace HealthSup.Application.Validators
         {
             var medicalAppointment = await _unitOfWork.MedicalAppointmentRepository.GetById(medicalAppointmentId);
 
-            if (medicalAppointment.Status.Id.Equals(MedicalAppointmentStatusEnum.InProgress))
+            if (medicalAppointment.Status.Id.Equals((int)MedicalAppointmentStatusEnum.InProgress))
                 return true;
 
             return false;

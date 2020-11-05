@@ -1,4 +1,5 @@
 ﻿UPDATE MedicalAppointment
-SET lastNodeId = @lastNodeId
+SET 
+	lastNodeId = @lastNodeId
 WHERE
 	id = @id
