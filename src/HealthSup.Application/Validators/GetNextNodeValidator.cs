@@ -3,7 +3,6 @@ using HealthSup.Application.DataContracts.v1.Requests.Node;
 using HealthSup.Application.Validators.Contracts;
 using HealthSup.Domain.Enums;
 using HealthSup.Domain.Repositories;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -125,11 +124,14 @@ namespace HealthSup.Application.Validators
                 .WithMessage("PossibleAnswersId cannot be empty.");
             });
 
-            RuleForEach(x => x.PossibleAnswersId)
+            When(x => !x.PossibleAnswerGroupId.Equals(0), () =>
+            {
+                RuleForEach(x => x.PossibleAnswersId)
                 .MustAsync(async (x, possibleAnswerId, cancellationToken) => await BeValidPossibleAnswerIdAsync(possibleAnswerId, x.PossibleAnswerGroupId))
                 .WithErrorCode(((int)ValidationErrorCodeEnum.PossibleAnswerInvalidForQuestion).ToString())
-                .WithMessage("PossibleAnswersId with id {PropertyValue} does not belongs to Possible Answer Group.");
-
+                .WithMessage(x => string.Concat("PossibleAnswersId with id {PropertyValue} ", $"does not belongs to Possible Answer Group with id {x.PossibleAnswerGroupId}."));
+            });
+            
             #endregion
         }
 
