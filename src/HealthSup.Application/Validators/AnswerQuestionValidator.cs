@@ -22,11 +22,11 @@ namespace HealthSup.Application.Validators
             #region MedicalAppointmentId
 
             RuleFor(x => x.MedicalAppointmentId)
-                .NotEqual(0)
-                .WithErrorCode(((int)ValidationErrorCodeEnum.MedicalAppointmentIdIsNull).ToString())
-                .WithMessage("MedicalAppointmentId is required, and cannot be 0, to get next node.");
+               .NotEqual(0)
+               .WithErrorCode(((int)ValidationErrorCodeEnum.MedicalAppointmentIdIsNull).ToString())
+               .WithMessage("MedicalAppointmentId is required, and cannot be 0, to get next node.");
 
-            When(x => !x.MedicalAppointmentId.Equals(0), () => 
+            When(x => !x.MedicalAppointmentId.Equals(0), () =>
             {
                 RuleFor(x => x.MedicalAppointmentId)
                 .MustAsync(BeValidMedicalAppointmentIdAsync)
@@ -34,7 +34,7 @@ namespace HealthSup.Application.Validators
                 .WithMessage("Medical appointment with id {PropertyValue} is not found.");
             });
 
-            WhenAsync((x, cancellationToken) => BeUnfinalizedMedicalAppointment(x.MedicalAppointmentId, cancellationToken), () =>
+            WhenAsync((x, cancellationToken) => BeValidMedicalAppointmentIdAsync(x.MedicalAppointmentId, cancellationToken), () =>
             {
                 RuleFor(x => x.MedicalAppointmentId)
                 .MustAsync(BeMedicalAppointmentUnfinalizedAsync)
@@ -240,17 +240,6 @@ namespace HealthSup.Application.Validators
             await BeValidQuestionIdAsync(questionId, cancellationToken) &&
             await BeValidMedicalAppointmentIdAsync(medicalAppointmentId, cancellationToken) &&
             await BeMedicalAppointmentUnfinalizedAsync(medicalAppointmentId, cancellationToken);
-        }
-
-        private async Task<bool> BeUnfinalizedMedicalAppointment
-        (
-            int medicalAppointmentId,
-            CancellationToken cancellationToken
-        ) 
-        {
-            return !medicalAppointmentId.Equals(0) &&
-            await BeValidMedicalAppointmentIdAsync(medicalAppointmentId, cancellationToken) &&
-            await BeValidMedicalAppointmentIdAsync(medicalAppointmentId, cancellationToken);
         }
     }
 }

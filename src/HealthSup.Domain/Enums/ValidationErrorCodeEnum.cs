@@ -14,6 +14,7 @@
         MedicalAppointmentIdIsNull = 200,
         MedicalAppointNotFound = 201,
         MedicalAppointmentIsFinalized = 202,
+        MedicalAppointmentCurrentNodeIsNotAction = 203,
 
         #endregion
 
