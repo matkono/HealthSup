@@ -1,5 +1,7 @@
 ﻿using HealthSup.Application.Services;
 using HealthSup.Application.Services.Contracts;
+using HealthSup.Application.Validators;
+using HealthSup.Application.Validators.Contracts;
 using HealthSup.Domain.Repositories;
 using HealthSup.Domain.Services;
 using HealthSup.Domain.Services.Contracts;
@@ -33,14 +35,36 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
             this IServiceCollection services
         )
         {
+            #region Validator
+
+            services.AddScoped<IAnswerQuestionValidator, AnswerQuestionValidator>();
+
+            #endregion
+
+            #region CrossCutting
+
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IHashService, HashService>();
+
+            #endregion
+
+            #region ApplicationService
+
             services.AddScoped<IDoctorApplicationService, DoctorApplicationService>();
             services.AddScoped<IMedicalAppointmentApplicationService, MedicalAppointmentApplicationService>();
             services.AddScoped<IAuthenticationApplicationService, AuthenticationApplicationService>();
+            services.AddScoped<IDecisionEngineApplicationService, DecisionEngineApplicationService>();
+
+            #endregion
+
+            #region DomainService
+
             services.AddScoped<IDoctorDomainService, DoctorDomainService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IMedicalAppointmentDomainService, MedicalAppointmentDomainService>();
+            services.AddScoped<IDecisionEngineDomainService, DecisionEngineDomainService>();
             services.AddScoped<INodeDomainService, NodeDomainService>();
-            services.AddScoped<IHashService, HashService>();
+
+            #endregion            
         }
 
         private static void ConfigureUnitOfWork

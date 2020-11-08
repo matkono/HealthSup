@@ -1,4 +1,4 @@
-﻿INSERT INTO MedicalAppointmentFlow
+﻿INSERT INTO MedicalAppointmentMovement
 (
 	fromNodeId,
 	toNodeId,

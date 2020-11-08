@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace HealthSup.Domain.Repositories
 {
-    public interface IDoctorRepository
+    public interface IPossibleAnswerGroupRepository
     {
-        Task<Doctor> GetById
+        Task<PossibleAnswerGroup> GetById
         (
             int id
         );

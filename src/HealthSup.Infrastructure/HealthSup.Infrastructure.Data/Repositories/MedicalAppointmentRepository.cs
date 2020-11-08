@@ -29,31 +29,30 @@ namespace HealthSup.Infrastructure.Data.Repositories
                 MedicalAppointment medicalAppointment,
                 Patient patient,
                 DecisionTree decisionTree,
-                Node node
+                Node node,
+                MedicalAppointmentStatus status
             )
             {
-                medicalAppointment.setPatient(patient);
-
-                medicalAppointment.setDecisionTree( decisionTree);
-
-                medicalAppointment.setLastNode(node);
+                medicalAppointment.Patient = patient;
+                medicalAppointment.DecisionTree = decisionTree;
+                medicalAppointment.LastNode = node;
+                medicalAppointment.Status = status;
 
                 return medicalAppointment;
             };
 
             var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.GetById);
 
-            var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointment, Patient, DecisionTree, Node, MedicalAppointment>(
+            var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointment, Patient, DecisionTree, Node, MedicalAppointmentStatus, MedicalAppointment>(
                                                                 query,
                                                                 MapFromQuery,
                                                                 new { medicalAppointmentId },
-                                                                UnitOfWork.Transaction,
-                                                                splitOn: "id, id, id, id");
+                                                                UnitOfWork.Transaction);
 
             return result.FirstOrDefault();
         }
 
-        public async Task UpdateLastNode
+        public async Task<int> UpdateLastNode
         (
             int id,
             int lastNodeId
@@ -61,10 +60,26 @@ namespace HealthSup.Infrastructure.Data.Repositories
         {
             var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.UpdateLastNode);
 
-            await UnitOfWork.Connection.ExecuteAsync
+            return await UnitOfWork.Connection.ExecuteAsync
             (
                 query,
                 new { id, lastNodeId },
+                UnitOfWork.Transaction
+            );
+        }
+
+        public async Task<int> UpdateStatus
+        (
+            int id,
+            int statusId
+        )
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.UpdateStatus);
+
+            return await UnitOfWork.Connection.ExecuteAsync
+            (
+                query,
+                new { id, statusId },
                 UnitOfWork.Transaction
             );
         }

@@ -20,6 +20,33 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
         private IUnitOfWork UnitOfWork { get; }
 
+        public async Task<PossibleAnswer> GetById
+        (
+            int id
+        )
+        {
+            PossibleAnswer MapFromQuery
+            (
+                PossibleAnswer possibleAnswer,
+                PossibleAnswerGroup possibleAnswerGroup
+            )
+            {
+                possibleAnswer.PossibleAnswerGroup = possibleAnswerGroup;
+
+                return possibleAnswer;
+            };
+
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.PossibleAnswer.GetById);
+
+            var result = await UnitOfWork.Connection.QueryAsync<PossibleAnswer, PossibleAnswerGroup, PossibleAnswer>(
+                                                                query,
+                                                                MapFromQuery,
+                                                                new { id },
+                                                                UnitOfWork.Transaction);
+
+            return result.FirstOrDefault();
+        }
+
         public async Task<List<PossibleAnswer>> ListByQuestionId
         (
             int questionId
@@ -28,10 +55,10 @@ namespace HealthSup.Infrastructure.Data.Repositories
             PossibleAnswer MapFromQuery
             (
                 PossibleAnswer possibleAnswer,
-                PossibleAnswerGroup setPossibleAnswer
+                PossibleAnswerGroup possibleAnswerGroup
             )
             {
-                possibleAnswer.SetPossibleAnswerGroup(setPossibleAnswer);
+                possibleAnswer.PossibleAnswerGroup = possibleAnswerGroup;
 
                 return possibleAnswer;
             };

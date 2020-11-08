@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace HealthSup.Infrastructure.Data.Repositories
 {
-    public class DoctorRepository : IDoctorRepository
+    public class PossibleAnswerGroupRepository : IPossibleAnswerGroupRepository
     {
-        private IUnitOfWork UnitOfWork { get; }
-
-        public DoctorRepository
+        public PossibleAnswerGroupRepository
         (
             IUnitOfWork unitOfWork
         )
@@ -19,27 +17,17 @@ namespace HealthSup.Infrastructure.Data.Repositories
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<Doctor> GetById
+        private IUnitOfWork UnitOfWork { get; }
+
+        public async Task<PossibleAnswerGroup> GetById
         (
             int id
         )
         {
-            Doctor MapFromQuery
-            (
-                Doctor doctor,
-                User user
-            )
-            {
-                doctor.User = user;
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.PossibleAnswerGroup.GetById);
 
-                return doctor;
-            };
-
-            var query = ScriptManager.GetByName(ScriptManager.FileNames.Doctor.GetById);
-
-            var result = await UnitOfWork.Connection.QueryAsync<Doctor, User, Doctor>(
+            var result = await UnitOfWork.Connection.QueryAsync<PossibleAnswerGroup>(
                                                                 query,
-                                                                MapFromQuery,
                                                                 new { id },
                                                                 UnitOfWork.Transaction);
 

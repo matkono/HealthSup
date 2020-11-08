@@ -6,31 +6,47 @@
 
   <ItemGroup>
     <None Remove="Scripts\Action\GetByNodeId.sql" />
+    <None Remove="Scripts\Answer\Insert.sql" />
     <None Remove="Scripts\DecisionTreeRule\GetActionConfirmationQuestionByNodeId.sql" />
+    <None Remove="Scripts\DecisionTreeRule\GetByFromNodeIdAndPossibleAnswerGroupdId.sql" />
     <None Remove="Scripts\Decision\GetByNodeId.sql" />
+    <None Remove="Scripts\Doctor\GetById.sql" />
     <None Remove="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
     <None Remove="Scripts\Doctor\UpdatePassword.sql" />
-    <None Remove="Scripts\MedicalAppointmentFlow\Insert.sql" />
+    <None Remove="Scripts\MedicalAppointmentMovement\GetByFromNodeId.sql" />
+    <None Remove="Scripts\MedicalAppointmentMovement\Insert.sql" />
     <None Remove="Scripts\MedicalAppointment\GetById.sql" />
     <None Remove="Scripts\MedicalAppointment\UpdateLastNode.sql" />
+    <None Remove="Scripts\MedicalAppointment\UpdateStatus.sql" />
     <None Remove="Scripts\Node\GetById.sql" />
     <None Remove="Scripts\Node\GetInitialByDecisionTreeId.sql" />
+    <None Remove="Scripts\PossibleAnswerGroup\GetById.sql" />
+    <None Remove="Scripts\PossibleAnswer\GetById.sql" />
     <None Remove="Scripts\PossibleAnswer\ListByQuestionId.sql" />
+    <None Remove="Scripts\Question\GetById.sql" />
     <None Remove="Scripts\Question\GetByNodeId.sql" />
     <None Remove="Scripts\UserDTO\GetByEmailAndPassword.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\Action\GetByNodeId.sql" />
+    <EmbeddedResource Include="Scripts\Answer\Insert.sql" />
     <EmbeddedResource Include="Scripts\DecisionTreeRule\GetActionConfirmationQuestionByNodeId.sql" />
+    <EmbeddedResource Include="Scripts\DecisionTreeRule\GetByFromNodeIdAndPossibleAnswerGroupdId.sql" />
     <EmbeddedResource Include="Scripts\Decision\GetByNodeId.sql" />
+    <EmbeddedResource Include="Scripts\Doctor\GetById.sql" />
     <EmbeddedResource Include="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
-    <EmbeddedResource Include="Scripts\MedicalAppointmentFlow\Insert.sql" />
+    <EmbeddedResource Include="Scripts\MedicalAppointmentMovement\GetByFromNodeId.sql" />
+    <EmbeddedResource Include="Scripts\MedicalAppointmentMovement\Insert.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\GetById.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\UpdateLastNode.sql" />
+    <EmbeddedResource Include="Scripts\MedicalAppointment\UpdateStatus.sql" />
     <EmbeddedResource Include="Scripts\Node\GetById.sql" />
     <EmbeddedResource Include="Scripts\Node\GetInitialByDecisionTreeId.sql" />
+    <EmbeddedResource Include="Scripts\PossibleAnswerGroup\GetById.sql" />
+    <EmbeddedResource Include="Scripts\PossibleAnswer\GetById.sql" />
     <EmbeddedResource Include="Scripts\PossibleAnswer\ListByQuestionId.sql" />
+    <EmbeddedResource Include="Scripts\Question\GetById.sql" />
     <EmbeddedResource Include="Scripts\Question\GetByNodeId.sql" />
     <EmbeddedResource Include="Scripts\UserDTO\UpdatePassword.sql" />
     <EmbeddedResource Include="Scripts\UserDTO\GetByEmailAndPassword.sql" />
@@ -43,10 +59,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\HealthSup.Domain\HealthSup.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Scripts\Doctor\" />
   </ItemGroup>
 
 </Project>

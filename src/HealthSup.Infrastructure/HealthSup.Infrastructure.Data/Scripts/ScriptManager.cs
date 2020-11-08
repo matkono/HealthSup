@@ -12,6 +12,8 @@ namespace HealthSup.Infrastructure.Data.Scripts
             public static class Doctor
             {
                 static readonly string EntityName = $"{nameof(Doctor)}";
+
+                public static readonly string GetById = $"{EntityName}.GetById";
             }
 
             public static class HealthSupAgent
@@ -35,6 +37,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string GetById = $"{EntityName}.GetById";
                 public static readonly string UpdateLastNode = $"{EntityName}.UpdateLastNode";
+                public static readonly string UpdateStatus = $"{EntityName}.UpdateStatus";
             }
 
             public static class Node
@@ -49,6 +52,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
             {
                 static readonly string EntityName = $"{nameof(Question)}";
 
+                public static readonly string GetById = $"{EntityName}.GetById";
                 public static readonly string GetByNodeId = $"{EntityName}.GetByNodeId";
             }
 
@@ -69,6 +73,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
             {
                 static readonly string EntityName = $"{nameof(PossibleAnswer)}";
 
+                public static readonly string GetById = $"{EntityName}.GetById";
                 public static readonly string ListByQuestionId = $"{EntityName}.ListByQuestionId";
             }
 
@@ -77,11 +82,27 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 static readonly string EntityName = $"{nameof(DecisionTreeRule)}";
 
                 public static readonly string GetActionConfirmationQuestionByNodeId = $"{EntityName}.GetActionConfirmationQuestionByNodeId";
+                public static readonly string GetByFromNodeIdAndPossibleAnswerGroupdId = $"{EntityName}.GetByFromNodeIdAndPossibleAnswerGroupdId";
             }
 
-            public static class MedicalAppointmentFlow
+            public static class MedicalAppointmentMovement
             {
-                static readonly string EntityName = $"{nameof(MedicalAppointmentFlow)}";
+                static readonly string EntityName = $"{nameof(MedicalAppointmentMovement)}";
+
+                public static readonly string GetByFromNodeId = $"{EntityName}.GetByFromNodeId";
+                public static readonly string Insert = $"{EntityName}.Insert";
+            }
+
+            public static class PossibleAnswerGroup
+            {
+                static readonly string EntityName = $"{nameof(PossibleAnswerGroup)}";
+
+                public static readonly string GetById = $"{EntityName}.GetById";
+            }
+
+            public static class Answer 
+            {
+                static readonly string EntityName = $"{nameof(Answer)}";
 
                 public static readonly string Insert = $"{EntityName}.Insert";
             }
