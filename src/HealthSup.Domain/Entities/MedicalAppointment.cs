@@ -14,7 +14,7 @@
             Id = id;
             IsDiagnostic = isDiagnostic;
             Patient = patient;
-            LastNode = lastNode;
+            CurrentNode = lastNode;
             Status = status;
         }
 
@@ -28,7 +28,7 @@
 
         public DecisionTree DecisionTree { get; set; }
 
-        public Node? LastNode { get; set; }
+        public Node? CurrentNode { get; set; }
 
         public MedicalAppointmentStatus Status { get; set; }
     }

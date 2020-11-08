@@ -195,7 +195,7 @@ namespace HealthSup.Application.Validators
 
             var question = await _unitOfWork.QuestionRepository.GetById(questionId);
 
-            if (question.Id.Equals(medicalAppointment.LastNode.Id))
+            if (question.Id.Equals(medicalAppointment.CurrentNode.Id))
                 return true;
 
             return false;

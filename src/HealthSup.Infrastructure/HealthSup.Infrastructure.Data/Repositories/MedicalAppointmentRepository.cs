@@ -35,7 +35,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
             {
                 medicalAppointment.Patient = patient;
                 medicalAppointment.DecisionTree = decisionTree;
-                medicalAppointment.LastNode = node;
+                medicalAppointment.CurrentNode = node;
                 medicalAppointment.Status = status;
 
                 return medicalAppointment;
@@ -55,7 +55,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
         public async Task<int> UpdateLastNode
         (
             int id,
-            int lastNodeId
+            int currenteNodeId
         )
         {
             var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.UpdateLastNode);
@@ -63,7 +63,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
             return await UnitOfWork.Connection.ExecuteAsync
             (
                 query,
-                new { id, lastNodeId },
+                new { id, currenteNodeId },
                 UnitOfWork.Transaction
             );
         }
