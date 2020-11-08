@@ -23,5 +23,21 @@ namespace HealthSup.Domain.Repositories
         IHealthSupAgentRepository HealthSupAgentRepository { get; }
 
         IUserRepository UserRepository { get; }
+
+        IMedicalAppointmentRepository MedicalAppointmentRepository { get; }
+
+        INodeRepository NodeRepository { get; }
+
+        IQuestionRepository QuestionRepository { get; }
+
+        IActionRepository ActionRepository { get; }
+
+        IDecisionRepository DecisionRepository { get; }
+
+        IPossibleAnswerRepository PossibleAnswerRepository { get; }
+        
+        IDecisionTreeRuleRepository DecisionTreeRuleRepository { get; }
+
+        IMedicalAppointmentFlowRepository MedicalAppointmentFlowRepository { get; }
     }
 }

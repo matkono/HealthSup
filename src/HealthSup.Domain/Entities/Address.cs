@@ -1,6 +1,6 @@
 ﻿namespace HealthSup.Domain.Entities
 {
-    public class Address: DomainResponse
+    public class Address: BaseEntity
     {
         public Address(
             int id, 

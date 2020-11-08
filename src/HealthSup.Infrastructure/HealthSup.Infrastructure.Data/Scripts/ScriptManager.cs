@@ -28,6 +28,63 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 public static readonly string GetByEmailAndPassword = $"{EntityName}.GetByEmailAndPassword";
                 public static readonly string UpdatePassword = $"{EntityName}.UpdatePassword";
             }
+
+            public static class MedicalAppointment
+            {
+                static readonly string EntityName = $"{nameof(MedicalAppointment)}";
+
+                public static readonly string GetById = $"{EntityName}.GetById";
+                public static readonly string UpdateLastNode = $"{EntityName}.UpdateLastNode";
+            }
+
+            public static class Node
+            {
+                static readonly string EntityName = $"{nameof(Node)}";
+
+                public static readonly string GetInitialByDecisionTreeid = $"{EntityName}.GetInitialByDecisionTreeId";
+                public static readonly string GetById = $"{EntityName}.GetById";
+            }
+
+            public static class Question
+            {
+                static readonly string EntityName = $"{nameof(Question)}";
+
+                public static readonly string GetByNodeId = $"{EntityName}.GetByNodeId";
+            }
+
+            public static class Action
+            {
+                static readonly string EntityName = $"{nameof(Action)}";
+
+                public static readonly string GetByNodeId = $"{EntityName}.GetByNodeId";
+            }
+
+            public static class Decision
+            {
+                static readonly string EntityName = $"{nameof(Decision)}";
+                public static readonly string GetByNodeId = $"{EntityName}.GetByNodeId";
+            }
+
+            public static class PossibleAnswer
+            {
+                static readonly string EntityName = $"{nameof(PossibleAnswer)}";
+
+                public static readonly string ListByQuestionId = $"{EntityName}.ListByQuestionId";
+            }
+
+            public static class DecisionTreeRule
+            {
+                static readonly string EntityName = $"{nameof(DecisionTreeRule)}";
+
+                public static readonly string GetActionConfirmationQuestionByNodeId = $"{EntityName}.GetActionConfirmationQuestionByNodeId";
+            }
+
+            public static class MedicalAppointmentFlow
+            {
+                static readonly string EntityName = $"{nameof(MedicalAppointmentFlow)}";
+
+                public static readonly string Insert = $"{EntityName}.Insert";
+            }
         }
 
         private static Assembly _thisAssemnbly = Assembly.GetExecutingAssembly();
@@ -65,10 +122,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
         private static string CleanQuery(string query)
         {
-            // Removing ALL comments
             query = Regex.Replace(query, @"--(.*)", "", RegexOptions.Multiline);
-
-            // Removing ALL whitespaces (except those inside quotes that must be preserved)
             query = Regex.Replace(query, @"(?<=^([^']| '[^']*')*)\s+", " ");
 
             return query;

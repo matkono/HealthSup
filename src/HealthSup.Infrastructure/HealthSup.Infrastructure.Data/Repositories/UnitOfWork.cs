@@ -19,14 +19,38 @@ namespace HealthSup.Infrastructure.Data.Repositories
         }
 
         private IDoctorRepository _doctorRepository;
-        private IHealthSupAgentRepository _HealthSupAgentRepository;
+        private IHealthSupAgentRepository _healthSupAgentRepository;
         private IUserRepository _userRepository;
+        private IMedicalAppointmentRepository _medicalAppointmentRepository;
+        private INodeRepository _nodeRepository;
+        private IQuestionRepository _questionRepository;
+        private IActionRepository _actionRepository;
+        private IDecisionRepository _decisionRepository;
+        private IPossibleAnswerRepository _possibleAnswerRepository;
+        private IDecisionTreeRuleRepository _decisionTreeRuleRepository;
+        private IMedicalAppointmentFlowRepository _medicalAppointmentFlowRepository;
 
         public IDoctorRepository DoctorRepository => _doctorRepository ??= new DoctorRepository(this);
 
-        public IHealthSupAgentRepository HealthSupAgentRepository => _HealthSupAgentRepository ??= new HealthSupAgentRepository(this);
+        public IHealthSupAgentRepository HealthSupAgentRepository => _healthSupAgentRepository ??= new HealthSupAgentRepository(this);
 
         public IUserRepository UserRepository => _userRepository ??= new UserRepository(this);
+
+        public IMedicalAppointmentRepository MedicalAppointmentRepository => _medicalAppointmentRepository ??= new MedicalAppointmentRepository(this);
+
+        public INodeRepository NodeRepository => _nodeRepository ??= new NodeRepository(this);
+
+        public IQuestionRepository QuestionRepository => _questionRepository ??= new QuestionRepository(this);
+
+        public IActionRepository ActionRepository => _actionRepository ??= new ActionRepository(this);
+
+        public IDecisionRepository DecisionRepository => _decisionRepository ??= new DecisionRepository(this);
+
+        public IPossibleAnswerRepository PossibleAnswerRepository => _possibleAnswerRepository ??= new PossibleAnswerRepository(this);
+
+        public IDecisionTreeRuleRepository DecisionTreeRuleRepository => _decisionTreeRuleRepository ??= new DecisionTreeRuleRepository(this);
+
+        public IMedicalAppointmentFlowRepository MedicalAppointmentFlowRepository => _medicalAppointmentFlowRepository ??= new MedicalAppointmentFlowRepository(this);
 
         public void Begin
         (
