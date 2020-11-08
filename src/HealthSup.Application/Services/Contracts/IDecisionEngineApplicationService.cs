@@ -6,9 +6,9 @@ namespace HealthSup.Application.Services.Contracts
 {
     public interface IDecisionEngineApplicationService
     {
-        public Task<GetNextNodeReturn> GetNextNode
+        public Task<GetNextNodeReturn> AnswerQuestion
         (
-            GetNextNodeRequest argument
+            AnswerQuestionRequest argument
         );
     }
 }

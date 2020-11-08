@@ -27,21 +27,31 @@ namespace HealthSup.Infrastructure.Data.Repositories
         )
         {
             var query = new StringBuilder();
+            
+            var parameters = new DynamicParameters();
 
-            foreach (var answer in answers) 
+            for (var index = 0; index < answers.Count; index ++) 
             {
                 var individualQuery = new StringBuilder();
+
                 individualQuery.Append(ScriptManager.GetByName(ScriptManager.FileNames.Answer.Insert));
-                individualQuery.Replace("@dateAnswered", $"'{answer.Date}'");
-                individualQuery.Replace("@questionId", answer.Question.Id.ToString());
-                individualQuery.Replace("@possibleAnswerId", answer.PossibleAnswer.Id.ToString());
-                individualQuery.Replace("@doctorId", answer.Doctor.Id.ToString());
-                individualQuery.Replace("@medicalAppointmentId", answer.MedicalAppointment.Id.ToString());
+                individualQuery.Replace("@dateAnswered", $"@dateAnswered{index}");
+                individualQuery.Replace("@questionId", $"@questionId{index}");
+                individualQuery.Replace("@possibleAnswerId", $"@possibleAnswerId{index}");
+                individualQuery.Replace("@doctorId", $"@doctorId{index}");
+                individualQuery.Replace("@medicalAppointmentId", $"@medicalAppointmentId{index}");
+
+                parameters.Add($"@dateAnswered{index}", answers[index].Date, DbType.DateTime);
+                parameters.Add($"@questionId{index}", answers[index].Question.Id, DbType.Int32);
+                parameters.Add($"@possibleAnswerId{index}", answers[index].PossibleAnswer.Id, DbType.Int32);
+                parameters.Add($"@doctorId{index}", answers[index].Doctor.Id, DbType.Int32);
+                parameters.Add($"@medicalAppointmentId{index}", answers[index].MedicalAppointment.Id, DbType.Int32);
 
                 query.Append(individualQuery);
             }
 
             return await UnitOfWork.Connection.ExecuteAsync(query.ToString(),
+                                                      parameters,
                                                       UnitOfWork.Transaction);
         }
     }

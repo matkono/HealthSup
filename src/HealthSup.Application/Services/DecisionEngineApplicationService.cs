@@ -17,7 +17,7 @@ namespace HealthSup.Application.Services
         public DecisionEngineApplicationService
         (
             IUnitOfWork unitOfWork,
-            IGetNextNodeValidator getNextNodeValidator,
+            IAnswerQuestionValidator getNextNodeValidator,
             IDecisionEngineDomainService decisionEngineDomainService
         )
         {
@@ -27,12 +27,12 @@ namespace HealthSup.Application.Services
         }
 
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IGetNextNodeValidator _getNextNodeValidator;
+        private readonly IAnswerQuestionValidator _getNextNodeValidator;
         private readonly IDecisionEngineDomainService DecisionEngineService;
 
-        public async Task<GetNextNodeReturn> GetNextNode
+        public async Task<GetNextNodeReturn> AnswerQuestion
         (
-            GetNextNodeRequest argument
+            AnswerQuestionRequest argument
         )
         {
             var result = await  _getNextNodeValidator.ValidateAsync(argument);

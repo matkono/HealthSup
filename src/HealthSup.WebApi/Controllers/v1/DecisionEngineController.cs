@@ -25,14 +25,14 @@ namespace HealthSup.WebApi.Controllers.v1
         IDecisionEngineApplicationService DecisionEngineService { get; set; }
 
         [HttpPost]
-        [Route("nextNode")]
+        [Route("question/answer")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> NextNode
+        public async Task<IActionResult> AnswerQuestion
         (
-            [FromBody]GetNextNodeRequest argument
+            [FromBody]AnswerQuestionRequest argument
         )
         {
-            var response = await DecisionEngineService.GetNextNode(argument);
+            var response = await DecisionEngineService.AnswerQuestion(argument);
 
             if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);

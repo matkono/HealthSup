@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace HealthSup.Application.Validators
 {
-    public class GetNextNodeValidator: AbstractValidator<GetNextNodeRequest>, IGetNextNodeValidator
+    public class AnswerQuestionValidator: AbstractValidator<AnswerQuestionRequest>, IAnswerQuestionValidator
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public GetNextNodeValidator
+        public AnswerQuestionValidator
         (
             IUnitOfWork unitOfWork
         )
@@ -34,16 +34,13 @@ namespace HealthSup.Application.Validators
                 .WithMessage("Medical appointment with id {PropertyValue} is not found.");
             });
 
-            When(x => !x.MedicalAppointmentId.Equals(0) &&
-            BeValidMedicalAppointmentIdAsync(x.MedicalAppointmentId, new CancellationToken()).GetAwaiter().GetResult() &&
-            BeValidMedicalAppointmentIdAsync(x.MedicalAppointmentId, new CancellationToken()).GetAwaiter().GetResult(), () =>
+            WhenAsync((x, cancellationToken) => BeUnfinalizedMedicalAppointment(x.MedicalAppointmentId, cancellationToken), () =>
             {
                 RuleFor(x => x.MedicalAppointmentId)
                 .MustAsync(BeMedicalAppointmentUnfinalizedAsync)
                 .WithErrorCode(((int)ValidationErrorCodeEnum.MedicalAppointmentIsFinalized).ToString())
                 .WithMessage("Medical appointment with id {PropertyValue} is finalized.");
             });
-
 
             #endregion
 
@@ -79,10 +76,7 @@ namespace HealthSup.Application.Validators
                 .WithMessage("Question with id {PropertyValue} is not found.");
             });
 
-            When(x => !x.QuestionId.Equals(0) && 
-            BeValidQuestionIdAsync(x.QuestionId, new CancellationToken()).GetAwaiter().GetResult() &&
-            BeValidMedicalAppointmentIdAsync(x.MedicalAppointmentId, new CancellationToken()).GetAwaiter().GetResult()&&
-            BeMedicalAppointmentUnfinalizedAsync(x.MedicalAppointmentId, new CancellationToken()).GetAwaiter().GetResult(), () =>
+            WhenAsync((x, cancellationToken) => BeCurrenteMedicalAppoinmentNode(x.QuestionId, x.MedicalAppointmentId, cancellationToken), () =>
             {
                 RuleFor(x => x.QuestionId)
                 .MustAsync(async (x, questionId, cancellationToken) => await BeCurrentNode(x.MedicalAppointmentId, questionId))
@@ -194,7 +188,7 @@ namespace HealthSup.Application.Validators
         private async Task<bool> BeCurrentNode
         (
             int medicalAppointmentId,
-            int questionId    
+            int questionId  
         ) 
         {
             var medicalAppointment = await _unitOfWork.MedicalAppointmentRepository.GetById(medicalAppointmentId);
@@ -233,6 +227,30 @@ namespace HealthSup.Application.Validators
                 return true;
 
             return false;
+        }
+
+        private async Task<bool> BeCurrenteMedicalAppoinmentNode
+        (
+            int questionId,
+            int medicalAppointmentId,
+            CancellationToken cancellationToken
+        )
+        {
+            return !questionId.Equals(0) &&
+            await BeValidQuestionIdAsync(questionId, cancellationToken) &&
+            await BeValidMedicalAppointmentIdAsync(medicalAppointmentId, cancellationToken) &&
+            await BeMedicalAppointmentUnfinalizedAsync(medicalAppointmentId, cancellationToken);
+        }
+
+        private async Task<bool> BeUnfinalizedMedicalAppointment
+        (
+            int medicalAppointmentId,
+            CancellationToken cancellationToken
+        ) 
+        {
+            return !medicalAppointmentId.Equals(0) &&
+            await BeValidMedicalAppointmentIdAsync(medicalAppointmentId, cancellationToken) &&
+            await BeValidMedicalAppointmentIdAsync(medicalAppointmentId, cancellationToken);
         }
     }
 }

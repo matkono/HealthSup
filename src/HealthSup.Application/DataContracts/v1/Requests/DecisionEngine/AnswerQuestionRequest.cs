@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HealthSup.Application.DataContracts.v1.Requests.Node
 {
-    public class GetNextNodeRequest
+    public class AnswerQuestionRequest
     {
         public int MedicalAppointmentId { get; set; }
 
