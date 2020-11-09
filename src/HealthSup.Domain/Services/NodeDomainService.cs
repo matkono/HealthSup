@@ -19,7 +19,7 @@ namespace HealthSup.Domain.Services
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public async Task<Node> ResolveByMedicalAppointment
+        public async Task<Node> GetCurrentNode
         (
             MedicalAppointment medicalAppointment
         )

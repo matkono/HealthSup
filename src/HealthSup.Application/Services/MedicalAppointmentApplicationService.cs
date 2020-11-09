@@ -47,7 +47,7 @@ namespace HealthSup.Application.Services
                 return response;
             }
 
-            var node = await NodeService.ResolveByMedicalAppointment(medicalAppointment);
+            var node = await NodeService.GetCurrentNode(medicalAppointment);
 
             if (node is Action action)
             {

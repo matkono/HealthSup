@@ -60,6 +60,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
             {
                 static readonly string EntityName = $"{nameof(Action)}";
 
+                public static readonly string GetById = $"{EntityName}.GetById";
                 public static readonly string GetByNodeId = $"{EntityName}.GetByNodeId";
             }
 

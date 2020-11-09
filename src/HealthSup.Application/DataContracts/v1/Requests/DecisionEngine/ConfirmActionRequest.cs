@@ -3,5 +3,7 @@
     public class ConfirmActionRequest
     {
         public int MedicalAppointmentId { get; set; }
+
+        public int ActionId { get; set; }
     }
 }

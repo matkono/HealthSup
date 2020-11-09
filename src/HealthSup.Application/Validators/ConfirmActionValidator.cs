@@ -3,6 +3,7 @@ using HealthSup.Application.DataContracts.v1.Requests.DecisionEngine;
 using HealthSup.Application.Validators.Contracts;
 using HealthSup.Domain.Enums;
 using HealthSup.Domain.Repositories;
+using Microsoft.VisualBasic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -42,13 +43,30 @@ namespace HealthSup.Application.Validators
                 .WithMessage("Medical appointment with id {PropertyValue} is finalized.");
             });
 
-            WhenAsync(async (x, cancellationToken) => await BeValidMedicalAppointmentIdAsync(x.MedicalAppointmentId, cancellationToken) && 
-            await BeMedicalAppointmentUnfinalizedAsync(x.MedicalAppointmentId, cancellationToken), () =>
+            #endregion
+
+            #region ActionId
+
+            RuleFor(x => x.ActionId)
+               .NotEqual(0)
+               .WithErrorCode(((int)ValidationErrorCodeEnum.ActionIsNull).ToString())
+               .WithMessage("ActionId is required, and cannot be 0, to get next node.");
+
+            When(x => !x.ActionId.Equals(0), () =>
             {
-                RuleFor(x => x.MedicalAppointmentId)
-                .MustAsync(CanConfirmAction)
-                .WithErrorCode(((int)ValidationErrorCodeEnum.MedicalAppointmentCurrentNodeIsNotAction).ToString())
-                .WithMessage("Cannot confirm action because the current node of medical appointment with id {PropertyValue} is not action.");
+                RuleFor(x => x.ActionId)
+                .MustAsync(BeValidActionIdAsync)
+                .WithErrorCode(((int)ValidationErrorCodeEnum.ActionNotFound).ToString())
+                .WithMessage("Action with id {PropertyValue} is not found.");
+            });
+
+            WhenAsync(async (x, cancellationToken) => !x.ActionId.Equals(0) &&
+            await BeValidActionIdAsync(x.ActionId, cancellationToken), () =>
+            {
+                RuleFor(x => x.ActionId)
+                .MustAsync(async (x, actionId, cancellationToken) => await BeMedicalAppointmentCurrentNode(x.MedicalAppointmentId, actionId, cancellationToken))
+                .WithErrorCode(((int)ValidationErrorCodeEnum.ActionNotFound).ToString())
+                .WithMessage(x => string.Concat("Action with id {PropertyValue} is not the current node of Medical Appoint", $" with id {x.MedicalAppointmentId}, so cannot be confirmed."));
             });
 
             #endregion
@@ -82,38 +100,32 @@ namespace HealthSup.Application.Validators
             return false;
         }
 
-        private async Task<bool> MedicalAppointmentExistOnDataBase
+        private async Task<bool> BeValidActionIdAsync
         (
-            int medicalAppointmentId,
+            int actionId,
             CancellationToken cancellationToken
         )
         {
-            return !medicalAppointmentId.Equals(0) &&
-            await BeValidMedicalAppointmentIdAsync(medicalAppointmentId, cancellationToken);
+            var action = await _unitOfWork.ActionRepository.GetById(actionId);
+
+            if (action != null)
+                return true;
+
+            return false;
         }
 
-        private async Task<bool> BeValidMedicalAppointment
+        private async Task<bool> BeMedicalAppointmentCurrentNode
         (
             int medicalAppointmentId,
+            int actionId,
             CancellationToken cancellationToken
         )
-        {
-            return !medicalAppointmentId.Equals(0) &&
-            await BeValidMedicalAppointmentIdAsync(medicalAppointmentId, cancellationToken) &&
-            await MedicalAppointmentExistOnDataBase(medicalAppointmentId, cancellationToken);
-        }
-
-        private async Task<bool> CanConfirmAction
-        (
-            int medicalAppointmentId,
-            CancellationToken cancellationToken
-        ) 
         {
             var medicalAppointment = await _unitOfWork.MedicalAppointmentRepository.GetById(medicalAppointmentId);
 
-            var node = await _unitOfWork.NodeRepository.GetById(medicalAppointment.CurrentNode.Id);
+            var action = await _unitOfWork.ActionRepository.GetById(actionId);
 
-            if (node.NodeType.Id.Equals((int)NodeTypeEnum.Action))
+            if (medicalAppointment.CurrentNode.Id.Equals(action))
                 return true;
 
             return false;

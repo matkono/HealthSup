@@ -19,6 +19,35 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
         private IUnitOfWork UnitOfWork { get; }
 
+        public async Task<Action> GetById
+        (
+            int id
+        )
+        {
+            Action MapFromQuery
+            (
+                Action action,
+                NodeType nodeType,
+                DecisionTree decisionTree
+            )
+            {
+                action.SetNodeType(nodeType);
+                action.SetDecisionTree(decisionTree);
+
+                return action;
+            };
+
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.Action.GetById);
+
+            var result = await UnitOfWork.Connection.QueryAsync<Action, NodeType, DecisionTree, Action>(
+                                                                query,
+                                                                MapFromQuery,
+                                                                new { id },
+                                                                UnitOfWork.Transaction);
+
+            return result.FirstOrDefault();
+        }
+
         public async Task<Action> GetByNodeId
         (
             int nodeId

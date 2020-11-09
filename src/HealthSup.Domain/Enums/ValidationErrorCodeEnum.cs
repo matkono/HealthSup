@@ -47,5 +47,13 @@
         PossibleAnswerIsEmpty = 601,
 
         #endregion
+
+        #region Action
+
+        ActionIsNull = 700,
+        ActionNotFound = 701,
+        ActionIsNotCurrentNode = 702,
+
+        #endregion
     }
 }

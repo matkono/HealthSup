@@ -80,8 +80,8 @@ namespace HealthSup.Application.Validators
             {
                 RuleFor(x => x.QuestionId)
                 .MustAsync(async (x, questionId, cancellationToken) => await BeCurrentNode(x.MedicalAppointmentId, questionId))
-                .WithErrorCode(((int)ValidationErrorCodeEnum.QuestionIsNotCurrentNode).ToString())
-                .WithMessage("Question with id {PropertyValue} is not the current node of Medical Appoint, so cannot be answered.");
+                .WithErrorCode(((int)ValidationErrorCodeEnum.ActionIsNotCurrentNode).ToString())
+                .WithMessage(x => string.Concat("Question with id {PropertyValue} is not the current node of Medical Appoint", $" with id {x.MedicalAppointmentId}, so cannot be answered."));
             });
 
             #endregion
