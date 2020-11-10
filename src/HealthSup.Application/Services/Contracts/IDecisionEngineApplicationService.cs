@@ -17,5 +17,10 @@ namespace HealthSup.Application.Services.Contracts
         (
             ConfirmActionRequest argument
         );
+
+        public Task<GetPreviousNodeReturn> GetPreviousNode
+        (
+            GetPreviousNodeRequest argument
+        );
     }
 }

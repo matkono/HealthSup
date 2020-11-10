@@ -112,5 +112,31 @@ namespace HealthSup.Application.Services
 
             return response;
         }
+
+        public async Task<GetPreviousNodeReturn> GetPreviousNode
+        (
+            GetPreviousNodeRequest argument
+        )
+        {
+            var node = await DecisionEngineService.ResolvePreviousNode
+            (
+                argument.MedicalAppointmentId,
+                argument.CurrentNodeId
+            );
+
+            if (node is Action action)
+            {
+                return new GetPreviousNodeReturn(action.ToDataContract());
+            }
+            else if (node is Question question)
+            {
+                return new GetPreviousNodeReturn(question.ToDataContract());
+            }
+            else
+            {
+                var decision = node as Decision;
+                return new GetPreviousNodeReturn(decision.ToDataContract());
+            }
+        }
     }
 }
