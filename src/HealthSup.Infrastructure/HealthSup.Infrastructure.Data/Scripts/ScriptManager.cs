@@ -84,6 +84,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string GetActionConfirmationQuestionByNodeId = $"{EntityName}.GetActionConfirmationQuestionByNodeId";
                 public static readonly string GetByFromNodeIdAndPossibleAnswerGroupdId = $"{EntityName}.GetByFromNodeIdAndPossibleAnswerGroupdId";
+                public static readonly string GetByToNodeId = $"{EntityName}.GetByToNodeId";
             }
 
             public static class MedicalAppointmentMovement
