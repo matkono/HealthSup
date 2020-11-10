@@ -80,9 +80,9 @@ namespace HealthSup.Domain.Services
             var rule = await _unitOfWork.DecisionTreeRuleRepository.GetByToNodeIdAsync(nodeId);
             var previousNode = await _unitOfWork.NodeRepository.GetById(rule.FromNode.Id);
 
-            if (currentNode.NodeType.Equals((int)NodeTypeEnum.Question)) 
+            if (previousNode.NodeType.Id.Equals((int)NodeTypeEnum.Question)) 
             {
-                var question = await _unitOfWork.QuestionRepository.GetByNodeId(currentNode.Id);
+                var question = await _unitOfWork.QuestionRepository.GetByNodeId(previousNode.Id);
                 var answers = await _unitOfWork.AnswerRepository.ListByQuestionId(question.Id);
                 await _unitOfWork.AnswerRepository.DeleteMany(answers);
             }

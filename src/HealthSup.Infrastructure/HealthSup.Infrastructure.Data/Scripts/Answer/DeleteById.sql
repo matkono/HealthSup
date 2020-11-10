@@ -1,4 +1,4 @@
 ﻿DELETE FROM
 	Answer
 WHERE
-	id = @id
+	id = @id;
