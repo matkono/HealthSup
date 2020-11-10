@@ -103,5 +103,17 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
             return result.FirstOrDefault();
         }
+
+        public async Task<int> DeleteById
+        (
+            int id
+        )
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointmentMovement.DeleteById);
+
+            return await UnitOfWork.Connection.ExecuteAsync(query,
+                                                      new { id },
+                                                      UnitOfWork.Transaction);
+        }
     }
 }

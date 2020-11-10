@@ -19,5 +19,10 @@ namespace HealthSup.Domain.Repositories
         (
             int toNodeId
         );
+
+        public Task<int> DeleteById
+        (
+            int id
+        );
     }
 }
