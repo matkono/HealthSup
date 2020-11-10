@@ -88,5 +88,31 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
             return result.ToList();
         }
+
+        public async Task<int> DeleteMany
+        (
+            List<Answer> deleteList
+        )
+        {
+            var query = new StringBuilder();
+
+            var parameters = new DynamicParameters();
+
+            for (var index = 0; index < deleteList.Count; index++)
+            {
+                var individualQuery = new StringBuilder();
+
+                individualQuery.Append(ScriptManager.GetByName(ScriptManager.FileNames.Answer.DeleteById));
+                individualQuery.Replace("@id", $"@id{index}");
+
+                parameters.Add($"@id{index}", deleteList[index].Id, DbType.Int32);
+
+                query.Append(individualQuery);
+            }
+
+            return await UnitOfWork.Connection.ExecuteAsync(query.ToString(),
+                                                      parameters,
+                                                      UnitOfWork.Transaction);
+        }
     }
 }

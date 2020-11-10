@@ -15,5 +15,10 @@ namespace HealthSup.Domain.Repositories
         (
             int questionId
         );
+
+        public Task<int> DeleteMany
+        (
+            List<Answer> deleteList
+        );
     }
 }
