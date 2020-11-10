@@ -56,5 +56,21 @@ namespace HealthSup.WebApi.Controllers.v1
 
             return NoContent();
         }
+
+        [HttpPost]
+        [Route("node/previous")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetPreviousNode
+        (
+            [FromBody]GetPreviousNodeRequest argument
+        )
+        {
+            var response = await DecisionEngineService.GetPreviousNode(argument);
+
+            if (response.Errors != null && response.Errors.Any())
+                return BadRequest(response);
+
+            return Ok(response);
+        }
     }
 }
