@@ -109,6 +109,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 static readonly string EntityName = $"{nameof(Answer)}";
 
                 public static readonly string Insert = $"{EntityName}.Insert";
+                public static readonly string ListByQuestionId = $"{EntityName}.ListByQuestionId";
             }
         }
 

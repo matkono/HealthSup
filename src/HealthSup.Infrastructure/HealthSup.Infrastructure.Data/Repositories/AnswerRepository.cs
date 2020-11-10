@@ -4,6 +4,7 @@ using HealthSup.Domain.Repositories;
 using HealthSup.Infrastructure.Data.Scripts;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,6 +54,39 @@ namespace HealthSup.Infrastructure.Data.Repositories
             return await UnitOfWork.Connection.ExecuteAsync(query.ToString(),
                                                       parameters,
                                                       UnitOfWork.Transaction);
+        }
+
+        public async Task<List<Answer>> ListByQuestionId
+        (
+            int questionId
+        )
+        {
+            Answer MapFromQuery
+            (
+                Answer answer,
+                Question question,
+                PossibleAnswer possibleAnswer,
+                Doctor doctor, 
+                MedicalAppointment medicalAppointment
+            )
+            {
+                answer.Question = question;
+                answer.PossibleAnswer = possibleAnswer;
+                answer.Doctor = doctor;
+                answer.MedicalAppointment = medicalAppointment;
+
+                return answer;
+            };
+
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.Answer.ListByQuestionId);
+
+            var result = await UnitOfWork.Connection.QueryAsync<Answer, Question, PossibleAnswer, Doctor, MedicalAppointment, Answer>(
+                                                                query,
+                                                                MapFromQuery,
+                                                                new { questionId },
+                                                                UnitOfWork.Transaction);
+
+            return result.ToList();
         }
     }
 }

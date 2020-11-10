@@ -8,6 +8,7 @@
     <None Remove="Scripts\Action\GetById.sql" />
     <None Remove="Scripts\Action\GetByNodeId.sql" />
     <None Remove="Scripts\Answer\Insert.sql" />
+    <None Remove="Scripts\Answer\ListByQuestionId.sql" />
     <None Remove="Scripts\DecisionTreeRule\GetActionConfirmationQuestionByNodeId.sql" />
     <None Remove="Scripts\DecisionTreeRule\GetByFromNodeIdAndPossibleAnswerGroupdId.sql" />
     <None Remove="Scripts\DecisionTreeRule\GetByToNodeId.sql" />
@@ -36,6 +37,7 @@
     <EmbeddedResource Include="Scripts\Action\GetById.sql" />
     <EmbeddedResource Include="Scripts\Action\GetByNodeId.sql" />
     <EmbeddedResource Include="Scripts\Answer\Insert.sql" />
+    <EmbeddedResource Include="Scripts\Answer\ListByQuestionId.sql" />
     <EmbeddedResource Include="Scripts\DecisionTreeRule\GetActionConfirmationQuestionByNodeId.sql" />
     <EmbeddedResource Include="Scripts\DecisionTreeRule\GetByFromNodeIdAndPossibleAnswerGroupdId.sql" />
     <EmbeddedResource Include="Scripts\DecisionTreeRule\GetByToNodeId.sql" />
