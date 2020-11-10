@@ -3,7 +3,6 @@ using HealthSup.Application.DataContracts.v1.Requests.DecisionEngine;
 using HealthSup.Application.Validators.Contracts;
 using HealthSup.Domain.Enums;
 using HealthSup.Domain.Repositories;
-using Microsoft.VisualBasic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -125,7 +124,7 @@ namespace HealthSup.Application.Validators
 
             var action = await _unitOfWork.ActionRepository.GetById(actionId);
 
-            if (medicalAppointment.CurrentNode.Id.Equals(action))
+            if (medicalAppointment.CurrentNode.Id.Equals(action.Id))
                 return true;
 
             return false;
