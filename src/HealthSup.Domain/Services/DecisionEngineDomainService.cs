@@ -77,7 +77,7 @@ namespace HealthSup.Domain.Services
         )
         {
             var currentNode = await _unitOfWork.NodeRepository.GetById(nodeId);
-            var rule = await _unitOfWork.DecisionTreeRuleRepository.GetByToNodeIdAsync(nodeId);
+            var rule = await _unitOfWork.DecisionTreeRuleRepository.GetByToNodeIdAsync(currentNode.Id);
             var previousNode = await _unitOfWork.NodeRepository.GetById(rule.FromNode.Id);
 
             if (previousNode.NodeType.Id.Equals((int)NodeTypeEnum.Question)) 
@@ -87,7 +87,7 @@ namespace HealthSup.Domain.Services
                 await _unitOfWork.AnswerRepository.DeleteMany(answers);
             }
 
-            var medicalAppointmentMovement = await _unitOfWork.MedicalAppointmentMovementRepository.GetByToNodeId(nodeId);
+            var medicalAppointmentMovement = await _unitOfWork.MedicalAppointmentMovementRepository.GetByToNodeId(currentNode.Id);
             await _unitOfWork.MedicalAppointmentMovementRepository.DeleteById(medicalAppointmentMovement.Id);
 
             await _unitOfWork.MedicalAppointmentRepository.UpdateLastNode(medicalAppointmentId, previousNode.Id);
