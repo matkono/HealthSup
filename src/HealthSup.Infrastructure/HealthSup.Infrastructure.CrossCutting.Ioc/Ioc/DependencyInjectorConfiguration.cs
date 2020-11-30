@@ -40,6 +40,7 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
             services.AddScoped<IAnswerQuestionValidator, AnswerQuestionValidator>();
             services.AddScoped<IConfirmActionValidator, ConfirmActionValidator>();
             services.AddScoped<IGetPreviousNodeValidator, GetPreviousNodeValidator>();
+            services.AddScoped<IConfirmDecisionValidator, ConfirmDecisionValidator>();
 
             #endregion
 

@@ -62,11 +62,6 @@ namespace HealthSup.Domain.Services
 
             var node = await _unitOfWork.NodeRepository.GetById(decisionTreeRule.ToNode.Id);
 
-            if (node.NodeType.Id.Equals((int)NodeTypeEnum.Decision)) 
-            {
-                await _unitOfWork.MedicalAppointmentRepository.UpdateStatus(medicalAppointment.Id, (int)MedicalAppointmentStatusEnum.Finalized);
-            }
-
             return await LoadNodeDetails(node.Id, node.NodeType.Id);
         }
 
@@ -113,6 +108,14 @@ namespace HealthSup.Domain.Services
                 MedicalAppointment = medicalAppointment
             };
             await _unitOfWork.MedicalAppointmentMovementRepository.InsetMovement(medicalAppointmentMoviment);
+        }
+
+        public async Task ConfirmDecision
+        (
+            int medicalAppointmentId
+        )
+        {
+            await _unitOfWork.MedicalAppointmentRepository.UpdateStatus(medicalAppointmentId, (int)MedicalAppointmentStatusEnum.Finalized);
         }
 
         private async Task<Node> LoadNodeDetails
