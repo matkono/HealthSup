@@ -28,7 +28,7 @@ namespace HealthSup.WebApi.Controllers.v1
         IMedicalAppointmentApplicationService MedicalAppointmentService { get; set; }
 
         [HttpGet]
-        [Route("medicalAppointment/{medicalAppointmentId}/currentNode")]
+        [Route("{medicalAppointmentId}/currentNode")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> ListLastNode
         (

@@ -21,18 +21,21 @@ namespace HealthSup.Application.Services
             IUnitOfWork unitOfWork,
             IAnswerQuestionValidator answerQuestionValidator,
             IConfirmActionValidator confirmActionValidator,
-            IDecisionEngineDomainService decisionEngineDomainService
+            IDecisionEngineDomainService decisionEngineDomainService,
+            IGetPreviousNodeValidator getPreviousNodeValidator
         )
         {
             _unitOfWork = unitOfWork;
             AnswerQuestionValidator = answerQuestionValidator;
             ConfirmActionValidator = confirmActionValidator;
+            GetPreviousNodeValidator = getPreviousNodeValidator;
             DecisionEngineService = decisionEngineDomainService ?? throw new ArgumentNullException(nameof(decisionEngineDomainService));
         }
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAnswerQuestionValidator AnswerQuestionValidator;
         private readonly IConfirmActionValidator ConfirmActionValidator;
+        private readonly IGetPreviousNodeValidator GetPreviousNodeValidator;
         private readonly IDecisionEngineDomainService DecisionEngineService;
 
         public async Task<GetNextNodeReturn> AnswerQuestion
@@ -118,6 +121,25 @@ namespace HealthSup.Application.Services
             GetPreviousNodeRequest argument
         )
         {
+            var resultValidator = await GetPreviousNodeValidator.ValidateAsync(argument);
+
+            if (!resultValidator.IsValid)
+            {
+                var response = new GetPreviousNodeReturn(null);
+
+                foreach (var error in resultValidator.Errors)
+                {
+                    response.AddError
+                    (
+                        Int32.Parse(error.ErrorCode),
+                        error.ErrorMessage,
+                        error.PropertyName
+                    );
+                }
+
+                return response;
+            }
+
             var node = await DecisionEngineService.ResolvePreviousNode
             (
                 argument.MedicalAppointmentId,
