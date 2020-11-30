@@ -13,6 +13,7 @@
     <None Remove="Scripts\DecisionTreeRule\GetActionConfirmationQuestionByNodeId.sql" />
     <None Remove="Scripts\DecisionTreeRule\GetByFromNodeIdAndPossibleAnswerGroupdId.sql" />
     <None Remove="Scripts\DecisionTreeRule\GetByToNodeId.sql" />
+    <None Remove="Scripts\Decision\GetById.sql" />
     <None Remove="Scripts\Decision\GetByNodeId.sql" />
     <None Remove="Scripts\Doctor\GetById.sql" />
     <None Remove="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
@@ -43,6 +44,7 @@
     <EmbeddedResource Include="Scripts\DecisionTreeRule\GetActionConfirmationQuestionByNodeId.sql" />
     <EmbeddedResource Include="Scripts\DecisionTreeRule\GetByFromNodeIdAndPossibleAnswerGroupdId.sql" />
     <EmbeddedResource Include="Scripts\DecisionTreeRule\GetByToNodeId.sql" />
+    <EmbeddedResource Include="Scripts\Decision\GetById.sql" />
     <EmbeddedResource Include="Scripts\Decision\GetByNodeId.sql" />
     <EmbeddedResource Include="Scripts\Doctor\GetById.sql" />
     <EmbeddedResource Include="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />

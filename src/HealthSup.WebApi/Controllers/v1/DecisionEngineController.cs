@@ -26,7 +26,7 @@ namespace HealthSup.WebApi.Controllers.v1
         IDecisionEngineApplicationService DecisionEngineService { get; set; }
 
         [HttpPost]
-        [Route("question/answer")]
+        [Route("node/question/answer")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> AnswerQuestion
         (
@@ -42,7 +42,7 @@ namespace HealthSup.WebApi.Controllers.v1
         }
 
         [HttpPost]
-        [Route("action/confirm")]
+        [Route("node/action/confirm")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> ConfirmAction
         (
@@ -71,6 +71,22 @@ namespace HealthSup.WebApi.Controllers.v1
                 return BadRequest(response);
 
             return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("node/decision/confirm")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> ConfirmDecision
+        (
+            [FromBody]ConfirmDecisionRequest argument
+        )
+        {
+            var response = await DecisionEngineService.ConfirmDecision(argument);
+
+            if (response.Errors != null && response.Errors.Any())
+                return BadRequest(response);
+
+            return NoContent();
         }
     }
 }

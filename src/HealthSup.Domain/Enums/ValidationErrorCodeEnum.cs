@@ -63,5 +63,13 @@
         NodeIdIsNotCurrentNode = 802,
 
         #endregion
+
+        #region Decision
+
+        DecisionIsNull = 900,
+        DecisionNotFound = 901,
+        DecisionIsNotCurrentNode = 902,
+
+        #endregion
     }
 }

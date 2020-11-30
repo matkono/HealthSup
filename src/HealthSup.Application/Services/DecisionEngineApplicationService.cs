@@ -22,13 +22,15 @@ namespace HealthSup.Application.Services
             IAnswerQuestionValidator answerQuestionValidator,
             IConfirmActionValidator confirmActionValidator,
             IDecisionEngineDomainService decisionEngineDomainService,
-            IGetPreviousNodeValidator getPreviousNodeValidator
+            IGetPreviousNodeValidator getPreviousNodeValidator,
+            IConfirmDecisionValidator confirmDecisionValidator
         )
         {
             _unitOfWork = unitOfWork;
             AnswerQuestionValidator = answerQuestionValidator;
             ConfirmActionValidator = confirmActionValidator;
             GetPreviousNodeValidator = getPreviousNodeValidator;
+            ConfirmDecisionValidator = confirmDecisionValidator;
             DecisionEngineService = decisionEngineDomainService ?? throw new ArgumentNullException(nameof(decisionEngineDomainService));
         }
 
@@ -36,6 +38,7 @@ namespace HealthSup.Application.Services
         private readonly IAnswerQuestionValidator AnswerQuestionValidator;
         private readonly IConfirmActionValidator ConfirmActionValidator;
         private readonly IGetPreviousNodeValidator GetPreviousNodeValidator;
+        private readonly IConfirmDecisionValidator ConfirmDecisionValidator;
         private readonly IDecisionEngineDomainService DecisionEngineService;
 
         public async Task<GetNextNodeReturn> AnswerQuestion
@@ -112,6 +115,35 @@ namespace HealthSup.Application.Services
             }
 
             await DecisionEngineService.ConfirmAction(argument.MedicalAppointmentId);
+
+            return response;
+        }
+
+        public async Task<BaseResponse> ConfirmDecision
+        (
+            ConfirmDecisionRequest argument    
+        ) 
+        {
+            var response = new BaseResponse();
+
+            var resultValidator = await ConfirmDecisionValidator.ValidateAsync(argument);
+
+            if (!resultValidator.IsValid)
+            {
+                foreach (var error in resultValidator.Errors)
+                {
+                    response.AddError
+                    (
+                        Int32.Parse(error.ErrorCode),
+                        error.ErrorMessage,
+                        error.PropertyName
+                    );
+                }
+
+                return response;
+            }
+
+            await DecisionEngineService.ConfirmDecision(argument.MedicalAppointmentId);
 
             return response;
         }

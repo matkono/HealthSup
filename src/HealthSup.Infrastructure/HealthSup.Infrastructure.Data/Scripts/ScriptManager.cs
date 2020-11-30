@@ -67,6 +67,8 @@ namespace HealthSup.Infrastructure.Data.Scripts
             public static class Decision
             {
                 static readonly string EntityName = $"{nameof(Decision)}";
+
+                public static readonly string GetById = $"{EntityName}.GetById";
                 public static readonly string GetByNodeId = $"{EntityName}.GetByNodeId";
             }
 
