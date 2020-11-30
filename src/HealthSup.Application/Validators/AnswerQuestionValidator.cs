@@ -76,7 +76,7 @@ namespace HealthSup.Application.Validators
                 .WithMessage("Question with id {PropertyValue} is not found.");
             });
 
-            WhenAsync((x, cancellationToken) => BeCurrenteMedicalAppoinmentNode(x.QuestionId, x.MedicalAppointmentId, cancellationToken), () =>
+            WhenAsync((x, cancellationToken) => BeValidQuestionIdAndMedicalAppoinment(x.QuestionId, x.MedicalAppointmentId, cancellationToken), () =>
             {
                 RuleFor(x => x.QuestionId)
                 .MustAsync(async (x, questionId, cancellationToken) => await BeCurrentNode(x.MedicalAppointmentId, questionId))
@@ -229,7 +229,7 @@ namespace HealthSup.Application.Validators
             return false;
         }
 
-        private async Task<bool> BeCurrenteMedicalAppoinmentNode
+        private async Task<bool> BeValidQuestionIdAndMedicalAppoinment
         (
             int questionId,
             int medicalAppointmentId,

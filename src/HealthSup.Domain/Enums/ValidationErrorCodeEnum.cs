@@ -55,5 +55,13 @@
         ActionIsNotCurrentNode = 702,
 
         #endregion
+
+        #region Node
+
+        NodeIdIsNull = 800,
+        NodeIdIsNotFound = 801,
+        NodeIdIsNotCurrentNode = 802,
+
+        #endregion
     }
 }

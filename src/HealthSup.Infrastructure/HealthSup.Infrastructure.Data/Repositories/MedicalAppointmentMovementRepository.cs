@@ -70,5 +70,50 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
             return result.FirstOrDefault();
         }
+
+        public async Task<MedicalAppointmentMovement> GetByToNodeId
+        (
+            int toNodeId
+        )
+        {
+            MedicalAppointmentMovement MapFromQuery
+            (
+                MedicalAppointmentMovement medicalAppointmentMovement,
+                Node fromNode,
+                Node toNode,
+                MedicalAppointment medicalAppointment
+            )
+            {
+                medicalAppointmentMovement.FromNode = fromNode;
+
+                medicalAppointmentMovement.ToNode = toNode;
+
+                medicalAppointmentMovement.MedicalAppointment = medicalAppointment;
+
+                return medicalAppointmentMovement;
+            };
+
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointmentMovement.GetByToNodeId);
+
+            var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointmentMovement, Node, Node, MedicalAppointment, MedicalAppointmentMovement>(
+                                                                query,
+                                                                MapFromQuery,
+                                                                new { toNodeId },
+                                                                UnitOfWork.Transaction);
+
+            return result.FirstOrDefault();
+        }
+
+        public async Task<int> DeleteById
+        (
+            int id
+        )
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointmentMovement.DeleteById);
+
+            return await UnitOfWork.Connection.ExecuteAsync(query,
+                                                      new { id },
+                                                      UnitOfWork.Transaction);
+        }
     }
 }

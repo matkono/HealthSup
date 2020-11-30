@@ -84,6 +84,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string GetActionConfirmationQuestionByNodeId = $"{EntityName}.GetActionConfirmationQuestionByNodeId";
                 public static readonly string GetByFromNodeIdAndPossibleAnswerGroupdId = $"{EntityName}.GetByFromNodeIdAndPossibleAnswerGroupdId";
+                public static readonly string GetByToNodeId = $"{EntityName}.GetByToNodeId";
             }
 
             public static class MedicalAppointmentMovement
@@ -92,6 +93,8 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string GetByFromNodeId = $"{EntityName}.GetByFromNodeId";
                 public static readonly string Insert = $"{EntityName}.Insert";
+                public static readonly string GetByToNodeId = $"{EntityName}.GetByToNodeId";
+                public static readonly string DeleteById = $"{EntityName}.DeleteById";
             }
 
             public static class PossibleAnswerGroup
@@ -106,6 +109,8 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 static readonly string EntityName = $"{nameof(Answer)}";
 
                 public static readonly string Insert = $"{EntityName}.Insert";
+                public static readonly string ListByQuestionId = $"{EntityName}.ListByQuestionId";
+                public static readonly string DeleteById = $"{EntityName}.DeleteById";
             }
         }
 

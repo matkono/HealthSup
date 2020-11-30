@@ -14,5 +14,15 @@ namespace HealthSup.Domain.Repositories
         (
             int fromNodeId
         );
+
+        public Task<MedicalAppointmentMovement> GetByToNodeId
+        (
+            int toNodeId
+        );
+
+        public Task<int> DeleteById
+        (
+            int id
+        );
     }
 }

@@ -17,6 +17,12 @@ namespace HealthSup.Domain.Services.Contracts
             List<int> PossibleAnswersId
         );
 
+        Task<Node> ResolvePreviousNode
+        (
+            int medicalAppointmentId,
+            int nodeId
+        );
+
         Task ConfirmAction
         (
             int medicalAppointmentId
