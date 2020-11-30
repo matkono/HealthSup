@@ -1,4 +1,6 @@
-﻿using HealthSup.Application.DataContracts.v1.Requests.Node;
+﻿using HealthSup.Application.DataContracts.Responses;
+using HealthSup.Application.DataContracts.v1.Requests.DecisionEngine;
+using HealthSup.Application.DataContracts.v1.Requests.Node;
 using HealthSup.Application.DataContracts.v1.Responses.Node;
 using HealthSup.Application.Mappers;
 using HealthSup.Application.Services.Contracts;
@@ -17,17 +19,20 @@ namespace HealthSup.Application.Services
         public DecisionEngineApplicationService
         (
             IUnitOfWork unitOfWork,
-            IAnswerQuestionValidator getNextNodeValidator,
+            IAnswerQuestionValidator answerQuestionValidator,
+            IConfirmActionValidator confirmActionValidator,
             IDecisionEngineDomainService decisionEngineDomainService
         )
         {
             _unitOfWork = unitOfWork;
-            _getNextNodeValidator = getNextNodeValidator;
+            AnswerQuestionValidator = answerQuestionValidator;
+            ConfirmActionValidator = confirmActionValidator;
             DecisionEngineService = decisionEngineDomainService ?? throw new ArgumentNullException(nameof(decisionEngineDomainService));
         }
 
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IAnswerQuestionValidator _getNextNodeValidator;
+        private readonly IAnswerQuestionValidator AnswerQuestionValidator;
+        private readonly IConfirmActionValidator ConfirmActionValidator;
         private readonly IDecisionEngineDomainService DecisionEngineService;
 
         public async Task<GetNextNodeReturn> AnswerQuestion
@@ -35,13 +40,13 @@ namespace HealthSup.Application.Services
             AnswerQuestionRequest argument
         )
         {
-            var result = await  _getNextNodeValidator.ValidateAsync(argument);
+            var resultValidator = await AnswerQuestionValidator.ValidateAsync(argument);
 
-            if (!result.IsValid)
+            if (!resultValidator.IsValid)
             {
                 var response = new GetNextNodeReturn(null);
 
-                foreach (var error in result.Errors)
+                foreach (var error in resultValidator.Errors)
                 {
                     response.AddError
                     (
@@ -77,6 +82,35 @@ namespace HealthSup.Application.Services
                 var decision = node as Decision;
                 return new GetNextNodeReturn(decision.ToDataContract());
             }
+        }
+
+        public async Task<BaseResponse> ConfirmAction
+        (
+            ConfirmActionRequest argument
+        )
+        {
+            var response = new BaseResponse();
+
+            var resultValidator = await ConfirmActionValidator.ValidateAsync(argument);
+
+            if (!resultValidator.IsValid)
+            {
+                foreach (var error in resultValidator.Errors)
+                {
+                    response.AddError
+                    (
+                        Int32.Parse(error.ErrorCode),
+                        error.ErrorMessage,
+                        error.PropertyName
+                    );
+                }
+
+                return response;
+            }
+
+            await DecisionEngineService.ConfirmAction(argument.MedicalAppointmentId);
+
+            return response;
         }
     }
 }

@@ -16,5 +16,10 @@ namespace HealthSup.Domain.Services.Contracts
             DateTime date,
             List<int> PossibleAnswersId
         );
+
+        Task ConfirmAction
+        (
+            int medicalAppointmentId
+        );
     }
 }

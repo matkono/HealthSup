@@ -70,6 +70,26 @@ namespace HealthSup.Domain.Services
             return await LoadNodeDetails(node.Id, node.NodeType.Id);
         }
 
+        public async Task ConfirmAction
+        (
+            int medicalAppointmentId
+        )
+        {
+            var medicalAppointment = await _unitOfWork.MedicalAppointmentRepository.GetById(medicalAppointmentId);
+
+            var decisionTreeRule = await _unitOfWork.DecisionTreeRuleRepository.GetActionConfirmationQuestionByNodeId(medicalAppointment.CurrentNode.Id);
+
+            var node = await _unitOfWork.NodeRepository.GetById(decisionTreeRule.ToNode.Id);
+            await _unitOfWork.MedicalAppointmentRepository.UpdateLastNode(medicalAppointment.Id, node.Id);
+            var medicalAppointmentMoviment = new MedicalAppointmentMovement()
+            {
+                FromNode = decisionTreeRule.FromNode,
+                ToNode = decisionTreeRule.ToNode,
+                MedicalAppointment = medicalAppointment
+            };
+            await _unitOfWork.MedicalAppointmentMovementRepository.InsetMovement(medicalAppointmentMoviment);
+        }
+
         private async Task<Node> LoadNodeDetails
         (
             int nodeId,

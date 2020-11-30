@@ -1,5 +1,5 @@
 ﻿UPDATE MedicalAppointment
 SET 
-	lastNodeId = @lastNodeId
+	currentNodeId = @currenteNodeId
 WHERE
 	id = @id

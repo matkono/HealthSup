@@ -1,4 +1,5 @@
-﻿using HealthSup.Application.DataContracts.v1.Requests.Node;
+﻿using HealthSup.Application.DataContracts.v1.Requests.DecisionEngine;
+using HealthSup.Application.DataContracts.v1.Requests.Node;
 using HealthSup.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -38,6 +39,22 @@ namespace HealthSup.WebApi.Controllers.v1
                 return BadRequest(response);
 
             return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("action/confirm")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> ConfirmAction
+        (
+            [FromBody]ConfirmActionRequest argument
+        )
+        {
+            var response = await DecisionEngineService.ConfirmAction(argument);
+
+            if (response.Errors != null && response.Errors.Any())
+                return BadRequest(response);
+
+            return NoContent();
         }
     }
 }

@@ -14,6 +14,7 @@
         MedicalAppointmentIdIsNull = 200,
         MedicalAppointNotFound = 201,
         MedicalAppointmentIsFinalized = 202,
+        MedicalAppointmentCurrentNodeIsNotAction = 203,
 
         #endregion
 
@@ -44,6 +45,14 @@
 
         PossibleAnswerIsNull = 600,
         PossibleAnswerIsEmpty = 601,
+
+        #endregion
+
+        #region Action
+
+        ActionIsNull = 700,
+        ActionNotFound = 701,
+        ActionIsNotCurrentNode = 702,
 
         #endregion
     }

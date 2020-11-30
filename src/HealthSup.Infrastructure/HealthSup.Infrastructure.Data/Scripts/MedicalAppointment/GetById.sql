@@ -3,7 +3,7 @@
 	ma.isDiagnostic,
 	p.id,
 	dt.id,
-	ma.lastNodeId as id,
+	ma.currentNodeId as id,
 	ma.medicalAppointmentStatusId as id
 FROM
 	MedicalAppointment ma

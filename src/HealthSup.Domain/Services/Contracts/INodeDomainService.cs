@@ -5,7 +5,7 @@ namespace HealthSup.Domain.Services.Contracts
 {
     public interface INodeDomainService
     { 
-        Task<Node> ResolveByMedicalAppointment
+        Task<Node> GetCurrentNode
         (
             MedicalAppointment medicalAppointment
         );
