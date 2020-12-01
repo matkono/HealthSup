@@ -90,7 +90,7 @@ namespace HealthSup.Domain.Services
             return await LoadNodeDetails(previousNode.Id, previousNode.NodeType.Id);
         }
 
-        public async Task ConfirmAction
+        public async Task<Node> ConfirmAction
         (
             int medicalAppointmentId
         )
@@ -108,6 +108,8 @@ namespace HealthSup.Domain.Services
                 MedicalAppointment = medicalAppointment
             };
             await _unitOfWork.MedicalAppointmentMovementRepository.InsetMovement(medicalAppointmentMoviment);
+
+            return await LoadNodeDetails(node.Id, node.NodeType.Id);
         }
 
         public async Task ConfirmDecision

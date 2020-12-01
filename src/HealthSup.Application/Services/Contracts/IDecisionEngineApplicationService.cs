@@ -13,7 +13,7 @@ namespace HealthSup.Application.Services.Contracts
             AnswerQuestionRequest argument
         );
 
-        public Task<BaseResponse> ConfirmAction
+        public Task<GetNextNodeReturn> ConfirmAction
         (
             ConfirmActionRequest argument
         );
