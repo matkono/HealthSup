@@ -23,7 +23,7 @@ namespace HealthSup.Domain.Services.Contracts
             int nodeId
         );
 
-        Task ConfirmAction
+        Task<Node> ConfirmAction
         (
             int medicalAppointmentId
         );

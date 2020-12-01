@@ -54,7 +54,7 @@ namespace HealthSup.WebApi.Controllers.v1
             if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);
 
-            return NoContent();
+            return Ok(response);
         }
 
         [HttpPost]

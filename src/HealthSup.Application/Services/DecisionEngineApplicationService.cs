@@ -90,17 +90,17 @@ namespace HealthSup.Application.Services
             }
         }
 
-        public async Task<BaseResponse> ConfirmAction
+        public async Task<GetNextNodeReturn> ConfirmAction
         (
             ConfirmActionRequest argument
         )
         {
-            var response = new BaseResponse();
-
             var resultValidator = await ConfirmActionValidator.ValidateAsync(argument);
 
             if (!resultValidator.IsValid)
             {
+                var response = new GetNextNodeReturn(null);
+
                 foreach (var error in resultValidator.Errors)
                 {
                     response.AddError
@@ -114,9 +114,21 @@ namespace HealthSup.Application.Services
                 return response;
             }
 
-            await DecisionEngineService.ConfirmAction(argument.MedicalAppointmentId);
+            var node = await DecisionEngineService.ConfirmAction(argument.MedicalAppointmentId);
 
-            return response;
+            if (node is Action action)
+            {
+                return new GetNextNodeReturn(action.ToDataContract());
+            }
+            else if (node is Question question)
+            {
+                return new GetNextNodeReturn(question.ToDataContract());
+            }
+            else
+            {
+                var decision = node as Decision;
+                return new GetNextNodeReturn(decision.ToDataContract());
+            }
         }
 
         public async Task<BaseResponse> ConfirmDecision
