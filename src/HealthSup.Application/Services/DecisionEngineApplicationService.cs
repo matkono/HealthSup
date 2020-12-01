@@ -143,7 +143,7 @@ namespace HealthSup.Application.Services
                 return response;
             }
 
-            await DecisionEngineService.ConfirmDecision(argument.MedicalAppointmentId);
+            await DecisionEngineService.ConfirmDecision(argument.MedicalAppointmentId, argument.DecisionId);
 
             return response;
         }

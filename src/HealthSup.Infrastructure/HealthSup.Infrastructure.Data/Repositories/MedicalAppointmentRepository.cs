@@ -83,5 +83,21 @@ namespace HealthSup.Infrastructure.Data.Repositories
                 UnitOfWork.Transaction
             );
         }
+
+        public async Task<int> UpdateIsDiagnostic
+        (
+            int id,
+            bool isDiagnostic
+        )
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.UpdateIsDiagnostic);
+
+            return await UnitOfWork.Connection.ExecuteAsync
+            (
+                query,
+                new { id, isDiagnostic },
+                UnitOfWork.Transaction
+            );
+        }
     }
 }

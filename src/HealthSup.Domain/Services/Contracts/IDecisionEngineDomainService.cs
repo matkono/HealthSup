@@ -30,7 +30,8 @@ namespace HealthSup.Domain.Services.Contracts
 
         Task ConfirmDecision
         (
-            int medicalAppointmentId
+            int medicalAppointmentId,
+            int decisionId
         );
     }
 }

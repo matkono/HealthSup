@@ -112,9 +112,15 @@ namespace HealthSup.Domain.Services
 
         public async Task ConfirmDecision
         (
-            int medicalAppointmentId
+            int medicalAppointmentId,
+            int decisionId
         )
         {
+            var decision = await _unitOfWork.DecisionRepository.GetById(decisionId);
+
+            if (decision.IsDiagnostic)
+                await _unitOfWork.MedicalAppointmentRepository.UpdateIsDiagnostic(medicalAppointmentId, true);
+
             await _unitOfWork.MedicalAppointmentRepository.UpdateStatus(medicalAppointmentId, (int)MedicalAppointmentStatusEnum.Finalized);
         }
 
