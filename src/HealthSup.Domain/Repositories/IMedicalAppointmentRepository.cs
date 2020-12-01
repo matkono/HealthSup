@@ -21,5 +21,11 @@ namespace HealthSup.Domain.Repositories
             int id,
             int statusId
         );
+
+        public Task<int> UpdateIsDiagnostic
+        (
+            int id,
+            bool isDiagnostic
+        );
     }
 }
