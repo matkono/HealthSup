@@ -12,10 +12,13 @@ namespace HealthSup.Application.Mappers
                 IsInitial = decision.IsInitial,
                 NodeType = decision.NodeType?.ToDataContract(),
                 DecisionTree = decision.DecisionTree?.ToDataContract(),
-                DecisionId = decision.DecisionId,
-                Code = decision.Code,
-                Title = decision.Title,
-                IsDiagnostic = decision.IsDiagnostic
+                Decision = new DecisionBase() 
+                {
+                    Id = decision.DecisionId,
+                    Title = decision.Title,
+                    Code = decision.Code,
+                    IsDiagnostic = decision.IsDiagnostic
+                }
             };
     }
 }

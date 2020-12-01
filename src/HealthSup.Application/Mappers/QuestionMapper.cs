@@ -13,11 +13,14 @@ namespace HealthSup.Application.Mappers
                 IsInitial = question.IsInitial,
                 NodeType = question.NodeType?.ToDataContract(),
                 DecisionTree = question.DecisionTree?.ToDataContract(),
-                QuestionId = question.QuestionId,
-                Title = question.Title,
-                Code = question.Code,
-                QuestionType = question.QuestionType?.ToDataContract(),
-                PossibleAnswers = question.PossibleAnswers.Select(possibleAnswer => possibleAnswer.ToDataContract()).ToList()
+                Question = new QuestionBase() 
+                {
+                    Id = question.QuestionId,
+                    Title = question.Title,
+                    Code = question.Code,
+                    QuestionType = question.QuestionType?.ToDataContract(),
+                    PossibleAnswers = question.PossibleAnswers.Select(possibleAnswer => possibleAnswer.ToDataContract()).ToList()
+                }
             };
     }
 }
