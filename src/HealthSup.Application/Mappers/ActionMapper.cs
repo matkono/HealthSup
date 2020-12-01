@@ -12,9 +12,12 @@ namespace HealthSup.Application.Mappers
                 IsInitial = action.IsInitial,
                 NodeType = action.NodeType?.ToDataContract(),
                 DecisionTree = action.DecisionTree?.ToDataContract(),
-                ActionId = action.ActionId,
-                Code = action.Code,
-                Title = action.Title
+                Action = new ActionBase() 
+                {
+                    Id = action.ActionId,
+                    Code = action.Code,
+                    Title = action.Title
+                }
             };
     }
 }
