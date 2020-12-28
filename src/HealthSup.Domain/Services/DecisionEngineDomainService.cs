@@ -82,7 +82,7 @@ namespace HealthSup.Domain.Services
                 await _unitOfWork.AnswerRepository.DeleteMany(answers);
             }
 
-            var medicalAppointmentMovement = await _unitOfWork.MedicalAppointmentMovementRepository.GetByToNodeId(currentNode.Id);
+            var medicalAppointmentMovement = await _unitOfWork.MedicalAppointmentMovementRepository.GetByToNodeId(medicalAppointmentId, currentNode.Id);
             await _unitOfWork.MedicalAppointmentMovementRepository.DeleteById(medicalAppointmentMovement.Id);
 
             await _unitOfWork.MedicalAppointmentRepository.UpdateLastNode(medicalAppointmentId, previousNode.Id);
