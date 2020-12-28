@@ -40,6 +40,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
         public async Task<MedicalAppointmentMovement> GetByFromNodeId
         (
+            int medicalAppointmentId,
             int fromNodeId
         )
         {
@@ -65,7 +66,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
             var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointmentMovement, Node, Node, MedicalAppointment, MedicalAppointmentMovement>(
                                                                 query,
                                                                 MapFromQuery,
-                                                                new { fromNodeId },
+                                                                new { medicalAppointmentId, fromNodeId },
                                                                 UnitOfWork.Transaction);
 
             return result.FirstOrDefault();
@@ -73,6 +74,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
         public async Task<MedicalAppointmentMovement> GetByToNodeId
         (
+            int medicalAppointmentId,
             int toNodeId
         )
         {
@@ -98,7 +100,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
             var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointmentMovement, Node, Node, MedicalAppointment, MedicalAppointmentMovement>(
                                                                 query,
                                                                 MapFromQuery,
-                                                                new { toNodeId },
+                                                                new { medicalAppointmentId, fromNodeId },
                                                                 UnitOfWork.Transaction);
 
             return result.FirstOrDefault();

@@ -12,11 +12,13 @@ namespace HealthSup.Domain.Repositories
 
         public Task<MedicalAppointmentMovement> GetByFromNodeId
         (
+            int medicalAppointmentId,
             int fromNodeId
         );
 
         public Task<MedicalAppointmentMovement> GetByToNodeId
         (
+            int medicalAppointmentId,
             int toNodeId
         );
 

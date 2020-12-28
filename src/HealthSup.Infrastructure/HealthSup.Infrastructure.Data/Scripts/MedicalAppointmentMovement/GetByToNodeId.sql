@@ -6,4 +6,5 @@
 FROM
 	MedicalAppointmentMovement mpm
 WHERE 
-	mpm.toNodeId = @toNodeId
+	mpm.toNodeId = @toNodeId AND
+	mpm.medicalAppointmentId = @medicalAppointmentId
