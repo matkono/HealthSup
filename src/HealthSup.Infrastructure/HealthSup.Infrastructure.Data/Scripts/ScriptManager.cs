@@ -97,6 +97,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 public static readonly string GetByFromNodeId = $"{EntityName}.GetByFromNodeId";
                 public static readonly string Insert = $"{EntityName}.Insert";
                 public static readonly string GetByToNodeId = $"{EntityName}.GetByToNodeId";
+                public static readonly string GetLastByMedicalAppointmentId = $"{EntityName}.GetLastByMedicalAppointmentId";
                 public static readonly string DeleteById = $"{EntityName}.DeleteById";
             }
 

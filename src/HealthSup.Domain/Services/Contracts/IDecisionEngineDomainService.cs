@@ -19,8 +19,7 @@ namespace HealthSup.Domain.Services.Contracts
 
         Task<Node> ResolvePreviousNode
         (
-            int medicalAppointmentId,
-            int nodeId
+            int medicalAppointmentId
         );
 
         Task<Node> ConfirmAction

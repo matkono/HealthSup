@@ -186,8 +186,7 @@ namespace HealthSup.Application.Services
 
             var node = await DecisionEngineService.ResolvePreviousNode
             (
-                argument.MedicalAppointmentId,
-                argument.CurrentNodeId
+                argument.MedicalAppointmentId
             );
 
             if (node is Action action)

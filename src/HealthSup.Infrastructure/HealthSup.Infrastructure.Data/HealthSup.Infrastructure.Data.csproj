@@ -21,6 +21,7 @@
     <None Remove="Scripts\MedicalAppointmentMovement\DeleteById.sql" />
     <None Remove="Scripts\MedicalAppointmentMovement\GetByFromNodeId.sql" />
     <None Remove="Scripts\MedicalAppointmentMovement\GetByToNodeId.sql" />
+    <None Remove="Scripts\MedicalAppointmentMovement\GetLastByMedicalAppointmentId.sql" />
     <None Remove="Scripts\MedicalAppointmentMovement\Insert.sql" />
     <None Remove="Scripts\MedicalAppointment\GetById.sql" />
     <None Remove="Scripts\MedicalAppointment\UpdateIsDiagnostic.sql" />
@@ -52,6 +53,7 @@
     <EmbeddedResource Include="Scripts\MedicalAppointmentMovement\DeleteById.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointmentMovement\GetByFromNodeId.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointmentMovement\GetByToNodeId.sql" />
+    <EmbeddedResource Include="Scripts\MedicalAppointmentMovement\GetLastByMedicalAppointmentId.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointmentMovement\Insert.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\GetById.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\UpdateIsDiagnostic.sql" />
