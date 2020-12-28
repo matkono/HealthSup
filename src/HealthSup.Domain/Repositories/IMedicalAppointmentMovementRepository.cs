@@ -22,6 +22,11 @@ namespace HealthSup.Domain.Repositories
             int toNodeId
         );
 
+        public Task<MedicalAppointmentMovement> GetLastByMedicalAppointmentId
+        (
+            int medicalAppointmentId
+        );
+
         public Task<int> DeleteById
         (
             int id

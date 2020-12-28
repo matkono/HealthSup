@@ -67,13 +67,14 @@ namespace HealthSup.Domain.Services
 
         public async Task<Node> ResolvePreviousNode
         (
-            int medicalAppointmentId, 
-            int nodeId
+            int medicalAppointmentId
         )
         {
-            var currentNode = await _unitOfWork.NodeRepository.GetById(nodeId);
-            var rule = await _unitOfWork.DecisionTreeRuleRepository.GetByToNodeIdAsync(currentNode.Id);
-            var previousNode = await _unitOfWork.NodeRepository.GetById(rule.FromNode.Id);
+            var medicalAppointmentMovement = await _unitOfWork.MedicalAppointmentMovementRepository.GetLastByMedicalAppointmentId(medicalAppointmentId);
+            var previousNode = await _unitOfWork.NodeRepository.GetById(medicalAppointmentMovement.FromNode.Id);
+
+            await _unitOfWork.MedicalAppointmentRepository.UpdateLastNode(medicalAppointmentId, previousNode.Id);
+            await _unitOfWork.MedicalAppointmentMovementRepository.DeleteById(medicalAppointmentMovement.Id);
 
             if (previousNode.NodeType.Id.Equals((int)NodeTypeEnum.Question)) 
             {
@@ -81,11 +82,6 @@ namespace HealthSup.Domain.Services
                 var answers = await _unitOfWork.AnswerRepository.ListByQuestionId(question.Id);
                 await _unitOfWork.AnswerRepository.DeleteMany(answers);
             }
-
-            var medicalAppointmentMovement = await _unitOfWork.MedicalAppointmentMovementRepository.GetByToNodeId(medicalAppointmentId, currentNode.Id);
-            await _unitOfWork.MedicalAppointmentMovementRepository.DeleteById(medicalAppointmentMovement.Id);
-
-            await _unitOfWork.MedicalAppointmentRepository.UpdateLastNode(medicalAppointmentId, previousNode.Id);
 
             return await LoadNodeDetails(previousNode.Id, previousNode.NodeType.Id);
         }
