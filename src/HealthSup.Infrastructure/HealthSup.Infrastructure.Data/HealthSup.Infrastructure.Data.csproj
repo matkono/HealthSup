@@ -29,6 +29,7 @@
     <None Remove="Scripts\MedicalAppointment\UpdateStatus.sql" />
     <None Remove="Scripts\Node\GetById.sql" />
     <None Remove="Scripts\Node\GetInitialByDecisionTreeId.sql" />
+    <None Remove="Scripts\Patient\ListPagedPatients.sql" />
     <None Remove="Scripts\PossibleAnswerGroup\GetById.sql" />
     <None Remove="Scripts\PossibleAnswer\GetById.sql" />
     <None Remove="Scripts\PossibleAnswer\ListByQuestionId.sql" />
@@ -61,6 +62,7 @@
     <EmbeddedResource Include="Scripts\MedicalAppointment\UpdateStatus.sql" />
     <EmbeddedResource Include="Scripts\Node\GetById.sql" />
     <EmbeddedResource Include="Scripts\Node\GetInitialByDecisionTreeId.sql" />
+    <EmbeddedResource Include="Scripts\Patient\ListPagedPatients.sql" />
     <EmbeddedResource Include="Scripts\PossibleAnswerGroup\GetById.sql" />
     <EmbeddedResource Include="Scripts\PossibleAnswer\GetById.sql" />
     <EmbeddedResource Include="Scripts\PossibleAnswer\ListByQuestionId.sql" />
