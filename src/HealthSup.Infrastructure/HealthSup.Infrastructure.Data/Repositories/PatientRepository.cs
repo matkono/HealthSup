@@ -22,8 +22,8 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
         public async Task<List<Patient>> ListPaged
         (
-            int pageNumber, 
-            int pageSize
+            uint pageNumber,
+            uint pageSize
         )
         {
             var query = ScriptManager.GetByName(ScriptManager.FileNames.Patient.ListPagedPatients);

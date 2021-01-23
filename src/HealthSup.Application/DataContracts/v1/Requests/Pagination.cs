@@ -1,9 +1,11 @@
-﻿namespace HealthSup.Application.DataContracts.v1.Requests
+﻿using HealthSup.Domain.Repositories;
+
+namespace HealthSup.Application.DataContracts.v1.Requests
 {
     public class Pagination
     {
-        public int PageSize { get; set; }
+        public uint PageSize { get; set; }
 
-        public int PageNumber { get; set; }
+        public uint PageNumber { get; set; }
     }
 }

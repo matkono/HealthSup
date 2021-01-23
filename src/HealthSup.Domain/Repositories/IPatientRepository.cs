@@ -8,8 +8,8 @@ namespace HealthSup.Domain.Repositories
     {
         Task<List<Patient>> ListPaged
         (
-            int pageNumber,
-            int pageSize
+            uint pageNumber,
+            uint pageSize
         );
     }
 }
