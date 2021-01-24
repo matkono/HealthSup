@@ -24,6 +24,7 @@
     <None Remove="Scripts\MedicalAppointmentMovement\GetLastByMedicalAppointmentId.sql" />
     <None Remove="Scripts\MedicalAppointmentMovement\Insert.sql" />
     <None Remove="Scripts\MedicalAppointment\GetById.sql" />
+    <None Remove="Scripts\MedicalAppointment\ListPagedByPatientId.sql" />
     <None Remove="Scripts\MedicalAppointment\UpdateIsDiagnostic.sql" />
     <None Remove="Scripts\MedicalAppointment\UpdateLastNode.sql" />
     <None Remove="Scripts\MedicalAppointment\UpdateStatus.sql" />
@@ -57,6 +58,7 @@
     <EmbeddedResource Include="Scripts\MedicalAppointmentMovement\GetLastByMedicalAppointmentId.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointmentMovement\Insert.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\GetById.sql" />
+    <EmbeddedResource Include="Scripts\MedicalAppointment\ListPagedByPatientId.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\UpdateIsDiagnostic.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\UpdateLastNode.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\UpdateStatus.sql" />

@@ -2,6 +2,7 @@
 using HealthSup.Domain.Entities;
 using HealthSup.Domain.Repositories;
 using HealthSup.Infrastructure.Data.Scripts;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -98,6 +99,41 @@ namespace HealthSup.Infrastructure.Data.Repositories
                 new { id, isDiagnostic },
                 UnitOfWork.Transaction
             );
+        }
+
+        public async Task<List<MedicalAppointment>> ListPagedByPatientId
+        (
+            int patientId, 
+            uint pageNumber, 
+            uint pageSize
+        )
+        {
+            MedicalAppointment MapFromQuery
+            (
+                MedicalAppointment medicalAppointment,
+                Patient patient,
+                DecisionTree decisionTree,
+                Node node,
+                MedicalAppointmentStatus status
+            )
+            {
+                medicalAppointment.Patient = patient;
+                medicalAppointment.DecisionTree = decisionTree;
+                medicalAppointment.CurrentNode = node;
+                medicalAppointment.Status = status;
+
+                return medicalAppointment;
+            };
+
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.ListPagedByPatientId);
+
+            var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointment, Patient, DecisionTree, Node, MedicalAppointmentStatus, MedicalAppointment>(
+                                                                query,
+                                                                MapFromQuery,
+                                                                new { patientId, pageNumber, pageSize },
+                                                                UnitOfWork.Transaction);
+
+            return result.ToList();
         }
     }
 }

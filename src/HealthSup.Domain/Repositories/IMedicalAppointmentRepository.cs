@@ -1,4 +1,5 @@
 ﻿using HealthSup.Domain.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HealthSup.Domain.Repositories
@@ -26,6 +27,13 @@ namespace HealthSup.Domain.Repositories
         (
             int id,
             bool isDiagnostic
+        );
+
+        Task<List<MedicalAppointment>> ListPagedByPatientId
+        (
+            int patientId,
+            uint pageNumber,
+            uint pageSize
         );
     }
 }
