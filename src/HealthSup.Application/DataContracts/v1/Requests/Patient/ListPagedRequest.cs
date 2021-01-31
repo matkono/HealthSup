@@ -1,6 +1,6 @@
 ﻿namespace HealthSup.Application.DataContracts.v1.Requests.Patient
 {
-    public class ListPagedPatientsRequest
+    public class ListPagedRequest
     {
         public Pagination Pagination { get; set; }
     }

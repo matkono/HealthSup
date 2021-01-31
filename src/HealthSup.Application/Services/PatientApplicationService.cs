@@ -19,11 +19,11 @@ namespace HealthSup.Application.Services
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public async Task<ListPagedPatientsReturn> ListPaged(ListPagedPatientsRequest argument)
+        public async Task<ListPagedReturn> ListPaged(ListPagedRequest argument)
         {
             var patients = await _unitOfWork.PatientRepository.ListPaged(argument.Pagination.PageNumber, argument.Pagination.PageSize);
 
-            return new ListPagedPatientsReturn(patients.ToDataContract());
+            return new ListPagedReturn(patients.ToDataContract());
         }
     }
 }
