@@ -27,7 +27,7 @@ namespace HealthSup.WebApi.Controllers.v1
         [HttpPost]
         [Route("listPaged")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> ListPagedPatients
+        public async Task<IActionResult> ListPaged
         (
             [FromBody]ListPagedRequest argument
         )

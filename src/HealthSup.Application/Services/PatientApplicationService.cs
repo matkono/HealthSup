@@ -3,6 +3,7 @@ using HealthSup.Application.DataContracts.v1.Responses.Patient;
 using HealthSup.Application.Mappers;
 using HealthSup.Application.Services.Contracts;
 using HealthSup.Domain.Repositories;
+using HealthSup.Infrastructure.CrossCutting.Constants;
 using System.Threading.Tasks;
 
 namespace HealthSup.Application.Services
@@ -21,7 +22,10 @@ namespace HealthSup.Application.Services
 
         public async Task<ListPagedReturn> ListPaged(ListPagedRequest argument)
         {
-            var patients = await _unitOfWork.PatientRepository.ListPaged(argument.Pagination.PageNumber, argument.Pagination.PageSize);
+            var pageNumber = argument.Pagination.PageNumber;
+            var pageSize = argument.Pagination.PageSize > ApplicationConstants.MaxPageSize ? ApplicationConstants.MaxPageSize : argument.Pagination.PageNumber;
+
+            var patients = await _unitOfWork.PatientRepository.ListPaged(pageNumber, pageSize);
 
             return new ListPagedReturn(patients.ToDataContract());
         }
