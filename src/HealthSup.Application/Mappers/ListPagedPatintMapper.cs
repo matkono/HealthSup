@@ -7,10 +7,13 @@ namespace HealthSup.Application.Mappers
 {
     public static class ListPagedPatintMapper
     {
-        public static ListPagedPatientsResponse ToDataContract(this List<Patient> patients)
+        public static ListPagedPatientsResponse ToDataContract(this PagedResult<List<Patient>> patients)
             => new ListPagedPatientsResponse()
             {
-                Patients = patients.Select(patient => patient.ToDataContract()).ToList()
+                Patients = patients.Data.Select(patient => patient.ToDataContract()).ToList(),
+                PageNumber = patients.PageNumber,
+                PageSize = patients.PageSize,
+                TotalRows = patients.TotalRows
             };
     }
 }

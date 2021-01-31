@@ -20,20 +20,25 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
         private IUnitOfWork UnitOfWork { get; }
 
-        public async Task<List<Patient>> ListPaged
+        public async Task<PagedResult<List<Patient>>> ListPaged
         (
             int pageNumber,
             int pageSize
         )
         {
-            var query = ScriptManager.GetByName(ScriptManager.FileNames.Patient.ListPagedPatients);
+            var listQuery = ScriptManager.GetByName(ScriptManager.FileNames.Patient.ListPagedPatients);
+            var countQuery = ScriptManager.GetByName(ScriptManager.FileNames.Patient.CountPatients);
 
             var result = await UnitOfWork.Connection.QueryAsync<Patient>(
-                                                                query,
+                                                                listQuery,
                                                                 new { pageNumber, pageSize },
                                                                 UnitOfWork.Transaction);
 
-            return result.ToList();
+            var count = UnitOfWork.Connection.ExecuteScalar<int>(countQuery, UnitOfWork.Transaction);
+
+            var toReturn = new PagedResult<List<Patient>>(result.ToList(), pageNumber, pageSize, count);
+
+            return toReturn;
         }
     }
 }

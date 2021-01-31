@@ -123,6 +123,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 static readonly string EntityName = $"{nameof(Patient)}";
 
                 public static readonly string ListPagedPatients = $"{EntityName}.ListPagedPatients";
+                public static readonly string CountPatients = $"{EntityName}.CountPatients";
             }
         }
 

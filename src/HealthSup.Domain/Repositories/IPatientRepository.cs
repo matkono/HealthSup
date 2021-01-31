@@ -6,7 +6,7 @@ namespace HealthSup.Domain.Repositories
 {
     public interface IPatientRepository
     {
-        Task<List<Patient>> ListPaged
+        Task<PagedResult<List<Patient>>> ListPaged
         (
             int pageNumber,
             int pageSize
