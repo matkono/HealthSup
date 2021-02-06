@@ -2,7 +2,7 @@
 
 namespace HealthSup.Application.DataContracts.v1.Responses.MedicalAppointment
 {
-    public class ListPagedByPatientIdResponse
+    public class ListMedicalAppointmentsPagedByPatientIdResponse
     {
         public List<MedicalAppointmentResponse> MedicalAppointments { get; set; }
 

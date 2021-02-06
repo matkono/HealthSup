@@ -29,11 +29,11 @@ namespace HealthSup.Domain.Repositories
             bool isDiagnostic
         );
 
-        Task<List<MedicalAppointment>> ListPagedByPatientId
+        Task<PagedResult<List<MedicalAppointment>>> ListPagedByPatientId
         (
             int patientId,
-            uint pageNumber,
-            uint pageSize
+            int pageNumber,
+            int pageSize
         );
     }
 }

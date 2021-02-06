@@ -40,6 +40,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 public static readonly string UpdateStatus = $"{EntityName}.UpdateStatus";
                 public static readonly string UpdateIsDiagnostic = $"{EntityName}.UpdateIsDiagnostic";
                 public static readonly string ListPagedByPatientId = $"{EntityName}.ListPagedByPatientId";
+                public static readonly string CountByPatientId = $"{EntityName}.CountByPatientId";
             }
 
             public static class Node

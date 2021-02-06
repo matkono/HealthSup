@@ -101,11 +101,11 @@ namespace HealthSup.Infrastructure.Data.Repositories
             );
         }
 
-        public async Task<List<MedicalAppointment>> ListPagedByPatientId
+        public async Task<PagedResult<List<MedicalAppointment>>> ListPagedByPatientId
         (
-            int patientId, 
-            uint pageNumber, 
-            uint pageSize
+            int patientId,
+            int pageNumber,
+            int pageSize
         )
         {
             MedicalAppointment MapFromQuery
@@ -126,6 +126,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
             };
 
             var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.ListPagedByPatientId);
+            var countQuery = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.CountByPatientId);
 
             var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointment, Patient, DecisionTree, Node, MedicalAppointmentStatus, MedicalAppointment>(
                                                                 query,
@@ -133,7 +134,11 @@ namespace HealthSup.Infrastructure.Data.Repositories
                                                                 new { patientId, pageNumber, pageSize },
                                                                 UnitOfWork.Transaction);
 
-            return result.ToList();
+            var count = UnitOfWork.Connection.ExecuteScalar<int>(countQuery, new { patientId }, UnitOfWork.Transaction);
+
+            var toReturn = new PagedResult<List<MedicalAppointment>>(result.ToList(), pageNumber, pageSize, count);
+
+            return toReturn;
         }
     }
 }

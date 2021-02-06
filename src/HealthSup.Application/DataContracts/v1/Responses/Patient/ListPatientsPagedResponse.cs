@@ -2,7 +2,7 @@
 
 namespace HealthSup.Application.DataContracts.v1.Responses.Patient
 {
-    public class ListPagedResponse
+    public class ListPatientsPagedResponse
     {
         public List<PatientResponse> Patients { get; set; }
 

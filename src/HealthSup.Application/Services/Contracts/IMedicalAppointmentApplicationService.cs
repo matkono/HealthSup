@@ -1,4 +1,5 @@
-﻿using HealthSup.Application.DataContracts.v1.Responses.MedicalAppointment;
+﻿using HealthSup.Application.DataContracts.v1.Requests.MedicalAppointment;
+using HealthSup.Application.DataContracts.v1.Responses.MedicalAppointment;
 using System.Threading.Tasks;
 
 namespace HealthSup.Application.Services.Contracts
@@ -8,6 +9,11 @@ namespace HealthSup.Application.Services.Contracts
         public Task<GetMedicalAppointmentLastNodeReturn> GetLastNode
         (
             int medicalAppointmentId
+        );
+
+        public Task<ListMedicalAppointmentsPagedByPatientIdReturn> ListPaged
+        (
+            ListPagedByPatientIdRequest argument
         );
     }
 }

@@ -20,14 +20,14 @@ namespace HealthSup.Application.Services
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public async Task<ListPagedReturn> ListPaged(ListPagedRequest argument)
+        public async Task<ListPatientsPagedReturn> ListPaged(ListPagedRequest argument)
         {
             var pageNumber = argument.Pagination.PageNumber;
-            var pageSize = argument.Pagination.PageSize > ApplicationConstants.MaxPageSize ? ApplicationConstants.MaxPageSize : argument.Pagination.PageNumber;
+            var pageSize = argument.Pagination.PageSize > ApplicationConstants.MaxPageSize ? ApplicationConstants.MaxPageSize : argument.Pagination.PageSize;
 
             var patients = await _unitOfWork.PatientRepository.ListPaged(pageNumber, pageSize);
 
-            return new ListPagedReturn(patients.ToDataContract());
+            return new ListPatientsPagedReturn(patients.ToDataContract());
         }
     }
 }

@@ -6,7 +6,7 @@ namespace HealthSup.Application.Services.Contracts
 {
     public interface IPatientApplicationService
     {
-        public Task<ListPagedReturn> ListPaged
+        public Task<ListPatientsPagedReturn> ListPaged
         (
             ListPagedRequest argument
         );
