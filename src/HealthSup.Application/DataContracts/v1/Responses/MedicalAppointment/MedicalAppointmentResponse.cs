@@ -1,22 +1,23 @@
-﻿using HealthSup.Application.DataContracts.v1.Responses.Node;
+﻿using HealthSup.Application.DataContracts.v1.Responses.DecisionTree;
+using HealthSup.Application.DataContracts.v1.Responses.MedicalAppointmentStatus;
+using HealthSup.Application.DataContracts.v1.Responses.Node;
 using HealthSup.Application.DataContracts.v1.Responses.Patient;
-using System.Runtime.Serialization;
 
 namespace HealthSup.Application.DataContracts.v1.Responses.MedicalAppointment
 {
-    [DataContract]
     public class MedicalAppointmentResponse
     {
-        [DataMember]
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        [DataMember]
-        public bool IsDiagnostic { get; private set; }
+        public bool IsDiagnostic { get; set; }
 
-        [DataMember]
-        public PatientResponse Patient { get; private set; }
+        public PatientResponse Patient { get; set; }
 
-        [DataMember]
-        public NodeResponse? LastNode { get; private set; }
+        public DecisionTreeResponse DecisionTree { get; set; }
+
+        public NodeResponse CurrentNode { get; set; }
+
+        public MedicalAppointmentStatusResponse Status { get; set; }
+
     }
 }

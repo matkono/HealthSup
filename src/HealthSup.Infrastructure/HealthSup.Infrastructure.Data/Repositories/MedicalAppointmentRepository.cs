@@ -2,6 +2,7 @@
 using HealthSup.Domain.Entities;
 using HealthSup.Domain.Repositories;
 using HealthSup.Infrastructure.Data.Scripts;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -98,6 +99,46 @@ namespace HealthSup.Infrastructure.Data.Repositories
                 new { id, isDiagnostic },
                 UnitOfWork.Transaction
             );
+        }
+
+        public async Task<PagedResult<List<MedicalAppointment>>> ListPagedByPatientId
+        (
+            int patientId,
+            int pageNumber,
+            int pageSize
+        )
+        {
+            MedicalAppointment MapFromQuery
+            (
+                MedicalAppointment medicalAppointment,
+                Patient patient,
+                DecisionTree decisionTree,
+                Node node,
+                MedicalAppointmentStatus status
+            )
+            {
+                medicalAppointment.Patient = patient;
+                medicalAppointment.DecisionTree = decisionTree;
+                medicalAppointment.CurrentNode = node;
+                medicalAppointment.Status = status;
+
+                return medicalAppointment;
+            };
+
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.ListPagedByPatientId);
+            var countQuery = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.CountByPatientId);
+
+            var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointment, Patient, DecisionTree, Node, MedicalAppointmentStatus, MedicalAppointment>(
+                                                                query,
+                                                                MapFromQuery,
+                                                                new { patientId, pageNumber, pageSize },
+                                                                UnitOfWork.Transaction);
+
+            var count = UnitOfWork.Connection.ExecuteScalar<int>(countQuery, new { patientId }, UnitOfWork.Transaction);
+
+            var toReturn = new PagedResult<List<MedicalAppointment>>(result.ToList(), pageNumber, pageSize, count);
+
+            return toReturn;
         }
     }
 }

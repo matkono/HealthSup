@@ -28,7 +28,7 @@
 
         public DecisionTree DecisionTree { get; set; }
 
-        public Node? CurrentNode { get; set; }
+        public Node CurrentNode { get; set; }
 
         public MedicalAppointmentStatus Status { get; set; }
     }
