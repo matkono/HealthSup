@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using Microsoft.AspNetCore.Components.Forms;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -125,6 +126,14 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string ListPagedPatients = $"{EntityName}.ListPagedPatients";
                 public static readonly string CountPatients = $"{EntityName}.CountPatients";
+            }
+
+            public static class Disease
+            {
+                static readonly string EntityName = $"{nameof(Disease)}";
+
+                public static readonly string ListPaged = $"{EntityName}.ListPaged";
+                public static readonly string CountDiseases = $"{EntityName}.CountDiseases";
             }
         }
 

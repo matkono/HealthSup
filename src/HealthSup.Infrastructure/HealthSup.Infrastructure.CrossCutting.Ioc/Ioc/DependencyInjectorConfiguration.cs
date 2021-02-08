@@ -58,6 +58,7 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
             services.AddScoped<IAuthenticationApplicationService, AuthenticationApplicationService>();
             services.AddScoped<IDecisionEngineApplicationService, DecisionEngineApplicationService>();
             services.AddScoped<IPatientApplicationService, PatientApplicationService>();
+            services.AddScoped<IDiseaseApplicationService, DiseaseApplicationService>();
 
             #endregion
 
