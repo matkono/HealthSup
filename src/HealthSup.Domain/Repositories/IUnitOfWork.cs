@@ -45,5 +45,7 @@ namespace HealthSup.Domain.Repositories
         IAnswerRepository AnswerRepository { get; }
 
         IPatientRepository PatientRepository { get; }
+
+        IDiseaseRepository DiseaseRepository { get; }
     }
 }

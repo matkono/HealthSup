@@ -1,4 +1,4 @@
-﻿using HealthSup.Application.DataContracts.v1.Requests.Patient;
+﻿using HealthSup.Application.DataContracts.v1.Requests.Disease;
 using HealthSup.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -12,27 +12,27 @@ namespace HealthSup.WebApi.Controllers.v1
     [ApiController]
     [Route("api/v{version:apiVersion}/[controller]")]
     [Authorize]
-    public class PatientController : ControllerBase
+    public class DiseaseController : ControllerBase
     {
-        public PatientController
+        IDiseaseApplicationService DiseaseApplicationService { get; set; }
+
+        public DiseaseController
         (
-            IPatientApplicationService patientApplicationService
+            IDiseaseApplicationService diseaseApplicationService
         )
         {
-            PatientApplicationService = patientApplicationService ?? throw new ArgumentNullException(nameof(patientApplicationService));
+            DiseaseApplicationService = diseaseApplicationService ?? throw new ArgumentNullException(nameof(diseaseApplicationService));
         }
-
-        IPatientApplicationService PatientApplicationService { get; set; }
 
         [HttpPost]
         [Route("listPaged")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> ListPaged
         (
-            [FromBody]ListPatientPagedRequest argument
+            [FromBody]ListDiseasePagedRequest argument
         )
         {
-            var response = await PatientApplicationService.ListPaged(argument);
+            var response = await DiseaseApplicationService.ListPaged(argument);
 
             if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);

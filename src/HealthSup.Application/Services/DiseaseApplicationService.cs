@@ -1,5 +1,5 @@
-﻿using HealthSup.Application.DataContracts.v1.Requests.Patient;
-using HealthSup.Application.DataContracts.v1.Responses.Patient;
+﻿using HealthSup.Application.DataContracts.v1.Requests.Disease;
+using HealthSup.Application.DataContracts.v1.Responses.Disease;
 using HealthSup.Application.Mappers;
 using HealthSup.Application.Services.Contracts;
 using HealthSup.Domain.Repositories;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace HealthSup.Application.Services
 {
-    public class PatientApplicationService : IPatientApplicationService
+    public class DiseaseApplicationService : IDiseaseApplicationService
     {
-        public PatientApplicationService
+        public DiseaseApplicationService
         (
             IUnitOfWork unitOfWork
         )
@@ -20,14 +20,17 @@ namespace HealthSup.Application.Services
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public async Task<ListPatientsPagedReturn> ListPaged(ListPatientPagedRequest argument)
+        public async Task<ListDiseasesPagedReturn> ListPaged
+        (
+            ListDiseasePagedRequest argument
+        )
         {
             var pageNumber = argument.Pagination.PageNumber;
             var pageSize = argument.Pagination.PageSize > ApplicationConstants.MaxPageSize ? ApplicationConstants.MaxPageSize : argument.Pagination.PageSize;
 
-            var patients = await _unitOfWork.PatientRepository.ListPaged(pageNumber, pageSize);
+            var diseases = await _unitOfWork.DiseaseRepository.ListPaged(pageNumber, pageSize);
 
-            return new ListPatientsPagedReturn(patients.ToDataContract());
+            return new ListDiseasesPagedReturn(diseases.ToDataContract());
         }
     }
 }

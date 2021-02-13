@@ -74,7 +74,7 @@ namespace HealthSup.Application.Services
           
         public async Task<ListMedicalAppointmentsPagedByPatientIdReturn> ListPaged
         (
-            ListPagedByPatientIdRequest argument
+            ListMedicalAppointmentPagedByPatientIdRequest argument
         )
         {
             var pageNumber = argument.Pagination.PageNumber;
