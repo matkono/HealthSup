@@ -29,7 +29,7 @@ namespace HealthSup.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> ListPaged
         (
-            [FromBody]ListPagedDiseaseRequest argument
+            [FromBody]ListPagedRequest argument
         )
         {
             var response = await DiseaseApplicationService.ListPaged(argument);
