@@ -20,7 +20,7 @@ namespace HealthSup.Application.Services
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public async Task<ListPatientsPagedReturn> ListPaged(ListPagedRequest argument)
+        public async Task<ListPatientsPagedReturn> ListPaged(ListPatientPagedRequest argument)
         {
             var pageNumber = argument.Pagination.PageNumber;
             var pageSize = argument.Pagination.PageSize > ApplicationConstants.MaxPageSize ? ApplicationConstants.MaxPageSize : argument.Pagination.PageSize;

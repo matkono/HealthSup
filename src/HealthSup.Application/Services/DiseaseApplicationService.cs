@@ -22,7 +22,7 @@ namespace HealthSup.Application.Services
 
         public async Task<ListDiseasesPagedReturn> ListPaged
         (
-            ListPagedRequest argument
+            ListDiseasePagedRequest argument
         )
         {
             var pageNumber = argument.Pagination.PageNumber;

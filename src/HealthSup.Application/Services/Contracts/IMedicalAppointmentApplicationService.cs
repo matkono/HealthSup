@@ -13,7 +13,7 @@ namespace HealthSup.Application.Services.Contracts
 
         public Task<ListMedicalAppointmentsPagedByPatientIdReturn> ListPaged
         (
-            ListPagedByPatientIdRequest argument
+            ListMedicalAppointmentPagedByPatientIdRequest argument
         );
     }
 }

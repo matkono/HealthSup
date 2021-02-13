@@ -8,7 +8,7 @@ namespace HealthSup.Application.Services.Contracts
     {
         public Task<ListDiseasesPagedReturn> ListPaged
         (
-            ListPagedRequest argument
+            ListDiseasePagedRequest argument
         );
     }
 }

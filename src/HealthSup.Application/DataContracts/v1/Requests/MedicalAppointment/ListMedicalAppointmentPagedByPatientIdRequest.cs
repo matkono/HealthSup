@@ -1,6 +1,6 @@
 ﻿namespace HealthSup.Application.DataContracts.v1.Requests.MedicalAppointment
 {
-    public class ListPagedByPatientIdRequest
+    public class ListMedicalAppointmentPagedByPatientIdRequest
     {
         public Pagination Pagination { get; set; }
 
