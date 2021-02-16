@@ -17,6 +17,7 @@
     <None Remove="Scripts\Decision\GetById.sql" />
     <None Remove="Scripts\Decision\GetByNodeId.sql" />
     <None Remove="Scripts\Disease\CountDiseases.sql" />
+    <None Remove="Scripts\Disease\GetById.sql" />
     <None Remove="Scripts\Disease\ListPaged.sql" />
     <None Remove="Scripts\Doctor\GetById.sql" />
     <None Remove="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
@@ -59,6 +60,7 @@
     <EmbeddedResource Include="Scripts\Decision\GetById.sql" />
     <EmbeddedResource Include="Scripts\Decision\GetByNodeId.sql" />
     <EmbeddedResource Include="Scripts\Disease\CountDiseases.sql" />
+    <EmbeddedResource Include="Scripts\Disease\GetById.sql" />
     <EmbeddedResource Include="Scripts\Disease\ListPaged.sql" />
     <EmbeddedResource Include="Scripts\Doctor\GetById.sql" />
     <EmbeddedResource Include="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />

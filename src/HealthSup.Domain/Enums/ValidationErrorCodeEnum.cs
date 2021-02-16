@@ -71,5 +71,19 @@
         DecisionIsNotCurrentNode = 902,
 
         #endregion
+
+        #region Patient
+
+        PatientIdIsNull = 1000,
+        PatientNotFound = 1001,
+
+        #endregion
+
+        #region Disease
+
+        DiseaseIdIsNull = 1100,
+        DiseaseNotFound = 1101,
+
+        #endregion
     }
 }

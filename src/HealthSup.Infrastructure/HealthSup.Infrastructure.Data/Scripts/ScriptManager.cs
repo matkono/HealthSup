@@ -136,6 +136,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string ListPaged = $"{EntityName}.ListPaged";
                 public static readonly string CountDiseases = $"{EntityName}.CountDiseases";
+                public static readonly string GetById = $"{EntityName}.GetById";
             }
 
             public static class DecisionTree 

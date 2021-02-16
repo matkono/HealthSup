@@ -2,6 +2,7 @@
 using HealthSup.Application.DataContracts.v1.Responses.MedicalAppointment;
 using HealthSup.Application.Mappers;
 using HealthSup.Application.Services.Contracts;
+using HealthSup.Application.Validators.Contracts;
 using HealthSup.Domain.Entities;
 using HealthSup.Domain.Enums;
 using HealthSup.Domain.Repositories;
@@ -19,12 +20,14 @@ namespace HealthSup.Application.Services
         (
             IMedicalAppointmentDomainService medicalAppointmentService,
             INodeDomainService nodeService,
-            IUnitOfWork unitOfWork
+            IUnitOfWork unitOfWork,
+            ICreateMedicalAppointmentValidator createMedicalAppointmentValidator
         )
         {
             MedicalAppointmentService = medicalAppointmentService ?? throw new ArgumentNullException(nameof(medicalAppointmentService));
             NodeService = nodeService ?? throw new ArgumentNullException(nameof(nodeService));
             _unitOfWork = unitOfWork;
+            CreateMedicalAppointmentValidator = createMedicalAppointmentValidator;
         }
 
         private readonly IMedicalAppointmentDomainService MedicalAppointmentService;
@@ -32,6 +35,8 @@ namespace HealthSup.Application.Services
         private readonly INodeDomainService NodeService;
 
         private readonly IUnitOfWork _unitOfWork;
+
+        private readonly ICreateMedicalAppointmentValidator CreateMedicalAppointmentValidator;
 
         public async Task<GetMedicalAppointmentLastNodeReturn> GetLastNode
         (
@@ -89,6 +94,25 @@ namespace HealthSup.Application.Services
             CreateMedicalAppointmentRequest argument
         )
         {
+            var resultValidator = await CreateMedicalAppointmentValidator.ValidateAsync(argument);
+
+            if (!resultValidator.IsValid)
+            {
+                var response = new CreateMedicalAppointmentReturn(null);
+
+                foreach (var error in resultValidator.Errors)
+                {
+                    response.AddError
+                    (
+                        Int32.Parse(error.ErrorCode),
+                        error.ErrorMessage,
+                        error.PropertyName
+                    );
+                }
+
+                return response;
+            }
+
             var medicalAppointment = await MedicalAppointmentService.Create(argument.PatientId, argument.DiseaseId);
 
             return new CreateMedicalAppointmentReturn(medicalAppointment.ToDataContract());
