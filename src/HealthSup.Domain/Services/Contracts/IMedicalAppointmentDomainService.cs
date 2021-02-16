@@ -10,10 +10,10 @@ namespace HealthSup.Domain.Services.Contracts
             int id
         );
 
-        Task UpdatelastNode
+        Task<MedicalAppointment> Create
         (
-            int id,
-            int lastNodeId
+            int patientId, 
+            int diseaseId
         );
     }
 }

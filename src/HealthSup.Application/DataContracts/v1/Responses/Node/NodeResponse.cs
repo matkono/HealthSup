@@ -6,7 +6,7 @@ namespace HealthSup.Application.DataContracts.v1.Responses.Node
     {
         public int Id { get; set; }
 
-        public bool IsInitial { get; set; }
+        public bool? IsInitial { get; set; }
 
         public NodeTypeResponse NodeType { get; set; }
 

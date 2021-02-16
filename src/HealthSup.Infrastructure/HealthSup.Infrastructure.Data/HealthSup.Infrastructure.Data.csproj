@@ -13,6 +13,7 @@
     <None Remove="Scripts\DecisionTreeRule\GetActionConfirmationQuestionByNodeId.sql" />
     <None Remove="Scripts\DecisionTreeRule\GetByFromNodeIdAndPossibleAnswerGroupdId.sql" />
     <None Remove="Scripts\DecisionTreeRule\GetByToNodeId.sql" />
+    <None Remove="Scripts\DecisionTree\GetByDiseaseId.sql" />
     <None Remove="Scripts\Decision\GetById.sql" />
     <None Remove="Scripts\Decision\GetByNodeId.sql" />
     <None Remove="Scripts\Disease\CountDiseases.sql" />
@@ -26,6 +27,7 @@
     <None Remove="Scripts\MedicalAppointmentMovement\GetLastByMedicalAppointmentId.sql" />
     <None Remove="Scripts\MedicalAppointmentMovement\Insert.sql" />
     <None Remove="Scripts\MedicalAppointment\CountByPatientId.sql" />
+    <None Remove="Scripts\MedicalAppointment\Create.sql" />
     <None Remove="Scripts\MedicalAppointment\GetById.sql" />
     <None Remove="Scripts\MedicalAppointment\ListPagedByPatientId.sql" />
     <None Remove="Scripts\MedicalAppointment\UpdateIsDiagnostic.sql" />
@@ -34,6 +36,7 @@
     <None Remove="Scripts\Node\GetById.sql" />
     <None Remove="Scripts\Node\GetInitialByDecisionTreeId.sql" />
     <None Remove="Scripts\Patient\CountPatients.sql" />
+    <None Remove="Scripts\Patient\GetById.sql" />
     <None Remove="Scripts\Patient\ListPagedPatients.sql" />
     <None Remove="Scripts\PossibleAnswerGroup\GetById.sql" />
     <None Remove="Scripts\PossibleAnswer\GetById.sql" />
@@ -52,6 +55,7 @@
     <EmbeddedResource Include="Scripts\DecisionTreeRule\GetActionConfirmationQuestionByNodeId.sql" />
     <EmbeddedResource Include="Scripts\DecisionTreeRule\GetByFromNodeIdAndPossibleAnswerGroupdId.sql" />
     <EmbeddedResource Include="Scripts\DecisionTreeRule\GetByToNodeId.sql" />
+    <EmbeddedResource Include="Scripts\DecisionTree\GetByDiseaseId.sql" />
     <EmbeddedResource Include="Scripts\Decision\GetById.sql" />
     <EmbeddedResource Include="Scripts\Decision\GetByNodeId.sql" />
     <EmbeddedResource Include="Scripts\Disease\CountDiseases.sql" />
@@ -64,6 +68,7 @@
     <EmbeddedResource Include="Scripts\MedicalAppointmentMovement\GetLastByMedicalAppointmentId.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointmentMovement\Insert.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\CountByPatientId.sql" />
+    <EmbeddedResource Include="Scripts\MedicalAppointment\Create.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\GetById.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\ListPagedByPatientId.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointment\UpdateIsDiagnostic.sql" />
@@ -72,6 +77,7 @@
     <EmbeddedResource Include="Scripts\Node\GetById.sql" />
     <EmbeddedResource Include="Scripts\Node\GetInitialByDecisionTreeId.sql" />
     <EmbeddedResource Include="Scripts\Patient\CountPatients.sql" />
+    <EmbeddedResource Include="Scripts\Patient\GetById.sql" />
     <EmbeddedResource Include="Scripts\Patient\ListPagedPatients.sql" />
     <EmbeddedResource Include="Scripts\PossibleAnswerGroup\GetById.sql" />
     <EmbeddedResource Include="Scripts\PossibleAnswer\GetById.sql" />

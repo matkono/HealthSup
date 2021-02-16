@@ -59,5 +59,21 @@ namespace HealthSup.WebApi.Controllers.v1
 
             return Ok(response);
         }
+
+        [HttpPost]
+        [Route("create")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Create
+        (
+            [FromBody]CreateMedicalAppointmentRequest argument
+        )
+        {
+            var response = await MedicalAppointmentService.Create(argument);
+
+            if (response.Errors != null && response.Errors.Any())
+                return BadRequest(response);
+
+            return Ok(response);
+        }
     }
 }

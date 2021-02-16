@@ -35,5 +35,10 @@ namespace HealthSup.Domain.Repositories
             int pageNumber,
             int pageSize
         );
+
+        Task<MedicalAppointment> Create
+        (
+            MedicalAppointment medicalAppointment
+        );
     }
 }

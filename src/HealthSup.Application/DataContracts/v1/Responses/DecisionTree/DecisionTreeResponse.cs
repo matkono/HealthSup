@@ -11,7 +11,7 @@ namespace HealthSup.Application.DataContracts.v1.Responses.DecisionTree
 
         public string Description { get; set; }
 
-        public bool IsCurrent { get; set; }
+        public bool? IsCurrent { get; set; }
 
         public DiseaseResponse Disease { get; set; }
     }

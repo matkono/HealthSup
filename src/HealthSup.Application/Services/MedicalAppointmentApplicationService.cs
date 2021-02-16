@@ -1,6 +1,5 @@
 ﻿using HealthSup.Application.DataContracts.v1.Requests.MedicalAppointment;
 using HealthSup.Application.DataContracts.v1.Responses.MedicalAppointment;
-using HealthSup.Application.DataContracts.v1.Responses.Patient;
 using HealthSup.Application.Mappers;
 using HealthSup.Application.Services.Contracts;
 using HealthSup.Domain.Entities;
@@ -83,6 +82,16 @@ namespace HealthSup.Application.Services
             var medicalAppointments = await _unitOfWork.MedicalAppointmentRepository.ListPagedByPatientId(argument.PatientId, pageNumber, pageSize);
 
             return new ListMedicalAppointmentsPagedByPatientIdReturn(medicalAppointments.ToDataContract());
+        }
+
+        public async Task<CreateMedicalAppointmentReturn> Create
+        (
+            CreateMedicalAppointmentRequest argument
+        )
+        {
+            var medicalAppointment = await MedicalAppointmentService.Create(argument.PatientId, argument.DiseaseId);
+
+            return new CreateMedicalAppointmentReturn(medicalAppointment.ToDataContract());
         }
     }
 }

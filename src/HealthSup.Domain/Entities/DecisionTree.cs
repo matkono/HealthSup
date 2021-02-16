@@ -27,8 +27,16 @@ namespace HealthSup.Domain.Entities
 
         public string Version { get; private set; }
 
-        public bool IsCurrent { get; private set; }
+        public bool? IsCurrent { get; private set; }
 
         public Disease Disease { get; private set; }
+
+        public void SetDisease
+        (
+            Disease disease
+        )
+        {
+            Disease = disease;
+        }
     }
 }

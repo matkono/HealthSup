@@ -140,5 +140,24 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
             return toReturn;
         }
+
+        public async Task<MedicalAppointment> Create
+        (
+            MedicalAppointment medicalAppointment
+        )
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.Create);
+            var parameters = new DynamicParameters();
+            parameters.Add("@patientId", medicalAppointment.Patient.Id);
+            parameters.Add("@decisionTreeId", medicalAppointment.DecisionTree.Id);
+            parameters.Add("@currenteNodeId", medicalAppointment.CurrentNode.Id);
+            parameters.Add("@medicalAppointmentStatusId", medicalAppointment.Status.Id);
+
+            var result = await UnitOfWork.Connection.QueryAsync<int>(query,
+                                                      parameters,
+                                                      UnitOfWork.Transaction);
+
+            return await GetById(result.Single());
+        }
     }
 }
