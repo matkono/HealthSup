@@ -11,6 +11,7 @@ namespace HealthSup.Application.Mappers
                 Id = decisionTree.Id,
                 Description = decisionTree.Description,
                 Version = decisionTree.Version,
+                IsCurrent = decisionTree.IsCurrent,
                 Disease = decisionTree.Disease?.ToDataContract()
             };
     }

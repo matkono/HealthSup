@@ -15,5 +15,10 @@ namespace HealthSup.Application.Services.Contracts
         (
             ListMedicalAppointmentPagedByPatientIdRequest argument
         );
+
+        public Task<CreateMedicalAppointmentReturn> Create
+        (
+            CreateMedicalAppointmentRequest argument
+        );
     }
 }

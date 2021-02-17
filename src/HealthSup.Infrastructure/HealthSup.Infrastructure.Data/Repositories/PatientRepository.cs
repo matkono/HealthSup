@@ -40,5 +40,20 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
             return toReturn;
         }
+
+        public async Task<Patient> GetById
+        (
+            int id
+        )
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.Patient.GetById);
+
+            var result = await UnitOfWork.Connection.QueryAsync<Patient>(
+                                                                query,
+                                                                new { id },
+                                                                UnitOfWork.Transaction);
+
+            return result.FirstOrDefault();
+        }
     }
 }

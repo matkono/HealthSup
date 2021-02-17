@@ -42,6 +42,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 public static readonly string UpdateIsDiagnostic = $"{EntityName}.UpdateIsDiagnostic";
                 public static readonly string ListPagedByPatientId = $"{EntityName}.ListPagedByPatientId";
                 public static readonly string CountByPatientId = $"{EntityName}.CountByPatientId";
+                public static readonly string Create = $"{EntityName}.Create";
             }
 
             public static class Node
@@ -126,6 +127,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string ListPagedPatients = $"{EntityName}.ListPagedPatients";
                 public static readonly string CountPatients = $"{EntityName}.CountPatients";
+                public static readonly string GetById = $"{EntityName}.GetById";
             }
 
             public static class Disease
@@ -134,6 +136,14 @@ namespace HealthSup.Infrastructure.Data.Scripts
 
                 public static readonly string ListPaged = $"{EntityName}.ListPaged";
                 public static readonly string CountDiseases = $"{EntityName}.CountDiseases";
+                public static readonly string GetById = $"{EntityName}.GetById";
+            }
+
+            public static class DecisionTree 
+            {
+                static readonly string EntityName = $"{nameof(DecisionTree)}";
+
+                public static readonly string GetByDiseaseId = $"{EntityName}.GetByDiseaseId";
             }
         }
 

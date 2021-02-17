@@ -22,7 +22,7 @@ namespace HealthSup.Domain.Entities
 
         public int Id { get; private set; }
 
-        public bool IsInitial { get; private set; }
+        public bool? IsInitial { get; private set; }
 
         public NodeType NodeType { get; private set; }
 

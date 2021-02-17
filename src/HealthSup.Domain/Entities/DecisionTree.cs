@@ -1,4 +1,6 @@
-﻿namespace HealthSup.Domain.Entities
+﻿using Microsoft.IdentityModel.Tokens;
+
+namespace HealthSup.Domain.Entities
 {
     public class DecisionTree: BaseEntity
     {
@@ -6,12 +8,14 @@
             int id,
             string description,
             string version,
+            bool isCurrent,
             Disease disease
         )
         {
             Id = id;
             Description = description;
             Version = version;
+            IsCurrent = isCurrent;
             Disease = disease;
         }
 
@@ -23,6 +27,16 @@
 
         public string Version { get; private set; }
 
+        public bool? IsCurrent { get; private set; }
+
         public Disease Disease { get; private set; }
+
+        public void SetDisease
+        (
+            Disease disease
+        )
+        {
+            Disease = disease;
+        }
     }
 }

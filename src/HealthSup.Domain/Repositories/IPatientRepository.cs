@@ -11,5 +11,10 @@ namespace HealthSup.Domain.Repositories
             int pageNumber,
             int pageSize
         );
+
+        Task<Patient> GetById
+        (
+            int id
+        );
     }
 }
