@@ -39,5 +39,21 @@ namespace HealthSup.WebApi.Controllers.v1
 
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("{registration}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> ListLastNode
+        (
+            string registration
+        )
+        {
+            var response = await PatientApplicationService.GetByRegistration(registration);
+
+            if (response.Errors != null && response.Errors.Any())
+                return BadRequest(response);
+
+            return Ok(response);
+        }
     }
 }

@@ -16,5 +16,10 @@ namespace HealthSup.Domain.Repositories
         (
             int id
         );
+
+        Task<Patient> GetByRegistration
+        (
+            string registration
+        );
     }
 }
