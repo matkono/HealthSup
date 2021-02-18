@@ -128,6 +128,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 public static readonly string ListPagedPatients = $"{EntityName}.ListPagedPatients";
                 public static readonly string CountPatients = $"{EntityName}.CountPatients";
                 public static readonly string GetById = $"{EntityName}.GetById";
+                public static readonly string GetByRegistration = $"{EntityName}.GetByRegistration";
             }
 
             public static class Disease

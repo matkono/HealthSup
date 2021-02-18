@@ -10,5 +10,10 @@ namespace HealthSup.Application.Services.Contracts
         (
             ListPatientPagedRequest argument
         );
+
+        public Task<GetPatientByRegistrationReturn> GetByRegistration
+        (
+            string registration
+        );
     }
 }

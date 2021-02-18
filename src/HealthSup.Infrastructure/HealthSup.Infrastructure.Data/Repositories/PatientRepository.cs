@@ -55,5 +55,20 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
             return result.FirstOrDefault();
         }
+
+        public async Task<Patient> GetByRegistration
+        (
+            string registration
+        )
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.Patient.GetByRegistration);
+
+            var result = await UnitOfWork.Connection.QueryAsync<Patient>(
+                                                                query,
+                                                                new { registration },
+                                                                UnitOfWork.Transaction);
+
+            return result.FirstOrDefault();
+        }
     }
 }

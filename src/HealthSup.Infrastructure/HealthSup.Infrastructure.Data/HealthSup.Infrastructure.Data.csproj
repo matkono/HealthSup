@@ -38,6 +38,7 @@
     <None Remove="Scripts\Node\GetInitialByDecisionTreeId.sql" />
     <None Remove="Scripts\Patient\CountPatients.sql" />
     <None Remove="Scripts\Patient\GetById.sql" />
+    <None Remove="Scripts\Patient\GetByRegistration.sql" />
     <None Remove="Scripts\Patient\ListPagedPatients.sql" />
     <None Remove="Scripts\PossibleAnswerGroup\GetById.sql" />
     <None Remove="Scripts\PossibleAnswer\GetById.sql" />
@@ -80,6 +81,7 @@
     <EmbeddedResource Include="Scripts\Node\GetInitialByDecisionTreeId.sql" />
     <EmbeddedResource Include="Scripts\Patient\CountPatients.sql" />
     <EmbeddedResource Include="Scripts\Patient\GetById.sql" />
+    <EmbeddedResource Include="Scripts\Patient\GetByRegistration.sql" />
     <EmbeddedResource Include="Scripts\Patient\ListPagedPatients.sql" />
     <EmbeddedResource Include="Scripts\PossibleAnswerGroup\GetById.sql" />
     <EmbeddedResource Include="Scripts\PossibleAnswer\GetById.sql" />
