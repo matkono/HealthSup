@@ -8,9 +8,9 @@ namespace HealthSup.Application.Mappers
         public static PatientResponse ToDataContract(this Patient patient)
             => new PatientResponse()
             {
-                Id = patient.Id,
-                Name = patient.Name,
-                Registration = patient.Registration
+                Id = patient != null? patient.Id: 0,
+                Name = patient != null ? patient.Name : string.Empty,
+                Registration = patient != null ? patient.Registration : string.Empty
             };
     }
 }
