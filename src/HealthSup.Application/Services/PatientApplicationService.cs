@@ -38,20 +38,6 @@ namespace HealthSup.Application.Services
         {
             var patient = await _unitOfWork.PatientRepository.GetByRegistration(registration);
 
-            if (patient == null)
-            {
-                var response = new GetPatientByRegistrationReturn(null);
-
-                response.AddError
-                (
-                    (int)ValidationErrorCodeEnum.PatientNotFound,
-                    $"Patient with registration {registration} is not found.",
-                    null
-                );
-
-                return response;
-            }
-
             return new GetPatientByRegistrationReturn(patient.ToDataContract());
         }
     }
