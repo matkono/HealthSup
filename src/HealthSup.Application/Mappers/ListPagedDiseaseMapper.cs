@@ -10,7 +10,7 @@ namespace HealthSup.Application.Mappers
         public static ListDiseasesPagedResponse ToDataContract(this PagedResult<List<Disease>> diseases)
             => new ListDiseasesPagedResponse()
             {
-                Patients = diseases.Data.Select(disease => disease.ToDataContract()).ToList(),
+                Diseases = diseases.Data.Select(disease => disease.ToDataContract()).ToList(),
                 PageNumber = diseases.PageNumber,
                 PageSize = diseases.PageSize,
                 TotalRows = diseases.TotalRows

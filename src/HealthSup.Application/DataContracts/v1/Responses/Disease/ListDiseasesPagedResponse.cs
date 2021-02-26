@@ -4,7 +4,7 @@ namespace HealthSup.Application.DataContracts.v1.Responses.Disease
 {
     public class ListDiseasesPagedResponse
     {
-        public List<DiseaseResponse> Patients { get; set; }
+        public List<DiseaseResponse> Diseases { get; set; }
 
         public int PageNumber { get; set; }
 
