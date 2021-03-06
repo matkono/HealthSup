@@ -128,6 +128,7 @@ namespace HealthSup.Application.Services
             try
             {
                 await AuthenticationService.UpdatePassword(user.Id, newPasswordMd5);
+                _unitOfWork.Commit();
 
                 return baseResponse;
             }
