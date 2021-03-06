@@ -7,7 +7,6 @@ using HealthSup.Domain.Entities;
 using HealthSup.Domain.Enums;
 using HealthSup.Domain.Repositories;
 using HealthSup.Domain.Services.Contracts;
-using HealthSup.Infrastructure.CrossCutting.Constants;
 using System;
 using System.Threading.Tasks;
 using Action = HealthSup.Domain.Entities.Action;
@@ -74,19 +73,6 @@ namespace HealthSup.Application.Services
                 var decision = node as Decision;
                 return new GetMedicalAppointmentLastNodeReturn(decision.ToDataContract());
             }
-        }
-          
-        public async Task<ListMedicalAppointmentsPagedByPatientIdReturn> ListPaged
-        (
-            ListMedicalAppointmentPagedByPatientIdRequest argument
-        )
-        {
-            var pageNumber = argument.Pagination.PageNumber;
-            var pageSize = argument.Pagination.PageSize > ApplicationConstants.MaxPageSize ? ApplicationConstants.MaxPageSize : argument.Pagination.PageSize;
-
-            var medicalAppointments = await _unitOfWork.MedicalAppointmentRepository.ListPagedByPatientId(argument.PatientId, pageNumber, pageSize);
-
-            return new ListMedicalAppointmentsPagedByPatientIdReturn(medicalAppointments.ToDataContract());
         }
 
         public async Task<CreateMedicalAppointmentReturn> Create
