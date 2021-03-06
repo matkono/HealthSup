@@ -1,6 +1,5 @@
 ﻿using HealthSup.Domain.Entities;
 using HealthSup.Domain.Enums;
-using HealthSup.Domain.Exception;
 using HealthSup.Domain.Repositories;
 using HealthSup.Domain.Services.Contracts;
 using System;
@@ -134,17 +133,14 @@ namespace HealthSup.Domain.Services
                     var action = await _unitOfWork.ActionRepository.GetByNodeId(nodeId);
                     return action;
 
-                case (int)NodeTypeEnum.Question:
-                    var question = await _unitOfWork.QuestionRepository.GetByNodeId(nodeId);
-                    question.SetPossibleAnswers(await _unitOfWork.PossibleAnswerRepository.ListByQuestionId(question.Id));
-                    return question;
-
                 case (int)NodeTypeEnum.Decision:
                     var decision = await _unitOfWork.DecisionRepository.GetByNodeId(nodeId);
                     return decision;
 
                 default:
-                    throw new InvalidNodeTypeException("NodeType is invalid.");
+                    var question = await _unitOfWork.QuestionRepository.GetByNodeId(nodeId);
+                    question.SetPossibleAnswers(await _unitOfWork.PossibleAnswerRepository.ListByQuestionId(question.Id));
+                    return question;
             }
         }
     }

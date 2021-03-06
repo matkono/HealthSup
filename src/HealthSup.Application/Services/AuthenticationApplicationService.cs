@@ -5,6 +5,7 @@ using HealthSup.Application.DataContracts.v1.Responses.Authentication;
 using HealthSup.Application.Mappers;
 using HealthSup.Application.Services.Contracts;
 using HealthSup.Domain.Enums;
+using HealthSup.Domain.Repositories;
 using HealthSup.Infrastructure.CrossCutting.Authentication.Services.Contracts;
 using HealthSup.Infrastructure.CrossCutting.Hash.Services.Contracts;
 using System;
@@ -17,16 +18,20 @@ namespace HealthSup.Application.Services
         public AuthenticationApplicationService
         (
             IHashService hashService,
-            IAuthenticationService authenticationService
+            IAuthenticationService authenticationService,
+            IUnitOfWork unitOfWork
         )
         {
             HashService = hashService ?? throw new ArgumentNullException(nameof(hashService));
             AuthenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
+            _unitOfWork = unitOfWork;
         }
 
         private readonly IHashService HashService;
 
         private readonly IAuthenticationService AuthenticationService;
+
+        private readonly IUnitOfWork _unitOfWork;
 
         public async Task<GetAuthenticationAgentResponse> AuthenticateAgentAsync
         (
@@ -119,9 +124,19 @@ namespace HealthSup.Application.Services
 
             var newPasswordMd5 = HashService.GetMd5Hash(updatePasswordRequest.NewPassword);
 
-            await AuthenticationService.UpdatePassword(user.Id, newPasswordMd5);
+            _unitOfWork.Begin();
+            try
+            {
+                await AuthenticationService.UpdatePassword(user.Id, newPasswordMd5);
+                _unitOfWork.Commit();
 
-            return baseResponse;
+                return baseResponse;
+            }
+            catch
+            {
+                _unitOfWork.Rollback();
+                throw new OperationCanceledException();
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using HealthSup.Application.DataContracts.v1.Requests;
-using HealthSup.Application.DataContracts.v1.Requests.MedicalAppointment;
 using HealthSup.Application.DataContracts.v1.Responses.MedicalAppointment;
 using HealthSup.Application.DataContracts.v1.Responses.Patient;
 using HealthSup.Application.Mappers;

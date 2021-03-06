@@ -10,6 +10,7 @@ using HealthSup.Domain.Repositories;
 using HealthSup.Domain.Services.Contracts;
 using System;
 using System.Threading.Tasks;
+using System.Transactions;
 using Action = HealthSup.Domain.Entities.Action;
 
 namespace HealthSup.Application.Services
@@ -65,28 +66,39 @@ namespace HealthSup.Application.Services
                 return response;
             }
 
-            var node = await DecisionEngineService.ResolveNextNode
-            (
-                argument.MedicalAppointmentId,
-                argument.DoctorId,
-                argument.QuestionId,
-                argument.PossibleAnswerGroupId,
-                argument.Date,
-                argument.PossibleAnswersId
-            );
+            _unitOfWork.Begin();
+            try
+            {
+                var node = await DecisionEngineService.ResolveNextNode
+                (
+                    argument.MedicalAppointmentId,
+                    argument.DoctorId,
+                    argument.QuestionId,
+                    argument.PossibleAnswerGroupId,
+                    argument.Date,
+                    argument.PossibleAnswersId
+                );
 
-            if (node is Action action)
-            {
-                return new GetNextNodeReturn(action.ToDataContract());
+                _unitOfWork.Commit();
+
+                if (node is Action action)
+                {
+                    return new GetNextNodeReturn(action.ToDataContract());
+                }
+                else if (node is Question question)
+                {
+                    return new GetNextNodeReturn(question.ToDataContract());
+                }
+                else
+                {
+                    var decision = node as Decision;
+                    return new GetNextNodeReturn(decision.ToDataContract());
+                }
             }
-            else if (node is Question question)
+            catch 
             {
-                return new GetNextNodeReturn(question.ToDataContract());
-            }
-            else
-            {
-                var decision = node as Decision;
-                return new GetNextNodeReturn(decision.ToDataContract());
+                _unitOfWork.Rollback();
+                throw new TransactionAbortedException();
             }
         }
 
@@ -114,20 +126,30 @@ namespace HealthSup.Application.Services
                 return response;
             }
 
-            var node = await DecisionEngineService.ConfirmAction(argument.MedicalAppointmentId);
+            _unitOfWork.Begin();
+            try
+            {
+                var node = await DecisionEngineService.ConfirmAction(argument.MedicalAppointmentId);
+                _unitOfWork.Commit();
 
-            if (node is Action action)
-            {
-                return new GetNextNodeReturn(action.ToDataContract());
+                if (node is Action action)
+                {
+                    return new GetNextNodeReturn(action.ToDataContract());
+                }
+                else if (node is Question question)
+                {
+                    return new GetNextNodeReturn(question.ToDataContract());
+                }
+                else
+                {
+                    var decision = node as Decision;
+                    return new GetNextNodeReturn(decision.ToDataContract());
+                }
             }
-            else if (node is Question question)
+            catch 
             {
-                return new GetNextNodeReturn(question.ToDataContract());
-            }
-            else
-            {
-                var decision = node as Decision;
-                return new GetNextNodeReturn(decision.ToDataContract());
+                _unitOfWork.Rollback();
+                throw new TransactionAbortedException();
             }
         }
 
@@ -155,9 +177,19 @@ namespace HealthSup.Application.Services
                 return response;
             }
 
-            await DecisionEngineService.ConfirmDecision(argument.MedicalAppointmentId, argument.DecisionId);
+            _unitOfWork.Begin();
+            try
+            {
+                await DecisionEngineService.ConfirmDecision(argument.MedicalAppointmentId, argument.DecisionId);
+                _unitOfWork.Commit();
 
-            return response;
+                return response;
+            }
+            catch 
+            {
+                _unitOfWork.Rollback();
+                throw new TransactionAbortedException();
+            }
         }
 
         public async Task<GetPreviousNodeReturn> GetPreviousNode
@@ -184,23 +216,34 @@ namespace HealthSup.Application.Services
                 return response;
             }
 
-            var node = await DecisionEngineService.ResolvePreviousNode
-            (
-                argument.MedicalAppointmentId
-            );
+            _unitOfWork.Begin();
+            try
+            {
+                var node = await DecisionEngineService.ResolvePreviousNode
+                (
+                    argument.MedicalAppointmentId
+                );
 
-            if (node is Action action)
-            {
-                return new GetPreviousNodeReturn(action.ToDataContract());
+                _unitOfWork.Commit();
+
+                if (node is Action action)
+                {
+                    return new GetPreviousNodeReturn(action.ToDataContract());
+                }
+                else if (node is Question question)
+                {
+                    return new GetPreviousNodeReturn(question.ToDataContract());
+                }
+                else
+                {
+                    var decision = node as Decision;
+                    return new GetPreviousNodeReturn(decision.ToDataContract());
+                }
             }
-            else if (node is Question question)
+            catch 
             {
-                return new GetPreviousNodeReturn(question.ToDataContract());
-            }
-            else
-            {
-                var decision = node as Decision;
-                return new GetPreviousNodeReturn(decision.ToDataContract());
+                _unitOfWork.Rollback();
+                throw new TransactionAbortedException();
             }
         }
     }

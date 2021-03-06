@@ -99,9 +99,20 @@ namespace HealthSup.Application.Services
                 return response;
             }
 
-            var medicalAppointment = await MedicalAppointmentService.Create(argument.PatientId, argument.DiseaseId);
+            _unitOfWork.Begin();
+            try
+            {
+                var medicalAppointment = await MedicalAppointmentService.Create(argument.PatientId, argument.DiseaseId);
 
-            return new CreateMedicalAppointmentReturn(medicalAppointment.ToDataContract());
+                _unitOfWork.Commit();
+
+                return new CreateMedicalAppointmentReturn(medicalAppointment.ToDataContract());
+            }
+            catch 
+            {
+                _unitOfWork.Rollback();
+                throw new OperationCanceledException();
+            }
         }
     }
 }
