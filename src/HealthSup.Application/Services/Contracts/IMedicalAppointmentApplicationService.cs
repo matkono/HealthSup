@@ -11,11 +11,6 @@ namespace HealthSup.Application.Services.Contracts
             int medicalAppointmentId
         );
 
-        public Task<ListMedicalAppointmentsPagedByPatientIdReturn> ListPaged
-        (
-            ListMedicalAppointmentPagedByPatientIdRequest argument
-        );
-
         public Task<CreateMedicalAppointmentReturn> Create
         (
             CreateMedicalAppointmentRequest argument

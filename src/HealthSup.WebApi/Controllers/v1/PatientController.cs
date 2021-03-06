@@ -1,4 +1,5 @@
-﻿using HealthSup.Application.DataContracts.v1.Requests.Patient;
+﻿using HealthSup.Application.DataContracts.v1.Requests;
+using HealthSup.Application.DataContracts.v1.Requests.MedicalAppointment;
 using HealthSup.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,15 +25,14 @@ namespace HealthSup.WebApi.Controllers.v1
 
         IPatientApplicationService PatientApplicationService { get; set; }
 
-        [HttpPost]
-        [Route("listPaged")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> ListPaged
         (
-            [FromBody]ListPatientPagedRequest argument
+            [FromQuery]Pagination pagination
         )
         {
-            var response = await PatientApplicationService.ListPaged(argument);
+            var response = await PatientApplicationService.ListPaged(pagination);
 
             if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);
@@ -49,6 +49,23 @@ namespace HealthSup.WebApi.Controllers.v1
         )
         {
             var response = await PatientApplicationService.GetByRegistration(registration);
+
+            if (response.Errors != null && response.Errors.Any())
+                return BadRequest(response);
+
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("{patientId}/medicalAppointments")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> ListMedicalAppointments
+        (
+            int patientId,
+            [FromQuery]Pagination pagination
+        )
+        {
+            var response = await PatientApplicationService.ListMedicalAppointments(patientId, pagination);
 
             if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);
