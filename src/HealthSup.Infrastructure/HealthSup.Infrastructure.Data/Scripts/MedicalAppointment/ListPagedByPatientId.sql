@@ -12,6 +12,6 @@ INNER JOIN Patient p ON
 INNER JOIN DecisionTree dt ON
 	dt.id = ma.decisionTreeId
 WHERE
-	ma.id = @PatientId
+	ma.patientId = @PatientId
 ORDER BY ma.id
 OFFSET ((@PageNumber - 1) * @PageSize) ROWS FETCH NEXT @PageSize ROWS ONLY;

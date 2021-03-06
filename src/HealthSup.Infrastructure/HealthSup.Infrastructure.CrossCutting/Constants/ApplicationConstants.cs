@@ -2,6 +2,6 @@
 {
     public static class ApplicationConstants
     {
-        public static int MaxPageSize = 1000;
+        public static int MaxPageSize = 100;
     }
 }
