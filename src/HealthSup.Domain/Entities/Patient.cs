@@ -31,5 +31,10 @@ namespace HealthSup.Domain.Entities
         public Address Address { get; private set; }
 
         public List<MedicalAppointment> MedicalAppointments { get; private set; }
+
+        public void SetAddress(Address address) 
+        {
+            Address = address;
+        }
     }
 }

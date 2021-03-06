@@ -2,8 +2,10 @@
 {
     public class AddressResponse
     {
-        public string Region { get; set; }
+        public string Neighborhood { get; set; }
 
         public string Cep { get; set; }
+
+        public string City { get; set; }
     }
 }

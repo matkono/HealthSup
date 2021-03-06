@@ -9,7 +9,8 @@ namespace HealthSup.Application.Mappers
             => new AddressResponse()
             {
                 Cep = address.Cep,
-                Region = address.Region
+                Neighborhood = address.Neighborhood,
+                City = address.City
             };
     }
 }

@@ -10,7 +10,8 @@ namespace HealthSup.Application.Mappers
             {
                 Id = patient != null? patient.Id: 0,
                 Name = patient != null ? patient.Name : string.Empty,
-                Registration = patient != null ? patient.Registration : string.Empty
+                Registration = patient != null ? patient.Registration : string.Empty,
+                Address = patient.Address?.ToDataContract()
             };
     }
 }
