@@ -34,6 +34,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
         private IPatientRepository _patientRepository;
         private IDiseaseRepository _diseaseRepository;
         private IDecisionTreeRepository _decisionTreeRepository;
+        private IAddressRepository _addressRepository;
 
         public IDoctorRepository DoctorRepository => _doctorRepository ??= new DoctorRepository(this);
 
@@ -65,7 +66,9 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
         public IDiseaseRepository DiseaseRepository => _diseaseRepository ??= new DiseaseRepository(this);
 
-        public IDecisionTreeRepository DecisionTreeRepository => _decisionTreeRepository ?? new DecisionTreeRepository(this);
+        public IDecisionTreeRepository DecisionTreeRepository => _decisionTreeRepository ??= new DecisionTreeRepository(this);
+
+        public IAddressRepository AddressRepository => _addressRepository ??= new AddressRepository(this);
 
         public void Begin
         (

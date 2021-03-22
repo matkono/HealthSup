@@ -106,5 +106,23 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
             return result.FirstOrDefault();
         }
+
+        public async Task<Patient> Create
+        (
+            Patient patient
+        )
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.Patient.Create);
+            var parameters = new DynamicParameters();
+            parameters.Add("@name", patient.Name);
+            parameters.Add("@registration", patient.Registration);
+            parameters.Add("@addressId", patient.Address.Id);
+
+            var result = await UnitOfWork.Connection.QueryAsync<int>(query,
+                                                      parameters,
+                                                      UnitOfWork.Transaction);
+
+            return await GetById(result.Single());
+        }
     }
 }

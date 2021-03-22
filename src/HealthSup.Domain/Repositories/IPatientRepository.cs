@@ -21,5 +21,10 @@ namespace HealthSup.Domain.Repositories
         (
             string registration
         );
+
+        Task<Patient> Create
+        (
+            Patient patient
+        );
     }
 }

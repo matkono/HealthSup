@@ -129,6 +129,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 public static readonly string CountPatients = $"{EntityName}.CountPatients";
                 public static readonly string GetById = $"{EntityName}.GetById";
                 public static readonly string GetByRegistration = $"{EntityName}.GetByRegistration";
+                public static readonly string Create = $"{EntityName}.Create";
             }
 
             public static class Disease
@@ -145,6 +146,15 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 static readonly string EntityName = $"{nameof(DecisionTree)}";
 
                 public static readonly string GetByDiseaseId = $"{EntityName}.GetByDiseaseId";
+            }
+
+            public static class Address 
+            {
+                static readonly string EntityName = $"{nameof(Address)}";
+
+                public static readonly string GetByCep = $"{EntityName}.GetByCep";
+                public static readonly string Create = $"{EntityName}.Create";
+                public static readonly string GetById = $"{EntityName}.GetById";
             }
         }
 

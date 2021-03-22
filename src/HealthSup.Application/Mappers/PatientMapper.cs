@@ -1,17 +1,21 @@
 ﻿using HealthSup.Application.DataContracts.v1.Responses.Patient;
-using HealthSup.Domain.Entities;
+using PatientContract = HealthSup.Application.DataContracts.v1.Requests.Patient.Patient;
+using PatientModel = HealthSup.Domain.Entities.Patient;
 
 namespace HealthSup.Application.Mappers
 {
     public static class PatientMapper
     {
-        public static PatientResponse ToDataContract(this Patient patient)
+        public static PatientResponse ToDataContract(this PatientModel patientModel)
             => new PatientResponse()
             {
-                Id = patient != null? patient.Id: 0,
-                Name = patient != null ? patient.Name : string.Empty,
-                Registration = patient != null ? patient.Registration : string.Empty,
-                Address = patient.Address?.ToDataContract()
+                Id = patientModel != null? patientModel.Id: 0,
+                Name = patientModel != null ? patientModel.Name : string.Empty,
+                Registration = patientModel != null ? patientModel.Registration : string.Empty,
+                Address = patientModel.Address?.ToDataContract()
             };
+
+        public static PatientModel ToModel(this PatientContract patientContract)
+            => new PatientModel(patientContract.Name, patientContract.Registration, patientContract.Address.ToModel());
     }
 }

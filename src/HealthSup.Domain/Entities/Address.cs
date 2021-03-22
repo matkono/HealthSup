@@ -3,13 +3,11 @@
     public class Address: BaseEntity
     {
         public Address(
-            int id, 
             string neighborhood,
             string cep,
             string city
         ) 
         {
-            Id = id;
             Neighborhood = neighborhood;
             Cep = cep;
             City = city;
