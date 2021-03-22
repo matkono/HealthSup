@@ -42,6 +42,7 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
             services.AddScoped<IGetPreviousNodeValidator, GetPreviousNodeValidator>();
             services.AddScoped<IConfirmDecisionValidator, ConfirmDecisionValidator>();
             services.AddScoped<ICreateMedicalAppointmentValidator, CreateMedicalAppointmentValidator>();
+            services.AddScoped<ICreatePatientValidator, CreatePatientValidator>();
 
             #endregion
 
@@ -69,6 +70,7 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
             services.AddScoped<IMedicalAppointmentDomainService, MedicalAppointmentDomainService>();
             services.AddScoped<IDecisionEngineDomainService, DecisionEngineDomainService>();
             services.AddScoped<INodeDomainService, NodeDomainService>();
+            services.AddScoped<IPatientDomainService, PatientDomainService>();
 
             #endregion            
         }

@@ -95,10 +95,10 @@ namespace HealthSup.Application.Services
                     return new GetNextNodeReturn(decision.ToDataContract());
                 }
             }
-            catch 
+            catch (Exception e)
             {
                 _unitOfWork.Rollback();
-                throw new TransactionAbortedException();
+                throw e;
             }
         }
 
@@ -146,10 +146,10 @@ namespace HealthSup.Application.Services
                     return new GetNextNodeReturn(decision.ToDataContract());
                 }
             }
-            catch 
+            catch (Exception e)
             {
                 _unitOfWork.Rollback();
-                throw new TransactionAbortedException();
+                throw e;
             }
         }
 
@@ -185,10 +185,10 @@ namespace HealthSup.Application.Services
 
                 return response;
             }
-            catch 
+            catch (Exception e)
             {
                 _unitOfWork.Rollback();
-                throw new TransactionAbortedException();
+                throw e;
             }
         }
 
@@ -240,10 +240,10 @@ namespace HealthSup.Application.Services
                     return new GetPreviousNodeReturn(decision.ToDataContract());
                 }
             }
-            catch 
+            catch (Exception e)
             {
                 _unitOfWork.Rollback();
-                throw new TransactionAbortedException();
+                throw e;
             }
         }
     }

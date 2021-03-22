@@ -7,6 +7,9 @@
   <ItemGroup>
     <None Remove="Scripts\Action\GetById.sql" />
     <None Remove="Scripts\Action\GetByNodeId.sql" />
+    <None Remove="Scripts\Address\Create.sql" />
+    <None Remove="Scripts\Address\GetByCep.sql" />
+    <None Remove="Scripts\Address\GetById.sql" />
     <None Remove="Scripts\Answer\DeleteById.sql" />
     <None Remove="Scripts\Answer\Insert.sql" />
     <None Remove="Scripts\Answer\ListByQuestionId.sql" />
@@ -37,6 +40,7 @@
     <None Remove="Scripts\Node\GetById.sql" />
     <None Remove="Scripts\Node\GetInitialByDecisionTreeId.sql" />
     <None Remove="Scripts\Patient\CountPatients.sql" />
+    <None Remove="Scripts\Patient\Create.sql" />
     <None Remove="Scripts\Patient\GetById.sql" />
     <None Remove="Scripts\Patient\GetByRegistration.sql" />
     <None Remove="Scripts\Patient\ListPagedPatients.sql" />
@@ -51,6 +55,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Scripts\Action\GetById.sql" />
     <EmbeddedResource Include="Scripts\Action\GetByNodeId.sql" />
+    <EmbeddedResource Include="Scripts\Address\Create.sql" />
+    <EmbeddedResource Include="Scripts\Address\GetByCep.sql" />
+    <EmbeddedResource Include="Scripts\Address\GetById.sql" />
     <EmbeddedResource Include="Scripts\Answer\DeleteById.sql" />
     <EmbeddedResource Include="Scripts\Answer\Insert.sql" />
     <EmbeddedResource Include="Scripts\Answer\ListByQuestionId.sql" />
@@ -80,6 +87,7 @@
     <EmbeddedResource Include="Scripts\Node\GetById.sql" />
     <EmbeddedResource Include="Scripts\Node\GetInitialByDecisionTreeId.sql" />
     <EmbeddedResource Include="Scripts\Patient\CountPatients.sql" />
+    <EmbeddedResource Include="Scripts\Patient\Create.sql" />
     <EmbeddedResource Include="Scripts\Patient\GetById.sql" />
     <EmbeddedResource Include="Scripts\Patient\GetByRegistration.sql" />
     <EmbeddedResource Include="Scripts\Patient\ListPagedPatients.sql" />

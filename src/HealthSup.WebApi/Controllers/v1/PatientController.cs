@@ -1,5 +1,6 @@
 ﻿using HealthSup.Application.DataContracts.v1.Requests;
 using HealthSup.Application.DataContracts.v1.Requests.MedicalAppointment;
+using HealthSup.Application.DataContracts.v1.Requests.Patient;
 using HealthSup.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -66,6 +67,22 @@ namespace HealthSup.WebApi.Controllers.v1
         )
         {
             var response = await PatientApplicationService.ListMedicalAppointments(patientId, pagination);
+
+            if (response.Errors != null && response.Errors.Any())
+                return BadRequest(response);
+
+            return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("create")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Create
+        (
+            [FromBody]CreatePatientRequest argument
+        )
+        {
+            var response = await PatientApplicationService.Create(argument);
 
             if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);

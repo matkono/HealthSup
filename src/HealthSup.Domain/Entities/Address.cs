@@ -3,22 +3,24 @@
     public class Address: BaseEntity
     {
         public Address(
-            int id, 
-            string region,
-            string cep
+            string neighborhood,
+            string cep,
+            string city
         ) 
         {
-            Id = id;
-            Region = region;
+            Neighborhood = neighborhood;
             Cep = cep;
+            City = city;
         }
 
         public Address() { }
 
         public int Id { get; private set; }
 
-        public string Region { get; private set; }
+        public string Neighborhood { get; private set; }
 
         public string Cep { get; private set; }
+
+        public string City { get; private set; }
     }
 }

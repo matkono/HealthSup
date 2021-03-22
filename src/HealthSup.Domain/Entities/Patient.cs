@@ -6,18 +6,14 @@ namespace HealthSup.Domain.Entities
     {
         public Patient
         (
-            int id,
             string name,
             string registration,
-            Address address,
-            List<MedicalAppointment> medicalAppointments
+            Address address
         )
         {
-            Id = id;
             Name = name;
             Registration = registration;
             Address = address;
-            MedicalAppointments = medicalAppointments;
         }
 
         public Patient() { }
@@ -31,5 +27,10 @@ namespace HealthSup.Domain.Entities
         public Address Address { get; private set; }
 
         public List<MedicalAppointment> MedicalAppointments { get; private set; }
+
+        public void SetAddress(Address address) 
+        {
+            Address = address;
+        }
     }
 }

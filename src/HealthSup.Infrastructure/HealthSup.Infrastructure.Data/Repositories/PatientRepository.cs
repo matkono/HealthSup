@@ -26,11 +26,23 @@ namespace HealthSup.Infrastructure.Data.Repositories
             int pageSize
         )
         {
+            Patient MapFromQuery
+            (
+                Patient patient,
+                Address address
+            )
+            {
+                patient.SetAddress(address);
+
+                return patient;
+            };
+
             var listQuery = ScriptManager.GetByName(ScriptManager.FileNames.Patient.ListPagedPatients);
             var countQuery = ScriptManager.GetByName(ScriptManager.FileNames.Patient.CountPatients);
 
-            var result = await UnitOfWork.Connection.QueryAsync<Patient>(
+            var result = await UnitOfWork.Connection.QueryAsync<Patient, Address, Patient>(
                                                                 listQuery,
+                                                                MapFromQuery,
                                                                 new { pageNumber, pageSize },
                                                                 UnitOfWork.Transaction);
 
@@ -46,10 +58,22 @@ namespace HealthSup.Infrastructure.Data.Repositories
             int id
         )
         {
+            Patient MapFromQuery
+               (
+                   Patient patient,
+                   Address address
+               )
+            {
+                patient.SetAddress(address);
+
+                return patient;
+            };
+
             var query = ScriptManager.GetByName(ScriptManager.FileNames.Patient.GetById);
 
-            var result = await UnitOfWork.Connection.QueryAsync<Patient>(
+            var result = await UnitOfWork.Connection.QueryAsync<Patient, Address, Patient>(
                                                                 query,
+                                                                MapFromQuery,
                                                                 new { id },
                                                                 UnitOfWork.Transaction);
 
@@ -61,14 +85,44 @@ namespace HealthSup.Infrastructure.Data.Repositories
             string registration
         )
         {
+            Patient MapFromQuery
+            (
+                Patient patient,
+                Address address
+            )
+            {
+                patient.SetAddress(address);
+
+                return patient;
+            };
+
             var query = ScriptManager.GetByName(ScriptManager.FileNames.Patient.GetByRegistration);
 
-            var result = await UnitOfWork.Connection.QueryAsync<Patient>(
+            var result = await UnitOfWork.Connection.QueryAsync<Patient, Address, Patient>(
                                                                 query,
+                                                                MapFromQuery,
                                                                 new { registration },
                                                                 UnitOfWork.Transaction);
 
             return result.FirstOrDefault();
+        }
+
+        public async Task<Patient> Create
+        (
+            Patient patient
+        )
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.Patient.Create);
+            var parameters = new DynamicParameters();
+            parameters.Add("@name", patient.Name);
+            parameters.Add("@registration", patient.Registration);
+            parameters.Add("@addressId", patient.Address.Id);
+
+            var result = await UnitOfWork.Connection.QueryAsync<int>(query,
+                                                      parameters,
+                                                      UnitOfWork.Transaction);
+
+            return await GetById(result.Single());
         }
     }
 }

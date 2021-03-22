@@ -1,6 +1,6 @@
-﻿namespace HealthSup.Application.DataContracts.v1.Responses.Address
+﻿namespace HealthSup.Application.DataContracts.v1.Requests.Address
 {
-    public class AddressResponse
+    public class Address
     {
         public string Neighborhood { get; set; }
 

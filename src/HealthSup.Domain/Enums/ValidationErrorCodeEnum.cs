@@ -76,6 +76,13 @@
 
         PatientIdIsNull = 1000,
         PatientNotFound = 1001,
+        PatientIsNullOrEmpty = 1002,
+        PatientNameIsNullOrEmpty = 1003,
+        PatientRegistrationIsNullOrEmpty = 1004,
+        PatientAddressIsNullOrEmpty = 1005,
+        PatientAddressCepIsNullOrEmpty = 1006,
+        PatientAddressCityIsNullOrEmpty = 1007,
+        PatientAddressNeighborhoodIsNullOrEmpty = 1008,
 
         #endregion
 

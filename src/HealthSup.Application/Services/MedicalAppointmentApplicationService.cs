@@ -108,10 +108,10 @@ namespace HealthSup.Application.Services
 
                 return new CreateMedicalAppointmentReturn(medicalAppointment.ToDataContract());
             }
-            catch 
+            catch (Exception e)
             {
                 _unitOfWork.Rollback();
-                throw new OperationCanceledException();
+                throw e;
             }
         }
     }

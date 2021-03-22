@@ -132,10 +132,10 @@ namespace HealthSup.Application.Services
 
                 return baseResponse;
             }
-            catch
+            catch (Exception e)
             {
                 _unitOfWork.Rollback();
-                throw new OperationCanceledException();
+                throw e;
             }
         }
     }

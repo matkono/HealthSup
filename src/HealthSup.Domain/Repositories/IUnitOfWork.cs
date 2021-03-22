@@ -49,5 +49,7 @@ namespace HealthSup.Domain.Repositories
         IDiseaseRepository DiseaseRepository { get; }
 
         IDecisionTreeRepository DecisionTreeRepository { get; }
+
+        IAddressRepository AddressRepository { get; }
     }
 }
