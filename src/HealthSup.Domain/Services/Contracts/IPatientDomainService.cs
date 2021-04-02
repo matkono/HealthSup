@@ -9,5 +9,10 @@ namespace HealthSup.Domain.Services.Contracts
         (
             Patient patient
         );
+
+        Task<Patient> Update
+        (
+            Patient patient
+        );
     }
 }

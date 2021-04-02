@@ -48,6 +48,9 @@ namespace HealthSup.Application.Services
         {
             var patient = await _unitOfWork.PatientRepository.GetByRegistration(registration);
 
+            if (patient == null)
+                return new GetPatientByRegistrationReturn(null);
+
             return new GetPatientByRegistrationReturn(patient.ToDataContract());
         }
 
@@ -101,6 +104,30 @@ namespace HealthSup.Application.Services
                 return new CreatePatientReturn(patient.ToDataContract());
             }
             catch(Exception e)
+            {
+                _unitOfWork.Rollback();
+                throw e;
+            }
+        }
+
+        public async Task<UpdatePatientReturn> Update
+        (
+            UpdatePatientRequest argument
+        )
+        {
+            var patientModel = argument.Patient.ToModel();
+            patientModel.Id = argument.PatientId;
+
+            _unitOfWork.Begin();
+            try
+            {
+                var patient = await PatientDomainService.Update(patientModel);
+
+                _unitOfWork.Commit();
+
+                return new UpdatePatientReturn(patient.ToDataContract());
+            }
+            catch (Exception e)
             {
                 _unitOfWork.Rollback();
                 throw e;

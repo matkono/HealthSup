@@ -54,6 +54,9 @@ namespace HealthSup.WebApi.Controllers.v1
             if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);
 
+            if (response.Data == null)
+                return NoContent();
+
             return Ok(response);
         }
 
@@ -75,7 +78,6 @@ namespace HealthSup.WebApi.Controllers.v1
         }
 
         [HttpPost]
-        [Route("create")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Create
         (
@@ -83,6 +85,29 @@ namespace HealthSup.WebApi.Controllers.v1
         )
         {
             var response = await PatientApplicationService.Create(argument);
+
+            if (response.Errors != null && response.Errors.Any())
+                return BadRequest(response);
+
+            return Ok(response);
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [Route("{patientId}")]
+        public async Task<IActionResult> UpdateAsync
+        (
+            int patientId,
+            [FromBody] Patient patient
+        )
+        {
+            var argument = new UpdatePatientRequest()
+            { 
+                PatientId = patientId,
+                Patient = patient
+            };
+
+            var response = await PatientApplicationService.Update(argument);
 
             if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);

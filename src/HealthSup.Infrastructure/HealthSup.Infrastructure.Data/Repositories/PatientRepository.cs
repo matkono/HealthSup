@@ -124,5 +124,22 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
             return await GetById(result.Single());
         }
+
+        public async Task<Patient> Update
+        (
+            Patient patient
+        )
+        {
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.Patient.Update);
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", patient.Id);
+            parameters.Add("@addressId", patient.Address.Id);
+
+            await UnitOfWork.Connection.QueryAsync<int>(query,
+                                                        parameters,
+                                                        UnitOfWork.Transaction);
+
+            return patient;
+        }
     }
 }

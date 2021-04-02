@@ -26,5 +26,10 @@ namespace HealthSup.Domain.Repositories
         (
             Patient patient
         );
+
+        Task<Patient> Update
+        (
+            Patient patient
+        );
     }
 }

@@ -130,6 +130,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 public static readonly string GetById = $"{EntityName}.GetById";
                 public static readonly string GetByRegistration = $"{EntityName}.GetByRegistration";
                 public static readonly string Create = $"{EntityName}.Create";
+                public static readonly string Update = $"{EntityName}.Update";
             }
 
             public static class Disease
