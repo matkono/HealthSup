@@ -28,5 +28,10 @@ namespace HealthSup.Application.Services.Contracts
         (
             CreatePatientRequest argument    
         );
+
+        public Task<UpdatePatientReturn> Update
+        (
+            UpdatePatientRequest argument
+        );
     }
 }

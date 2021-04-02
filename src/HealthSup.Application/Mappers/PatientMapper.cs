@@ -16,6 +16,11 @@ namespace HealthSup.Application.Mappers
             };
 
         public static PatientModel ToModel(this PatientContract patientContract)
-            => new PatientModel(patientContract.Name, patientContract.Registration, patientContract.Address.ToModel());
+            => new PatientModel
+            {
+                Name = patientContract.Name,
+                Registration = patientContract.Registration,
+                Address = patientContract.Address.ToModel()
+            };
     }
 }

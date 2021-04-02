@@ -54,8 +54,7 @@ namespace HealthSup.Application.Validators
             When(x => x.Patient.Address != null, () =>
             {
                 RuleFor(x => x.Patient.Address.Cep)
-                   .NotNull()
-                   .NotEmpty()
+                   .Must(BeValidAddressContent)
                    .WithErrorCode(((int)ValidationErrorCodeEnum.PatientAddressCepIsNullOrEmpty).ToString())
                    .WithMessage("Patient's cep address cannot be null or empty.");
             });
@@ -63,8 +62,7 @@ namespace HealthSup.Application.Validators
             When(x => x.Patient.Address != null, () =>
             {
                 RuleFor(x => x.Patient.Address.City)
-                   .NotNull()
-                   .NotEmpty()
+                   .Must(BeValidAddressContent)
                    .WithErrorCode(((int)ValidationErrorCodeEnum.PatientAddressCityIsNullOrEmpty).ToString())
                    .WithMessage("Patient's city cannot be null or empty.");
             });
@@ -72,11 +70,18 @@ namespace HealthSup.Application.Validators
             When(x => x.Patient.Address != null, () =>
             {
                 RuleFor(x => x.Patient.Address.Neighborhood)
-                   .NotNull()
-                   .NotEmpty()
+                   .Must(BeValidAddressContent)
                    .WithErrorCode(((int)ValidationErrorCodeEnum.PatientAddressNeighborhoodIsNullOrEmpty).ToString())
                    .WithMessage("Patient's neighborhood cannot be null or empty.");
             });
+        }
+
+        private bool BeValidAddressContent
+        (
+            string addressContent
+        )
+        {
+            return string.IsNullOrEmpty(addressContent) ? false : true;
         }
     }
 }

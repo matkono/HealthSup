@@ -1,4 +1,5 @@
 ﻿using HealthSup.Application.DataContracts.v1.Requests;
+using HealthSup.Application.DataContracts.v1.Requests.Address;
 using HealthSup.Application.DataContracts.v1.Requests.MedicalAppointment;
 using HealthSup.Application.DataContracts.v1.Requests.Patient;
 using HealthSup.Application.Services.Contracts;
@@ -54,6 +55,9 @@ namespace HealthSup.WebApi.Controllers.v1
             if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);
 
+            if (response.Data == null)
+                return NoContent();
+
             return Ok(response);
         }
 
@@ -75,7 +79,6 @@ namespace HealthSup.WebApi.Controllers.v1
         }
 
         [HttpPost]
-        [Route("create")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Create
         (
@@ -83,6 +86,29 @@ namespace HealthSup.WebApi.Controllers.v1
         )
         {
             var response = await PatientApplicationService.Create(argument);
+
+            if (response.Errors != null && response.Errors.Any())
+                return BadRequest(response);
+
+            return Ok(response);
+        }
+
+        [HttpPatch]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [Route("{patientId}")]
+        public async Task<IActionResult> UpdateAsync
+        (
+            int patientId,
+            [FromBody] UpdateAddressRequest updateAddressRequest
+        )
+        {
+            var argument = new UpdatePatientRequest()
+            { 
+                PatientId = patientId,
+                Address = updateAddressRequest.Address
+            };
+
+            var response = await PatientApplicationService.Update(argument);
 
             if (response.Errors != null && response.Errors.Any())
                 return BadRequest(response);

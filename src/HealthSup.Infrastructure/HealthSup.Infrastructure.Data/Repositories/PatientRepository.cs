@@ -4,6 +4,7 @@ using HealthSup.Domain.Repositories;
 using HealthSup.Infrastructure.Data.Scripts;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace HealthSup.Infrastructure.Data.Repositories
@@ -123,6 +124,36 @@ namespace HealthSup.Infrastructure.Data.Repositories
                                                       UnitOfWork.Transaction);
 
             return await GetById(result.Single());
+        }
+
+        public async Task<Patient> Update
+        (
+            Patient patient
+        )
+        {
+            var query = new StringBuilder();
+            query.Append(ScriptManager.GetByName(ScriptManager.FileNames.Patient.Update));
+
+            var valuesToBeUpdated = new StringBuilder();
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", patient.Id);
+
+            if (patient.Address != null) 
+            {
+                valuesToBeUpdated.Append("addressId = @addressId");
+                parameters.Add("@addressId", patient.Address.Id);
+            }
+
+            if(string.IsNullOrEmpty(valuesToBeUpdated.ToString()))
+                return await GetById(patient.Id);
+
+            query.Replace("@valuesToBeUpdated", valuesToBeUpdated.ToString());
+
+            await UnitOfWork.Connection.QueryAsync<int>(query.ToString(),
+                                                        parameters,
+                                                        UnitOfWork.Transaction);
+
+            return await GetById(patient.Id);
         }
     }
 }
