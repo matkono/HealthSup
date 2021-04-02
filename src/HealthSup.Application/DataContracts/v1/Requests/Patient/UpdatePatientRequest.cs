@@ -8,6 +8,6 @@ namespace HealthSup.Application.DataContracts.v1.Requests.Patient
         public int PatientId { get; set; }
 
         [FromBody]
-        public Patient Patient { get; set; }
+        public Address.Address? Address { get; set;}
     }
 }

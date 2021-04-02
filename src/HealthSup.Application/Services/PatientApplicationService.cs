@@ -5,11 +5,13 @@ using HealthSup.Application.DataContracts.v1.Responses.Patient;
 using HealthSup.Application.Mappers;
 using HealthSup.Application.Services.Contracts;
 using HealthSup.Application.Validators.Contracts;
+using HealthSup.Domain.Entities;
 using HealthSup.Domain.Repositories;
 using HealthSup.Domain.Services.Contracts;
 using HealthSup.Infrastructure.CrossCutting.Constants;
 using System;
 using System.Threading.Tasks;
+using PatientModel = HealthSup.Domain.Entities.Patient;
 
 namespace HealthSup.Application.Services
 {
@@ -19,17 +21,20 @@ namespace HealthSup.Application.Services
         (
             IUnitOfWork unitOfWork,
             IPatientDomainService patientDomainService,
-            ICreatePatientValidator createPatientValidator
+            ICreatePatientValidator createPatientValidator,
+            IUpdatePatientValidator updatePatientValidator
         )
         {
             _unitOfWork = unitOfWork;
             PatientDomainService = patientDomainService ?? throw new ArgumentNullException(nameof(patientDomainService));
             CreatePatientValidator = createPatientValidator;
+            UpdatePatientValidator = updatePatientValidator;
         }
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPatientDomainService PatientDomainService;
         private readonly ICreatePatientValidator CreatePatientValidator;
+        private readonly IUpdatePatientValidator UpdatePatientValidator;
 
         public async Task<ListPatientsPagedReturn> ListPaged(Pagination pagination)
         {
@@ -115,8 +120,29 @@ namespace HealthSup.Application.Services
             UpdatePatientRequest argument
         )
         {
-            var patientModel = argument.Patient.ToModel();
+            var resultValidator = UpdatePatientValidator.Validate(argument);
+
+            if (!resultValidator.IsValid)
+            {
+                var response = new UpdatePatientReturn(null);
+
+                foreach (var error in resultValidator.Errors)
+                {
+                    response.AddError
+                    (
+                        Int32.Parse(error.ErrorCode),
+                        error.ErrorMessage,
+                        error.PropertyName
+                    );
+                }
+
+                return response;
+            }
+
+            var patientModel = new PatientModel();
             patientModel.Id = argument.PatientId;
+            if (argument.Address != null)
+                patientModel.Address = argument.Address.ToModel();
 
             _unitOfWork.Begin();
             try

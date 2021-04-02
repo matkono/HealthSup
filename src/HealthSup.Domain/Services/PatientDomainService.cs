@@ -36,11 +36,16 @@ namespace HealthSup.Domain.Services
             Patient patient
         )
         {
-            var address = await _unitOfWork.AddressRepository.GetByCep(patient.Address.Cep);
+            if (patient.Address != null) 
+            {
+                var address = await _unitOfWork.AddressRepository.GetByCep(patient.Address.Cep);
 
-            if (address == null)
-                patient.SetAddress(await _unitOfWork.AddressRepository.Create(patient.Address));
+                if (address == null)
+                    address = await _unitOfWork.AddressRepository.Create(patient.Address);
 
+                patient.Address = address;
+            }
+            
             return await _unitOfWork.PatientRepository.Update(patient);
         }
     }

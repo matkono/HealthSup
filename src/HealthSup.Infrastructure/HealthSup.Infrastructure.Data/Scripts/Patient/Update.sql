@@ -1,5 +1,5 @@
 ﻿UPDATE PATIENT
 SET
-	addressId = @addressId
+	@valuesToBeUpdated
 WHERE 
 	id = @id

@@ -1,4 +1,5 @@
 ﻿using HealthSup.Application.DataContracts.v1.Requests;
+using HealthSup.Application.DataContracts.v1.Requests.Address;
 using HealthSup.Application.DataContracts.v1.Requests.MedicalAppointment;
 using HealthSup.Application.DataContracts.v1.Requests.Patient;
 using HealthSup.Application.Services.Contracts;
@@ -92,19 +93,19 @@ namespace HealthSup.WebApi.Controllers.v1
             return Ok(response);
         }
 
-        [HttpPut]
+        [HttpPatch]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [Route("{patientId}")]
         public async Task<IActionResult> UpdateAsync
         (
             int patientId,
-            [FromBody] Patient patient
+            [FromBody] UpdateAddressRequest updateAddressRequest
         )
         {
             var argument = new UpdatePatientRequest()
             { 
                 PatientId = patientId,
-                Patient = patient
+                Address = updateAddressRequest.Address
             };
 
             var response = await PatientApplicationService.Update(argument);
