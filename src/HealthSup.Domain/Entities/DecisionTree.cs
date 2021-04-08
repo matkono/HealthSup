@@ -21,15 +21,15 @@ namespace HealthSup.Domain.Entities
 
         public DecisionTree() { }
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        public string Description { get; private set; }
+        public string Description { get; set; }
 
-        public string Version { get; private set; }
+        public string Version { get; set; }
 
-        public bool? IsCurrent { get; private set; }
+        public bool? IsCurrent { get; set; }
 
-        public Disease Disease { get; private set; }
+        public Disease Disease { get; set; }
 
         public void SetDisease
         (
