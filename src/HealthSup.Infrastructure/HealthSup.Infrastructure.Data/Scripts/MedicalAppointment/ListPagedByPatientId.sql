@@ -6,7 +6,8 @@
 	d.id,
 	d.name,
 	ma.currentNodeId as id,
-	ma.medicalAppointmentStatusId as id
+	mas.id as id,
+	mas.name
 FROM
 	MedicalAppointment ma
 INNER JOIN Patient p ON
@@ -15,6 +16,8 @@ INNER JOIN DecisionTree dt ON
 	dt.id = ma.decisionTreeId
 INNER JOIN Disease d ON
 	d.id = dt.id
+INNER JOIN MedicalAppoinmentStatus mas ON
+	mas.id = ma.medicalAppointmentStatusId
 WHERE
 	ma.patientId = @PatientId
 ORDER BY ma.id
