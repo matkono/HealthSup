@@ -113,10 +113,13 @@ namespace HealthSup.Infrastructure.Data.Repositories
                 MedicalAppointment medicalAppointment,
                 Patient patient,
                 DecisionTree decisionTree,
+                Disease disease,
                 Node node,
                 MedicalAppointmentStatus status
             )
             {
+                decisionTree.Disease = disease;
+
                 medicalAppointment.Patient = patient;
                 medicalAppointment.DecisionTree = decisionTree;
                 medicalAppointment.CurrentNode = node;
@@ -128,7 +131,7 @@ namespace HealthSup.Infrastructure.Data.Repositories
             var query = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.ListPagedByPatientId);
             var countQuery = ScriptManager.GetByName(ScriptManager.FileNames.MedicalAppointment.CountByPatientId);
 
-            var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointment, Patient, DecisionTree, Node, MedicalAppointmentStatus, MedicalAppointment>(
+            var result = await UnitOfWork.Connection.QueryAsync<MedicalAppointment, Patient, DecisionTree, Disease, Node, MedicalAppointmentStatus, MedicalAppointment>(
                                                                 query,
                                                                 MapFromQuery,
                                                                 new { patientId, pageNumber, pageSize },
