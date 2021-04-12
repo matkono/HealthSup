@@ -23,6 +23,7 @@
     <None Remove="Scripts\Disease\GetById.sql" />
     <None Remove="Scripts\Disease\ListPaged.sql" />
     <None Remove="Scripts\Doctor\GetById.sql" />
+    <None Remove="Scripts\Doctor\GetByUserId.sql" />
     <None Remove="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
     <None Remove="Scripts\Doctor\UpdatePassword.sql" />
     <None Remove="Scripts\MedicalAppointmentMovement\DeleteById.sql" />
@@ -72,6 +73,7 @@
     <EmbeddedResource Include="Scripts\Disease\GetById.sql" />
     <EmbeddedResource Include="Scripts\Disease\ListPaged.sql" />
     <EmbeddedResource Include="Scripts\Doctor\GetById.sql" />
+    <EmbeddedResource Include="Scripts\Doctor\GetByUserId.sql" />
     <EmbeddedResource Include="Scripts\HealthSupAgent\GetByNameAndPassword.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointmentMovement\DeleteById.sql" />
     <EmbeddedResource Include="Scripts\MedicalAppointmentMovement\GetByFromNodeId.sql" />

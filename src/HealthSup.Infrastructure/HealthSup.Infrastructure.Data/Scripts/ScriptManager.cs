@@ -15,6 +15,7 @@ namespace HealthSup.Infrastructure.Data.Scripts
                 static readonly string EntityName = $"{nameof(Doctor)}";
 
                 public static readonly string GetById = $"{EntityName}.GetById";
+                public static readonly string GetByUserId = $"{EntityName}.GetByUserId";
             }
 
             public static class HealthSupAgent

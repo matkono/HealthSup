@@ -1,8 +1,8 @@
-﻿using HealthSup.Application.Services.Contracts;
-using HealthSup.Domain.Services.Contracts;
-using HealthSup.Infrastructure.CrossCutting.Authentication.Services.Contracts;
-using HealthSup.Infrastructure.CrossCutting.Hash.Services.Contracts;
-using System;
+﻿using HealthSup.Application.DataContracts.v1.Responses.Doctor;
+using HealthSup.Application.Mappers;
+using HealthSup.Application.Services.Contracts;
+using HealthSup.Domain.Repositories;
+using System.Threading.Tasks;
 
 namespace HealthSup.Application.Services
 {
@@ -10,20 +10,22 @@ namespace HealthSup.Application.Services
     {
         public DoctorApplicationService
         (
-            IDoctorDomainService doctorServiceDomain,
-            IHashService hashCrossCuttingService,
-            IAuthenticationService authenticationCrossCuttingService
+            IUnitOfWork unitOfWork
         )
         {
-            DoctorServiceDomain = doctorServiceDomain ?? throw new ArgumentNullException(nameof(doctorServiceDomain));
-            HashService = hashCrossCuttingService ?? throw new ArgumentNullException(nameof(hashCrossCuttingService));
-            AuthenticationService = authenticationCrossCuttingService ?? throw new ArgumentNullException(nameof(authenticationCrossCuttingService));
+            _unitOfWork = unitOfWork;
         }
 
-        private IDoctorDomainService DoctorServiceDomain;
+        private readonly IUnitOfWork _unitOfWork;
 
-        private IHashService HashService;
+        public async Task<GetDoctorByUserIdReturn> GetByUserId(int userId)
+        {
+            var doctor = await _unitOfWork.DoctorRepository.GetByUserId(userId);
 
-        private IAuthenticationService AuthenticationService;
+            if (doctor == null)
+                return new GetDoctorByUserIdReturn(null);
+
+            return new GetDoctorByUserIdReturn(doctor.ToDataContract());
+        }
     }
 }

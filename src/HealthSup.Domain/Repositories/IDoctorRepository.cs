@@ -9,5 +9,10 @@ namespace HealthSup.Domain.Repositories
         (
             int id
         );
+
+        Task<Doctor> GetByUserId
+        (
+            int userId
+        );
     }
 }

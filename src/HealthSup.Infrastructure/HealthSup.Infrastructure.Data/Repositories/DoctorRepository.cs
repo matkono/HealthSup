@@ -45,5 +45,32 @@ namespace HealthSup.Infrastructure.Data.Repositories
 
             return result.FirstOrDefault();
         }
+
+        public async Task<Doctor> GetByUserId
+        (
+            int userId
+        )
+        {
+            Doctor MapFromQuery
+            (
+                Doctor doctor,
+                User user
+            )
+            {
+                doctor.User = user;
+
+                return doctor;
+            };
+
+            var query = ScriptManager.GetByName(ScriptManager.FileNames.Doctor.GetByUserId);
+
+            var result = await UnitOfWork.Connection.QueryAsync<Doctor, User, Doctor>(
+                                                                query,
+                                                                MapFromQuery,
+                                                                new { userId },
+                                                                UnitOfWork.Transaction);
+
+            return result.FirstOrDefault();
+        }
     }
 }

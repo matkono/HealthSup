@@ -67,7 +67,6 @@ namespace HealthSup.Infrastructure.CrossCutting.Ioc.Ioc
 
             #region DomainService
 
-            services.AddScoped<IDoctorDomainService, DoctorDomainService>();
             services.AddScoped<IMedicalAppointmentDomainService, MedicalAppointmentDomainService>();
             services.AddScoped<IDecisionEngineDomainService, DecisionEngineDomainService>();
             services.AddScoped<INodeDomainService, NodeDomainService>();

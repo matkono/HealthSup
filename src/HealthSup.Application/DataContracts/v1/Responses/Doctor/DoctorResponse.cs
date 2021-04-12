@@ -2,13 +2,14 @@
 
 namespace HealthSup.Application.DataContracts.v1.Responses.Doctor
 {
-    public class DoctorResponse<T>: BaseResponse<T>
+    public class DoctorResponse
     {
-        public DoctorResponse
-        (
-            T response
-        ) : base(response)
-        {
-        }
+        public string Name { get; set; }
+
+        public string Crm { get; set; }
+
+        public string Phone { get; set; }
+
+        public int UserId { get; set; }
     }
 }
