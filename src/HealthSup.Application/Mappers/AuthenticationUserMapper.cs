@@ -8,6 +8,7 @@ namespace HealthSup.Application.Mappers
         public static AuthenticationUserResponse ToDataContract(this UserDTO user)
             => new AuthenticationUserResponse()
             {
+                Id = user.Id,
                 Email = user.Email,
                 IsActive = user.IsActive
             };
