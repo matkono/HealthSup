@@ -4,15 +4,19 @@
     {
         public AuthenticationUserResponse
         (
+            int id,
             string email,
             bool isActive
         )
         {
+            Id = id;
             Email = email;
             IsActive = isActive;
         }
 
         public AuthenticationUserResponse(){ }
+
+        public int Id { get; set;}
 
         public string Email { get; set; }
 
